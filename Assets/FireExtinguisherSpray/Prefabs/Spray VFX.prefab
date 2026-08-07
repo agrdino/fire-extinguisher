@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1604843568611905434}
+  - component: {fileID: 1799624741967802157}
   - component: {fileID: 9183173456270695763}
   - component: {fileID: 2438112986137277288}
   m_Layer: 0
@@ -33,6 +34,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6017435726724014741}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1799624741967802157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2682511707164702544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8770ad37b259d4a83881eae150aa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemLerper
+  _sourceA: {fileID: 3625830887672195487, guid: 0a05c2b69c4b7294abc0299ec47ace37, type: 3}
+  _sourceB: {fileID: 5251150387956691017, guid: 87065867d48842446926809c0e008354, type: 3}
 --- !u!198 &9183173456270695763
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -665,7 +680,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 18
+    angle: 12
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -4863,6 +4878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4886044652192804187}
+  - component: {fileID: 5051668980730018669}
   - component: {fileID: 7661673376581834310}
   - component: {fileID: 756407958938084838}
   m_Layer: 0
@@ -4887,6 +4903,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6017435726724014741}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5051668980730018669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062828805996638100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8770ad37b259d4a83881eae150aa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemLerper
+  _sourceA: {fileID: 1534601647492764132, guid: cacd2ce1ad3e86348824b21b021fee91, type: 3}
+  _sourceB: {fileID: 6356419105379117769, guid: b77395ac1e5853740a14d4206d4f96df, type: 3}
 --- !u!198 &7661673376581834310
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5519,7 +5549,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 24
+    angle: 18
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -9708,6 +9738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8866141503063109461}
+  - component: {fileID: 8857627594743811878}
   - component: {fileID: 1072153519871311270}
   - component: {fileID: 963711021972642536}
   m_Layer: 0
@@ -9732,6 +9763,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6017435726724014741}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &8857627594743811878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3447636585469524971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8770ad37b259d4a83881eae150aa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemLerper
+  _sourceA: {fileID: 6764601024115937801, guid: 5614e178b4014c446b5af73114bfc373, type: 3}
+  _sourceB: {fileID: 4086816630848379307, guid: 188f05f531cdac7449e7029a4e6dd923, type: 3}
 --- !u!198 &1072153519871311270
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14544,6 +14589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6017435726724014741}
+  - component: {fileID: 3385672858378381898}
   m_Layer: 0
   m_Name: Spray VFX
   m_TagString: Untagged
@@ -14570,6 +14616,24 @@ Transform:
   - {fileID: 4886044652192804187}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3385672858378381898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4374259762931984424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5fbc2bc5b997d14083d4a13e3ada612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.ParticleSystemLerpGroup
+  _lerpers:
+  - {fileID: 8857627594743811878}
+  - {fileID: 3899597833327736532}
+  - {fileID: 1799624741967802157}
+  - {fileID: 5051668980730018669}
+  _blend: 0
 --- !u!1 &8753507406349863604
 GameObject:
   m_ObjectHideFlags: 0
@@ -14579,6 +14643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7256181817536516450}
+  - component: {fileID: 3899597833327736532}
   - component: {fileID: 2853913172483831045}
   - component: {fileID: 2084383373006526428}
   m_Layer: 0
@@ -14603,6 +14668,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6017435726724014741}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &3899597833327736532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8753507406349863604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8770ad37b259d4a83881eae150aa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemLerper
+  _sourceA: {fileID: 5350530556904994950, guid: e4504b8071e20a14d84a8a98914c12eb, type: 3}
+  _sourceB: {fileID: 2537379466262820644, guid: c40b006f896905948a3eca653fd365ad, type: 3}
 --- !u!198 &2853913172483831045
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -15235,7 +15314,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 16
+    angle: 12
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
