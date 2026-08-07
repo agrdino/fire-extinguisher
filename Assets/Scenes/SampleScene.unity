@@ -545,7 +545,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1262285363446781867
+--- !u!1001 &7719654504923749077
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -553,49 +553,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 4229482701261158069, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+      propertyPath: m_Name
+      value: Fire Extinguisher
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3159188870966280729, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 5644422246397808845, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5185995365514952072, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
-      propertyPath: m_Name
-      value: FireExtinguisher
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -610,4 +610,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1203715351}
-  - {fileID: 1262285363446781867}
+  - {fileID: 7719654504923749077}

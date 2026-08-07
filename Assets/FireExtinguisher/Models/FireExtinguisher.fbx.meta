@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: f42736447a79503489a97d18cff9148a
+guid: a3aa9b0c52168d440aec8c827499c59b
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FireExtinguisher
+    second: {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: a9085eb4fcbd22f4180c700720359373, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

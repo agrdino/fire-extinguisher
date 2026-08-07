@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4282713186543174471}
-  m_Mesh: {fileID: -1782044941624214175, guid: f42736447a79503489a97d18cff9148a, type: 3}
+  m_Mesh: {fileID: -1782044941624214175, guid: a3aa9b0c52168d440aec8c827499c59b, type: 3}
 --- !u!23 &5239936705323936524
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6252093943007823109, guid: f42736447a79503489a97d18cff9148a, type: 3}
+  - {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,7 +130,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5015417681087285038}
-  m_Mesh: {fileID: 6594475343890290769, guid: f42736447a79503489a97d18cff9148a, type: 3}
+  m_Mesh: {fileID: 6594475343890290769, guid: a3aa9b0c52168d440aec8c827499c59b, type: 3}
 --- !u!23 &5157530643104427525
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6252093943007823109, guid: f42736447a79503489a97d18cff9148a, type: 3}
+  - {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -220,7 +220,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5222461903692330439}
-  m_Mesh: {fileID: 4469379117353178072, guid: f42736447a79503489a97d18cff9148a, type: 3}
+  m_Mesh: {fileID: 4469379117353178072, guid: a3aa9b0c52168d440aec8c827499c59b, type: 3}
 --- !u!23 &1277002319683207666
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -246,7 +246,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8556262120643298411, guid: f42736447a79503489a97d18cff9148a, type: 3}
+  - {fileID: 2100000, guid: a9085eb4fcbd22f4180c700720359373, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -280,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4557544525544834340}
   m_Layer: 0
-  m_Name: PressureGauge
+  m_Name: Pressure Gauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
