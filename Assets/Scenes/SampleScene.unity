@@ -432,6 +432,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &937413626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 937413628}
+  - component: {fileID: 937413627}
+  m_Layer: 0
+  m_Name: Keyboard Simulator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &937413627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937413626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca63f02dda2a3c4ba76b8191832dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherKeyboardSimulator
+  _controller: {fileID: 7719654504923749081}
+  _simulateKeyboardHeartbeat: 1
+  _heartbeatInterval: 2
+  _lastSimulatedKey: 0
+--- !u!4 &937413628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937413626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1203715347
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +593,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1826992621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1826992623}
+  - component: {fileID: 1826992622}
+  m_Layer: 0
+  m_Name: Keyboard Input
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1826992622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826992621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc95e8731170a6468b9abfe1c576b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherKeyboardInput
+  _controller: {fileID: 7719654504923749081}
+--- !u!4 &1826992623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826992621}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7719654504923749077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -600,8 +693,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4229482701261158069, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 7719654504923749081}
   m_SourcePrefab: {fileID: 100100000, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+--- !u!1 &7719654504923749078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4229482701261158069, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+  m_PrefabInstance: {fileID: 7719654504923749077}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7719654504923749079 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5668460465359325686, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+  m_PrefabInstance: {fileID: 7719654504923749077}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7719654504923749078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b040b886435676447b1208d4cc754c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisher
+--- !u!114 &7719654504923749081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7719654504923749078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6554850beb2485a4a9f168d292529c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherController
+  _fireExtinguisher: {fileID: 7719654504923749079}
+  _inputSettings: {fileID: 11400000, guid: 336796254df630d49a3f5282e28a41a5, type: 2}
+  _connectionTimeout: 3
+  _logReceivedStates: 1
+  _currentState:
+    _safetyPin: 0
+    _lever: 0
+  _isConnected: 0
+  _lastReceivedKey: 0
+  _hasReceivedKey: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -611,3 +745,5 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1203715351}
   - {fileID: 7719654504923749077}
+  - {fileID: 937413628}
+  - {fileID: 1826992623}

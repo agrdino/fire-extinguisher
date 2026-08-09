@@ -42,10 +42,10 @@ namespace _Scripts.ParticleSystemLerps
     {
         var blend = Mathf.Clamp01(value);
 
-        if (!_hasCache)
+        if (!_hasCache || _target == null || _cachedA == null || _cachedB == null)
         {
             RebuildCache();
-            if (!_hasCache)
+            if (!_hasCache || _target == null || _cachedA == null || _cachedB == null)
                 return;
         }
 

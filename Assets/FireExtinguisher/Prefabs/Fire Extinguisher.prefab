@@ -126,7 +126,8 @@ Transform:
   m_LocalPosition: {x: 0.37086433, y: 0.320381, z: -0.000000029802322}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5215056963397048850}
   m_Father: {fileID: 5644422246397808845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5266074050111984604
@@ -317,6 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5644422246397808845}
+  - component: {fileID: 5668460465359325686}
   m_Layer: 0
   m_Name: Fire Extinguisher
   m_TagString: Untagged
@@ -346,6 +348,29 @@ Transform:
   - {fileID: 3794236825661027198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5668460465359325686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229482701261158069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b040b886435676447b1208d4cc754c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisher
+  _sprayEffect: {fileID: 3828605877708346061}
+  _safetyPin: {fileID: 3168912231227574061}
+  _blendDuration: 1
+  _keyboardSendInterval: 2
+  _connectionTimeout: 5
+  _simulateKeyboardHeartbeat: 1
+  _logReceivedStates: 1
+  _currentState: 0
+  _isConnected: 0
+  _isSafetyPinInserted: 1
+  _isLeverPressed: 0
 --- !u!1 &5291665499011464297
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +843,79 @@ Transform:
   - {fileID: 5845732627772937940}
   m_Father: {fileID: 3476122449496881098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2007940521809705095
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5825205773101850441}
+    m_Modifications:
+    - target: {fileID: 4374259762931984424, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_Name
+      value: Spray VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+--- !u!114 &3828605877708346061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3385672858378381898, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+  m_PrefabInstance: {fileID: 2007940521809705095}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5fbc2bc5b997d14083d4a13e3ada612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.ParticleSystemLerpGroup
+--- !u!4 &5215056963397048850 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6017435726724014741, guid: 940c07a40210a7f458f3e355eefc26a7, type: 3}
+  m_PrefabInstance: {fileID: 2007940521809705095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3205122084431318306
 PrefabInstance:
   m_ObjectHideFlags: 0
