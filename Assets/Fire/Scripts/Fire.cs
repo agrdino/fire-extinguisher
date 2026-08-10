@@ -16,7 +16,12 @@ namespace _Scripts.Fires
         [Header("Extinguishing")]
         [SerializeField, Min(0f)] private float _deactivationDelay = 0.5f;
 
+        [Header("Recovery")]
+        [SerializeField, Min(0f)] private float _recoveryDelay = 1f;
+        [SerializeField, Min(0f)] private float _intensityRecoveryPerSecond = 10f;
+
         private float _remainingDeactivationDelay;
+        private float _remainingRecoveryDelay;
 
         public event Action<float> OnIntensityChanged;
 
@@ -34,11 +39,16 @@ namespace _Scripts.Fires
         {
             _currentIntensity = _maxIntensity;
             _remainingDeactivationDelay = _deactivationDelay;
+            _remainingRecoveryDelay = _recoveryDelay;
         }
 
         private void Update()
         {
-            if (!IsExtinguished) return;
+            if (!IsExtinguished)
+            {
+                RecoverIntensity();
+                return;
+            }
 
             _remainingDeactivationDelay -= Time.deltaTime;
             if (_remainingDeactivationDelay > 0f) return;
@@ -49,7 +59,19 @@ namespace _Scripts.Fires
         {
             if (amount <= 0f || IsExtinguished) return;
 
+            _remainingRecoveryDelay = _recoveryDelay;
             _currentIntensity = Mathf.Max(0f, _currentIntensity - amount);
+            OnIntensityChanged?.Invoke(_currentIntensity);
+        }
+
+        private void RecoverIntensity()
+        {
+            if (_currentIntensity >= _maxIntensity || _intensityRecoveryPerSecond <= 0f) return;
+
+            _remainingRecoveryDelay -= Time.deltaTime;
+            if (_remainingRecoveryDelay > 0f) return;
+
+            _currentIntensity = Mathf.Min(_maxIntensity, _currentIntensity + _intensityRecoveryPerSecond * Time.deltaTime);
             OnIntensityChanged?.Invoke(_currentIntensity);
         }
 

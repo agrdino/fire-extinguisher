@@ -49,7 +49,9 @@ MonoBehaviour:
   _collider: {fileID: 4453009127530087213}
   _maxIntensity: 100
   _currentIntensity: 100
-  _deactivationDelay: 4
+  _deactivationDelay: 2
+  _recoveryDelay: 1
+  _intensityRecoveryPerSecond: 8
 --- !u!135 &4453009127530087213
 SphereCollider:
   m_ObjectHideFlags: 0
