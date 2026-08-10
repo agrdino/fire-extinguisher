@@ -459,6 +459,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e0bfae7d544b44aa26ddea2d559ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.FireExtinguisher
+  _txtName: {fileID: 0}
+  _txtDescription: {fileID: 0}
+  _imgIcon: {fileID: 0}
   _btnSelect: {fileID: 313602980}
 --- !u!114 &313602980
 MonoBehaviour:
@@ -1924,6 +1927,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e0bfae7d544b44aa26ddea2d559ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.FireExtinguisher
+  _txtName: {fileID: 0}
+  _txtDescription: {fileID: 0}
+  _imgIcon: {fileID: 0}
   _btnSelect: {fileID: 1205012258}
 --- !u!114 &1205012258
 MonoBehaviour:
@@ -2374,12 +2380,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e53427dac44de79f16d56779550bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.UIController
-  _startScene: {fileID: 331691046}
-  _selectScene: {fileID: 461390552}
-  _fightingScene: {fileID: 1263200628}
-  _escapeScene: {fileID: 1711211502}
-  _completeScene: {fileID: 581625609}
-  _loadingScene: {fileID: 759476517}
+  _startScene:
+    _underlyingValue: {fileID: 331691046}
+  _selectScene:
+    _underlyingValue: {fileID: 461390552}
+  _fightingScene:
+    _underlyingValue: {fileID: 1263200628}
+  _escapeScene:
+    _underlyingValue: {fileID: 1711211502}
+  _completeScene:
+    _underlyingValue: {fileID: 581625609}
+  _loadingScene:
+    _underlyingValue: {fileID: 759476517}
 --- !u!1 &1263200626
 GameObject:
   m_ObjectHideFlags: 0

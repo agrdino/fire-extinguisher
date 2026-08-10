@@ -1,12 +1,20 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts.Data
 {
-    [CreateAssetMenu(fileName = "FireExtinguisherConfigs", menuName = "FireExtinguisherConfigs")]
-    public class FireExtinguisherConfigs : ScriptableObject
+    public class FireExtinguisherConfigs : MonoBehaviour
     {
         [SerializeField] private List<FireExtinguisherConfig> _fireExtinguisherConfigs;
+        
+        private static FireExtinguisherConfigs _instance;
+        public static FireExtinguisherConfigs Instance => _instance;
+
+        private void Awake()
+        {
+            _instance = this;
+        }
 
         public FireExtinguisherConfig GetFireExtinguisherConfig(int id)
         {

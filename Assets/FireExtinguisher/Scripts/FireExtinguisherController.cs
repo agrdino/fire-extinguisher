@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,6 +35,12 @@ namespace _Scripts.FireExtinguishers
         public bool IsConnected => _isConnected;
         public Key LastReceivedKey => _lastReceivedKey;
         public bool HasReceivedKey => _hasReceivedKey;
+        
+        public event Action<float> OnCapacityChanged
+        {
+            add { _fireExtinguisher.OnCapacityChanged += value; }
+            remove { _fireExtinguisher.OnCapacityChanged -= value; }
+        } 
 
         private void Reset()
         {

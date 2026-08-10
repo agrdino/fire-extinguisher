@@ -46,6 +46,7 @@ namespace _Scripts.FireExtinguishers
         }
 
         public void SetState(SafetyPinState safetyPin, LeverState lever) => SetState(new FireExtinguisherState(safetyPin, lever));
+        
         public void SetState(FireExtinguisherState state)
         {
             bool couldSpray = CanSpray;
@@ -63,6 +64,7 @@ namespace _Scripts.FireExtinguishers
 
         public void Refill() => SetRemainingAmount(_capacity);
         public void SetRemainingRatio(float ratio) => SetRemainingAmount(_capacity * Mathf.Clamp01(ratio));
+        
         public void SetRemainingAmount(float amount)
         {
             float clampedAmount = Mathf.Clamp(amount, 0f, _capacity);

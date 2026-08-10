@@ -6,5 +6,8 @@ namespace _Scripts.Data
     public class FireExtinguisherConfig : ScriptableObject
     {
         public int id;
+        public new string name;
+        public string description;
+        public Sprite icon;
     }
 }
