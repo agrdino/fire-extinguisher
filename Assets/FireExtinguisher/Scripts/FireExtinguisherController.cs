@@ -84,7 +84,7 @@ namespace _Scripts.FireExtinguishers
             _isConnected = true;
             _currentState = state;
 
-            if (_fireExtinguisher != null)  _fireExtinguisher.ApplyState(state);
+            if (_fireExtinguisher != null)  _fireExtinguisher.SetState(state);
             if (_logReceivedStates) LogReceivedState(state);
         }
 
@@ -101,7 +101,7 @@ namespace _Scripts.FireExtinguishers
             _isConnected = false;
             _currentState = _currentState.WithLever(LeverState.Released);
 
-            if (_fireExtinguisher != null) _fireExtinguisher.ApplyState(_currentState);
+            if (_fireExtinguisher != null) _fireExtinguisher.SetState(_currentState);
 
             Debug.LogWarning("Fire extinguisher connection timed out. Lever was released; safety pin state was preserved.", this);
         }
