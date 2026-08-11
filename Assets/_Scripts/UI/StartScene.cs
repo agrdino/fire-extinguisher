@@ -1,5 +1,4 @@
-using System;
-using _Scripts.FireExtinguishers;
+using _Scripts.Controller;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +23,7 @@ namespace _Scripts.UI
 
         private void OnClickStartButton()
         {
-            UIController.Instance.ShowScene(UIController.EScene.SelectScene);
+            ApplicationManager.Instance.SetState(ApplicationState.Selecting);
         }
     }
 }

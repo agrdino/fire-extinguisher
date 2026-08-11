@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace _Scripts.FireExtinguishers
 {
+    [DefaultExecutionOrder(-101)]
     [DisallowMultipleComponent]
     public sealed class FireExtinguisherController : MonoBehaviour
     {
@@ -21,6 +22,7 @@ namespace _Scripts.FireExtinguishers
         [SerializeField, Min(0.02f)] private float _connectionTimeout = 3f;
 
         [SerializeField] private bool _logReceivedStates = true;
+        [SerializeField] private bool _isInputEnabled;
 
         [SerializeField] private FireExtinguisherState _currentState;
         [SerializeField] private bool _isConnected;
@@ -30,44 +32,31 @@ namespace _Scripts.FireExtinguishers
         private float _lastReceiveTime = float.NegativeInfinity;
 
         public FireExtinguisher FireExtinguisher => _fireExtinguisher;
+        public bool IsDepleted => _fireExtinguisher.IsDepleted;
+
         public SO_FireExtinguisherInputSettings InputSettings => _inputSettings;
         public FireExtinguisherState CurrentState => _currentState;
         public bool IsConnected => _isConnected;
         public Key LastReceivedKey => _lastReceivedKey;
         public bool HasReceivedKey => _hasReceivedKey;
+        public bool IsInputEnabled => _isInputEnabled;
         
         public event Action<float> OnCapacityChanged
         {
-            add { _fireExtinguisher.OnCapacityChanged += value; }
-            remove { _fireExtinguisher.OnCapacityChanged -= value; }
+            add => _fireExtinguisher.OnCapacityChanged += value;
+            remove => _fireExtinguisher.OnCapacityChanged -= value;
         } 
-
-        private void Reset()
-        {
-            _fireExtinguisher = GetComponent<FireExtinguisher>();
-            if (_fireExtinguisher == null) _fireExtinguisher = FindFirstObjectByType<FireExtinguisher>();
-        }
 
         private void Awake()
         {
             if (Instance != null && Instance != this)
             {
-                Debug.LogError("Only one FireExtinguisherController may be active in a scene.", this);
-                enabled = false;
+                Destroy(gameObject);
                 return;
             }
 
             Instance = this;
-
-            if (_fireExtinguisher == null) _fireExtinguisher = GetComponent<FireExtinguisher>();
-            if (_fireExtinguisher == null) _fireExtinguisher = FindFirstObjectByType<FireExtinguisher>();
-
-            _currentState = _fireExtinguisher != null ? _fireExtinguisher.CurrentState : FireExtinguisherState.DefaultState;
-        }
-
-        private void OnDestroy()
-        {
-            if (Instance == this) Instance = null;
+            _currentState = _fireExtinguisher.CurrentState;
         }
 
         private void Update()
@@ -75,9 +64,15 @@ namespace _Scripts.FireExtinguishers
             UpdateConnectionTimeout();
         }
 
+        private void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
+        }
+
         public bool TryReceiveKey(Key key)
         {
-            if (_inputSettings == null || !_inputSettings.TryGetState(key, out FireExtinguisherState state)) return false;
+            if (!_inputSettings.TryGetState(key, out FireExtinguisherState state)) return false;
+            if (!_isInputEnabled) return true;
             
             _lastReceivedKey = key;
             _hasReceivedKey = true;
@@ -85,32 +80,56 @@ namespace _Scripts.FireExtinguishers
             return true;
         }
 
+        public void ReceiveState(SafetyPinState safetyPin, LeverState lever) => ReceiveState(new FireExtinguisherState(safetyPin, lever));
         public void ReceiveState(FireExtinguisherState state)
         {
+            if (!_isInputEnabled) return;
+
             _lastReceiveTime = Time.unscaledTime;
             _isConnected = true;
             _currentState = state;
-
-            if (_fireExtinguisher != null)  _fireExtinguisher.SetState(state);
+            _fireExtinguisher.SetState(state);
+            
             if (_logReceivedStates) LogReceivedState(state);
         }
 
-        public void ReceiveState(SafetyPinState safetyPin, LeverState lever)
+        public void Refill()
         {
-            ReceiveState(new FireExtinguisherState(safetyPin, lever));
+            _fireExtinguisher.Refill();
+        }
+
+        public void SetInputEnabled(bool isEnabled)
+        {
+            _isInputEnabled = isEnabled;
+            if (isEnabled) return;
+
+            _isConnected = false;
+            _currentState = _currentState.WithLever(LeverState.Released);
+            _fireExtinguisher.SetState(_currentState);
+        }
+
+        public void ResetInputState()
+        {
+            _lastReceiveTime = float.NegativeInfinity;
+            _isConnected = false;
+            _currentState = FireExtinguisherState.DefaultState;
+            _lastReceivedKey = Key.None;
+            _hasReceivedKey = false;
+
+            _fireExtinguisher.SetState(_currentState);
         }
 
         private void UpdateConnectionTimeout()
         {
+            if (!_isInputEnabled) return;
             if (!_isConnected) return;
             if (Time.unscaledTime - _lastReceiveTime < Mathf.Max(0.01f, _connectionTimeout)) return;
             
             _isConnected = false;
             _currentState = _currentState.WithLever(LeverState.Released);
 
-            if (_fireExtinguisher != null) _fireExtinguisher.SetState(_currentState);
-
-            Debug.LogWarning("Fire extinguisher connection timed out. Lever was released; safety pin state was preserved.", this);
+            _fireExtinguisher.SetState(_currentState);
+            if (_logReceivedStates) Debug.LogWarning("Fire extinguisher connection timed out. Lever was released; safety pin state was preserved.", this);
         }
 
         private void LogReceivedState(FireExtinguisherState state)

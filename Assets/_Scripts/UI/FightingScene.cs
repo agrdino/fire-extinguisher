@@ -1,4 +1,3 @@
-using _Scripts.Controller;
 using _Scripts.FireExtinguishers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,10 +11,7 @@ namespace _Scripts.UI
         private void Start()
         {
             _sldFireExtinguisher.value = 1;
-            FireExtinguisherController.Instance.FireExtinguisher.OnCapacityChanged += OnValueChanged;
-            
-            MessageDispatcher.Register(MessageDispatcher.EMessageID.FireOff, Complete);
-            MessageDispatcher.Register(MessageDispatcher.EMessageID.OutOfEnergy, Complete);
+            FireExtinguisherController.Instance.FireExtinguisher.OnRemainingAmountChanged += OnValueChanged;
         }
 
         public void Show()
@@ -26,14 +22,14 @@ namespace _Scripts.UI
         {
         }
 
-        private void OnValueChanged(float value)
+        private void OnDestroy()
         {
-            _sldFireExtinguisher.value = value;
+            FireExtinguisherController.Instance.FireExtinguisher.OnRemainingAmountChanged -= OnValueChanged;
         }
 
-        private void Complete()
+        private void OnValueChanged(float amount, float ratio)
         {
-            UIController.Instance.ShowScene(UIController.EScene.EscapeScene);
+            _sldFireExtinguisher.value = ratio;
         }
     }
 }

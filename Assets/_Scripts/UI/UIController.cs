@@ -1,21 +1,12 @@
 using System;
 using AYellowpaper;
 using UnityEngine;
+using _Scripts.Controller;
 
 namespace _Scripts.UI
 {
     public class UIController : MonoBehaviour
     {
-        public enum EScene
-        {
-            StartScene,
-            SelectScene,
-            FightingScene,
-            EscapeScene,
-            CompleteScene,
-            LoadingScene,
-        }
-        
         private static UIController _instance;
         public static UIController Instance => _instance;
         
@@ -27,34 +18,41 @@ namespace _Scripts.UI
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _loadingScene;
         
         private IScene _currentScene;
+        private ApplicationManager _applicationManager;
         
         private void Awake()
         {
             _instance = this;
+            _applicationManager = ApplicationManager.Instance;
+            _applicationManager.OnStateChanged += OnApplicationStateChanged;
         }
 
-        public void ShowScene(EScene scene)
+        private void OnDestroy()
+        {
+            _applicationManager.OnStateChanged -= OnApplicationStateChanged;
+            if (_instance == this) _instance = null;
+        }
+
+        private void OnApplicationStateChanged(ApplicationState state)
         {
             if (_currentScene != null)
             {
                 _currentScene.Hide();
                 _currentScene.gameObject.SetActive(false);
             }
-            _currentScene?.Hide();
             
-            _currentScene = scene switch
+            _currentScene = state switch
             {
-                EScene.StartScene => _startScene.Value,
-                EScene.SelectScene => _selectScene.Value,
-                EScene.FightingScene => _fightingScene.Value,
-                EScene.EscapeScene => _escapeScene.Value,
-                EScene.CompleteScene => _completeScene.Value,
-                EScene.LoadingScene => _loadingScene.Value,
-                _ => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
+                ApplicationState.Start => _startScene.Value,
+                ApplicationState.Selecting => _selectScene.Value,
+                ApplicationState.Playing => _fightingScene.Value,
+                ApplicationState.Won => _completeScene.Value,
+                ApplicationState.Lost => _escapeScene.Value,
+                _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
             
+            _currentScene.gameObject.SetActive(true);
             _currentScene.Show();
-            _currentScene.gameObject.SetActive(false);
         }
     }
 }
