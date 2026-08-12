@@ -24,7 +24,6 @@ namespace _Scripts.UI
 
         private void OnDestroy()
         {
-            FireExtinguisherController.Instance.FireExtinguisher.OnRemainingAmountChanged -= OnValueChanged;
         }
 
         private void OnValueChanged(float amount, float ratio)
