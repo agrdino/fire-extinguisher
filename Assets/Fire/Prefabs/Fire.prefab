@@ -30,8 +30,7 @@ Transform:
   m_LocalPosition: {x: 1.74932, y: 0, z: 0.12361}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1452860175010180050}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5449774790168554459
@@ -46,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7d57c9303553c4e8e7b4424c7a6b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fire
+  _fireType: 1
   _collider: {fileID: 4453009127530087213}
   _maxIntensity: 100
   _currentIntensity: 100
@@ -71,79 +71,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &2010411683306737968
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 5920212611039059228}
-    m_Modifications:
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557703680963431338, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: m_Name
-      value: Fire VFX
-      objectReference: {fileID: 0}
-    - target: {fileID: 8486400158510775176, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: _fire
-      value: 
-      objectReference: {fileID: 5449774790168554459}
-    - target: {fileID: 8486400158510775176, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: _fullBlendIntensityRatio
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8486400158510775176, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-      propertyPath: _zeroBlendIntensityRatio
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
---- !u!4 &1452860175010180050 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1139395757426621154, guid: e8cc30d6a6629b24eab3690e139cbc96, type: 3}
-  m_PrefabInstance: {fileID: 2010411683306737968}
-  m_PrefabAsset: {fileID: 0}

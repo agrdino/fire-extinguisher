@@ -15,6 +15,7 @@ namespace _Scripts.UI
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _fightingScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapeScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _completeScene;
+        [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _failedScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _loadingScene;
         
         private IScene _currentScene;
@@ -46,8 +47,9 @@ namespace _Scripts.UI
                 ApplicationState.Start => _startScene.Value,
                 ApplicationState.Selecting => _selectScene.Value,
                 ApplicationState.Playing => _fightingScene.Value,
+                ApplicationState.Escape => _escapeScene.Value,
                 ApplicationState.Won => _completeScene.Value,
-                ApplicationState.Lost => _escapeScene.Value,
+                ApplicationState.Lost => _failedScene.Value,
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
             

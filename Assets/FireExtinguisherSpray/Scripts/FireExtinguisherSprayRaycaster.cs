@@ -14,6 +14,8 @@ namespace _Scripts.FireExtinguishers
         [SerializeField] private LayerMask _fireLayers = ~0;
 
         private readonly HashSet<Fire> _hitFires = new();
+        private readonly HashSet<Fire> _incompatibleFiresLastFrame = new();
+        private readonly HashSet<Fire> _incompatibleFiresThisFrame = new();
         private readonly RaycastHit[] _hits = new RaycastHit[8];
 
         private Transform RayOrigin => _rayOrigin != null ? _rayOrigin : transform;
@@ -26,14 +28,15 @@ namespace _Scripts.FireExtinguishers
 
         private void Update()
         {
-            if (_fireExtinguisher == null) return;
-            if (!_fireExtinguisher.CanSpray) return;
-            if (_range <= 0f || _intensityReductionPerSecond <= 0f) return;
+            if (_fireExtinguisher == null || !_fireExtinguisher.CanSpray || _range <= 0f)
+            {
+                ClearIncompatibleFireTracking();
+                return;
+            }
 
             int count = Physics.RaycastNonAlloc(RayOrigin.position, RayOrigin.forward, _hits, _range, _fireLayers, QueryTriggerInteraction.Collide);
-            if (count == 0) return;
-
             _hitFires.Clear();
+            _incompatibleFiresThisFrame.Clear();
             float intensityReduction = _intensityReductionPerSecond * Time.deltaTime;
             for (int i = 0; i < count; i++)
             {
@@ -41,8 +44,27 @@ namespace _Scripts.FireExtinguishers
                 Fire fire = hit.collider.GetComponentInParent<Fire>();
                 if (fire == null || !_hitFires.Add(fire)) continue;
 
+                if (!_fireExtinguisher.CanExtinguish(fire.FireType))
+                {
+                    _incompatibleFiresThisFrame.Add(fire);
+                    if (!_incompatibleFiresLastFrame.Contains(fire))
+                        _fireExtinguisher.NotifyIncompatibleFireTargeted(fire.FireType);
+                    continue;
+                }
+
+                if (_intensityReductionPerSecond <= 0f) continue;
                 fire.ReduceIntensity(intensityReduction);
             }
+
+            _incompatibleFiresLastFrame.Clear();
+            foreach (Fire fire in _incompatibleFiresThisFrame)
+                _incompatibleFiresLastFrame.Add(fire);
+        }
+
+        private void ClearIncompatibleFireTracking()
+        {
+            _incompatibleFiresLastFrame.Clear();
+            _incompatibleFiresThisFrame.Clear();
         }
 
         private void OnDrawGizmosSelected()

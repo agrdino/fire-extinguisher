@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8486400158510775176}
   - component: {fileID: 7730572035177239564}
   m_Layer: 7
-  m_Name: Fire VFX
+  m_Name: Solid Fire VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Fires;
 using UnityEngine;
 
 namespace _Scripts.FireExtinguishers
@@ -6,6 +7,9 @@ namespace _Scripts.FireExtinguishers
     [DisallowMultipleComponent]
     public sealed class FireExtinguisher : MonoBehaviour
     {
+        [Header("Type")]
+        [SerializeField] private FireExtinguisherType _extinguisherType = FireExtinguisherType.CO2;
+
         [SerializeField] private FireExtinguisherState _state;
 
         [Header("Capacity")]
@@ -21,7 +25,10 @@ namespace _Scripts.FireExtinguishers
         public event Action OnLowAmount;
         public event Action OnDepleted;
         public event Action OnRefilled;
+        public event Action<FireExtinguisherType> OnTypeChanged;
+        public event Action<FireExtinguisherType, FireType> OnIncompatibleFireTargeted;
 
+        public FireExtinguisherType ExtinguisherType => _extinguisherType;
         public FireExtinguisherState CurrentState => _state;
         public float Capacity => _capacity;
         public float ConsumptionPerSecond => _consumptionPerSecond;
@@ -64,6 +71,28 @@ namespace _Scripts.FireExtinguishers
 
         public void Refill() => SetRemainingAmount(_capacity);
         public void SetRemainingRatio(float ratio) => SetRemainingAmount(_capacity * Mathf.Clamp01(ratio));
+
+        public void SetType(FireExtinguisherType extinguisherType)
+        {
+            if (_extinguisherType == extinguisherType) return;
+            _extinguisherType = extinguisherType;
+            OnTypeChanged?.Invoke(_extinguisherType);
+        }
+
+        public bool CanExtinguish(FireType fireType)
+        {
+            return (_extinguisherType, fireType) switch
+            {
+                (FireExtinguisherType.Powder, FireType.Solid) => true,
+                (FireExtinguisherType.CO2, FireType.Liquid) => true,
+                _ => false
+            };
+        }
+
+        public void NotifyIncompatibleFireTargeted(FireType fireType)
+        {
+            OnIncompatibleFireTargeted?.Invoke(_extinguisherType, fireType);
+        }
         
         public void SetRemainingAmount(float amount)
         {

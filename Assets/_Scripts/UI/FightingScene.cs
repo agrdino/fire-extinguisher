@@ -8,9 +8,10 @@ namespace _Scripts.UI
     {
         [SerializeField] private Slider _sldFireExtinguisher;
         
-        private void Start()
+        private void OnEnable()
         {
-            _sldFireExtinguisher.value = 1;
+            if (_sldFireExtinguisher != null)
+                _sldFireExtinguisher.value = FireExtinguisherController.Instance.FireExtinguisher.RemainingRatio;
             FireExtinguisherController.Instance.FireExtinguisher.OnRemainingAmountChanged += OnValueChanged;
         }
 
@@ -22,13 +23,15 @@ namespace _Scripts.UI
         {
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
+            if (FireExtinguisherController.Instance == null) return;
+            FireExtinguisherController.Instance.FireExtinguisher.OnRemainingAmountChanged -= OnValueChanged;
         }
 
         private void OnValueChanged(float amount, float ratio)
         {
-            _sldFireExtinguisher.value = ratio;
+            if (_sldFireExtinguisher != null) _sldFireExtinguisher.value = ratio;
         }
     }
 }

@@ -5,6 +5,7 @@
         Start,
         Selecting,
         Playing,
+        Escape,
         Won,
         Lost
     }

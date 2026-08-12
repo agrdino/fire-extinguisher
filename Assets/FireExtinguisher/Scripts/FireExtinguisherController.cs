@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Fires;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,7 +46,13 @@ namespace _Scripts.FireExtinguishers
         {
             add => _fireExtinguisher.OnCapacityChanged += value;
             remove => _fireExtinguisher.OnCapacityChanged -= value;
-        } 
+        }
+
+        public event Action<FireExtinguisherType, FireType> OnIncompatibleFireTargeted
+        {
+            add => _fireExtinguisher.OnIncompatibleFireTargeted += value;
+            remove => _fireExtinguisher.OnIncompatibleFireTargeted -= value;
+        }
 
         private void Awake()
         {

@@ -7,6 +7,9 @@ namespace _Scripts.Fires
     [RequireComponent(typeof(SphereCollider))]
     public class Fire : MonoBehaviour
     {
+        [Header("Type")]
+        [SerializeField] private FireType _fireType = FireType.Solid;
+
         [SerializeField] private SphereCollider _collider;
         [FormerlySerializedAs("_hp")]
         [SerializeField, Min(0f)] private float _maxIntensity = 100f;
@@ -25,6 +28,7 @@ namespace _Scripts.Fires
 
         public event Action<float> OnIntensityChanged;
 
+        public FireType FireType => _fireType;
         public float MaxIntensity => _maxIntensity;
         public float CurrentIntensity => _currentIntensity;
         public float IntensityRatio => _maxIntensity > 0f ? _currentIntensity / _maxIntensity : 0f;
