@@ -54,15 +54,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7188368331962347738, guid: d413bdb7b9cb1f44f9980a91811efe9d, type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7188368331962347738, guid: d413bdb7b9cb1f44f9980a91811efe9d, type: 3}
-      propertyPath: InitialModule.startSize.scalar
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7188368331962347738, guid: d413bdb7b9cb1f44f9980a91811efe9d, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188368331962347738, guid: d413bdb7b9cb1f44f9980a91811efe9d, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7188368331962347738, guid: d413bdb7b9cb1f44f9980a91811efe9d, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar

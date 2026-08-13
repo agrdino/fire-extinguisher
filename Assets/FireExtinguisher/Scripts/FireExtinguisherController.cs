@@ -117,6 +117,7 @@ namespace _Scripts.FireExtinguishers
 
         public void ResetInputState()
         {
+            _isInputEnabled = false;
             _lastReceiveTime = float.NegativeInfinity;
             _isConnected = false;
             _currentState = FireExtinguisherState.DefaultState;

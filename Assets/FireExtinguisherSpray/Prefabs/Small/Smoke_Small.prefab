@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5251150387956691017, guid: 87065867d48842446926809c0e008354, type: 3}
       propertyPath: VelocityModule.z.scalar
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5251150387956691017, guid: 87065867d48842446926809c0e008354, type: 3}
       propertyPath: ShapeModule.radius.value
