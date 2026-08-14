@@ -1,6 +1,7 @@
 using _Scripts.Controller;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace _Scripts.UI
 {
@@ -15,13 +16,17 @@ namespace _Scripts.UI
 
         private void Awake()
         {
-            Canvas canvas = GetComponentInParent<Canvas>();
-            _uiRoot = canvas != null ? canvas.transform : transform.parent;
-            if (_uiRoot != null)
+            if (GetComponentInParent<LazyFollow>() == null)
             {
-                _initialUIPosition = _uiRoot.position;
-                _initialUIRotation = _uiRoot.rotation;
+                Canvas canvas = GetComponentInParent<Canvas>();
+                _uiRoot = canvas != null ? canvas.transform : transform.parent;
+                if (_uiRoot != null)
+                {
+                    _initialUIPosition = _uiRoot.position;
+                    _initialUIRotation = _uiRoot.rotation;
+                }
             }
+
             if (_btnBack != null) _btnBack.onClick.AddListener(OnClickBackButton);
         }
 
