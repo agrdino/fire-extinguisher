@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8791967201778078587}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3276402775951938465}
   - component: {fileID: 8004949152488525337}
   - component: {fileID: 8810929473677591646}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Panel Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8011306221875157488}
   - component: {fileID: 94206513658370017}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Camera Follow UI Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinDistanceAllowed: 0.05
   m_MaxDistanceAllowed: 0.5
   m_TimeUntilThresholdReachesMaxDistance: 0.5
-  m_RotationFollowMode: 3
+  m_RotationFollowMode: 2
   m_MinAngleAllowed: 0.1
   m_MaxAngleAllowed: 0.5
   m_TimeUntilThresholdReachesMaxAngle: 1.5
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 2469411116676729905}
   - component: {fileID: 5959251778192673700}
   - component: {fileID: 4352498942735808067}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

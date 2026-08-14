@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7365427658994596097}
   - component: {fileID: 8725204153011631853}
   - component: {fileID: 2982901458964593806}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5397791763785180365}
   - component: {fileID: 8764242355584418840}
   - component: {fileID: 5086413928593215767}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9185976861864668267}
   - component: {fileID: 54434880042164488}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: sldCapacity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3557474964244961864}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,9 +498,21 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 55.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7424364948707381595, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Name
       value: UI Guide Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158824281994967529, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

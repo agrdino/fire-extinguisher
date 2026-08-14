@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9074301228669041451}
   - component: {fileID: 5608156052591273908}
   - component: {fileID: 7020935751406656763}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: btnConfirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7876318600539631070}
   - component: {fileID: 2974195155179100235}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Options
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 5945267592061817615}
   - component: {fileID: 8646157577416160300}
   - component: {fileID: 4433749472553521139}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,9 +431,21 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 55.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7424364948707381595, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Name
       value: UI Guide Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158824281994967529, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -453,6 +465,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7876318600539631070}
     m_Modifications:
+    - target: {fileID: 479224610170316850, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 543141021659192353, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2563778383769394183, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -469,6 +489,18 @@ PrefabInstance:
     - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Name
       value: UI Choice Fire Extinguisher Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814983152775523154, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488201831702772054, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Pivot.x
@@ -590,6 +622,14 @@ PrefabInstance:
     - target: {fileID: 2502109916755691156, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
       propertyPath: m_Name
       value: btnBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2502109916755691156, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611786612121129326, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5072966233235169675, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
       propertyPath: m_Pivot.x
@@ -804,6 +844,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7876318600539631070}
     m_Modifications:
+    - target: {fileID: 479224610170316850, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 543141021659192353, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2563778383769394183, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -820,6 +868,18 @@ PrefabInstance:
     - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Name
       value: UI Choice Fire Extinguisher Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814983152775523154, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488201831702772054, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Pivot.x

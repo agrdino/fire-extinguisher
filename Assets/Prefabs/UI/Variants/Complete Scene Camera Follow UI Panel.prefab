@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1186468801346554431}
   - component: {fileID: 8348190819828295151}
   - component: {fileID: 4912416500538067919}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: btnRetry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 910426349928956185}
   - component: {fileID: 1999479750541788237}
   - component: {fileID: 6179997634518016947}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,9 +468,21 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 7424364948707381595, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Name
       value: UI Guide Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158824281994967529, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

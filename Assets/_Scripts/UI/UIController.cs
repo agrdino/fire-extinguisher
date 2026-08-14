@@ -17,6 +17,7 @@ namespace _Scripts.UI
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _completeScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _failedScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _loadingScene;
+        [SerializeField] private GameObject _rayInteractor;
         
         private IScene _currentScene;
         private ApplicationManager _applicationManager;
@@ -36,6 +37,9 @@ namespace _Scripts.UI
 
         private void OnApplicationStateChanged(ApplicationState state)
         {
+            if (_rayInteractor != null)
+                _rayInteractor.SetActive(state != ApplicationState.Playing && state != ApplicationState.Escape);
+
             if (_currentScene != null)
             {
                 _currentScene.Hide();

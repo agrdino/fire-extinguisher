@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1623498418476600074}
   - component: {fileID: 3659056097132625835}
   - component: {fileID: 7667187874983524450}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 2573885224152614991}
   - component: {fileID: 8453162251587334363}
   - component: {fileID: 1437967693190062590}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: btnStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6953621748544104088}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: UI Guide Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 6559792179991761825}
   - component: {fileID: 5504042225138939459}
   - component: {fileID: 7616547896661342521}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: txtTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 2622621104939411707}
   - component: {fileID: 6234587546437966205}
   - component: {fileID: 6176681672174345724}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: txtGuide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,4 +691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0cb07d8dd345fcb7a8997e1f61ae3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.StartScene
-  _btnStart: {fileID: 1437967693190062590}
+  _btnFactory: {fileID: 0}
+  _btnPark: {fileID: 0}
+  _btnConfirm: {fileID: 0}
+  _selectedColor: {r: 0.16, g: 0.55, b: 0.82, a: 0.9}
+  _unselectedColor: {r: 0, g: 0, b: 0, a: 0.7}
