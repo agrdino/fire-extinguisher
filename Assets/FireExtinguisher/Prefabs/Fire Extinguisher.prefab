@@ -343,7 +343,7 @@ MonoBehaviour:
   _capacity: 30
   _consumptionPerSecond: 1
   _remainingAmount: 30
-  _lowAmountThresholdRatio: 0.15
+  _sprayRadius: 0.25
 --- !u!1 &7483837537850348871
 GameObject:
   m_ObjectHideFlags: 0

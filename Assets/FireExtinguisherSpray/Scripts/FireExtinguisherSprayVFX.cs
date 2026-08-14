@@ -11,6 +11,9 @@ namespace _Scripts.FireExtinguishers.Visualizes
         [SerializeField] private ParticleSystemLerpGroup _sprayEffect;
         [SerializeField, Min(0f)] private float _blendDuration = 1f;
 
+        [Header("Capacity Fade")]
+        [SerializeField, Range(0f, 1f)] private float _fadeStartCapacityRatio = 0.15f;
+
         private float _currentBlend;
         private float _targetBlend;
 
@@ -55,9 +58,8 @@ namespace _Scripts.FireExtinguishers.Visualizes
 
         private float GetMaximumBlend()
         {
-            float lowAmountThresholdRatio = _fireExtinguisher.LowAmountThresholdRatio;
-            if (lowAmountThresholdRatio <= 0f) return 1f;
-            return Mathf.InverseLerp(0f, lowAmountThresholdRatio, _fireExtinguisher.RemainingRatio);
+            if (_fadeStartCapacityRatio <= 0f) return 1f;
+            return Mathf.InverseLerp(0f, _fadeStartCapacityRatio, _fireExtinguisher.RemainingRatio);
         }
 
         private void FireExtinguisher_OnCanSprayChanged(bool canSpray) => UpdateTargetBlend();
