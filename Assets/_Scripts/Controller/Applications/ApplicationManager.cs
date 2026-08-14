@@ -34,6 +34,7 @@ namespace _Scripts.Controller
 
         private FireController _fireController;
         private FireExtinguisherController _fireExtinguisherController;
+        private EnviromentController _enviromentController;
         private Vector3 _initialPlayerPosition;
         private Quaternion _initialPlayerRotation;
 
@@ -60,6 +61,7 @@ namespace _Scripts.Controller
             Instance = this;
             _fireController = FireController.Instance;
             _fireExtinguisherController = FireExtinguisherController.Instance;
+            _enviromentController = EnviromentController.Instance;
             if (_playerRoot != null)
             {
                 _initialPlayerPosition = _playerRoot.position;
@@ -138,6 +140,7 @@ namespace _Scripts.Controller
                     break;
 
                 case ApplicationState.Selecting:
+                    ResetPlayerPose();
                     _fireController.SpawnFires();
                     break;
 
@@ -170,6 +173,7 @@ namespace _Scripts.Controller
         private void ResetApplication()
         {
             _fireController.ClearFires();
+            _enviromentController?.ShowStartEnviroment();
             ResetExtinguisher();
             SelectExtinguisher(_defaultExtinguisherType);
             _isEscapeTimeLimited = false;
@@ -236,7 +240,7 @@ namespace _Scripts.Controller
         {
             if (IsPlaying)
             {
-                SetState(ApplicationState.Start);
+                SetState(ApplicationState.Selecting);
                 return;
             }
 

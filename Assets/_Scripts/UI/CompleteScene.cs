@@ -47,7 +47,7 @@ namespace _Scripts.UI
 
         private void OnClickBackButton()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.Start);
+            ApplicationManager.Instance.SetState(ApplicationState.Selecting);
         }
 
         private void MoveUIInFrontOfViewer()

@@ -63,7 +63,7 @@ namespace _Scripts.UI
 
         private void OnRestartButtonClicked()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.Start);
+            ApplicationManager.Instance.SetState(ApplicationState.Selecting);
         }
     }
 }

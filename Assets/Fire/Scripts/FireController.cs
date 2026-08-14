@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Controller;
 using UnityEngine;
 
 namespace _Scripts.Fires
@@ -16,7 +17,6 @@ namespace _Scripts.Fires
         }
 
         [SerializeField] private List<Fire> _firePrefabs = new();
-        [SerializeField] private List<Transform> _spawnPoints = new();
         [SerializeField] private List<Fire> _activeFires = new();
 
         private bool _hasRaisedAllFiresExtinguished;
@@ -49,28 +49,61 @@ namespace _Scripts.Fires
         public void SpawnFires()
         {
             ClearFires();
-            Fire firePrefab = GetRandomFirePrefab();
-            if (firePrefab == null) return;
-            
-            CurrentFireType = firePrefab.FireType;
-            OnFireTypeSelected?.Invoke(CurrentFireType);
-            foreach (Transform spawnPoint in _spawnPoints)
+
+            FireSpawnPoint spawnPoint = GetRandomSpawnPoint();
+            if (spawnPoint == null)
             {
-                if (spawnPoint == null) continue;
-                Fire fire = Instantiate(firePrefab, spawnPoint.position, spawnPoint.rotation);
-                fire.transform.parent = transform;
-                fire.name = $"{firePrefab.name} ({firePrefab.FireType})";
-                fire.OnIntensityChanged += Fire_OnIntensityChanged;
-                _activeFires.Add(fire);
+                Debug.LogWarning("No fire spawn point is available in the selected enviroment.", this);
+                return;
             }
+
+            Fire firePrefab = GetRandomFirePrefab(spawnPoint.FireType);
+            if (firePrefab == null)
+            {
+                Debug.LogWarning($"No fire prefab is configured for {spawnPoint.FireType}.", this);
+                return;
+            }
+
+            CurrentFireType = spawnPoint.FireType;
+            OnFireTypeSelected?.Invoke(CurrentFireType);
+
+            Fire fire = Instantiate(firePrefab, spawnPoint.transform.position, spawnPoint.transform.rotation, transform);
+            fire.name = $"{firePrefab.name} ({spawnPoint.FireType})";
+            fire.OnIntensityChanged += Fire_OnIntensityChanged;
+            _activeFires.Add(fire);
         }
 
-        private Fire GetRandomFirePrefab()
+        private static FireSpawnPoint GetRandomSpawnPoint()
+        {
+            EnviromentController enviromentController = EnviromentController.Instance;
+            if (enviromentController == null) return null;
+
+            IReadOnlyList<FireSpawnPoint> spawnPoints = enviromentController.GetActiveFireSpawnPoints();
+            int validPointCount = 0;
+            for (int i = 0; i < spawnPoints.Count; i++)
+            {
+                if (spawnPoints[i] != null && spawnPoints[i].gameObject.activeInHierarchy) validPointCount++;
+            }
+
+            if (validPointCount == 0) return null;
+
+            int selectedIndex = UnityEngine.Random.Range(0, validPointCount);
+            for (int i = 0; i < spawnPoints.Count; i++)
+            {
+                FireSpawnPoint spawnPoint = spawnPoints[i];
+                if (spawnPoint == null || !spawnPoint.gameObject.activeInHierarchy) continue;
+                if (selectedIndex-- == 0) return spawnPoint;
+            }
+
+            return null;
+        }
+
+        private Fire GetRandomFirePrefab(FireType fireType)
         {
             int validPrefabCount = 0;
             foreach (Fire prefab in _firePrefabs)
             {
-                if (prefab != null) validPrefabCount++;
+                if (prefab != null && prefab.FireType == fireType) validPrefabCount++;
             }
 
             if (validPrefabCount == 0) return null;
@@ -78,13 +111,12 @@ namespace _Scripts.Fires
             int selectedIndex = UnityEngine.Random.Range(0, validPrefabCount);
             foreach (Fire prefab in _firePrefabs)
             {
-                if (prefab == null) continue;
+                if (prefab == null || prefab.FireType != fireType) continue;
                 if (selectedIndex-- == 0) return prefab;
             }
 
             return null;
         }
-
 
         public void ClearFires()
         {
