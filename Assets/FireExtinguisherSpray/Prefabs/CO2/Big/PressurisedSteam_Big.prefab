@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3147150929999453701}
-  - component: {fileID: 4723017735642548604}
   - component: {fileID: 2835151605523563953}
   - component: {fileID: 7427748566182595430}
   m_Layer: 0
@@ -34,20 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4723017735642548604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5722862558170274549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8770ad37b259d4a83881eae150aa44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.ParticleSystemLerper
-  _sourceA: {fileID: 8900363324508990786, guid: e3de774f50e8dab44a38cff95bb0835c, type: 3}
-  _sourceB: {fileID: 2835151605523563953}
 --- !u!198 &2835151605523563953
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -121,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0

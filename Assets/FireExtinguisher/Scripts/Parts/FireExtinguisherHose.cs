@@ -82,6 +82,24 @@ namespace _Scripts.FireExtinguishers.Visualizes
         public int BoneCount => _bones != null ? _bones.Length : 0;
         public bool IsStretching => _initialized && Vector3.Distance(_curveStart, _curveEnd) > _effectiveRestLength;
 
+        public void SetStartAnchor(Transform startAnchor)
+        {
+            if (_startAnchor == startAnchor) return;
+
+            _startAnchor = startAnchor;
+            if (!_initialized || _startAnchor == null) return;
+
+            InitializeSmoothedShape();
+            UpdateCurve(0f);
+            PoseBones();
+        }
+
+        public void SetMaterial(Material material)
+        {
+            if (_hoseRenderer != null && material != null && _hoseRenderer.sharedMaterial != material)
+                _hoseRenderer.sharedMaterial = material;
+        }
+
         private void Reset()
         {
             _hoseRenderer = GetComponentInParent<SkinnedMeshRenderer>();

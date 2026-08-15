@@ -14,7 +14,7 @@ namespace _Scripts.UI
         [SerializeField] private Color _selectedColor = new Color(0.16f, 0.55f, 0.82f, 0.9f);
         [SerializeField] private Color _unselectedColor = new Color(0f, 0f, 0f, 0.7f);
 
-        private FireExtinguisherType _selectedType;
+        private FireExtinguisherType _selectedType = FireExtinguisherType.Unselect;
 
         private void Awake()
         {
@@ -34,7 +34,7 @@ namespace _Scripts.UI
         
         public void Show()
         {
-            _selectedType = ApplicationManager.Instance.SelectedExtinguisherType;
+            _selectedType = FireExtinguisherType.Unselect;
             UpdateSelectionVisuals();
         }
 
@@ -44,7 +44,7 @@ namespace _Scripts.UI
         
         private void OnClickSelectButton()
         {
-            ApplicationManager.Instance.SelectExtinguisher(_selectedType);
+            if (_selectedType == FireExtinguisherType.Unselect) return;
             ApplicationManager.Instance.SetState(ApplicationState.Playing);
         }
 
@@ -66,6 +66,7 @@ namespace _Scripts.UI
         private void SelectExtinguisher(FireExtinguisherType extinguisherType)
         {
             _selectedType = extinguisherType;
+            ApplicationManager.Instance.SelectExtinguisher(extinguisherType);
             UpdateSelectionVisuals();
         }
 
@@ -73,7 +74,7 @@ namespace _Scripts.UI
         {
             if (_btnCO2 != null && _btnCO2.image != null) _btnCO2.image.color = _selectedType == FireExtinguisherType.CO2 ? _selectedColor : _unselectedColor;
             if (_btnPowder != null && _btnPowder.image != null) _btnPowder.image.color = _selectedType == FireExtinguisherType.Powder ? _selectedColor : _unselectedColor;
-            if (_btnSelect != null) _btnSelect.interactable = true;
+            if (_btnSelect != null) _btnSelect.interactable = _selectedType != FireExtinguisherType.Unselect;
         }
     }
 }

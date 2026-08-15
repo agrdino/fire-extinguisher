@@ -23,12 +23,11 @@ namespace _Scripts.Controller
         [SerializeField] private EmergencyExit _emergencyExit;
         [SerializeField] private Transform _playerRoot;
         [SerializeField] private GameObject _movementProviderObject;
-        [SerializeField] private FireExtinguisherType _defaultExtinguisherType = FireExtinguisherType.CO2;
 
         [Header("Runtime")]
         [SerializeField] private ApplicationState _state = ApplicationState.Start;
         [SerializeField, Min(0f)] private float _remainingTime;
-        [SerializeField] private FireExtinguisherType _selectedExtinguisherType;
+        [SerializeField] private FireExtinguisherType _selectedExtinguisherType = FireExtinguisherType.Unselect;
 
         private bool _isEscapeTimeLimited;
 
@@ -140,6 +139,8 @@ namespace _Scripts.Controller
                     break;
 
                 case ApplicationState.Selecting:
+                    ResetExtinguisher();
+                    SelectExtinguisher(FireExtinguisherType.Unselect);
                     ResetPlayerPose();
                     _fireController.SpawnFires();
                     break;
@@ -175,7 +176,7 @@ namespace _Scripts.Controller
             _fireController.ClearFires();
             _enviromentController?.ShowStartEnviroment();
             ResetExtinguisher();
-            SelectExtinguisher(_defaultExtinguisherType);
+            SelectExtinguisher(FireExtinguisherType.Unselect);
             _isEscapeTimeLimited = false;
             SetEmergencyExitActive(false);
             ResetPlayerPose();

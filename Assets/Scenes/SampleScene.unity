@@ -323,10 +323,9 @@ MonoBehaviour:
   _emergencyExit: {fileID: 1581244154}
   _playerRoot: {fileID: 865430807}
   _movementProviderObject: {fileID: 493453822}
-  _defaultExtinguisherType: 0
   _state: 0
   _remainingTime: 0
-  _selectedExtinguisherType: 0
+  _selectedExtinguisherType: 2
 --- !u!4 &125678028
 Transform:
   m_ObjectHideFlags: 0
@@ -2280,13 +2279,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.6
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &887241829
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,6 +3827,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1411347410}
     m_Modifications:
+    - target: {fileID: 1684791653009937374, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
+      propertyPath: _fireExtinguisher
+      value: 
+      objectReference: {fileID: 2705487025438446371}
     - target: {fileID: 2841395514262302519, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
       propertyPath: _fireExtinguisher
       value: 
@@ -3836,6 +3839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nozzle
       objectReference: {fileID: 0}
+    - target: {fileID: 8712345678901234507, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
+      propertyPath: _fireExtinguisher
+      value: 
+      objectReference: {fileID: 2705487025438446371}
     - target: {fileID: 9052882761576765703, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
       propertyPath: _fireExtinguisher
       value: 
@@ -5373,19 +5380,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 18
       objectReference: {fileID: 0}
-    - target: {fileID: 3753758855052760273, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
-      propertyPath: _endAnchor
-      value: 
-      objectReference: {fileID: 1638034514}
     - target: {fileID: 5816237009640691327, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_Name
       value: Fire Extinguisher
       objectReference: {fileID: 0}
-    - target: {fileID: 6325457313241659287, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
-      propertyPath: _endAnchor
-      value: 
-      objectReference: {fileID: 1638034514}
-    - target: {fileID: 9070559572457058867, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
+    - target: {fileID: 8123456789012345612, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: _endAnchor
       value: 
       objectReference: {fileID: 1638034514}

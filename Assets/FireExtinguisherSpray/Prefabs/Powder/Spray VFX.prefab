@@ -14632,7 +14632,7 @@ MonoBehaviour:
   _fireExtinguisher: {fileID: 0}
   _sprayEffect: {fileID: 3385672858378381898}
   _blendDuration: 0.1
-  _fadeStartCapacityRatio: 0.15
+  _fadeStartCapacityRatio: 0.2
 --- !u!114 &3385672858378381898
 MonoBehaviour:
   m_ObjectHideFlags: 0

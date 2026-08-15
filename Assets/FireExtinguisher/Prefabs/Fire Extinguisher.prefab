@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3014158271963197912}
   - component: {fileID: 7066903038430929420}
+  - component: {fileID: 7066903038430929421}
+  - component: {fileID: 7066903038430929422}
   m_Layer: 0
   m_Name: Fire Extinguisher
   m_TagString: Untagged
@@ -33,6 +35,7 @@ Transform:
   - {fileID: 9097045077453660844}
   - {fileID: 6059208995970705160}
   - {fileID: 4838769995723459948}
+  - {fileID: 8123456789012345611}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7066903038430929420
@@ -47,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b040b886435676447b1208d4cc754c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisher
-  _extinguisherType: 1
+  _extinguisherType: 2
   _state:
     _safetyPin: 0
     _lever: 0
@@ -55,6 +58,41 @@ MonoBehaviour:
   _consumptionPerSecond: 1
   _remainingAmount: 30
   _sprayRadius: 0.25
+--- !u!114 &7066903038430929421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816237009640691327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c81908bf394c83b9e721f6218e4d07, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherModelSwitcher
+  _fireExtinguisher: {fileID: 7066903038430929420}
+  _unselectModel: {fileID: 9097045077453660844}
+  _co2Model: {fileID: 4838769995723459948}
+  _powderModel: {fileID: 6059208995970705160}
+--- !u!114 &7066903038430929422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816237009640691327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f06f55a3f449f4ae0fbf6dc83a07cd, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.Visualizes.FireExtinguisherHoseSwitcher
+  _fireExtinguisher: {fileID: 7066903038430929420}
+  _hose: {fileID: 8123456789012345612}
+  _unselectAnchor: {fileID: 8123456789012345621}
+  _co2Anchor: {fileID: 8123456789012345622}
+  _powderAnchor: {fileID: 8123456789012345623}
+  _selectedMaterial: {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
+  _unselectMaterial: {fileID: 2100000, guid: afa27ed436299b74ab5e92a4f7043757, type: 2}
 --- !u!1001 &64944323794034956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,8 +157,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CO2
       objectReference: {fileID: 0}
+    - target: {fileID: 7038425410925001307, guid: ec8536f7bbc493048b34b5c6d8183574, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2323724400642395872, guid: ec8536f7bbc493048b34b5c6d8183574, type: 3}
+    - {fileID: 785972842106729488, guid: ec8536f7bbc493048b34b5c6d8183574, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec8536f7bbc493048b34b5c6d8183574, type: 3}
@@ -140,6 +184,18 @@ PrefabInstance:
     - target: {fileID: 1259850072376362492, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
       propertyPath: m_Name
       value: Unselect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654103150550823505, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
+      propertyPath: _fireExtinguisher
+      value:
+      objectReference: {fileID: 7066903038430929420}
+    - target: {fileID: 4754249683321269672, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
+      propertyPath: _fireExtinguisher
+      value:
+      objectReference: {fileID: 7066903038430929420}
+    - target: {fileID: 4804027573742842278, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8365396514357850622, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -182,7 +238,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4113311048698675730, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
+    - {fileID: 5312201794852317353, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
@@ -260,12 +318,58 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7066903038430929420}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1654352279943124175, guid: 3b9034f27b28fda4b84c9ca04ae4416b, type: 3}
+    - {fileID: 7374821798583254644, guid: 3b9034f27b28fda4b84c9ca04ae4416b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b9034f27b28fda4b84c9ca04ae4416b, type: 3}
 --- !u!4 &6059208995970705160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6626978647403587363, guid: 3b9034f27b28fda4b84c9ca04ae4416b, type: 3}
+  m_PrefabInstance: {fileID: 1144305239251845163}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8123456789012345610
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3014158271963197912}
+    m_Modifications: []
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c4b7c76b5d6541c5aa8d08ea014194c1, type: 3}
+--- !u!4 &8123456789012345611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8123456789012345602, guid: c4b7c76b5d6541c5aa8d08ea014194c1, type: 3}
+  m_PrefabInstance: {fileID: 8123456789012345610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8123456789012345612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8214700216862634520, guid: c4b7c76b5d6541c5aa8d08ea014194c1, type: 3}
+  m_PrefabInstance: {fileID: 8123456789012345610}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ef56d7245f4c449d98efbb4f261794, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.Visualizes.FireExtinguisherHose
+--- !u!4 &8123456789012345621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4406862677336694136, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
+  m_PrefabInstance: {fileID: 732091685625942866}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8123456789012345622 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8480612918312422188, guid: ec8536f7bbc493048b34b5c6d8183574, type: 3}
+  m_PrefabInstance: {fileID: 64944323794034956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8123456789012345623 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353411370532817829, guid: 3b9034f27b28fda4b84c9ca04ae4416b, type: 3}
   m_PrefabInstance: {fileID: 1144305239251845163}
   m_PrefabAsset: {fileID: 0}

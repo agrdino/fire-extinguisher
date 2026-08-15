@@ -8,7 +8,7 @@ namespace _Scripts.FireExtinguishers
     public sealed class FireExtinguisher : MonoBehaviour
     {
         [Header("Type")]
-        [SerializeField] private FireExtinguisherType _extinguisherType = FireExtinguisherType.CO2;
+        [SerializeField] private FireExtinguisherType _extinguisherType = FireExtinguisherType.Unselect;
 
         [SerializeField] private FireExtinguisherState _state;
 
