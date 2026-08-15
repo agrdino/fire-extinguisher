@@ -3047,6 +3047,7 @@ MonoBehaviour:
   _loadingScene:
     _underlyingValue: {fileID: 1549558717717310380}
   _rayInteractor: {fileID: 835448536}
+  _idleHintPrefab: {fileID: 4883971573629354392, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
 --- !u!4 &1292726914
 Transform:
   m_ObjectHideFlags: 0

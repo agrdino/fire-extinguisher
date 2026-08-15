@@ -18,8 +18,10 @@ namespace _Scripts.UI
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _failedScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _loadingScene;
         [SerializeField] private GameObject _rayInteractor;
+        [SerializeField] private IdleHintController _idleHintPrefab;
         
         private IScene _currentScene;
+        private IdleHintController _idleHintInstance;
         private ApplicationManager _applicationManager;
         private EnviromentController _enviromentController;
         private ApplicationState _currentState;
@@ -32,6 +34,16 @@ namespace _Scripts.UI
             _enviromentController = EnviromentController.Instance;
             _applicationManager.OnStateChanged += OnApplicationStateChanged;
             _enviromentController.OnEnviromentChanged += OnEnviromentChanged;
+
+            if (_idleHintPrefab != null)
+            {
+                _idleHintInstance = Instantiate(_idleHintPrefab);
+                _idleHintInstance.name = "Idle Hint System";
+            }
+            else
+            {
+                Debug.LogError("Assign the Idle Hint Popup prefab on UIController.", this);
+            }
         }
 
         private void OnDestroy()
@@ -40,6 +52,8 @@ namespace _Scripts.UI
                 _applicationManager.OnStateChanged -= OnApplicationStateChanged;
             if (_enviromentController != null)
                 _enviromentController.OnEnviromentChanged -= OnEnviromentChanged;
+            if (_idleHintInstance != null)
+                Destroy(_idleHintInstance.gameObject);
             if (_instance == this) _instance = null;
         }
 
