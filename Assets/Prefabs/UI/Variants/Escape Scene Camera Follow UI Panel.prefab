@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3631581984620840109}
   - component: {fileID: 8303000425341282657}
   - component: {fileID: 6331684870858826349}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: btnRestart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 4354127407432640548}
   - component: {fileID: 7269144449710305663}
   - component: {fileID: 5941766372809996011}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,26 +266,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 94206513658370017, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
-      propertyPath: m_MaxAngleAllowed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 94206513658370017, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
-      propertyPath: m_MaxDistanceAllowed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 94206513658370017, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
-      propertyPath: m_RotationFollowMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 94206513658370017, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
-      propertyPath: m_TimeUntilThresholdReachesMaxAngle
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 94206513658370017, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
-      propertyPath: m_TimeUntilThresholdReachesMaxDistance
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5682787560497632375, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
       propertyPath: m_Name
       value: Escape Scene Camera Follow UI Panel
@@ -479,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424364948707381595, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Name
@@ -487,11 +467,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9158824281994967529, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

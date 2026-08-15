@@ -21,17 +21,25 @@ namespace _Scripts.UI
         
         private IScene _currentScene;
         private ApplicationManager _applicationManager;
+        private EnviromentController _enviromentController;
+        private ApplicationState _currentState;
+        private bool _hasCurrentState;
         
         private void Awake()
         {
             _instance = this;
             _applicationManager = ApplicationManager.Instance;
+            _enviromentController = EnviromentController.Instance;
             _applicationManager.OnStateChanged += OnApplicationStateChanged;
+            _enviromentController.OnEnviromentChanged += OnEnviromentChanged;
         }
 
         private void OnDestroy()
         {
-            _applicationManager.OnStateChanged -= OnApplicationStateChanged;
+            if (_applicationManager != null)
+                _applicationManager.OnStateChanged -= OnApplicationStateChanged;
+            if (_enviromentController != null)
+                _enviromentController.OnEnviromentChanged -= OnEnviromentChanged;
             if (_instance == this) _instance = null;
         }
 
@@ -57,8 +65,38 @@ namespace _Scripts.UI
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
             
+            _currentState = state;
+            _hasCurrentState = true;
+
+            if (!PlaceScene(_currentScene, state)) return;
+
             _currentScene.gameObject.SetActive(true);
             _currentScene.Show();
+        }
+
+        private void OnEnviromentChanged(EnviromentType enviromentType)
+        {
+            if (!_hasCurrentState || _currentScene == null) return;
+            if (_currentState == ApplicationState.Start || enviromentType == EnviromentType.Start) return;
+
+            PlaceScene(_currentScene, _currentState);
+        }
+
+        private bool PlaceScene(IScene scene, ApplicationState state)
+        {
+            EnviromentType enviromentType = state == ApplicationState.Start
+                ? EnviromentType.Start
+                : _enviromentController.CurrentEnviroment;
+
+            if (!_enviromentController.TryGetUIPoint(enviromentType, state, out Transform point))
+            {
+                Debug.LogError($"Missing UI point for {enviromentType}/{state}. Assign it on EnviromentController.", this);
+                scene.gameObject.SetActive(false);
+                return false;
+            }
+
+            scene.gameObject.transform.SetPositionAndRotation(point.position, point.rotation);
+            return true;
         }
     }
 }

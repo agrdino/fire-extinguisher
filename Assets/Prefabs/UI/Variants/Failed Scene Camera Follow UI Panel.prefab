@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3284882797192740297}
   - component: {fileID: 863983746319138546}
   - component: {fileID: 6908957407178762920}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: btnRetry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 7367846547456875488}
   - component: {fileID: 4977943707881909120}
   - component: {fileID: 890934903258314914}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424364948707381595, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Name
@@ -478,11 +478,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9158824281994967529, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

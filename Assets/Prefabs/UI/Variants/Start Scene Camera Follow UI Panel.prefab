@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1623498418476600074}
   - component: {fileID: 3659056097132625835}
   - component: {fileID: 7667187874983524450}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 2573885224152614991}
   - component: {fileID: 8453162251587334363}
   - component: {fileID: 1437967693190062590}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: btnStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6953621748544104088}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: UI Guide Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 6559792179991761825}
   - component: {fileID: 5504042225138939459}
   - component: {fileID: 7616547896661342521}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: txtTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 2622621104939411707}
   - component: {fileID: 6234587546437966205}
   - component: {fileID: 6176681672174345724}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: txtGuide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,10 +587,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 94206513658370017, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
-      propertyPath: m_TimeUntilThresholdReachesMaxAngle
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2469411116676729905, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0

@@ -12,6 +12,58 @@ namespace _Scripts.Controller
         Park
     }
 
+    [Serializable]
+    public sealed class UIStatePoint
+    {
+        [SerializeField] private ApplicationState _state;
+        [SerializeField] private Transform _point;
+
+        public ApplicationState State => _state;
+        public Transform Point => _point;
+
+        public UIStatePoint(ApplicationState state)
+        {
+            _state = state;
+        }
+    }
+
+    [Serializable]
+    public sealed class EnviromentUIPoints
+    {
+        [SerializeField] private EnviromentType _enviroment;
+        [SerializeField] private List<UIStatePoint> _points = new();
+
+        public EnviromentType Enviroment => _enviroment;
+
+        public EnviromentUIPoints(EnviromentType enviroment)
+        {
+            _enviroment = enviroment;
+        }
+
+        public bool TryGetPoint(ApplicationState state, out Transform point)
+        {
+            foreach (UIStatePoint statePoint in _points)
+            {
+                if (statePoint.State != state) continue;
+
+                point = statePoint.Point;
+                return point != null;
+            }
+
+            point = null;
+            return false;
+        }
+
+        public void EnsureState(ApplicationState state)
+        {
+            foreach (UIStatePoint statePoint in _points)
+                if (statePoint.State == state)
+                    return;
+
+            _points.Add(new UIStatePoint(state));
+        }
+    }
+
     [DefaultExecutionOrder(-102)]
     [DisallowMultipleComponent]
     public sealed class EnviromentController : MonoBehaviour
@@ -28,6 +80,10 @@ namespace _Scripts.Controller
         [SerializeField] private Transform _factoryExit;
         [SerializeField] private Transform _parkExit;
         [SerializeField] private EmergencyExit _emergencyExit;
+
+        [Header("UI Points")]
+        [Tooltip("Start only needs a Start point. Factory and Park need one point for each gameplay UI state.")]
+        [SerializeField] private List<EnviromentUIPoints> _uiPoints = new();
 
         [Header("Runtime")]
         [SerializeField] private EnviromentType _currentEnviroment = EnviromentType.Start;
@@ -71,6 +127,22 @@ namespace _Scripts.Controller
             OnEnviromentChanged?.Invoke(_currentEnviroment);
         }
 
+        public bool TryGetUIPoint(EnviromentType enviromentType, ApplicationState state, out Transform point)
+        {
+            foreach (EnviromentUIPoints enviromentPoints in _uiPoints)
+            {
+                if (enviromentPoints.Enviroment != enviromentType) continue;
+                if (enviromentPoints.TryGetPoint(state, out point)) return true;
+
+                break;
+            }
+
+            GameObject enviroment = GetEnviroment(enviromentType);
+            Transform uiPointsRoot = enviroment != null ? enviroment.transform.Find("UI Points") : null;
+            point = uiPointsRoot != null ? uiPointsRoot.Find($"UI Point - {state}") : null;
+            return point != null;
+        }
+
         public IReadOnlyList<FireSpawnPoint> GetActiveFireSpawnPoints()
         {
             GameObject activeEnviroment = GetEnviroment(_currentEnviroment);
@@ -104,6 +176,45 @@ namespace _Scripts.Controller
         private static void SetActive(GameObject target, bool isActive)
         {
             if (target != null && target.activeSelf != isActive) target.SetActive(isActive);
+        }
+
+        private void OnValidate()
+        {
+            EnsureUIStates(EnviromentType.Start, ApplicationState.Start);
+            EnsureUIStates(
+                EnviromentType.Factory,
+                ApplicationState.Selecting,
+                ApplicationState.Playing,
+                ApplicationState.Escape,
+                ApplicationState.Won,
+                ApplicationState.Lost);
+            EnsureUIStates(
+                EnviromentType.Park,
+                ApplicationState.Selecting,
+                ApplicationState.Playing,
+                ApplicationState.Escape,
+                ApplicationState.Won,
+                ApplicationState.Lost);
+        }
+
+        private void EnsureUIStates(EnviromentType enviromentType, params ApplicationState[] states)
+        {
+            EnviromentUIPoints enviromentPoints = null;
+            foreach (EnviromentUIPoints candidate in _uiPoints)
+            {
+                if (candidate.Enviroment != enviromentType) continue;
+
+                enviromentPoints = candidate;
+                break;
+            }
+
+            if (enviromentPoints == null)
+            {
+                enviromentPoints = new EnviromentUIPoints(enviromentType);
+                _uiPoints.Add(enviromentPoints);
+            }
+
+            foreach (ApplicationState state in states) enviromentPoints.EnsureState(state);
         }
     }
 }
