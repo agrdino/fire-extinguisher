@@ -18,6 +18,7 @@ namespace _Scripts.Controller
 
         [SerializeField, Min(0f)] private float _roundDuration = 60f;
         [SerializeField, Min(0f)] private float _escapeDuration = 30f;
+        [SerializeField, Min(0f)] private float _exploreDuration = 30f;
 
         [Header("Gameplay References")]
         [SerializeField] private EmergencyExit _emergencyExit;
@@ -40,7 +41,9 @@ namespace _Scripts.Controller
         public ApplicationState State => _state;
         public float RoundDuration => _roundDuration;
         public float EscapeDuration => _escapeDuration;
+        public float ExploreDuration => _exploreDuration;
         public float RemainingTime => _remainingTime;
+        public bool IsExploring => _state == ApplicationState.Explore;
         public bool IsPlaying => _state == ApplicationState.Playing;
         public bool IsEscaping => _state == ApplicationState.Escape;
         public bool IsEscapeTimeLimited => IsEscaping && _isEscapeTimeLimited;
@@ -76,7 +79,7 @@ namespace _Scripts.Controller
                 _emergencyExit.OnPlayerReached += HandleEmergencyExitReached;
             if (_fireExtinguisherController != null)
                 _fireExtinguisherController.SetInputEnabled(false);
-            SetMovementEnabled(_state == ApplicationState.Playing || _state == ApplicationState.Escape);
+            SetMovementEnabled(CanMoveInState(_state));
         }
 
         private void OnDisable()
@@ -98,6 +101,14 @@ namespace _Scripts.Controller
 
         private void LateUpdate()
         {
+            if (IsExploring)
+            {
+                _remainingTime = Mathf.Max(0f, _remainingTime - Time.deltaTime);
+                OnRemainingTimeChanged?.Invoke(_remainingTime);
+                if (_remainingTime <= 0f) CompleteExplore();
+                return;
+            }
+
             if (!IsPlaying && !IsEscaping) return;
 
             if (IsPlaying || _isEscapeTimeLimited)
@@ -131,17 +142,30 @@ namespace _Scripts.Controller
             if (_state == state && !force) return;
 
             _state = state;
-            SetMovementEnabled(_state == ApplicationState.Playing || _state == ApplicationState.Escape);
+            SetMovementEnabled(CanMoveInState(_state));
             switch (_state)
             {
                 case ApplicationState.Start:
                     ResetApplication();
                     break;
 
+                case ApplicationState.Guide:
+                    ResetExtinguisher();
+                    SelectExtinguisher(FireExtinguisherType.Unselect);
+                    _fireController.ClearFires();
+                    break;
+
+                case ApplicationState.Explore:
+                    ResetExtinguisher();
+                    SelectExtinguisher(FireExtinguisherType.Unselect);
+                    _fireController.ClearFires();
+                    _remainingTime = _exploreDuration;
+                    OnRemainingTimeChanged?.Invoke(_remainingTime);
+                    break;
+
                 case ApplicationState.Selecting:
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
-                    ResetPlayerPose();
                     _fireController.SpawnFires();
                     break;
 
@@ -206,6 +230,12 @@ namespace _Scripts.Controller
         public void SelectCO2Extinguisher() => SelectExtinguisher(FireExtinguisherType.CO2);
         public void SelectPowderExtinguisher() => SelectExtinguisher(FireExtinguisherType.Powder);
 
+        public void CompleteExplore()
+        {
+            if (!IsExploring) return;
+            SetState(ApplicationState.Selecting);
+        }
+
         private void SetEmergencyExitActive(bool isActive)
         {
             if (_emergencyExit == null) return;
@@ -252,6 +282,15 @@ namespace _Scripts.Controller
         {
             _isEscapeTimeLimited = isTimeLimited;
             SetState(ApplicationState.Escape);
+        }
+
+        private static bool CanMoveInState(ApplicationState state)
+        {
+            return state == ApplicationState.Guide
+                || state == ApplicationState.Explore
+                || state == ApplicationState.Selecting
+                || state == ApplicationState.Playing
+                || state == ApplicationState.Escape;
         }
     }
 }

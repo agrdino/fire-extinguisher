@@ -11,13 +11,14 @@ namespace _Scripts.UI
         public static UIController Instance => _instance;
         
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _startScene;
+        [SerializeField] private GuideScene _guideScene;
+        [SerializeField] private ExploreScene _exploreScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _fightingScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapeScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _completeScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _failedScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _loadingScene;
-        [SerializeField] private GameObject _rayInteractor;
         [SerializeField] private IdleHintController _idleHintPrefab;
         
         private IScene _currentScene;
@@ -59,9 +60,6 @@ namespace _Scripts.UI
 
         private void OnApplicationStateChanged(ApplicationState state)
         {
-            if (_rayInteractor != null)
-                _rayInteractor.SetActive(state != ApplicationState.Playing && state != ApplicationState.Escape);
-
             if (_currentScene != null)
             {
                 _currentScene.Hide();
@@ -71,6 +69,8 @@ namespace _Scripts.UI
             _currentScene = state switch
             {
                 ApplicationState.Start => _startScene.Value,
+                ApplicationState.Guide => _guideScene,
+                ApplicationState.Explore => _exploreScene,
                 ApplicationState.Selecting => _selectScene.Value,
                 ApplicationState.Playing => _fightingScene.Value,
                 ApplicationState.Escape => _escapeScene.Value,

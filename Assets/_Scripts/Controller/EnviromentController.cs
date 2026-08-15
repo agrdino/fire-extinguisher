@@ -183,6 +183,8 @@ namespace _Scripts.Controller
             EnsureUIStates(EnviromentType.Start, ApplicationState.Start);
             EnsureUIStates(
                 EnviromentType.Factory,
+                ApplicationState.Guide,
+                ApplicationState.Explore,
                 ApplicationState.Selecting,
                 ApplicationState.Playing,
                 ApplicationState.Escape,
@@ -190,6 +192,8 @@ namespace _Scripts.Controller
                 ApplicationState.Lost);
             EnsureUIStates(
                 EnviromentType.Park,
+                ApplicationState.Guide,
+                ApplicationState.Explore,
                 ApplicationState.Selecting,
                 ApplicationState.Playing,
                 ApplicationState.Escape,

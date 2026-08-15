@@ -9,6 +9,7 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnFactory;
         [SerializeField] private Button _btnPark;
         [SerializeField] private Button _btnConfirm;
+        [SerializeField] private Button _btnStart;
         [SerializeField] private Color _selectedColor = new Color(0.16f, 0.55f, 0.82f, 0.9f);
         [SerializeField] private Color _unselectedColor = new Color(0f, 0f, 0f, 0.7f);
 
@@ -19,6 +20,7 @@ namespace _Scripts.UI
             if (_btnFactory != null) _btnFactory.onClick.AddListener(OnClickFactoryButton);
             if (_btnPark != null) _btnPark.onClick.AddListener(OnClickParkButton);
             if (_btnConfirm != null) _btnConfirm.onClick.AddListener(OnClickConfirmButton);
+            if (_btnStart != null) _btnStart.onClick.AddListener(OnClickStartButton);
         }
 
         private void OnDestroy()
@@ -26,6 +28,7 @@ namespace _Scripts.UI
             if (_btnFactory != null) _btnFactory.onClick.RemoveListener(OnClickFactoryButton);
             if (_btnPark != null) _btnPark.onClick.RemoveListener(OnClickParkButton);
             if (_btnConfirm != null) _btnConfirm.onClick.RemoveListener(OnClickConfirmButton);
+            if (_btnStart != null) _btnStart.onClick.RemoveListener(OnClickStartButton);
         }
 
         public void Show()
@@ -51,7 +54,13 @@ namespace _Scripts.UI
         private void OnClickConfirmButton()
         {
             EnviromentController.Instance.SetEnviroment(_selectedEnviroment);
-            ApplicationManager.Instance.SetState(ApplicationState.Selecting);
+            ApplicationManager.Instance.SetState(ApplicationState.Guide);
+        }
+
+        private void OnClickStartButton()
+        {
+            EnviromentController.Instance.SetEnviroment(_selectedEnviroment);
+            ApplicationManager.Instance.SetState(ApplicationState.Guide);
         }
 
         private void SelectEnviroment(EnviromentType enviromentType)
