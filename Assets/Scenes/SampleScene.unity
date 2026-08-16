@@ -3059,19 +3059,6 @@ MonoBehaviour:
   _loadingScene:
     _underlyingValue: {fileID: 1549558717717310380}
   _idleHintPrefab: {fileID: 4883971573629354392, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
---- !u!114 &1292726915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1292726912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e65ad5bd2df47ce92e31752d7fe0ee5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.RayInteractorStateController
-  _rayInteractor: {fileID: 835448536}
 --- !u!4 &1292726914
 Transform:
   m_ObjectHideFlags: 0
@@ -3096,6 +3083,19 @@ Transform:
   - {fileID: 630000000000000002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292726915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292726912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e65ad5bd2df47ce92e31752d7fe0ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.RayInteractorStateController
+  _rayInteractor: {fileID: 835448536}
 --- !u!1 &1307971415
 GameObject:
   m_ObjectHideFlags: 0
@@ -4933,7 +4933,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0a93dc2b5f64d64b3355a416ab646b3, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.GuideScene
 --- !u!4 &630000000000000002 stripped
 Transform:
@@ -4970,7 +4970,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d406fb7df3244c91b7824283603aa06b, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.ExploreScene
 --- !u!4 &640000000000000002 stripped
 Transform:
