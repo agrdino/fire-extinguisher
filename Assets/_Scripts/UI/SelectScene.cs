@@ -16,6 +16,13 @@ namespace _Scripts.UI
 
         private FireExtinguisherType _selectedType = FireExtinguisherType.Unselect;
 
+        public Transform ExtinguisherOptionsHintTarget => _btnCO2 != null
+            ? _btnCO2.transform.parent
+            : transform;
+        public Transform ConfirmHintTarget => _btnSelect != null
+            ? _btnSelect.transform
+            : transform;
+
         private void Awake()
         {
             if (_btnCO2 != null) _btnCO2.onClick.AddListener(OnClickCO2Button);

@@ -48,6 +48,7 @@ namespace _Scripts.Controller
         public bool IsEscaping => _state == ApplicationState.Escape;
         public bool IsEscapeTimeLimited => IsEscaping && _isEscapeTimeLimited;
         public FireExtinguisherType SelectedExtinguisherType => _selectedExtinguisherType;
+        public EmergencyExit EmergencyExit => _emergencyExit;
 
         public event Action<ApplicationState> OnStateChanged;
         public event Action<float> OnRemainingTimeChanged;

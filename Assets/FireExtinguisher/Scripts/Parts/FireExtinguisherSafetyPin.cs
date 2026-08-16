@@ -16,6 +16,8 @@ namespace _Scripts.FireExtinguishers.Visualizes
         private bool _isMoving;
         private SafetyPinState _currentPinState;
 
+        public Transform HintTarget => _safetyPin != null ? _safetyPin : transform;
+
         private void Reset()
         {
             _fireExtinguisher = GetComponentInParent<FireExtinguisher>();

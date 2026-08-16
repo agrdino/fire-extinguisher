@@ -27,6 +27,8 @@ namespace _Scripts.UI
         private EnviromentController _enviromentController;
         private ApplicationState _currentState;
         private bool _hasCurrentState;
+
+        public IScene CurrentScene => _currentScene;
         
         private void Awake()
         {

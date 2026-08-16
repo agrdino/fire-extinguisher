@@ -15,6 +15,14 @@ namespace _Scripts.Controller
         public event Action OnPlayerReached;
 
         public bool IsArmed => _isArmed;
+        public Transform HintTarget
+        {
+            get
+            {
+                Transform view = transform.Find("View");
+                return view != null ? view : transform;
+            }
+        }
 
         private void Reset()
         {

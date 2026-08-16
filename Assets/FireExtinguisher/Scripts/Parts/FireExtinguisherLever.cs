@@ -16,6 +16,8 @@ namespace _Scripts.FireExtinguishers.Visualizes
         private float _targetRotation;
         private bool _isRotating;
 
+        public Transform HintTarget => _lever != null ? _lever : transform;
+
         private void Reset()
         {
             _fireExtinguisher = GetComponentInParent<FireExtinguisher>();

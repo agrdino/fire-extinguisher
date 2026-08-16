@@ -1,5 +1,6 @@
 using _Scripts.Controller;
 using _Scripts.FireExtinguishers;
+using _Scripts.FireExtinguishers.Visualizes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -35,6 +36,15 @@ namespace _Scripts.UI
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private TMP_Text _messageText;
 
+        [Header("Callout")]
+        [SerializeField] private Material _curveMaterial;
+        [SerializeField] private Color _curveColor = new(0.1254902f, 0.5882353f, 0.9529412f, 1f);
+        [SerializeField, Min(0.0001f)] private float _curveWidth = 0.003f;
+        [SerializeField, Min(0f)] private float _targetGap = 0.08f;
+        [SerializeField, Min(0f)] private float _popupGap = 0.015f;
+        [SerializeField, Min(0f)] private float _viewportMargin = 0.08f;
+        [SerializeField, Min(0f)] private float _curveStrength = 0.18f;
+
         [Header("Timing")]
         [SerializeField, Min(0f)] private float _idleDelay = 8f;
         [SerializeField, Min(0f)] private float _fadeDuration = 0.2f;
@@ -55,6 +65,7 @@ namespace _Scripts.UI
         private float _idleTime;
         private float _targetAlpha;
         private HintStep _currentStep;
+        private HintCalloutCurve _calloutCurve;
 
         private void Awake()
         {
@@ -97,6 +108,7 @@ namespace _Scripts.UI
             _canvasGroup.blocksRaycasts = false;
 
             EnsureOverlayCamera(layer);
+            EnsureCalloutCurve(layer);
             BindEvents();
             RefreshRequirement(true);
         }
@@ -211,21 +223,75 @@ namespace _Scripts.UI
         {
             _currentStep = step;
             _idleTime = 0f;
+            if (_calloutCurve != null) _calloutCurve.SetTarget(ResolveHintTarget(step));
             HideHint();
         }
 
         private void ShowCurrentHint()
         {
             _messageText.SetText(GetHintText(_currentStep));
+            if (_calloutCurve != null)
+            {
+                _calloutCurve.SetTarget(ResolveHintTarget(_currentStep));
+                _calloutCurve.SetVisible(true);
+            }
             _targetAlpha = 1f;
         }
 
         private void HideHint()
         {
             _targetAlpha = 0f;
+            if (_calloutCurve != null) _calloutCurve.SetVisible(false);
             if (_canvasGroup == null) return;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+        }
+
+        private Transform ResolveHintTarget(HintStep step)
+        {
+            switch (step)
+            {
+                case HintStep.SelectExtinguisher:
+                case HintStep.ConfirmExtinguisher:
+                {
+                    SelectScene selectScene = UIController.Instance?.CurrentScene as SelectScene;
+                    if (selectScene == null) return null;
+                    return step == HintStep.SelectExtinguisher
+                        ? selectScene.ExtinguisherOptionsHintTarget
+                        : selectScene.ConfirmHintTarget;
+                }
+
+                case HintStep.RemoveSafetyPin:
+                    return FindActivePartTarget<FireExtinguisherSafetyPin>(
+                        component => component.HintTarget);
+
+                case HintStep.AimAndSqueeze:
+                    return FindActivePartTarget<FireExtinguisherLever>(
+                        component => component.HintTarget);
+
+                case HintStep.GoToEmergencyExit:
+                    return _applicationManager?.EmergencyExit?.HintTarget;
+
+                default:
+                    return null;
+            }
+        }
+
+        private Transform FindActivePartTarget<T>(System.Func<T, Transform> getTarget)
+            where T : Component
+        {
+            if (_fireExtinguisher == null) return null;
+
+            T[] parts = _fireExtinguisher.GetComponentsInChildren<T>(true);
+            T fallback = null;
+            foreach (T part in parts)
+            {
+                if (part == null) continue;
+                fallback ??= part;
+                if (part.gameObject.activeInHierarchy) return getTarget(part);
+            }
+
+            return fallback != null ? getTarget(fallback) : _fireExtinguisher.transform;
         }
 
         private string GetHintText(HintStep step)
@@ -273,6 +339,33 @@ namespace _Scripts.UI
             _baseCamera.cullingMask &= ~(1 << layer);
             AddCameraToStack(_baseCamera, _overlayCamera);
             _ownsOverlayCamera = true;
+        }
+
+        private void EnsureCalloutCurve(int layer)
+        {
+            RectTransform popupRect = _canvasGroup != null
+                ? _canvasGroup.transform as RectTransform
+                : null;
+            if (popupRect == null)
+            {
+                Debug.LogError("Idle Hint Popup requires its CanvasGroup on a RectTransform.", this);
+                return;
+            }
+
+            _calloutCurve = GetComponent<HintCalloutCurve>();
+            if (_calloutCurve == null) _calloutCurve = gameObject.AddComponent<HintCalloutCurve>();
+            _calloutCurve.gameObject.layer = layer;
+            _calloutCurve.Initialize(
+                popupRect,
+                _canvasGroup,
+                _baseCamera,
+                _curveMaterial,
+                _curveColor,
+                _curveWidth,
+                _targetGap,
+                _popupGap,
+                _viewportMargin,
+                _curveStrength);
         }
 
         private static void AddCameraToStack(Camera baseCamera, Camera overlayCamera)
