@@ -4,10 +4,10 @@ using UnityEngine;
 namespace _Scripts.Controller
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(BoxCollider))]
+    [RequireComponent(typeof(Collider))]
     public sealed class EmergencyExit : MonoBehaviour
     {
-        [SerializeField] private BoxCollider _trigger;
+        [SerializeField] private Collider _trigger;
 
         private Transform _playerRoot;
         private bool _isArmed;
@@ -26,13 +26,12 @@ namespace _Scripts.Controller
 
         private void Reset()
         {
-            _trigger = GetComponent<BoxCollider>();
+            _trigger = GetComponent<Collider>();
             _trigger.isTrigger = true;
         }
 
         private void Awake()
         {
-            if (_trigger == null) _trigger = GetComponent<BoxCollider>();
             _trigger.isTrigger = true;
         }
 

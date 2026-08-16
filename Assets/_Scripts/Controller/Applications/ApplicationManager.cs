@@ -154,12 +154,18 @@ namespace _Scripts.Controller
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.ClearFires();
+                    _isEscapeTimeLimited = false;
+                    SetEmergencyExitActive(false);
+                    ResetPlayerPose();
                     break;
 
                 case ApplicationState.Explore:
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.ClearFires();
+                    _isEscapeTimeLimited = false;
+                    SetEmergencyExitActive(false);
+                    ResetPlayerPose();
                     _remainingTime = _exploreDuration;
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
                     break;
@@ -187,6 +193,10 @@ namespace _Scripts.Controller
                     break;
 
                 case ApplicationState.Won:
+                    _fireExtinguisherController.SetInputEnabled(false);
+                    _emergencyExit?.Disarm();
+                    break;
+
                 case ApplicationState.Lost:
                     _fireExtinguisherController.SetInputEnabled(false);
                     SetEmergencyExitActive(false);
@@ -272,7 +282,7 @@ namespace _Scripts.Controller
         {
             if (IsPlaying)
             {
-                SetState(ApplicationState.Selecting);
+                SetState(ApplicationState.Guide);
                 return;
             }
 

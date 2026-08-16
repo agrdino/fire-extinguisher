@@ -28,7 +28,7 @@ namespace _Scripts.UI
 
         private void OnRetryClicked()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.Selecting);
+            ApplicationManager.Instance.SetState(ApplicationState.Guide);
         }
     }
 }

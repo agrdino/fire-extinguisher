@@ -28,7 +28,7 @@ namespace _Scripts.UI
 
         private void OnClickBackButton()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.Selecting);
+            ApplicationManager.Instance.SetState(ApplicationState.Guide);
         }
     }
 }
