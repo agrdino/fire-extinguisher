@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b85e6f66a6a4a068362bd376facdbad, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherSprayRaycaster
   _fireExtinguisher: {fileID: 0}
   _rayOrigin: {fileID: 2987053083054346954}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44c81908bf394c83b9e721f6218e4d07, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherModelSwitcher
   _fireExtinguisher: {fileID: 0}
   _unselectModel: {fileID: 8712345678901234502}
@@ -511,7 +511,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 128675641325120797, guid: 98ab54709a621fa46a4d644a84008275, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.17223004
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 128675641325120797, guid: 98ab54709a621fa46a4d644a84008275, type: 3}
       propertyPath: m_LocalPosition.y

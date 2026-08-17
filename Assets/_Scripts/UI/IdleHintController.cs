@@ -58,11 +58,9 @@ namespace _Scripts.UI
         [SerializeField] private string _goToEmergencyExitHint = "Follow the EXIT signs and go to the emergency exit.";
 
         private ApplicationManager _applicationManager;
-        private global::_Scripts.FireExtinguishers.FireExtinguisher _fireExtinguisher;
+        private FireExtinguisher _fireExtinguisher;
         private Camera _baseCamera;
         private Camera _overlayCamera;
-        private bool _ownsOverlayCamera;
-        private int _originalBaseCameraMask;
         private float _idleTime;
         private float _targetAlpha;
         private HintStep _currentStep;
@@ -80,24 +78,10 @@ namespace _Scripts.UI
 
             _instance = this;
             _applicationManager = ApplicationManager.Instance;
-            _fireExtinguisher = FireExtinguisherController.Instance?.FireExtinguisher;
+            _fireExtinguisher = FireExtinguisherController.Instance.FireExtinguisher;
 
-            if (_applicationManager == null)
-            {
-                Debug.LogWarning("Idle hints require an ApplicationManager in the active scene.", this);
-                enabled = false;
-                return;
-            }
-
-            if (_canvasGroup == null || _messageText == null)
-            {
-                Debug.LogError("Idle Hint Popup prefab is missing its CanvasGroup or message text reference.", this);
-                enabled = false;
-                return;
-            }
-
-            LazyFollow lazyFollow = GetComponent<LazyFollow>();
-            lazyFollow.target = Camera.main != null ? Camera.main.transform : null;
+            if (_applicationManager == null) return;
+            if (_canvasGroup == null || _messageText == null) return;
 
             int layer = LayerMask.NameToLayer(AlwaysOnTopLayerName);
             if (layer != AlwaysOnTopLayer || gameObject.layer != layer)
@@ -110,7 +94,7 @@ namespace _Scripts.UI
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
 
-            EnsureOverlayCamera(layer);
+            EnsureOverlayCamera();
             EnsureCalloutCurve(layer);
             BindEvents();
             RefreshRequirement(true);
@@ -149,7 +133,6 @@ namespace _Scripts.UI
         private void OnDestroy()
         {
             UnbindEvents();
-            TearDownOverlayCamera();
             if (_instance == this) _instance = null;
         }
 
@@ -345,7 +328,7 @@ namespace _Scripts.UI
             };
         }
 
-        private void EnsureOverlayCamera(int layer)
+        private void EnsureOverlayCamera()
         {
             _baseCamera = Camera.main;
             if (_baseCamera == null)
@@ -355,35 +338,13 @@ namespace _Scripts.UI
             }
 
             Transform existing = _baseCamera.transform.Find(OverlayCameraName);
-            if (existing != null && existing.TryGetComponent(out _overlayCamera))
-            {
-                AddCameraToStack(_baseCamera, _overlayCamera);
-                return;
-            }
-
-            GameObject cameraObject = new GameObject(OverlayCameraName);
-            cameraObject.transform.SetParent(_baseCamera.transform, false);
-            _overlayCamera = cameraObject.AddComponent<Camera>();
-            _overlayCamera.clearFlags = CameraClearFlags.Nothing;
-            _overlayCamera.cullingMask = 1 << layer;
-            _overlayCamera.depth = _baseCamera.depth + 1f;
-            _overlayCamera.useOcclusionCulling = false;
-
-            UniversalAdditionalCameraData overlayData = _overlayCamera.GetUniversalAdditionalCameraData();
-            overlayData.renderType = CameraRenderType.Overlay;
-            overlayData.renderShadows = false;
-
-            _originalBaseCameraMask = _baseCamera.cullingMask;
-            _baseCamera.cullingMask &= ~(1 << layer);
+            if (existing == null || !existing.TryGetComponent(out _overlayCamera)) return;
             AddCameraToStack(_baseCamera, _overlayCamera);
-            _ownsOverlayCamera = true;
         }
 
         private void EnsureCalloutCurve(int layer)
         {
-            RectTransform popupRect = _canvasGroup != null
-                ? _canvasGroup.transform as RectTransform
-                : null;
+            RectTransform popupRect = _canvasGroup != null ? _canvasGroup.transform as RectTransform : null;
             if (popupRect == null)
             {
                 Debug.LogError("Idle Hint Popup requires its CanvasGroup on a RectTransform.", this);
@@ -413,17 +374,5 @@ namespace _Scripts.UI
                 baseData.cameraStack.Add(overlayCamera);
         }
 
-        private void TearDownOverlayCamera()
-        {
-            if (_baseCamera != null && _overlayCamera != null)
-            {
-                UniversalAdditionalCameraData baseData = _baseCamera.GetUniversalAdditionalCameraData();
-                baseData.cameraStack.Remove(_overlayCamera);
-            }
-
-            if (!_ownsOverlayCamera || _overlayCamera == null) return;
-            if (_baseCamera != null) _baseCamera.cullingMask = _originalBaseCameraMask;
-            Destroy(_overlayCamera.gameObject);
-        }
     }
 }

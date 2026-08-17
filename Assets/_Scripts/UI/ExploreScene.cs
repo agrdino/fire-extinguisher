@@ -8,54 +8,59 @@ namespace _Scripts.UI
     public sealed class ExploreScene : MonoBehaviour, IScene
     {
         [SerializeField] private Button _btnStart;
-        [SerializeField] private Component _txtCountdown;
+        [SerializeField] private Button _btnBackGuide;
+        [SerializeField] private TextMeshProUGUI _txtCountdown;
 
         private ApplicationManager _applicationManager;
 
         private void Awake()
         {
-            if (_btnStart != null) _btnStart.onClick.AddListener(OnClickStartButton);
+            _btnStart.onClick.AddListener(StartButton_OnClick);
+            if (_btnBackGuide != null) _btnBackGuide.onClick.AddListener(BackGuideButton_OnClick);
         }
 
         private void OnDestroy()
         {
-            if (_btnStart != null) _btnStart.onClick.RemoveListener(OnClickStartButton);
+            _btnStart.onClick.RemoveListener(StartButton_OnClick);
+            if (_btnBackGuide != null) _btnBackGuide.onClick.RemoveListener(BackGuideButton_OnClick);
             UnsubscribeFromTimer();
         }
 
         public void Show()
         {
             _applicationManager = ApplicationManager.Instance;
-            if (_applicationManager == null) return;
 
-            _applicationManager.OnRemainingTimeChanged += UpdateCountdown;
-            UpdateCountdown(_applicationManager.RemainingTime);
+            _txtCountdown.gameObject.SetActive(_applicationManager.IsExploreTimeLimited);
+            if (!_applicationManager.IsExploreTimeLimited) return;
+
+            _applicationManager.OnRemainingTimeChanged += ApplicationManager_OnRemainingTimeChanged;
+            ApplicationManager_OnRemainingTimeChanged(_applicationManager.RemainingTime);
         }
 
-        public void Hide()
-        {
-            UnsubscribeFromTimer();
-        }
+        public void Hide() => UnsubscribeFromTimer();
 
-        private void OnClickStartButton()
-        {
-            ApplicationManager.Instance.CompleteExplore();
-        }
-
-        private void UpdateCountdown(float remainingTime)
+        private void ApplicationManager_OnRemainingTimeChanged(float remainingTime)
         {
             int seconds = Mathf.CeilToInt(remainingTime);
-            if (_txtCountdown is TMP_Text tmpText)
-                tmpText.SetText("Fire drill starts in {0}s", seconds);
-            else if (_txtCountdown is Text legacyText)
-                legacyText.text = $"Fire drill starts in {seconds}s";
+            _txtCountdown.SetText("Fire drill starts in {0}s", seconds);
         }
 
         private void UnsubscribeFromTimer()
         {
-            if (_applicationManager != null)
-                _applicationManager.OnRemainingTimeChanged -= UpdateCountdown;
+            if (_applicationManager == null) return;
+            _applicationManager.OnRemainingTimeChanged -= ApplicationManager_OnRemainingTimeChanged;
             _applicationManager = null;
         }
+
+        private void StartButton_OnClick()
+        {
+            ApplicationManager.Instance.CompleteExplore();
+        }
+
+        private void BackGuideButton_OnClick()
+        {
+            ApplicationManager.Instance.SetState(ApplicationState.Guide);
+        }
+
     }
 }

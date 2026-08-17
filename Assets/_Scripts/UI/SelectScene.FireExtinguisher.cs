@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace _Scripts.UI
 {
-    public class FireExtinguisher : MonoBehaviour
+    public class UIFireExtinguisher : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _txtName;
         [SerializeField] private TextMeshProUGUI _txtDescription;

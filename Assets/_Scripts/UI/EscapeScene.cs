@@ -8,11 +8,6 @@ namespace _Scripts.UI
     {
         [SerializeField] private TMP_Text _txtGuide;
 
-        private void Reset()
-        {
-            _txtGuide = transform.Find("UI Guide Title/txtGuide")?.GetComponent<TMP_Text>();
-        }
-
         private void OnEnable()
         {
             ApplicationManager.Instance.OnRemainingTimeChanged += OnRemainingTimeChanged;
@@ -21,6 +16,7 @@ namespace _Scripts.UI
 
         private void OnDisable()
         {
+            if (ApplicationManager.Instance == null) return;
             ApplicationManager.Instance.OnRemainingTimeChanged -= OnRemainingTimeChanged;
         }
 

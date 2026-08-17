@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.LazyFollow
   m_Target: {fileID: 0}
-  m_TargetOffset: {x: 0.38, y: 0.22, z: 1.35}
+  m_TargetOffset: {x: 0.3, y: 0.15, z: 1.35}
   m_FollowInLocalSpace: 0
   m_ApplyTargetInLocalSpace: 0
   m_MovementSpeed: 5
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_MinDistanceAllowed: 0.03
   m_MaxDistanceAllowed: 0.12
   m_TimeUntilThresholdReachesMaxDistance: 0.5
-  m_RotationFollowMode: 2
+  m_RotationFollowMode: 1
   m_MinAngleAllowed: 0.1
   m_MaxAngleAllowed: 1
   m_TimeUntilThresholdReachesMaxAngle: 0.75

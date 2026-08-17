@@ -18,6 +18,7 @@ namespace _Scripts.Controller
 
         [SerializeField, Min(0f)] private float _roundDuration = 60f;
         [SerializeField, Min(0f)] private float _escapeDuration = 30f;
+        [SerializeField] private bool _isExploreTimeLimited = true;
         [SerializeField, Min(0f)] private float _exploreDuration = 30f;
 
         [Header("Gameplay References")]
@@ -44,6 +45,7 @@ namespace _Scripts.Controller
         public float ExploreDuration => _exploreDuration;
         public float RemainingTime => _remainingTime;
         public bool IsExploring => _state == ApplicationState.Explore;
+        public bool IsExploreTimeLimited => IsExploring && _isExploreTimeLimited;
         public bool IsPlaying => _state == ApplicationState.Playing;
         public bool IsEscaping => _state == ApplicationState.Escape;
         public bool IsEscapeTimeLimited => IsEscaping && _isEscapeTimeLimited;
@@ -102,13 +104,15 @@ namespace _Scripts.Controller
 
         private void LateUpdate()
         {
-            if (IsExploring)
+            if (IsExploreTimeLimited)
             {
                 _remainingTime = Mathf.Max(0f, _remainingTime - Time.deltaTime);
                 OnRemainingTimeChanged?.Invoke(_remainingTime);
                 if (_remainingTime <= 0f) CompleteExplore();
                 return;
             }
+
+            if (IsExploring) return;
 
             if (!IsPlaying && !IsEscaping) return;
 
