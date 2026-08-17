@@ -173,7 +173,7 @@ namespace _Scripts.Controller
                 case ApplicationState.Selecting:
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
-                    _fireController.SpawnFires();
+                    _fireController.SpawnFires(_playerRoot);
                     break;
 
                 case ApplicationState.Playing:

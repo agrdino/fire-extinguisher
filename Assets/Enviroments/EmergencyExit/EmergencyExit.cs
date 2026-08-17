@@ -15,24 +15,11 @@ namespace _Scripts.Controller
         public event Action OnPlayerReached;
 
         public bool IsArmed => _isArmed;
-        public Transform HintTarget
-        {
-            get
-            {
-                Transform view = transform.Find("View");
-                return view != null ? view : transform;
-            }
-        }
+        public Transform HintTarget => transform;
 
         private void Reset()
         {
             _trigger = GetComponent<Collider>();
-            _trigger.isTrigger = true;
-        }
-
-        private void Awake()
-        {
-            _trigger.isTrigger = true;
         }
 
         public void Arm(Transform playerRoot)

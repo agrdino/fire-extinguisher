@@ -8,15 +8,18 @@ namespace _Scripts.UI
     {
         [SerializeField] private ScrollRect _scrollView;
         [SerializeField] private Button _btnContinue;
+        [SerializeField] private Button _btnBack;
 
         private void Awake()
         {
             if (_btnContinue != null) _btnContinue.onClick.AddListener(OnClickContinueButton);
+            if (_btnBack != null) _btnBack.onClick.AddListener(OnClickBackButton);
         }
 
         private void OnDestroy()
         {
             if (_btnContinue != null) _btnContinue.onClick.RemoveListener(OnClickContinueButton);
+            if (_btnBack != null) _btnBack.onClick.RemoveListener(OnClickBackButton);
         }
 
         public void Show()
@@ -31,6 +34,11 @@ namespace _Scripts.UI
         private static void OnClickContinueButton()
         {
             ApplicationManager.Instance.SetState(ApplicationState.Explore);
+        }
+
+        private void OnClickBackButton()
+        {
+            ApplicationManager.Instance.SetState(ApplicationState.Start);
         }
     }
 }

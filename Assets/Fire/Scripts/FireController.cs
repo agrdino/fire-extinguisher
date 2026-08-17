@@ -18,6 +18,7 @@ namespace _Scripts.Fires
 
         [SerializeField] private List<Fire> _firePrefabs = new();
         [SerializeField] private List<Fire> _activeFires = new();
+        [SerializeField, Min(0f)] private float _minimumSpawnDistanceFromPlayer = 2f;
 
         private bool _hasRaisedAllFiresExtinguished;
 
@@ -46,43 +47,40 @@ namespace _Scripts.Fires
 
         public bool AreAllFiresExtinguished() => _activeFires.Count > 0 && _activeFires.TrueForAll(fire => fire.IsExtinguished);
 
-        public void SpawnFires()
+        public void SpawnFires(Transform playerRoot)
         {
             ClearFires();
 
-            FireSpawnPoint spawnPoint = GetRandomSpawnPoint();
-            if (spawnPoint == null)
-            {
-                Debug.LogWarning("No fire spawn point is available in the selected enviroment.", this);
-                return;
-            }
+            if (playerRoot == null) return;
+
+            FireSpawnPoint spawnPoint = GetRandomSpawnPoint(playerRoot.position);
+            if (spawnPoint == null) return;
 
             Fire firePrefab = GetRandomFirePrefab(spawnPoint.FireType);
-            if (firePrefab == null)
-            {
-                Debug.LogWarning($"No fire prefab is configured for {spawnPoint.FireType}.", this);
-                return;
-            }
+            if (firePrefab == null) return;
 
             CurrentFireType = spawnPoint.FireType;
             OnFireTypeSelected?.Invoke(CurrentFireType);
 
             Fire fire = Instantiate(firePrefab, spawnPoint.transform.position, spawnPoint.transform.rotation, transform);
             fire.name = $"{firePrefab.name} ({spawnPoint.FireType})";
+            FireProximityWarning proximityWarning = fire.GetComponentInChildren<FireProximityWarning>(true);
+            if (proximityWarning != null) proximityWarning.Arm(playerRoot);
             fire.OnIntensityChanged += Fire_OnIntensityChanged;
             _activeFires.Add(fire);
         }
 
-        private static FireSpawnPoint GetRandomSpawnPoint()
+        private FireSpawnPoint GetRandomSpawnPoint(Vector3 playerPosition)
         {
             EnviromentController enviromentController = EnviromentController.Instance;
             if (enviromentController == null) return null;
 
             IReadOnlyList<FireSpawnPoint> spawnPoints = enviromentController.GetActiveFireSpawnPoints();
+            float minimumDistanceSquared = _minimumSpawnDistanceFromPlayer * _minimumSpawnDistanceFromPlayer;
             int validPointCount = 0;
             for (int i = 0; i < spawnPoints.Count; i++)
             {
-                if (spawnPoints[i] != null && spawnPoints[i].gameObject.activeInHierarchy) validPointCount++;
+                if (IsValidSpawnPoint(spawnPoints[i], playerPosition, minimumDistanceSquared)) validPointCount++;
             }
 
             if (validPointCount == 0) return null;
@@ -91,11 +89,23 @@ namespace _Scripts.Fires
             for (int i = 0; i < spawnPoints.Count; i++)
             {
                 FireSpawnPoint spawnPoint = spawnPoints[i];
-                if (spawnPoint == null || !spawnPoint.gameObject.activeInHierarchy) continue;
+                if (!IsValidSpawnPoint(spawnPoint, playerPosition, minimumDistanceSquared)) continue;
                 if (selectedIndex-- == 0) return spawnPoint;
             }
 
             return null;
+        }
+
+        private static bool IsValidSpawnPoint(
+            FireSpawnPoint spawnPoint,
+            Vector3 playerPosition,
+            float minimumDistanceSquared)
+        {
+            if (spawnPoint == null || !spawnPoint.gameObject.activeInHierarchy) return false;
+
+            Vector3 offset = spawnPoint.transform.position - playerPosition;
+            offset.y = 0f;
+            return offset.sqrMagnitude >= minimumDistanceSquared;
         }
 
         private Fire GetRandomFirePrefab(FireType fireType)

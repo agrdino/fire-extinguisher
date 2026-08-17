@@ -31,6 +31,7 @@ namespace _Scripts.UI
         private const string AlwaysOnTopLayerName = "AlwaysOnTopUI";
         private const string OverlayCameraName = "Always On Top UI Camera";
         private static IdleHintController _instance;
+        public static IdleHintController Instance => _instance;
 
         [Header("View")]
         [SerializeField] private CanvasGroup _canvasGroup;
@@ -66,6 +67,8 @@ namespace _Scripts.UI
         private float _targetAlpha;
         private HintStep _currentStep;
         private HintCalloutCurve _calloutCurve;
+        private bool _isShowingTemporaryMessage;
+        private float _remainingTemporaryMessageTime;
 
         private void Awake()
         {
@@ -117,14 +120,26 @@ namespace _Scripts.UI
         {
             if (_canvasGroup == null) return;
 
-            HintStep requiredStep = ResolveRequiredStep();
-            if (requiredStep != _currentStep)
-                SetStep(requiredStep);
-
-            if (_currentStep != HintStep.None && _targetAlpha <= 0f)
+            if (_isShowingTemporaryMessage)
             {
-                _idleTime += Time.unscaledDeltaTime;
-                if (_idleTime >= _idleDelay) ShowCurrentHint();
+                _remainingTemporaryMessageTime -= Time.unscaledDeltaTime;
+                if (_remainingTemporaryMessageTime <= 0f)
+                {
+                    _isShowingTemporaryMessage = false;
+                    RefreshRequirement(true);
+                }
+            }
+            else
+            {
+                HintStep requiredStep = ResolveRequiredStep();
+                if (requiredStep != _currentStep)
+                    SetStep(requiredStep);
+
+                if (_currentStep != HintStep.None && _targetAlpha <= 0f)
+                {
+                    _idleTime += Time.unscaledDeltaTime;
+                    if (_idleTime >= _idleDelay) ShowCurrentHint();
+                }
             }
 
             float fadeSpeed = _fadeDuration > 0f ? Time.unscaledDeltaTime / _fadeDuration : 1f;
@@ -145,6 +160,22 @@ namespace _Scripts.UI
         public void NotifyActivity()
         {
             RefreshRequirement(true);
+        }
+
+        public void ShowTemporaryMessage(string message, Transform target, float duration)
+        {
+            if (string.IsNullOrWhiteSpace(message) || _messageText == null) return;
+
+            _isShowingTemporaryMessage = true;
+            _remainingTemporaryMessageTime = Mathf.Max(duration, _fadeDuration);
+            _idleTime = 0f;
+            _messageText.SetText(message);
+            if (_calloutCurve != null)
+            {
+                _calloutCurve.SetTarget(target);
+                _calloutCurve.SetVisible(target != null);
+            }
+            _targetAlpha = 1f;
         }
 
         private void BindEvents()
@@ -185,6 +216,13 @@ namespace _Scripts.UI
         private void RefreshRequirement(bool resetTimer)
         {
             HintStep requiredStep = ResolveRequiredStep();
+            if (_isShowingTemporaryMessage)
+            {
+                _currentStep = requiredStep;
+                if (resetTimer) _idleTime = 0f;
+                return;
+            }
+
             if (requiredStep != _currentStep)
             {
                 SetStep(requiredStep);
