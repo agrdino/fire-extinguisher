@@ -3,6 +3,8 @@ using _Scripts.FireExtinguishers;
 using _Scripts.FireExtinguishers.Visualizes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit.UI;
 
@@ -51,11 +53,11 @@ namespace _Scripts.UI
         [SerializeField, Min(0f)] private float _fadeDuration = 0.2f;
 
         [Header("Copy")]
-        [SerializeField] private string _selectExtinguisherHint = "Select 1 of 2 extinguishers.";
-        [SerializeField] private string _confirmExtinguisherHint = "Press CONFIRM to continue.";
-        [SerializeField] private string _removeSafetyPinHint = "Remove the safety pin.";
-        [SerializeField] private string _aimAndSqueezeHint = "Aim at the base of the fire and squeeze the lever.";
-        [SerializeField] private string _goToEmergencyExitHint = "Follow the EXIT signs and go to the emergency exit.";
+        [SerializeField] private LocalizedString _selectExtinguisherHintLocalized = new("UI", "hint.select_extinguisher");
+        [SerializeField] private LocalizedString _confirmExtinguisherHintLocalized = new("UI", "hint.confirm_extinguisher");
+        [SerializeField] private LocalizedString _removeSafetyPinHintLocalized = new("UI", "hint.remove_safety_pin");
+        [SerializeField] private LocalizedString _aimAndSqueezeHintLocalized = new("UI", "hint.aim_and_squeeze");
+        [SerializeField] private LocalizedString _goToEmergencyExitHintLocalized = new("UI", "hint.go_to_exit");
 
         private ApplicationManager _applicationManager;
         private FireExtinguisher _fireExtinguisher;
@@ -67,6 +69,7 @@ namespace _Scripts.UI
         private HintCalloutCurve _calloutCurve;
         private bool _isShowingTemporaryMessage;
         private float _remainingTemporaryMessageTime;
+        private LocalizedString _temporaryMessage;
 
         private void Awake()
         {
@@ -110,6 +113,7 @@ namespace _Scripts.UI
                 if (_remainingTemporaryMessageTime <= 0f)
                 {
                     _isShowingTemporaryMessage = false;
+                    _temporaryMessage = null;
                     RefreshRequirement(true);
                 }
             }
@@ -145,14 +149,15 @@ namespace _Scripts.UI
             RefreshRequirement(true);
         }
 
-        public void ShowTemporaryMessage(string message, Transform target, float duration)
+        public void ShowTemporaryMessage(LocalizedString message, Transform target, float duration)
         {
-            if (string.IsNullOrWhiteSpace(message) || _messageText == null) return;
+            if (message == null || message.IsEmpty || _messageText == null) return;
 
             _isShowingTemporaryMessage = true;
+            _temporaryMessage = message;
             _remainingTemporaryMessageTime = Mathf.Max(duration, _fadeDuration);
             _idleTime = 0f;
-            _messageText.SetText(message);
+            _messageText.SetText(message.GetLocalizedString());
             if (_calloutCurve != null)
             {
                 _calloutCurve.SetTarget(target);
@@ -165,6 +170,7 @@ namespace _Scripts.UI
         {
             _applicationManager.OnStateChanged += OnApplicationStateChanged;
             _applicationManager.OnExtinguisherSelected += OnExtinguisherSelected;
+            LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
             if (_fireExtinguisher != null)
                 _fireExtinguisher.OnStateChanged += OnFireExtinguisherStateChanged;
         }
@@ -179,6 +185,16 @@ namespace _Scripts.UI
 
             if (_fireExtinguisher != null)
                 _fireExtinguisher.OnStateChanged -= OnFireExtinguisherStateChanged;
+            LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
+        }
+
+        private void OnSelectedLocaleChanged(Locale locale)
+        {
+            if (_messageText == null || _targetAlpha <= 0f) return;
+            if (_isShowingTemporaryMessage && _temporaryMessage != null)
+                _messageText.SetText(_temporaryMessage.GetLocalizedString());
+            else if (_currentStep != HintStep.None)
+                _messageText.SetText(GetHintText(_currentStep));
         }
 
         private void OnApplicationStateChanged(ApplicationState state)
@@ -319,11 +335,11 @@ namespace _Scripts.UI
         {
             return step switch
             {
-                HintStep.SelectExtinguisher => _selectExtinguisherHint,
-                HintStep.ConfirmExtinguisher => _confirmExtinguisherHint,
-                HintStep.RemoveSafetyPin => _removeSafetyPinHint,
-                HintStep.AimAndSqueeze => _aimAndSqueezeHint,
-                HintStep.GoToEmergencyExit => _goToEmergencyExitHint,
+                HintStep.SelectExtinguisher => _selectExtinguisherHintLocalized.GetLocalizedString(),
+                HintStep.ConfirmExtinguisher => _confirmExtinguisherHintLocalized.GetLocalizedString(),
+                HintStep.RemoveSafetyPin => _removeSafetyPinHintLocalized.GetLocalizedString(),
+                HintStep.AimAndSqueeze => _aimAndSqueezeHintLocalized.GetLocalizedString(),
+                HintStep.GoToEmergencyExit => _goToEmergencyExitHintLocalized.GetLocalizedString(),
                 _ => string.Empty
             };
         }

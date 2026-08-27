@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 5945267592061817615}
   - component: {fileID: 8646157577416160300}
   - component: {fileID: 4433749472553521139}
+  - component: {fileID: 6556179771841121361}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -252,8 +253,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CONFIRM
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aebbc5a4476e71744bf67ff1e2fb85fd, type: 2}
+  m_sharedMaterial: {fileID: 490948797343480162, guid: aebbc5a4476e71744bf67ff1e2fb85fd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -322,6 +323,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6556179771841121361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7040882091630518832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Components.LocalizeStringEvent
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: UI
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: common.confirm
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4433749472553521139}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: SetText
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &600438678291134053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,6 +527,10 @@ PrefabInstance:
         Not
         for solid-material fires.'
       objectReference: {fileID: 0}
+    - target: {fileID: 4222477321915889028, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_Key
+      value: select.co2_description
+      objectReference: {fileID: 0}
     - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Name
       value: UI Choice Fire Extinguisher Item
@@ -493,6 +538,10 @@ PrefabInstance:
     - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5191577703398265060, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_Key
+      value: select.co2_name
       objectReference: {fileID: 0}
     - target: {fileID: 5814983152775523154, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Layer
@@ -865,6 +914,10 @@ PrefabInstance:
         Not
         for liquid fires in this training.'
       objectReference: {fileID: 0}
+    - target: {fileID: 4222477321915889028, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_Key
+      value: select.powder_description
+      objectReference: {fileID: 0}
     - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Name
       value: UI Choice Fire Extinguisher Item
@@ -872,6 +925,10 @@ PrefabInstance:
     - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5191577703398265060, guid: 552d3e67870045747a4ea845df207d96, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_Key
+      value: select.powder_name
       objectReference: {fileID: 0}
     - target: {fileID: 5814983152775523154, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Layer

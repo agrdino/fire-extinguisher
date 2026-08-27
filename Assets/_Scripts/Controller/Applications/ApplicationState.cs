@@ -1,4 +1,4 @@
-﻿namespace _Scripts.Controller
+namespace _Scripts.Controller
 {
     public enum ApplicationState
     {
@@ -9,6 +9,7 @@
         Won = 4,
         Lost = 5,
         Guide = 6,
-        Explore = 7
+        Explore = 7,
+        Language = 8
     }
 }

@@ -1,0 +1,244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI
+  m_TableCollectionNameGuidString: 7c2bb8a07c69bff42b7ab36a83db000c
+  m_Entries:
+  - m_Id: 1303486464
+    m_Key: common.button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1328652288
+    m_Key: common.start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1328652289
+    m_Key: common.confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1328652290
+    m_Key: common.continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040896
+    m_Key: common.back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040897
+    m_Key: common.retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040898
+    m_Key: common.restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040899
+    m_Key: common.loading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040900
+    m_Key: start.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040901
+    m_Key: start.start_training
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040902
+    m_Key: start.instructions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040903
+    m_Key: environment.factory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040904
+    m_Key: environment.factory_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040905
+    m_Key: environment.park
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040906
+    m_Key: environment.park_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040907
+    m_Key: language.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040908
+    m_Key: language.instruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040909
+    m_Key: language.vietnamese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040910
+    m_Key: language.english
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040911
+    m_Key: language.japanese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040912
+    m_Key: guide.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040913
+    m_Key: guide.instructions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040914
+    m_Key: guide.instructions_full
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040915
+    m_Key: explore.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040916
+    m_Key: explore.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040917
+    m_Key: explore.start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040918
+    m_Key: explore.countdown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040919
+    m_Key: select.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040920
+    m_Key: select.subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040921
+    m_Key: select.co2_short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040922
+    m_Key: select.co2_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040923
+    m_Key: select.co2_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040924
+    m_Key: select.powder_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040925
+    m_Key: select.powder_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040926
+    m_Key: select.placeholder_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040927
+    m_Key: fighting.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040928
+    m_Key: fighting.instruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040929
+    m_Key: fighting.guide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040930
+    m_Key: escape.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040931
+    m_Key: escape.instruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040932
+    m_Key: escape.unlimited
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040933
+    m_Key: escape.timed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040934
+    m_Key: complete.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040935
+    m_Key: complete.message
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040936
+    m_Key: failed.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040937
+    m_Key: failed.message
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040938
+    m_Key: hint.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040939
+    m_Key: hint.select_extinguisher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040940
+    m_Key: hint.confirm_extinguisher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040941
+    m_Key: hint.remove_safety_pin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040942
+    m_Key: hint.aim_and_squeeze
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040943
+    m_Key: hint.go_to_exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040944
+    m_Key: warning.safe_distance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040945
+    m_Key: exit.label
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4980653051426373737
+  references:
+    version: 2
+    RefIds:
+    - rid: 4980653051426373737
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1787815339434

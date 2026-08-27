@@ -11,6 +11,7 @@ namespace _Scripts.UI
         public static UIController Instance => _instance;
         
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _startScene;
+        [SerializeField] private LanguageScene _languageScene;
         [SerializeField] private GuideScene _guideScene;
         [SerializeField] private ExploreScene _exploreScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectScene;
@@ -58,6 +59,7 @@ namespace _Scripts.UI
             _currentScene = state switch
             {
                 ApplicationState.Start => _startScene.Value,
+                ApplicationState.Language => _languageScene,
                 ApplicationState.Guide => _guideScene,
                 ApplicationState.Explore => _exploreScene,
                 ApplicationState.Selecting => _selectScene.Value,
@@ -91,9 +93,13 @@ namespace _Scripts.UI
                 ? EnviromentType.Start
                 : _enviromentController.CurrentEnviroment;
 
-            if (!_enviromentController.TryGetUIPoint(enviromentType, state, out Transform point))
+            ApplicationState placementState = state == ApplicationState.Language
+                ? ApplicationState.Guide
+                : state;
+
+            if (!_enviromentController.TryGetUIPoint(enviromentType, placementState, out Transform point))
             {
-                Debug.LogError($"Missing UI point for {enviromentType}/{state}. Assign it on EnviromentController.", this);
+                Debug.LogError($"Missing UI point for {enviromentType}/{placementState}. Assign it on EnviromentController.", this);
                 scene.gameObject.SetActive(false);
                 return false;
             }

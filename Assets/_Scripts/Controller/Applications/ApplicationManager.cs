@@ -154,6 +154,7 @@ namespace _Scripts.Controller
                     ResetApplication();
                     break;
 
+                case ApplicationState.Language:
                 case ApplicationState.Guide:
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);

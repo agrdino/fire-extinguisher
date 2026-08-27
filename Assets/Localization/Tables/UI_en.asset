@@ -1,0 +1,320 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 7c2bb8a07c69bff42b7ab36a83db000c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1303486464
+    m_Localized: Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1328652288
+    m_Localized: START
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1328652289
+    m_Localized: CONFIRM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1328652290
+    m_Localized: CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040896
+    m_Localized: BACK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040897
+    m_Localized: RETRY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040898
+    m_Localized: RESTART
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040899
+    m_Localized: Loading...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040900
+    m_Localized: FIRE EXTINGUISHER TRAINING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040901
+    m_Localized: START TRAINING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040902
+    m_Localized: '1. Choose the extinguisher that matches the fire.
+
+
+      2. Remove
+      the safety pin.
+
+
+      3. Aim at the base of the fire.
+
+
+      4. Squeeze
+      the lever and sweep side to side.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040903
+    m_Localized: FACTORY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040904
+    m_Localized: Industrial fire safety training
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040905
+    m_Localized: PARK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040906
+    m_Localized: Outdoor fire safety training
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040907
+    m_Localized: SELECT LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040908
+    m_Localized: Choose your preferred language.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040909
+    m_Localized: "Ti\u1EBFng Vi\u1EC7t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040910
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040911
+    m_Localized: "\u65E5\u672C\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040912
+    m_Localized: SAFETY GUIDE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040913
+    m_Localized: '1. Explore the area and locate the emergency exit.
+
+
+      2. Choose
+      an extinguisher that matches the fire.
+
+
+      3. Remove the safety pin.
+
+
+      4.
+      Aim at the base of the fire.
+
+
+      5. Squeeze the lever and sweep side to
+      side.
+
+
+      6. After extinguishing the fire, follow the exit marker.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040914
+    m_Localized: 'Before the fire drill:
+
+
+      1. Explore the area and locate the
+      emergency exit.
+
+
+      2. When a fire appears, choose an extinguisher that
+      matches the fire type.
+
+
+      3. Remove the safety pin.
+
+
+      4. Aim at
+      the base of the fire.
+
+
+      5. Squeeze the lever and sweep side to side.
+
+
+      6.
+      After extinguishing the fire, follow the exit marker.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040915
+    m_Localized: EXPLORE THE AREA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040916
+    m_Localized: 'Move around and locate the emergency exit.
+
+      The fire drill
+      will begin automatically.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040917
+    m_Localized: START FIRE DRILL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040918
+    m_Localized: Fire drill starts in {0}s
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040919
+    m_Localized: CHOOSE A FIRE EXTINGUISHER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040920
+    m_Localized: CO2 is for liquid fires. Dry powder is for solid fires. Select one,
+      then confirm.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040921
+    m_Localized: CO2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040922
+    m_Localized: CO2 EXTINGUISHER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040923
+    m_Localized: 'For flammable-liquid fires.
+
+
+      Leaves no residue.
+
+
+      Not
+      for solid-material fires.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040924
+    m_Localized: DRY POWDER EXTINGUISHER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040925
+    m_Localized: 'For solid-material fires.
+
+
+      Quickly blankets the flames.
+
+
+      Not
+      for liquid fires in this training.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040926
+    m_Localized: Bla bla
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040927
+    m_Localized: EXTINGUISH ALL FIRES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040928
+    m_Localized: Remove the safety pin, aim at the base of the fire, squeeze the
+      lever, and sweep side to side.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040929
+    m_Localized: 'TIME: {0}:{1}
+
+      Remove the safety pin, aim at the base of
+      the fire, squeeze the lever, and sweep side to side.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040930
+    m_Localized: EVACUATE NOW
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040931
+    m_Localized: Follow the exit marker and reach the emergency exit before time
+      runs out.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040932
+    m_Localized: 'TIME: UNLIMITED
+
+      Follow the exit marker and reach the emergency
+      exit.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040933
+    m_Localized: 'TIME: {0}:{1}
+
+      Follow the exit marker and reach the emergency
+      exit before time runs out.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040934
+    m_Localized: TRAINING COMPLETE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040935
+    m_Localized: All fires are out and you reached safety.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040936
+    m_Localized: TRAINING FAILED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040937
+    m_Localized: You did not reach safety in time. Retry and follow the correct extinguisher
+      procedure.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040938
+    m_Localized: HINT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040939
+    m_Localized: Select 1 of 2 extinguishers.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040940
+    m_Localized: Press CONFIRM to continue.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040941
+    m_Localized: Remove the safety pin.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040942
+    m_Localized: Aim at the base of the fire and squeeze the lever.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040943
+    m_Localized: Follow the EXIT signs and go to the emergency exit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040944
+    m_Localized: Warning! Keep a safe distance from the fire.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040945
+    m_Localized: EXIT
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

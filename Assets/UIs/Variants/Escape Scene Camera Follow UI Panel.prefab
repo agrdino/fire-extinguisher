@@ -94,7 +94,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.EscapeScene
   _txtGuide: {fileID: 2525880713164417683}
-  _btnRestart: {fileID: 0}
+  _unlimitedString:
+    m_TableReference:
+      m_TableCollectionName: UI
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: escape.unlimited
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _timedString:
+    m_TableReference:
+      m_TableCollectionName: UI
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: escape.timed
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &8756719896946817964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,9 +216,17 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 55.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7412088410918292824, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_Key
+      value: escape.title
+      objectReference: {fileID: 0}
     - target: {fileID: 7424364948707381595, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941529779487067612, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_Key
+      value: escape.instruction
       objectReference: {fileID: 0}
     - target: {fileID: 9056930120052453212, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_Name

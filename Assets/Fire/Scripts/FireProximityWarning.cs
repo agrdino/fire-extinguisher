@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Scripts.UI;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace _Scripts.Fires
 {
@@ -9,7 +10,7 @@ namespace _Scripts.Fires
     public sealed class FireProximityWarning : MonoBehaviour
     {
         [SerializeField] private SphereCollider _trigger;
-        [SerializeField] private string _warningMessage = "Warning! Keep a safe distance from the fire.";
+        [SerializeField] private LocalizedString _localizedWarningMessage = new("UI", "warning.safe_distance");
         [SerializeField, Min(0f)] private float _messageDuration = 2.5f;
 
         private readonly HashSet<Collider> _playerCollidersInside = new();
@@ -49,11 +50,11 @@ namespace _Scripts.Fires
             if (hintController != null)
             {
                 Transform warningTarget = transform.parent != null ? transform.parent : transform;
-                hintController.ShowTemporaryMessage(_warningMessage, warningTarget, _messageDuration);
+                hintController.ShowTemporaryMessage(_localizedWarningMessage, warningTarget, _messageDuration);
                 return;
             }
 
-            Debug.LogWarning(_warningMessage, this);
+            Debug.LogWarning(_localizedWarningMessage.GetLocalizedString(), this);
         }
 
         private void OnTriggerExit(Collider other)

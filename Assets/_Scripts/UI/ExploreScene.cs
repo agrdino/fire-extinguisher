@@ -1,6 +1,7 @@
 using _Scripts.Controller;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 
 namespace _Scripts.UI
@@ -10,6 +11,7 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnStart;
         [SerializeField] private Button _btnBackGuide;
         [SerializeField] private TextMeshProUGUI _txtCountdown;
+        [SerializeField] private LocalizedString _countdownString = new("UI", "explore.countdown");
 
         private ApplicationManager _applicationManager;
 
@@ -42,7 +44,7 @@ namespace _Scripts.UI
         private void ApplicationManager_OnRemainingTimeChanged(float remainingTime)
         {
             int seconds = Mathf.CeilToInt(remainingTime);
-            _txtCountdown.SetText("Fire drill starts in {0}s", seconds);
+            _txtCountdown.SetText(_countdownString.GetLocalizedString(seconds));
         }
 
         private void UnsubscribeFromTimer()

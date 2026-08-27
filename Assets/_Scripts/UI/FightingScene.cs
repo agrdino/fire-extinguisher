@@ -2,6 +2,8 @@ using _Scripts.FireExtinguishers;
 using _Scripts.Controller;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 namespace _Scripts.UI
@@ -10,10 +12,16 @@ namespace _Scripts.UI
     {
         [SerializeField] private Slider _sldFireExtinguisher;
         [SerializeField] private TMP_Text _txtGuide;
+        [SerializeField] private LocalizedString _guideString = new("UI", "fighting.guide");
         
         private void OnEnable()
         {
             if (_txtGuide == null) _txtGuide = transform.Find("UI Guide Title/txtGuide")?.GetComponent<TMP_Text>();
+            if (_txtGuide != null)
+            {
+                LocalizeStringEvent localizer = _txtGuide.GetComponent<LocalizeStringEvent>();
+                if (localizer != null) localizer.enabled = false;
+            }
             if (FireExtinguisherController.Instance == null || ApplicationManager.Instance == null) return;
             if (_sldFireExtinguisher != null) _sldFireExtinguisher.value = FireExtinguisherController.Instance.FireExtinguisher.RemainingRatio;
             FireExtinguisherController.Instance.FireExtinguisher.OnRemainingAmountChanged += OnValueChanged;
@@ -46,7 +54,7 @@ namespace _Scripts.UI
             int totalSeconds = Mathf.CeilToInt(remainingTime);
             int minutes = totalSeconds / 60;
             int seconds = totalSeconds % 60;
-            _txtGuide.SetText($"TIME: {minutes:00}:{seconds:00}\nRemove the safety pin, aim at the base of the fire, squeeze the lever, and sweep side to side.");
+            _txtGuide.SetText(_guideString.GetLocalizedString(minutes.ToString("00"), seconds.ToString("00")));
         }
     }
 }

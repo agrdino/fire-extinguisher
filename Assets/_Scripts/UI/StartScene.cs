@@ -54,13 +54,13 @@ namespace _Scripts.UI
         private void OnClickConfirmButton()
         {
             EnviromentController.Instance.SetEnviroment(_selectedEnviroment);
-            ApplicationManager.Instance.SetState(ApplicationState.Guide);
+            ApplicationManager.Instance.SetState(ApplicationState.Language);
         }
 
         private void OnClickStartButton()
         {
             EnviromentController.Instance.SetEnviroment(_selectedEnviroment);
-            ApplicationManager.Instance.SetState(ApplicationState.Guide);
+            ApplicationManager.Instance.SetState(ApplicationState.Language);
         }
 
         private void SelectEnviroment(EnviromentType enviromentType)

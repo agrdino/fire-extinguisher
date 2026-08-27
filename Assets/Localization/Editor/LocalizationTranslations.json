@@ -1,0 +1,68 @@
+{
+  "items": [
+    {"key":"common.button","en":"Button","vi":"Nút","ja":"ボタン"},
+    {"key":"common.start","en":"START","vi":"BẮT ĐẦU","ja":"開始"},
+    {"key":"common.confirm","en":"CONFIRM","vi":"XÁC NHẬN","ja":"確認"},
+    {"key":"common.continue","en":"CONTINUE","vi":"TIẾP TỤC","ja":"続ける"},
+    {"key":"common.back","en":"BACK","vi":"QUAY LẠI","ja":"戻る"},
+    {"key":"common.retry","en":"RETRY","vi":"THỬ LẠI","ja":"再試行"},
+    {"key":"common.restart","en":"RESTART","vi":"CHƠI LẠI","ja":"再スタート"},
+    {"key":"common.loading","en":"Loading...","vi":"Đang tải...","ja":"読み込み中..."},
+
+    {"key":"start.title","en":"FIRE EXTINGUISHER TRAINING","vi":"HUẤN LUYỆN CHỮA CHÁY","ja":"消火訓練"},
+    {"key":"start.start_training","en":"START TRAINING","vi":"BẮT ĐẦU HUẤN LUYỆN","ja":"訓練を開始"},
+    {"key":"start.instructions","en":"1. Choose the extinguisher that matches the fire.\n\n2. Remove the safety pin.\n\n3. Aim at the base of the fire.\n\n4. Squeeze the lever and sweep side to side.","vi":"1. Chọn bình chữa cháy phù hợp với đám cháy.\n\n2. Rút chốt an toàn.\n\n3. Hướng vòi phun vào gốc lửa.\n\n4. Bóp cò và lia vòi qua lại.","ja":"1. 火災の種類に合った消火器を選びます。\n\n2. 安全ピンを抜きます。\n\n3. ノズルを火元に向けます。\n\n4. レバーを握り、左右に噴射します。"},
+
+    {"key":"environment.factory","en":"FACTORY","vi":"NHÀ MÁY","ja":"工場"},
+    {"key":"environment.factory_description","en":"Industrial fire safety training","vi":"Huấn luyện an toàn cháy nổ trong nhà máy","ja":"工場での火災安全訓練"},
+    {"key":"environment.park","en":"PARK","vi":"CÔNG VIÊN","ja":"公園"},
+    {"key":"environment.park_description","en":"Outdoor fire safety training","vi":"Huấn luyện an toàn cháy nổ ngoài trời","ja":"屋外での火災安全訓練"},
+
+    {"key":"language.title","en":"SELECT LANGUAGE","vi":"CHỌN NGÔN NGỮ","ja":"言語を選択"},
+    {"key":"language.instruction","en":"Choose your preferred language.","vi":"Chọn ngôn ngữ anh muốn sử dụng.","ja":"使用する言語を選んでください。"},
+    {"key":"language.vietnamese","en":"Tiếng Việt","vi":"Tiếng Việt","ja":"Tiếng Việt"},
+    {"key":"language.english","en":"English","vi":"English","ja":"English"},
+    {"key":"language.japanese","en":"日本語","vi":"日本語","ja":"日本語"},
+
+    {"key":"guide.title","en":"SAFETY GUIDE","vi":"HƯỚNG DẪN AN TOÀN","ja":"安全ガイド"},
+    {"key":"guide.instructions","en":"1. Explore the area and locate the emergency exit.\n\n2. Choose an extinguisher that matches the fire.\n\n3. Remove the safety pin.\n\n4. Aim at the base of the fire.\n\n5. Squeeze the lever and sweep side to side.\n\n6. After extinguishing the fire, follow the exit marker.","vi":"1. Khám phá khu vực và xác định lối thoát hiểm.\n\n2. Chọn bình chữa cháy phù hợp với loại đám cháy.\n\n3. Rút chốt an toàn.\n\n4. Hướng vòi phun vào gốc lửa.\n\n5. Bóp cò và lia vòi qua lại.\n\n6. Sau khi dập lửa, đi theo chỉ dẫn đến lối thoát hiểm.","ja":"1. 周囲を確認し、非常口の位置を把握します。\n\n2. 火災の種類に合った消火器を選びます。\n\n3. 安全ピンを抜きます。\n\n4. ノズルを火元に向けます。\n\n5. レバーを握り、左右に噴射します。\n\n6. 消火後、案内表示に従って非常口へ向かいます。"},
+    {"key":"guide.instructions_full","en":"Before the fire drill:\n\n1. Explore the area and locate the emergency exit.\n\n2. When a fire appears, choose an extinguisher that matches the fire type.\n\n3. Remove the safety pin.\n\n4. Aim at the base of the fire.\n\n5. Squeeze the lever and sweep side to side.\n\n6. After extinguishing the fire, follow the exit marker.","vi":"Trước khi diễn tập:\n\n1. Khám phá khu vực và xác định lối thoát hiểm.\n\n2. Khi có cháy, chọn bình chữa cháy phù hợp với loại đám cháy.\n\n3. Rút chốt an toàn.\n\n4. Hướng vòi phun vào gốc lửa.\n\n5. Bóp cò và lia vòi qua lại.\n\n6. Sau khi dập lửa, đi theo chỉ dẫn đến lối thoát hiểm.","ja":"訓練を始める前に：\n\n1. 周囲を確認し、非常口の位置を把握します。\n\n2. 火災が発生したら、種類に合った消火器を選びます。\n\n3. 安全ピンを抜きます。\n\n4. ノズルを火元に向けます。\n\n5. レバーを握り、左右に噴射します。\n\n6. 消火後、案内表示に従って非常口へ向かいます。"},
+
+    {"key":"explore.title","en":"EXPLORE THE AREA","vi":"KHÁM PHÁ KHU VỰC","ja":"周囲を確認"},
+    {"key":"explore.description","en":"Move around and locate the emergency exit.\nThe fire drill will begin automatically.","vi":"Di chuyển quanh khu vực và xác định lối thoát hiểm.\nBuổi diễn tập sẽ tự động bắt đầu.","ja":"周囲を移動して非常口を確認してください。\n消火訓練は自動的に始まります。"},
+    {"key":"explore.start","en":"START FIRE DRILL","vi":"BẮT ĐẦU DIỄN TẬP","ja":"消火訓練を開始"},
+    {"key":"explore.countdown","en":"Fire drill starts in {0}s","vi":"Diễn tập bắt đầu sau {0} giây","ja":"消火訓練はあと{0}秒で始まります"},
+
+    {"key":"select.title","en":"CHOOSE A FIRE EXTINGUISHER","vi":"CHỌN BÌNH CHỮA CHÁY","ja":"消火器を選択"},
+    {"key":"select.subtitle","en":"CO2 is for liquid fires. Dry powder is for solid fires. Select one, then confirm.","vi":"CO₂ dùng cho cháy chất lỏng. Bột khô dùng cho cháy chất rắn. Chọn một bình rồi xác nhận.","ja":"CO₂消火器は液体火災、粉末消火器は固体火災に使用します。1つ選んで確認してください。"},
+    {"key":"select.co2_short","en":"CO2","vi":"CO₂","ja":"CO₂"},
+    {"key":"select.co2_name","en":"CO2 EXTINGUISHER","vi":"BÌNH CHỮA CHÁY CO₂","ja":"CO₂消火器"},
+    {"key":"select.co2_description","en":"For flammable-liquid fires.\n\nLeaves no residue.\n\nNot for solid-material fires.","vi":"Dùng cho đám cháy chất lỏng dễ cháy.\n\nKhông để lại cặn.\n\nKhông dùng cho đám cháy chất rắn.","ja":"可燃性液体の火災に使用します。\n\n消火後に残留物がありません。\n\n固体火災には使用しません。"},
+    {"key":"select.powder_name","en":"DRY POWDER EXTINGUISHER","vi":"BÌNH CHỮA CHÁY BỘT KHÔ","ja":"粉末消火器"},
+    {"key":"select.powder_description","en":"For solid-material fires.\n\nQuickly blankets the flames.\n\nNot for liquid fires in this training.","vi":"Dùng cho đám cháy chất rắn.\n\nNhanh chóng bao phủ ngọn lửa.\n\nTrong bài huấn luyện này không dùng cho cháy chất lỏng.","ja":"固体火災に使用します。\n\n炎を素早く覆って消火します。\n\nこの訓練では液体火災には使用しません。"},
+    {"key":"select.placeholder_description","en":"Bla bla","vi":"Mô tả","ja":"説明"},
+
+    {"key":"fighting.title","en":"EXTINGUISH ALL FIRES","vi":"DẬP TẮT TẤT CẢ ĐÁM CHÁY","ja":"すべての火を消す"},
+    {"key":"fighting.instruction","en":"Remove the safety pin, aim at the base of the fire, squeeze the lever, and sweep side to side.","vi":"Rút chốt an toàn, hướng vòi vào gốc lửa, bóp cò và lia vòi qua lại.","ja":"安全ピンを抜き、火元に向けてレバーを握り、左右に噴射してください。"},
+    {"key":"fighting.guide","en":"TIME: {0}:{1}\nRemove the safety pin, aim at the base of the fire, squeeze the lever, and sweep side to side.","vi":"THỜI GIAN: {0}:{1}\nRút chốt an toàn, hướng vòi vào gốc lửa, bóp cò và lia vòi qua lại.","ja":"残り時間: {0}:{1}\n安全ピンを抜き、火元に向けてレバーを握り、左右に噴射してください。"},
+
+    {"key":"escape.title","en":"EVACUATE NOW","vi":"SƠ TÁN NGAY","ja":"直ちに避難"},
+    {"key":"escape.instruction","en":"Follow the exit marker and reach the emergency exit before time runs out.","vi":"Đi theo chỉ dẫn và đến lối thoát hiểm trước khi hết giờ.","ja":"案内表示に従い、時間切れになる前に非常口へ向かってください。"},
+    {"key":"escape.unlimited","en":"TIME: UNLIMITED\nFollow the exit marker and reach the emergency exit.","vi":"THỜI GIAN: KHÔNG GIỚI HẠN\nĐi theo chỉ dẫn và đến lối thoát hiểm.","ja":"時間: 無制限\n案内表示に従って非常口へ向かってください。"},
+    {"key":"escape.timed","en":"TIME: {0}:{1}\nFollow the exit marker and reach the emergency exit before time runs out.","vi":"THỜI GIAN: {0}:{1}\nĐi theo chỉ dẫn và đến lối thoát hiểm trước khi hết giờ.","ja":"残り時間: {0}:{1}\n案内表示に従い、時間切れになる前に非常口へ向かってください。"},
+
+    {"key":"complete.title","en":"TRAINING COMPLETE","vi":"HOÀN THÀNH HUẤN LUYỆN","ja":"訓練完了"},
+    {"key":"complete.message","en":"All fires are out and you reached safety.","vi":"Tất cả đám cháy đã được dập và anh đã đến nơi an toàn.","ja":"すべての火を消し、安全な場所に避難できました。"},
+    {"key":"failed.title","en":"TRAINING FAILED","vi":"HUẤN LUYỆN THẤT BẠI","ja":"訓練失敗"},
+    {"key":"failed.message","en":"You did not reach safety in time. Retry and follow the correct extinguisher procedure.","vi":"Anh chưa đến nơi an toàn kịp thời. Hãy thử lại và thực hiện đúng quy trình dùng bình chữa cháy.","ja":"時間内に安全な場所へ到達できませんでした。正しい消火手順で再試行してください。"},
+
+    {"key":"hint.title","en":"HINT","vi":"GỢI Ý","ja":"ヒント"},
+    {"key":"hint.select_extinguisher","en":"Select 1 of 2 extinguishers.","vi":"Chọn 1 trong 2 bình chữa cháy.","ja":"2本の消火器から1本を選んでください。"},
+    {"key":"hint.confirm_extinguisher","en":"Press CONFIRM to continue.","vi":"Nhấn XÁC NHẬN để tiếp tục.","ja":"「確認」を押して続けてください。"},
+    {"key":"hint.remove_safety_pin","en":"Remove the safety pin.","vi":"Rút chốt an toàn.","ja":"安全ピンを抜いてください。"},
+    {"key":"hint.aim_and_squeeze","en":"Aim at the base of the fire and squeeze the lever.","vi":"Hướng vòi vào gốc lửa và bóp cò.","ja":"火元に向けてレバーを握ってください。"},
+    {"key":"hint.go_to_exit","en":"Follow the EXIT signs and go to the emergency exit.","vi":"Đi theo biển LỐI THOÁT đến lối thoát hiểm.","ja":"「非常口」の表示に従って避難してください。"},
+    {"key":"warning.safe_distance","en":"Warning! Keep a safe distance from the fire.","vi":"Cảnh báo! Hãy giữ khoảng cách an toàn với đám cháy.","ja":"警告！火から安全な距離を保ってください。"},
+    {"key":"exit.label","en":"EXIT","vi":"LỐI THOÁT","ja":"非常口"}
+  ]
+}
