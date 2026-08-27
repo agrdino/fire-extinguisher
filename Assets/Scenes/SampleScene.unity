@@ -324,6 +324,7 @@ MonoBehaviour:
   _exploreDuration: 30
   _emergencyExit: {fileID: 1581244154}
   _playerRoot: {fileID: 865430807}
+  _playerView: {fileID: 1803542066}
   _movementProviderObject: {fileID: 493453822}
   _state: 0
   _remainingTime: 0
@@ -2593,6 +2594,9 @@ MonoBehaviour:
   _factoryExit: {fileID: 1374403877}
   _parkExit: {fileID: 1355941108}
   _emergencyExit: {fileID: 1581244154}
+  _minimumExitDistanceFromPlayer: 2
+  _behindPlayerDotThreshold: 0
+  _selectedExitSpawnPoint: {fileID: 0}
   _uiPoints:
   - _enviroment: 0
     _points:
@@ -5975,10 +5979,6 @@ PrefabInstance:
     - target: {fileID: 276826466166282137, guid: a900309a95a41be4fbcb4b4abefb0828, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993622622320885146, guid: a900309a95a41be4fbcb4b4abefb0828, type: 3}
-      propertyPath: m_fontSize
-      value: 103.55
       objectReference: {fileID: 0}
     - target: {fileID: 8768764030793352861, guid: a900309a95a41be4fbcb4b4abefb0828, type: 3}
       propertyPath: m_Camera

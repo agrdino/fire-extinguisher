@@ -80,6 +80,11 @@ namespace _Scripts.Controller
         [SerializeField] private Transform _factoryExit;
         [SerializeField] private Transform _parkExit;
         [SerializeField] private EmergencyExit _emergencyExit;
+        [SerializeField, Min(0f)] private float _minimumExitDistanceFromPlayer = 2f;
+        [SerializeField, Range(-1f, 1f)] private float _behindPlayerDotThreshold = 0f;
+
+        [Header("Exit Runtime")]
+        [SerializeField] private EmergencyExitSpawnPoint _selectedExitSpawnPoint;
 
         [Header("UI Points")]
         [Tooltip("Start only needs a Start point. Factory and Park need one point for each gameplay UI state.")]
@@ -120,15 +125,34 @@ namespace _Scripts.Controller
             SetActive(_factoryEnviroment, enviromentType == EnviromentType.Factory);
             SetActive(_parkEnviroment, enviromentType == EnviromentType.Park);
 
-            Transform exitMarker = GetExitMarker(enviromentType);
-            if (_emergencyExit != null && exitMarker != null)
-                _emergencyExit.transform.SetPositionAndRotation(exitMarker.position, exitMarker.rotation);
-
             OnEnviromentChanged?.Invoke(_currentEnviroment);
+        }
+
+        public bool PositionEmergencyExit(Transform playerView)
+        {
+            if (_emergencyExit == null || playerView == null) return false;
+
+            _selectedExitSpawnPoint = GetPreferredExitSpawnPoint(playerView.position, playerView.forward);
+            Transform exitMarker = _selectedExitSpawnPoint != null
+                ? _selectedExitSpawnPoint.transform
+                : GetLegacyExitMarker(_currentEnviroment);
+            if (exitMarker == null) return false;
+
+            _emergencyExit.transform.SetPositionAndRotation(exitMarker.position, exitMarker.rotation);
+            return true;
         }
 
         public bool TryGetUIPoint(EnviromentType enviromentType, ApplicationState state, out Transform point)
         {
+            if (state == ApplicationState.Won
+                && enviromentType == _currentEnviroment
+                && _selectedExitSpawnPoint != null
+                && _selectedExitSpawnPoint.CompleteUIPoint != null)
+            {
+                point = _selectedExitSpawnPoint.CompleteUIPoint;
+                return true;
+            }
+
             foreach (EnviromentUIPoints enviromentPoints in _uiPoints)
             {
                 if (enviromentPoints.Enviroment != enviromentType) continue;
@@ -152,6 +176,92 @@ namespace _Scripts.Controller
             return activeEnviroment.GetComponentsInChildren<FireSpawnPoint>(true);
         }
 
+        public IReadOnlyList<EmergencyExitSpawnPoint> GetActiveExitSpawnPoints()
+        {
+            GameObject activeEnviroment = GetEnviroment(_currentEnviroment);
+            if (activeEnviroment == null || _currentEnviroment == EnviromentType.Start)
+                return Array.Empty<EmergencyExitSpawnPoint>();
+
+            return activeEnviroment.GetComponentsInChildren<EmergencyExitSpawnPoint>(true);
+        }
+
+        private EmergencyExitSpawnPoint GetPreferredExitSpawnPoint(
+            Vector3 playerPosition,
+            Vector3 playerForward)
+        {
+            IReadOnlyList<EmergencyExitSpawnPoint> spawnPoints = GetActiveExitSpawnPoints();
+            if (spawnPoints.Count == 0) return null;
+
+            playerForward.y = 0f;
+            if (playerForward.sqrMagnitude < 0.0001f) playerForward = Vector3.forward;
+            else playerForward.Normalize();
+
+            float minimumDistanceSquared = _minimumExitDistanceFromPlayer * _minimumExitDistanceFromPlayer;
+            bool hasPointBehindPlayer = false;
+            for (int i = 0; i < spawnPoints.Count; i++)
+            {
+                EmergencyExitSpawnPoint spawnPoint = spawnPoints[i];
+                if (!TryGetExitOffset(spawnPoint, playerPosition, minimumDistanceSquared, out Vector3 offset))
+                    continue;
+
+                if (IsBehindPlayer(offset, playerForward))
+                {
+                    hasPointBehindPlayer = true;
+                    break;
+                }
+            }
+
+            float totalWeight = 0f;
+            for (int i = 0; i < spawnPoints.Count; i++)
+            {
+                EmergencyExitSpawnPoint spawnPoint = spawnPoints[i];
+                if (!TryGetExitOffset(spawnPoint, playerPosition, minimumDistanceSquared, out Vector3 offset))
+                    continue;
+                if (hasPointBehindPlayer && !IsBehindPlayer(offset, playerForward)) continue;
+
+                // Squared distance keeps the choice random while favoring farther exits strongly.
+                totalWeight += Mathf.Max(offset.sqrMagnitude, 0.0001f);
+            }
+
+            if (totalWeight <= 0f) return null;
+
+            float selection = UnityEngine.Random.value * totalWeight;
+            EmergencyExitSpawnPoint lastValidPoint = null;
+            for (int i = 0; i < spawnPoints.Count; i++)
+            {
+                EmergencyExitSpawnPoint spawnPoint = spawnPoints[i];
+                if (!TryGetExitOffset(spawnPoint, playerPosition, minimumDistanceSquared, out Vector3 offset))
+                    continue;
+                if (hasPointBehindPlayer && !IsBehindPlayer(offset, playerForward)) continue;
+
+                lastValidPoint = spawnPoint;
+                selection -= Mathf.Max(offset.sqrMagnitude, 0.0001f);
+                if (selection <= 0f) return spawnPoint;
+            }
+
+            return lastValidPoint;
+        }
+
+        private bool IsBehindPlayer(Vector3 offset, Vector3 playerForward)
+        {
+            if (offset.sqrMagnitude < 0.0001f) return false;
+            return Vector3.Dot(offset.normalized, playerForward) <= _behindPlayerDotThreshold;
+        }
+
+        private static bool TryGetExitOffset(
+            EmergencyExitSpawnPoint spawnPoint,
+            Vector3 playerPosition,
+            float minimumDistanceSquared,
+            out Vector3 offset)
+        {
+            offset = Vector3.zero;
+            if (spawnPoint == null || !spawnPoint.gameObject.activeInHierarchy) return false;
+
+            offset = spawnPoint.transform.position - playerPosition;
+            offset.y = 0f;
+            return offset.sqrMagnitude >= minimumDistanceSquared;
+        }
+
         private GameObject GetEnviroment(EnviromentType enviromentType)
         {
             return enviromentType switch
@@ -163,7 +273,7 @@ namespace _Scripts.Controller
             };
         }
 
-        private Transform GetExitMarker(EnviromentType enviromentType)
+        private Transform GetLegacyExitMarker(EnviromentType enviromentType)
         {
             return enviromentType switch
             {

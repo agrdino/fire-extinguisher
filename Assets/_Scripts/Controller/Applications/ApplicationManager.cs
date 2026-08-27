@@ -24,6 +24,7 @@ namespace _Scripts.Controller
         [Header("Gameplay References")]
         [SerializeField] private EmergencyExit _emergencyExit;
         [SerializeField] private Transform _playerRoot;
+        [SerializeField] private Transform _playerView;
         [SerializeField] private GameObject _movementProviderObject;
 
         [Header("Runtime")]
@@ -36,6 +37,7 @@ namespace _Scripts.Controller
         private FireController _fireController;
         private FireExtinguisherController _fireExtinguisherController;
         private EnviromentController _enviromentController;
+        private EmergencyExitPathGuide _emergencyExitPathGuide;
         private Vector3 _initialPlayerPosition;
         private Quaternion _initialPlayerRotation;
 
@@ -67,6 +69,12 @@ namespace _Scripts.Controller
             _fireController = FireController.Instance;
             _fireExtinguisherController = FireExtinguisherController.Instance;
             _enviromentController = EnviromentController.Instance;
+            _emergencyExitPathGuide = _emergencyExit != null
+                ? _emergencyExit.GetComponentInChildren<EmergencyExitPathGuide>(true)
+                : null;
+            if (_emergencyExit != null && _emergencyExitPathGuide == null)
+                Debug.LogError("Emergency Exit prefab is missing its preconfigured Escape Path Guide.", _emergencyExit);
+            _emergencyExitPathGuide?.Initialize(_emergencyExit, _playerRoot);
             if (_playerRoot != null)
             {
                 _initialPlayerPosition = _playerRoot.position;
@@ -93,6 +101,7 @@ namespace _Scripts.Controller
                 _emergencyExit.OnPlayerReached -= HandleEmergencyExitReached;
             if (_fireExtinguisherController != null)
                 _fireExtinguisherController.SetInputEnabled(false);
+            _emergencyExitPathGuide?.SetVisible(false);
             SetMovementEnabled(false);
         }
 
@@ -179,6 +188,7 @@ namespace _Scripts.Controller
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.SpawnFires(_playerRoot);
+                    _enviromentController?.PositionEmergencyExit(GetPlayerView());
                     break;
 
                 case ApplicationState.Playing:
@@ -208,6 +218,7 @@ namespace _Scripts.Controller
                     break;
             }
 
+            _emergencyExitPathGuide?.SetVisible(_state == ApplicationState.Escape);
             OnStateChanged?.Invoke(_state);
         }
 
@@ -276,6 +287,14 @@ namespace _Scripts.Controller
             if (characterController != null) characterController.enabled = false;
             _playerRoot.SetPositionAndRotation(_initialPlayerPosition, _initialPlayerRotation);
             if (characterController != null) characterController.enabled = wasEnabled;
+        }
+
+        private Transform GetPlayerView()
+        {
+            if (_playerView != null) return _playerView;
+
+            Camera mainCamera = Camera.main;
+            return mainCamera != null ? mainCamera.transform : _playerRoot;
         }
 
         private void HandleAllFiresExtinguished()
