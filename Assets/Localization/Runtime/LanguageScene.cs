@@ -59,7 +59,7 @@ namespace _Scripts.UI
 
         private static void Continue()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.Guide);
+            ApplicationManager.Instance.SetState(ApplicationState.Start);
         }
 
         private static void Back()

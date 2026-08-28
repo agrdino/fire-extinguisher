@@ -23,6 +23,8 @@ namespace _Scripts.Fires
         private bool _hasRaisedAllFiresExtinguished;
 
         public event Action OnAllFiresExtinguished;
+        public event Action OnFireFlareUpStarted;
+        public event Action OnFireFlareUpCompleted;
         public event Action<FireType> OnFireTypeSelected;
         
         public IReadOnlyList<Fire> ActiveFires => _activeFires;
@@ -67,6 +69,8 @@ namespace _Scripts.Fires
             FireProximityWarning proximityWarning = fire.GetComponentInChildren<FireProximityWarning>(true);
             if (proximityWarning != null) proximityWarning.Arm(playerRoot);
             fire.OnIntensityChanged += Fire_OnIntensityChanged;
+            fire.OnFlareUpStarted += Fire_OnFlareUpStarted;
+            fire.OnFlareUpCompleted += Fire_OnFlareUpCompleted;
             _activeFires.Add(fire);
         }
 
@@ -145,7 +149,11 @@ namespace _Scripts.Fires
         {
             foreach (Fire fire in _activeFires)
             {
-                if (fire != null) fire.OnIntensityChanged -= Fire_OnIntensityChanged;
+                if (fire == null) continue;
+
+                fire.OnIntensityChanged -= Fire_OnIntensityChanged;
+                fire.OnFlareUpStarted -= Fire_OnFlareUpStarted;
+                fire.OnFlareUpCompleted -= Fire_OnFlareUpCompleted;
             }
         }
 
@@ -157,6 +165,10 @@ namespace _Scripts.Fires
             _hasRaisedAllFiresExtinguished = true;
             OnAllFiresExtinguished?.Invoke();
         }
+
+        private void Fire_OnFlareUpStarted() => OnFireFlareUpStarted?.Invoke();
+
+        private void Fire_OnFlareUpCompleted() => OnFireFlareUpCompleted?.Invoke();
 
     }
 }

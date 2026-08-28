@@ -89,12 +89,13 @@ namespace _Scripts.UI
 
         private bool PlaceScene(IScene scene, ApplicationState state)
         {
-            EnviromentType enviromentType = state == ApplicationState.Start
+            bool isStartFlow = state == ApplicationState.Language || state == ApplicationState.Start;
+            EnviromentType enviromentType = isStartFlow
                 ? EnviromentType.Start
                 : _enviromentController.CurrentEnviroment;
 
             ApplicationState placementState = state == ApplicationState.Language
-                ? ApplicationState.Guide
+                ? ApplicationState.Start
                 : state;
 
             if (!_enviromentController.TryGetUIPoint(enviromentType, placementState, out Transform point))

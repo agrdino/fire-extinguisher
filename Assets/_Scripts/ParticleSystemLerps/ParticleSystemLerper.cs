@@ -40,7 +40,7 @@ namespace _Scripts.ParticleSystemLerps
 
     public void SetBlend(float value)
     {
-        var blend = Mathf.Clamp01(value);
+        var blend = value;
 
         if (!_hasCache || _target == null || _cachedA == null || _cachedB == null)
         {

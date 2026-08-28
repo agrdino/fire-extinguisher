@@ -12,6 +12,9 @@ namespace _Scripts.Fires
         [SerializeField] private AudioSource _secondAudioSource;
         [SerializeField] private AudioClip _fireLoop;
         [SerializeField, Min(0f)] private float _overlapDuration = 0.1f;
+        [SerializeField, Min(1f)] private float _flareUpVolumeMultiplier = 1.5f;
+
+        private volatile float _fireLoopGain = 1f;
 
         private void Reset()
         {
@@ -31,12 +34,13 @@ namespace _Scripts.Fires
         private void OnEnable()
         {
             _fire.OnIntensityChanged += Fire_OnIntensityChanged;
-            UpdateFireLoop();
+            UpdateFireAudio();
         }
 
         private void OnDisable()
         {
             _fire.OnIntensityChanged -= Fire_OnIntensityChanged;
+            _fireLoopGain = 1f;
             StopFireLoop();
         }
 
@@ -72,6 +76,21 @@ namespace _Scripts.Fires
                 _overlapDuration);
         }
 
+        private void UpdateFireAudio()
+        {
+            _fireLoopGain = Mathf.Lerp(1f, _flareUpVolumeMultiplier, _fire.FlareUpProgress);
+            UpdateFireLoop();
+        }
+
+        private void OnAudioFilterRead(float[] data, int channels)
+        {
+            float gain = _fireLoopGain;
+            if (gain <= 1f) return;
+
+            for (int i = 0; i < data.Length; i++)
+                data[i] *= gain;
+        }
+
         private void StopFireLoop()
         {
             if (AudioManager.TryGetInstance(out AudioManager audioManager))
@@ -93,6 +112,6 @@ namespace _Scripts.Fires
             if (_secondAudioSource != null) _secondAudioSource.Stop();
         }
 
-        private void Fire_OnIntensityChanged(float currentIntensity) => UpdateFireLoop();
+        private void Fire_OnIntensityChanged(float currentIntensity) => UpdateFireAudio();
     }
 }

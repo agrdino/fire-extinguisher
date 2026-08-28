@@ -7,7 +7,7 @@ namespace _Scripts.ParticleSystemLerps
     public sealed class ParticleSystemLerpGroup : MonoBehaviour
     {
         [SerializeField] private List<ParticleSystemLerper> _lerpers = new List<ParticleSystemLerper>();
-        [SerializeField, Range(0f, 1f)] private float _blend;
+        [SerializeField] private float _blend;
 
         private float _lastAppliedBlend = float.NaN;
 
@@ -30,7 +30,7 @@ namespace _Scripts.ParticleSystemLerps
 
         public void SetBlend(float value)
         {
-            _blend = Mathf.Clamp01(value);
+            _blend = value;
             ApplyBlend();
         }
 

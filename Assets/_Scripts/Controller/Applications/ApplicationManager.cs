@@ -28,11 +28,12 @@ namespace _Scripts.Controller
         [SerializeField] private GameObject _movementProviderObject;
 
         [Header("Runtime")]
-        [SerializeField] private ApplicationState _state = ApplicationState.Start;
+        [SerializeField] private ApplicationState _state = ApplicationState.Language;
         [SerializeField, Min(0f)] private float _remainingTime;
         [SerializeField] private FireExtinguisherType _selectedExtinguisherType = FireExtinguisherType.Unselect;
 
         private bool _isEscapeTimeLimited;
+        private bool _isFireFlareUpPending;
 
         private FireController _fireController;
         private FireExtinguisherController _fireExtinguisherController;
@@ -85,7 +86,11 @@ namespace _Scripts.Controller
         private void OnEnable()
         {
             if (_fireController != null)
+            {
                 _fireController.OnAllFiresExtinguished += HandleAllFiresExtinguished;
+                _fireController.OnFireFlareUpStarted += HandleFireFlareUpStarted;
+                _fireController.OnFireFlareUpCompleted += HandleFireFlareUpCompleted;
+            }
             if (_emergencyExit != null)
                 _emergencyExit.OnPlayerReached += HandleEmergencyExitReached;
             if (_fireExtinguisherController != null)
@@ -96,7 +101,11 @@ namespace _Scripts.Controller
         private void OnDisable()
         {
             if (_fireController != null)
+            {
                 _fireController.OnAllFiresExtinguished -= HandleAllFiresExtinguished;
+                _fireController.OnFireFlareUpStarted -= HandleFireFlareUpStarted;
+                _fireController.OnFireFlareUpCompleted -= HandleFireFlareUpCompleted;
+            }
             if (_emergencyExit != null)
                 _emergencyExit.OnPlayerReached -= HandleEmergencyExitReached;
             if (_fireExtinguisherController != null)
@@ -108,7 +117,7 @@ namespace _Scripts.Controller
         private void Start()
         {
             Application.targetFrameRate = 60;
-            SetState(ApplicationState.Start, true);
+            SetState(ApplicationState.Language, true);
         }
 
         private void LateUpdate()
@@ -131,7 +140,7 @@ namespace _Scripts.Controller
                 OnRemainingTimeChanged?.Invoke(_remainingTime);
             }
 
-            if (IsPlaying && (_fireExtinguisherController.IsDepleted || _remainingTime <= 0f))
+            if (IsPlaying && !_isFireFlareUpPending && (_fireExtinguisherController.IsDepleted || _remainingTime <= 0f))
             {
                 BeginEscape(true);
                 return;
@@ -193,6 +202,7 @@ namespace _Scripts.Controller
 
                 case ApplicationState.Playing:
                     _isEscapeTimeLimited = false;
+                    _isFireFlareUpPending = false;
                     ResetExtinguisher();
                     _remainingTime = _roundDuration;
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
@@ -300,6 +310,21 @@ namespace _Scripts.Controller
         private void HandleAllFiresExtinguished()
         {
             if (IsPlaying) BeginEscape(false);
+        }
+
+        private void HandleFireFlareUpStarted()
+        {
+            if (!IsPlaying || _isFireFlareUpPending) return;
+
+            _isFireFlareUpPending = true;
+        }
+
+        private void HandleFireFlareUpCompleted()
+        {
+            if (!IsPlaying || !_isFireFlareUpPending) return;
+
+            _isFireFlareUpPending = false;
+            BeginEscape(true);
         }
 
         private void HandleEmergencyExitReached()

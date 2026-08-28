@@ -67,6 +67,7 @@ namespace _Scripts.FireExtinguishers
                 if (!_fireExtinguisher.CanExtinguish(fire.FireType))
                 {
                     _incompatibleFiresThisFrame.Add(fire);
+                    fire.BeginFlareUp();
                     if (!_incompatibleFiresLastFrame.Contains(fire))
                         _fireExtinguisher.NotifyIncompatibleFireTargeted(fire.FireType);
                     continue;

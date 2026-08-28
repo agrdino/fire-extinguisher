@@ -326,7 +326,7 @@ MonoBehaviour:
   _playerRoot: {fileID: 865430807}
   _playerView: {fileID: 1803542066}
   _movementProviderObject: {fileID: 493453822}
-  _state: 0
+  _state: 8
   _remainingTime: 0
   _selectedExtinguisherType: 2
 --- !u!4 &125678028

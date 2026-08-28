@@ -10,7 +10,7 @@ This project uses the official Unity Localization package (`com.unity.localizati
 
 Unity uses the standard locale identifiers above. The language selector is inserted into the application flow as:
 
-`Environment selection -> Language selection -> Safety Guide`
+`Language selection -> Environment selection -> Safety Guide`
 
 The selected locale is persisted by Unity through the PlayerPrefs key `fire-extinguisher.locale`.
 
