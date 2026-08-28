@@ -20,6 +20,10 @@ namespace _Scripts.UI
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _completeScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _failedScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _loadingScene;
+
+        [Header("Failed UI Placement")]
+        [SerializeField, Min(0f)] private float _failedSceneDistance = 2.5f;
+        [SerializeField] private float _failedSceneHeight = 1.55f;
         
         private IScene _currentScene;
         private ApplicationManager _applicationManager;
@@ -89,6 +93,8 @@ namespace _Scripts.UI
 
         private bool PlaceScene(IScene scene, ApplicationState state)
         {
+            if (state == ApplicationState.Lost) return PlaceFailedScene(scene);
+
             bool isStartFlow = state == ApplicationState.Language || state == ApplicationState.Start;
             EnviromentType enviromentType = isStartFlow
                 ? EnviromentType.Start
@@ -108,5 +114,22 @@ namespace _Scripts.UI
             scene.gameObject.transform.SetPositionAndRotation(point.position, point.rotation);
             return true;
         }
+
+        private bool PlaceFailedScene(IScene scene)
+        {
+            Transform playerView = _applicationManager.PlayerView;
+            if (playerView == null)
+            {
+                Debug.LogError("Cannot place Failed UI because the player view is missing.", this);
+                return false;
+            }
+
+            Quaternion yawRotation = Quaternion.Euler(0f, playerView.eulerAngles.y, 0f);
+            Vector3 position = playerView.position + yawRotation * Vector3.forward * _failedSceneDistance;
+            position.y = _failedSceneHeight;
+            scene.gameObject.transform.SetPositionAndRotation(position, yawRotation);
+            return true;
+        }
+
     }
 }

@@ -2816,6 +2816,8 @@ MonoBehaviour:
     _underlyingValue: {fileID: 5104902911455822533}
   _loadingScene:
     _underlyingValue: {fileID: 1549558717717310380}
+  _failedSceneDistance: 2.5
+  _failedSceneHeight: 1.55
 --- !u!4 &1292726914
 Transform:
   m_ObjectHideFlags: 0
