@@ -8,7 +8,7 @@ PlayerSettings:
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 3
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -143,9 +143,12 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.1.0
+  bundleVersion: 0.1.1
   preloadedAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - {fileID: 11400000, guid: 0842f6cd3caa7464abd46ba7863c55ea, type: 2}
+  - {fileID: 223052535798994128, guid: 157b64858944e5d45ad81986fa762dea, type: 2}
+  - {fileID: -6067500449776338583, guid: 3fabf28d4c0fcf54b8366c8f2737d6f3, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -176,10 +179,10 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 29
-  AndroidTargetSdkVersion: 0
-  AndroidPreferredInstallLocation: 1
+  AndroidTargetSdkVersion: 34
+  AndroidPreferredInstallLocation: 0
   AndroidPreferredDataLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -272,8 +275,8 @@ PlayerSettings:
   AndroidAllowedArchitectures: -13
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/admin/Documents/Jobs/Spaxtek/Projects/FireExtinguisher/Keystore/Fire
-    Extinguisher VR Training.keystore
+  AndroidKeystoreName: E:/Unity/Documents/fire-extinguisher-docs/Fire Extinguisher
+    VR Training.keystore
   AndroidKeyaliasName: fire extinguisher vr training
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidEnableArm64MTE: 0
