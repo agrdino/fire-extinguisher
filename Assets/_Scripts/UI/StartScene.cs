@@ -1,81 +1,73 @@
 using _Scripts.Controller;
+using _Scripts.FireExtinguishers;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Scripts.UI
 {
-    public class StartScene : MonoBehaviour, IScene
+    public sealed class StartScene : MonoBehaviour, IScene
     {
-        [SerializeField] private Button _btnFactory;
-        [SerializeField] private Button _btnPark;
-        [SerializeField] private Button _btnConfirm;
         [SerializeField] private Button _btnStart;
-        [SerializeField] private Color _selectedColor = new Color(0.16f, 0.55f, 0.82f, 0.9f);
-        [SerializeField] private Color _unselectedColor = new Color(0f, 0f, 0f, 0.7f);
 
-        private EnviromentType _selectedEnviroment = EnviromentType.Factory;
+        private FireExtinguisherController _fireExtinguisherController;
 
         private void Awake()
         {
-            if (_btnFactory != null) _btnFactory.onClick.AddListener(OnClickFactoryButton);
-            if (_btnPark != null) _btnPark.onClick.AddListener(OnClickParkButton);
-            if (_btnConfirm != null) _btnConfirm.onClick.AddListener(OnClickConfirmButton);
+            if (_btnStart == null)
+                _btnStart = FindButton("btnStart") ?? FindButton("btnConfirm");
             if (_btnStart != null) _btnStart.onClick.AddListener(OnClickStartButton);
         }
 
         private void OnDestroy()
         {
-            if (_btnFactory != null) _btnFactory.onClick.RemoveListener(OnClickFactoryButton);
-            if (_btnPark != null) _btnPark.onClick.RemoveListener(OnClickParkButton);
-            if (_btnConfirm != null) _btnConfirm.onClick.RemoveListener(OnClickConfirmButton);
             if (_btnStart != null) _btnStart.onClick.RemoveListener(OnClickStartButton);
+        }
+
+        private void Update()
+        {
+            RefreshStartButton();
         }
 
         public void Show()
         {
-            _selectedEnviroment = EnviromentType.Factory;
-            UpdateSelectionVisuals();
+            ResolveFireExtinguisherController();
+            RefreshStartButton();
         }
 
-        public void Hide()
-        {
-        }
-
-        private void OnClickFactoryButton()
-        {
-            SelectEnviroment(EnviromentType.Factory);
-        }
-
-        private void OnClickParkButton()
-        {
-            SelectEnviroment(EnviromentType.Park);
-        }
-
-        private void OnClickConfirmButton()
-        {
-            EnviromentController.Instance.SetEnviroment(_selectedEnviroment);
-            ApplicationManager.Instance.SetState(ApplicationState.Guide);
-        }
+        public void Hide() { }
 
         private void OnClickStartButton()
         {
-            EnviromentController.Instance.SetEnviroment(_selectedEnviroment);
+            RefreshStartButton();
+            if (_fireExtinguisherController == null
+                || !_fireExtinguisherController.IsReadyToStart)
+                return;
+
             ApplicationManager.Instance.SetState(ApplicationState.Guide);
         }
 
-        private void SelectEnviroment(EnviromentType enviromentType)
+        private void RefreshStartButton()
         {
-            _selectedEnviroment = enviromentType;
-            UpdateSelectionVisuals();
+            ResolveFireExtinguisherController();
+            if (_btnStart != null)
+                _btnStart.interactable =
+                    _fireExtinguisherController != null
+                    && _fireExtinguisherController.IsReadyToStart;
         }
 
-        private void UpdateSelectionVisuals()
+        private void ResolveFireExtinguisherController()
         {
-            if (_btnFactory != null && _btnFactory.image != null)
-                _btnFactory.image.color = _selectedEnviroment == EnviromentType.Factory ? _selectedColor : _unselectedColor;
-            if (_btnPark != null && _btnPark.image != null)
-                _btnPark.image.color = _selectedEnviroment == EnviromentType.Park ? _selectedColor : _unselectedColor;
-            if (_btnConfirm != null) _btnConfirm.interactable = true;
+            if (_fireExtinguisherController == null)
+                _fireExtinguisherController = FireExtinguisherController.Instance;
+        }
+
+        private Button FindButton(string buttonName)
+        {
+            Button[] buttons = GetComponentsInChildren<Button>(true);
+            foreach (Button button in buttons)
+                if (button.name == buttonName)
+                    return button;
+            return null;
         }
     }
 }

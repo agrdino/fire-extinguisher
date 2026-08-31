@@ -46,10 +46,6 @@ MonoBehaviour:
     m_Localized: RESTART
     m_Metadata:
       m_Items: []
-  - m_Id: 1337040899
-    m_Localized: Loading...
-    m_Metadata:
-      m_Items: []
   - m_Id: 1337040900
     m_Localized: FIRE EXTINGUISHER TRAINING
     m_Metadata:
@@ -313,6 +309,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1337040945
     m_Localized: EXIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448646678781953
+    m_Localized: Reinsert the safety pin before starting.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448646678781952
+    m_Localized: SELECT ENVIRONMENT
     m_Metadata:
       m_Items: []
   references:

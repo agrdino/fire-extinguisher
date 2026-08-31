@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8433061247923922913
+--- !u!1001 &4360544795741926981
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,78 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 479224610170316850, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 543141021659192353, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 970801882820681446, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 190
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475880899142143461, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 155
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475880899142143461, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2563778383769394183, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 771087a26848b8b4698143dfcb429962, type: 3}
-    - target: {fileID: 2636325300729656182, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_text
-      value: 'For flammable-liquid fires.
-
-        Leaves no residue.
-
-        Not
-        for solid-material fires.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4222477321915889028, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_StringReference.m_TableEntryReference.m_Key
-      value: select.co2_description
-      objectReference: {fileID: 0}
     - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Name
-      value: UI Choice Fire Extinguisher Item
-      objectReference: {fileID: 0}
-    - target: {fileID: 4478362861357897577, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5191577703398265060, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_StringReference.m_TableEntryReference.m_Key
-      value: select.co2_name
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382527770823583186, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382527770823583186, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -275
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382527770823583186, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 112.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5814983152775523154, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6488201831702772054, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_Layer
-      value: 5
+      value: UI Choice Environment Item Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Pivot.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Pivot.y
@@ -127,15 +62,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -156,22 +91,6 @@ PrefabInstance:
     - target: {fileID: 6749044932583159776, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185790124480753838, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185790124480753838, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -275
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185790124480753838, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 112.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832627563217175522, guid: 552d3e67870045747a4ea845df207d96, type: 3}
-      propertyPath: m_text
-      value: CO2 EXTINGUISHER
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

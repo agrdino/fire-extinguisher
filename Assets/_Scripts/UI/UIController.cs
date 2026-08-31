@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using AYellowpaper;
 using UnityEngine;
 using _Scripts.Controller;
@@ -10,26 +11,32 @@ namespace _Scripts.UI
         private static UIController _instance;
         public static UIController Instance => _instance;
         
-        [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _startScene;
-        [SerializeField] private LanguageScene _languageScene;
+        [SerializeField] private SelectLanguageScene _selectLanguageScene;
+        [SerializeField] private SelectEnvironmentScene _selectEnvironmentScene;
+        [SerializeField] private StartScene _startScene;
         [SerializeField] private GuideScene _guideScene;
         [SerializeField] private ExploreScene _exploreScene;
-        [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectScene;
+        [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectExtinguisherScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _fightingScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapeScene;
-        [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _completeScene;
+        [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _completedScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _failedScene;
-        [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _loadingScene;
 
         [Header("Failed UI Placement")]
         [SerializeField, Min(0f)] private float _failedSceneDistance = 2.5f;
         [SerializeField] private float _failedSceneHeight = 1.55f;
+
+        [Header("Start Flow UI Placement")]
+        [SerializeField, Min(0f)] private float _startFlowSceneDistance = 2.5f;
+        [SerializeField] private float _startFlowVerticalOffset;
+        [SerializeField, Min(1)] private int _startFlowPlacementFrames = 30;
         
         private IScene _currentScene;
         private ApplicationManager _applicationManager;
-        private EnviromentController _enviromentController;
+        private EnvironmentController _environmentController;
         private ApplicationState _currentState;
         private bool _hasCurrentState;
+        private Coroutine _startFlowPlacementCoroutine;
 
         public IScene CurrentScene => _currentScene;
         
@@ -37,9 +44,10 @@ namespace _Scripts.UI
         {
             _instance = this;
             _applicationManager = ApplicationManager.Instance;
-            _enviromentController = EnviromentController.Instance;
+            _environmentController = EnvironmentController.Instance;
+            ResolveSceneReferences();
             _applicationManager.OnStateChanged += OnApplicationStateChanged;
-            _enviromentController.OnEnviromentChanged += OnEnviromentChanged;
+            _environmentController.OnEnvironmentChanged += OnEnvironmentChanged;
 
         }
 
@@ -47,13 +55,19 @@ namespace _Scripts.UI
         {
             if (_applicationManager != null)
                 _applicationManager.OnStateChanged -= OnApplicationStateChanged;
-            if (_enviromentController != null)
-                _enviromentController.OnEnviromentChanged -= OnEnviromentChanged;
+            if (_environmentController != null)
+                _environmentController.OnEnvironmentChanged -= OnEnvironmentChanged;
             if (_instance == this) _instance = null;
         }
 
         private void OnApplicationStateChanged(ApplicationState state)
         {
+            if (_startFlowPlacementCoroutine != null)
+            {
+                StopCoroutine(_startFlowPlacementCoroutine);
+                _startFlowPlacementCoroutine = null;
+            }
+
             if (_currentScene != null)
             {
                 _currentScene.Hide();
@@ -62,15 +76,16 @@ namespace _Scripts.UI
             
             _currentScene = state switch
             {
-                ApplicationState.Start => _startScene.Value,
-                ApplicationState.Language => _languageScene,
+                ApplicationState.Start => _startScene,
+                ApplicationState.Language => _selectLanguageScene,
+                ApplicationState.SelectEnvironment => _selectEnvironmentScene,
                 ApplicationState.Guide => _guideScene,
                 ApplicationState.Explore => _exploreScene,
-                ApplicationState.Selecting => _selectScene.Value,
-                ApplicationState.Playing => _fightingScene.Value,
+                ApplicationState.SelectExtinguisher => _selectExtinguisherScene.Value,
+                ApplicationState.Fighting => _fightingScene.Value,
                 ApplicationState.Escape => _escapeScene.Value,
-                ApplicationState.Won => _completeScene.Value,
-                ApplicationState.Lost => _failedScene.Value,
+                ApplicationState.Completed => _completedScene.Value,
+                ApplicationState.Failed => _failedScene.Value,
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
             
@@ -81,38 +96,78 @@ namespace _Scripts.UI
 
             _currentScene.gameObject.SetActive(true);
             _currentScene.Show();
+
+            if (IsStartFlowState(state))
+                _startFlowPlacementCoroutine = StartCoroutine(RefreshStartFlowPlacement(_currentScene, state));
         }
 
-        private void OnEnviromentChanged(EnviromentType enviromentType)
+        private void OnEnvironmentChanged(EnvironmentType EnvironmentType)
         {
             if (!_hasCurrentState || _currentScene == null) return;
-            if (_currentState == ApplicationState.Start || enviromentType == EnviromentType.Start) return;
+            if (_currentState == ApplicationState.Language
+                || _currentState == ApplicationState.SelectEnvironment
+                || EnvironmentType == EnvironmentType.Start)
+                return;
 
             PlaceScene(_currentScene, _currentState);
         }
 
         private bool PlaceScene(IScene scene, ApplicationState state)
         {
-            if (state == ApplicationState.Lost) return PlaceFailedScene(scene);
+            if (state == ApplicationState.Failed) return PlaceFailedScene(scene);
 
-            bool isStartFlow = state == ApplicationState.Language || state == ApplicationState.Start;
-            EnviromentType enviromentType = isStartFlow
-                ? EnviromentType.Start
-                : _enviromentController.CurrentEnviroment;
+            if (IsStartFlowState(state)) return PlaceStartFlowScene(scene);
 
-            ApplicationState placementState = state == ApplicationState.Language
-                ? ApplicationState.Start
-                : state;
+            EnvironmentType environmentType = _environmentController.CurrentEnvironment;
 
-            if (!_enviromentController.TryGetUIPoint(enviromentType, placementState, out Transform point))
+            if (!_environmentController.TryGetUIPoint(environmentType, state, out Transform point))
             {
-                Debug.LogError($"Missing UI point for {enviromentType}/{placementState}. Assign it on EnviromentController.", this);
+                Debug.LogError($"Missing UI point for {environmentType}/{state}. Assign it on EnvironmentController.", this);
                 scene.gameObject.SetActive(false);
                 return false;
             }
 
             scene.gameObject.transform.SetPositionAndRotation(point.position, point.rotation);
             return true;
+        }
+
+        private static bool IsStartFlowState(ApplicationState state)
+        {
+            return state == ApplicationState.Language
+                || state == ApplicationState.SelectEnvironment
+                || state == ApplicationState.Start;
+        }
+
+        private bool PlaceStartFlowScene(IScene scene)
+        {
+            Transform playerView = _applicationManager.PlayerView;
+            if (playerView == null)
+            {
+                Debug.LogError("Cannot place start flow UI because the player view is missing.", this);
+                return false;
+            }
+
+            Vector3 position = playerView.position
+                + playerView.forward * _startFlowSceneDistance
+                + playerView.up * _startFlowVerticalOffset;
+            scene.gameObject.transform.SetPositionAndRotation(position, playerView.rotation);
+            return true;
+        }
+
+        private IEnumerator RefreshStartFlowPlacement(IScene scene, ApplicationState state)
+        {
+            // OpenXR can apply the tracked head pose a few frames after the initial
+            // Language state. Re-sample briefly, then leave the UI fixed in world space.
+            for (int frame = 0; frame < _startFlowPlacementFrames; frame++)
+            {
+                yield return null;
+                if (!_hasCurrentState || _currentState != state || _currentScene != scene)
+                    yield break;
+
+                PlaceStartFlowScene(scene);
+            }
+
+            _startFlowPlacementCoroutine = null;
         }
 
         private bool PlaceFailedScene(IScene scene)
@@ -129,6 +184,15 @@ namespace _Scripts.UI
             position.y = _failedSceneHeight;
             scene.gameObject.transform.SetPositionAndRotation(position, yawRotation);
             return true;
+        }
+
+        private void ResolveSceneReferences()
+        {
+            _selectLanguageScene ??= GetComponentInChildren<SelectLanguageScene>(true);
+            _selectEnvironmentScene ??= GetComponentInChildren<SelectEnvironmentScene>(true);
+            _startScene ??= GetComponentInChildren<StartScene>(true);
+            _guideScene ??= GetComponentInChildren<GuideScene>(true);
+            _exploreScene ??= GetComponentInChildren<ExploreScene>(true);
         }
 
     }

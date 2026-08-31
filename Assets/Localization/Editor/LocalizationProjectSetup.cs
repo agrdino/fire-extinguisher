@@ -33,23 +33,23 @@ namespace Spaxtek.EditorTools
         private const string FontAssetPath = RootFolder + "/Fonts/NotoSansJP Dynamic SDF.asset";
         private const string SettingsPath = SettingsFolder + "/Localization Settings.asset";
         private const string CatalogPath = RootFolder + "/Editor/LocalizationTranslations.json";
-        private const string LanguagePrefabPath = PrefabsFolder + "/Language Scene Camera Follow UI Panel.prefab";
-        private const string SourcePanelPath = "Assets/UIs/Variants/Start Scene Camera Follow UI Panel.prefab";
+        private const string LanguagePrefabPath = PrefabsFolder + "/Select Language Scene.prefab";
+        private const string SourcePanelPath = "Assets/UIs/Variants/Start Scene.prefab";
         private const string TableName = "UI";
 
         [Serializable]
         private sealed class TranslationCatalog
         {
-            public Translation[] items;
+            public Translation[] items = Array.Empty<Translation>();
         }
 
         [Serializable]
         private sealed class Translation
         {
-            public string key;
-            public string en;
-            public string vi;
-            public string ja;
+            public string key = string.Empty;
+            public string en = string.Empty;
+            public string vi = string.Empty;
+            public string ja = string.Empty;
         }
 
         private static Dictionary<string, string> _staticKeyByText;
@@ -244,15 +244,15 @@ namespace Spaxtek.EditorTools
             GameObject root = PrefabUtility.LoadPrefabContents(LanguagePrefabPath);
             try
             {
-                root.name = "Language Scene Camera Follow UI Panel";
+                root.name = "Select Language Scene";
                 StartScene startScene = root.GetComponentInChildren<StartScene>(true);
                 GameObject host = startScene != null ? startScene.gameObject : root;
                 if (startScene != null)
                     Object.DestroyImmediate(startScene, true);
 
-                LanguageScene languageScene = host.GetComponent<LanguageScene>();
+                SelectLanguageScene languageScene = host.GetComponent<SelectLanguageScene>();
                 if (languageScene == null)
-                    languageScene = host.AddComponent<LanguageScene>();
+                    languageScene = host.AddComponent<SelectLanguageScene>();
 
                 TMP_Text title = FindText(root, "txtTitle");
                 TMP_Text instruction = FindText(root, "txtGuide");
@@ -268,14 +268,15 @@ namespace Spaxtek.EditorTools
                 Button vietnameseButton = EnsureButtonClone(continueButton, "btnVietnamese", "Tiếng Việt", new Vector2(-430f, -120f), new Vector2(360f, 110f));
                 Button englishButton = EnsureButtonClone(continueButton, "btnEnglish", "English", new Vector2(0f, -120f), new Vector2(360f, 110f));
                 Button japaneseButton = EnsureButtonClone(continueButton, "btnJapanese", "日本語", new Vector2(430f, -120f), new Vector2(360f, 110f));
-                Button backButton = EnsureButtonClone(continueButton, "btnBack", "BACK", new Vector2(-360f, -390f), new Vector2(300f, 100f));
+                Button backButton = FindButton(root, "btnBack");
+                if (backButton != null)
+                    Object.DestroyImmediate(backButton.gameObject);
 
                 SerializedObject serializedScene = new(languageScene);
                 serializedScene.FindProperty("_btnVietnamese").objectReferenceValue = vietnameseButton;
                 serializedScene.FindProperty("_btnEnglish").objectReferenceValue = englishButton;
                 serializedScene.FindProperty("_btnJapanese").objectReferenceValue = japaneseButton;
                 serializedScene.FindProperty("_btnContinue").objectReferenceValue = continueButton;
-                serializedScene.FindProperty("_btnBack").objectReferenceValue = backButton;
                 serializedScene.ApplyModifiedPropertiesWithoutUndo();
 
                 PrefabUtility.SaveAsPrefabAsset(root, LanguagePrefabPath);
@@ -333,7 +334,7 @@ namespace Spaxtek.EditorTools
             List<string> paths = AssetDatabase.FindAssets("t:Prefab", new[]
                 {
                     "Assets/UIs",
-                    "Assets/Enviroments/EmergencyExit",
+                    "Assets/Environments/EmergencyExit",
                     PrefabsFolder
                 })
                 .Select(AssetDatabase.GUIDToAssetPath)
@@ -399,8 +400,8 @@ namespace Spaxtek.EditorTools
 
         private static void EnsureLanguagePanelInScene(Scene scene, GameObject languagePrefab)
         {
-            LanguageScene languageScene = scene.GetRootGameObjects()
-                .SelectMany(root => root.GetComponentsInChildren<LanguageScene>(true))
+            SelectLanguageScene languageScene = scene.GetRootGameObjects()
+                .SelectMany(root => root.GetComponentsInChildren<SelectLanguageScene>(true))
                 .FirstOrDefault();
 
             if (languageScene == null)
@@ -408,9 +409,9 @@ namespace Spaxtek.EditorTools
                 GameObject instance = PrefabUtility.InstantiatePrefab(languagePrefab, scene) as GameObject;
                 if (instance == null)
                     throw new InvalidOperationException("Unable to instantiate the language panel.");
-                instance.name = "Language Scene Camera Follow UI Panel";
+                instance.name = "Select Language Scene";
                 instance.SetActive(false);
-                languageScene = instance.GetComponentInChildren<LanguageScene>(true);
+                languageScene = instance.GetComponentInChildren<SelectLanguageScene>(true);
             }
 
             UIController controller = scene.GetRootGameObjects()
@@ -420,9 +421,9 @@ namespace Spaxtek.EditorTools
                 throw new InvalidOperationException("SampleScene is missing UIController.");
 
             SerializedObject serializedController = new(controller);
-            SerializedProperty property = serializedController.FindProperty("_languageScene");
+            SerializedProperty property = serializedController.FindProperty("_selectLanguageScene");
             if (property == null)
-                throw new InvalidOperationException("UIController._languageScene was not found.");
+                throw new InvalidOperationException("UIController._selectLanguageScene was not found.");
             property.objectReferenceValue = languageScene;
             serializedController.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(controller);

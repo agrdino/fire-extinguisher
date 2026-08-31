@@ -4,18 +4,18 @@ using UnityEngine.UI;
 
 namespace _Scripts.UI
 {
-    public sealed class FailedScene : MonoBehaviour, IScene
+    public sealed class CompletedScene : MonoBehaviour, IScene
     {
-        [SerializeField] private Button _btnRetry;
+        [SerializeField] private Button _btnRestart;
 
         private void Awake()
         {
-            if (_btnRetry != null) _btnRetry.onClick.AddListener(OnRetryClicked);
+            if (_btnRestart != null) _btnRestart.onClick.AddListener(OnClickRestartButton);
         }
 
         private void OnDestroy()
         {
-            if (_btnRetry != null) _btnRetry.onClick.RemoveListener(OnRetryClicked);
+            if (_btnRestart != null) _btnRestart.onClick.RemoveListener(OnClickRestartButton);
         }
 
         public void Show()
@@ -26,7 +26,7 @@ namespace _Scripts.UI
         {
         }
 
-        private void OnRetryClicked()
+        private void OnClickRestartButton()
         {
             ApplicationManager.Instance.SetState(ApplicationState.Start);
         }

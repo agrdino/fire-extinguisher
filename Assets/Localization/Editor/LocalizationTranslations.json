@@ -7,12 +7,11 @@
     {"key":"common.back","en":"BACK","vi":"QUAY LẠI","ja":"戻る"},
     {"key":"common.retry","en":"RETRY","vi":"THỬ LẠI","ja":"再試行"},
     {"key":"common.restart","en":"RESTART","vi":"CHƠI LẠI","ja":"再スタート"},
-    {"key":"common.loading","en":"Loading...","vi":"Đang tải...","ja":"読み込み中..."},
-
     {"key":"start.title","en":"FIRE EXTINGUISHER TRAINING","vi":"HUẤN LUYỆN CHỮA CHÁY","ja":"消火訓練"},
     {"key":"start.start_training","en":"START TRAINING","vi":"BẮT ĐẦU HUẤN LUYỆN","ja":"訓練を開始"},
     {"key":"start.instructions","en":"1. Choose the extinguisher that matches the fire.\n\n2. Remove the safety pin.\n\n3. Aim at the base of the fire.\n\n4. Squeeze the lever and sweep side to side.","vi":"1. Chọn bình chữa cháy phù hợp với đám cháy.\n\n2. Rút chốt an toàn.\n\n3. Hướng vòi phun vào gốc lửa.\n\n4. Bóp cò và lia vòi qua lại.","ja":"1. 火災の種類に合った消火器を選びます。\n\n2. 安全ピンを抜きます。\n\n3. ノズルを火元に向けます。\n\n4. レバーを握り、左右に噴射します。"},
 
+    {"key":"environment.title","en":"SELECT ENVIRONMENT","vi":"CHỌN MÔI TRƯỜNG","ja":"環境を選択"},
     {"key":"environment.factory","en":"FACTORY","vi":"NHÀ MÁY","ja":"工場"},
     {"key":"environment.factory_description","en":"Industrial fire safety training","vi":"Huấn luyện an toàn cháy nổ trong nhà máy","ja":"工場での火災安全訓練"},
     {"key":"environment.park","en":"PARK","vi":"CÔNG VIÊN","ja":"公園"},
@@ -56,6 +55,7 @@
     {"key":"failed.title","en":"TRAINING FAILED","vi":"HUẤN LUYỆN THẤT BẠI","ja":"訓練失敗"},
     {"key":"failed.message","en":"You did not reach safety in time. Retry and follow the correct extinguisher procedure.","vi":"Anh chưa đến nơi an toàn kịp thời. Hãy thử lại và thực hiện đúng quy trình dùng bình chữa cháy.","ja":"時間内に安全な場所へ到達できませんでした。正しい消火手順で再試行してください。"},
 
+    {"key":"start.reset_safety_pin","en":"Reinsert the safety pin before starting.","vi":"Đặt lại chốt trước khi bắt đầu.","ja":"開始する前に安全ピンを元に戻してください。"},
     {"key":"hint.title","en":"HINT","vi":"GỢI Ý","ja":"ヒント"},
     {"key":"hint.select_extinguisher","en":"Select 1 of 2 extinguishers.","vi":"Chọn 1 trong 2 bình chữa cháy.","ja":"2本の消火器から1本を選んでください。"},
     {"key":"hint.confirm_extinguisher","en":"Press CONFIRM to continue.","vi":"Nhấn XÁC NHẬN để tiếp tục.","ja":"「確認」を押して続けてください。"},

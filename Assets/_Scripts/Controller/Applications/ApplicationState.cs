@@ -3,13 +3,14 @@ namespace _Scripts.Controller
     public enum ApplicationState
     {
         Start = 0,
-        Selecting = 1,
-        Playing = 2,
+        SelectExtinguisher = 1,
+        Fighting = 2,
         Escape = 3,
-        Won = 4,
-        Lost = 5,
+        Completed = 4,
+        Failed = 5,
         Guide = 6,
         Explore = 7,
-        Language = 8
+        Language = 8,
+        SelectEnvironment = 9
     }
 }

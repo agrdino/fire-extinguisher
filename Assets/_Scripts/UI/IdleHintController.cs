@@ -22,6 +22,7 @@ namespace _Scripts.UI
         private enum HintStep
         {
             None,
+            ResetSafetyPin,
             SelectExtinguisher,
             ConfirmExtinguisher,
             RemoveSafetyPin,
@@ -53,6 +54,7 @@ namespace _Scripts.UI
         [SerializeField, Min(0f)] private float _fadeDuration = 0.2f;
 
         [Header("Copy")]
+        [SerializeField] private LocalizedString _resetSafetyPinHintLocalized = new("UI", "start.reset_safety_pin");
         [SerializeField] private LocalizedString _selectExtinguisherHintLocalized = new("UI", "hint.select_extinguisher");
         [SerializeField] private LocalizedString _confirmExtinguisherHintLocalized = new("UI", "hint.confirm_extinguisher");
         [SerializeField] private LocalizedString _removeSafetyPinHintLocalized = new("UI", "hint.remove_safety_pin");
@@ -60,6 +62,7 @@ namespace _Scripts.UI
         [SerializeField] private LocalizedString _goToEmergencyExitHintLocalized = new("UI", "hint.go_to_exit");
 
         private ApplicationManager _applicationManager;
+        private FireExtinguisherController _fireExtinguisherController;
         private FireExtinguisher _fireExtinguisher;
         private Camera _baseCamera;
         private Camera _overlayCamera;
@@ -81,7 +84,8 @@ namespace _Scripts.UI
 
             _instance = this;
             _applicationManager = ApplicationManager.Instance;
-            _fireExtinguisher = FireExtinguisherController.Instance.FireExtinguisher;
+            _fireExtinguisherController = FireExtinguisherController.Instance;
+            _fireExtinguisher = _fireExtinguisherController?.FireExtinguisher;
 
             if (_applicationManager == null) return;
             if (_canvasGroup == null || _messageText == null) return;
@@ -125,8 +129,15 @@ namespace _Scripts.UI
 
                 if (_currentStep != HintStep.None && _targetAlpha <= 0f)
                 {
-                    _idleTime += Time.unscaledDeltaTime;
-                    if (_idleTime >= _idleDelay) ShowCurrentHint();
+                    if (_currentStep == HintStep.ResetSafetyPin)
+                    {
+                        ShowCurrentHint();
+                    }
+                    else
+                    {
+                        _idleTime += Time.unscaledDeltaTime;
+                        if (_idleTime >= _idleDelay) ShowCurrentHint();
+                    }
                 }
             }
 
@@ -222,6 +233,15 @@ namespace _Scripts.UI
                 return;
             }
 
+            if (requiredStep == HintStep.ResetSafetyPin)
+            {
+                if (requiredStep != _currentStep)
+                    SetStep(requiredStep);
+                else
+                    ShowCurrentHint();
+                return;
+            }
+
             if (requiredStep != _currentStep)
             {
                 SetStep(requiredStep);
@@ -237,7 +257,15 @@ namespace _Scripts.UI
         {
             if (_applicationManager == null) return HintStep.None;
 
-            if (_applicationManager.State == ApplicationState.Selecting)
+            if (_applicationManager.State == ApplicationState.Start)
+            {
+                return _fireExtinguisherController != null
+                    && _fireExtinguisherController.IsReadyToStart
+                        ? HintStep.None
+                        : HintStep.ResetSafetyPin;
+            }
+
+            if (_applicationManager.State == ApplicationState.SelectExtinguisher)
             {
                 return _applicationManager.SelectedExtinguisherType == FireExtinguisherType.Unselect
                     ? HintStep.SelectExtinguisher
@@ -247,7 +275,7 @@ namespace _Scripts.UI
             if (_applicationManager.State == ApplicationState.Escape)
                 return HintStep.GoToEmergencyExit;
 
-            if (_applicationManager.State != ApplicationState.Playing || _fireExtinguisher == null)
+            if (_applicationManager.State != ApplicationState.Fighting || _fireExtinguisher == null)
                 return HintStep.None;
 
             FireExtinguisherState state = _fireExtinguisher.CurrentState;
@@ -261,7 +289,10 @@ namespace _Scripts.UI
             _currentStep = step;
             _idleTime = 0f;
             if (_calloutCurve != null) _calloutCurve.SetTarget(ResolveHintTarget(step));
-            HideHint();
+            if (step == HintStep.ResetSafetyPin)
+                ShowCurrentHint();
+            else
+                HideHint();
         }
 
         private void ShowCurrentHint()
@@ -288,10 +319,14 @@ namespace _Scripts.UI
         {
             switch (step)
             {
+                case HintStep.ResetSafetyPin:
+                    return FindActivePartTarget<FireExtinguisherSafetyPin>(
+                        component => component.HintTarget);
+
                 case HintStep.SelectExtinguisher:
                 case HintStep.ConfirmExtinguisher:
                 {
-                    SelectScene selectScene = UIController.Instance?.CurrentScene as SelectScene;
+                    SelectExtinguisherScene selectScene = UIController.Instance?.CurrentScene as SelectExtinguisherScene;
                     if (selectScene == null) return null;
                     return step == HintStep.SelectExtinguisher
                         ? selectScene.ExtinguisherOptionsHintTarget
@@ -335,6 +370,7 @@ namespace _Scripts.UI
         {
             return step switch
             {
+                HintStep.ResetSafetyPin => _resetSafetyPinHintLocalized.GetLocalizedString(),
                 HintStep.SelectExtinguisher => _selectExtinguisherHintLocalized.GetLocalizedString(),
                 HintStep.ConfirmExtinguisher => _confirmExtinguisherHintLocalized.GetLocalizedString(),
                 HintStep.RemoveSafetyPin => _removeSafetyPinHintLocalized.GetLocalizedString(),

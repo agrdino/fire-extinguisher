@@ -37,7 +37,7 @@ namespace _Scripts.Controller
 
         private FireController _fireController;
         private FireExtinguisherController _fireExtinguisherController;
-        private EnviromentController _enviromentController;
+        private EnvironmentController _EnvironmentController;
         private EmergencyExitPathGuide _emergencyExitPathGuide;
         private Vector3 _initialPlayerPosition;
         private Quaternion _initialPlayerRotation;
@@ -49,7 +49,7 @@ namespace _Scripts.Controller
         public float RemainingTime => _remainingTime;
         public bool IsExploring => _state == ApplicationState.Explore;
         public bool IsExploreTimeLimited => IsExploring && _isExploreTimeLimited;
-        public bool IsPlaying => _state == ApplicationState.Playing;
+        public bool IsFighting => _state == ApplicationState.Fighting;
         public bool IsEscaping => _state == ApplicationState.Escape;
         public bool IsEscapeTimeLimited => IsEscaping && _isEscapeTimeLimited;
         public FireExtinguisherType SelectedExtinguisherType => _selectedExtinguisherType;
@@ -70,7 +70,7 @@ namespace _Scripts.Controller
             Instance = this;
             _fireController = FireController.Instance;
             _fireExtinguisherController = FireExtinguisherController.Instance;
-            _enviromentController = EnviromentController.Instance;
+            _EnvironmentController = EnvironmentController.Instance;
             _emergencyExitPathGuide = _emergencyExit != null
                 ? _emergencyExit.GetComponentInChildren<EmergencyExitPathGuide>(true)
                 : null;
@@ -133,21 +133,21 @@ namespace _Scripts.Controller
 
             if (IsExploring) return;
 
-            if (!IsPlaying && !IsEscaping) return;
+            if (!IsFighting && !IsEscaping) return;
 
-            if (IsPlaying || _isEscapeTimeLimited)
+            if (IsFighting || _isEscapeTimeLimited)
             {
                 _remainingTime = Mathf.Max(0f, _remainingTime - Time.deltaTime);
                 OnRemainingTimeChanged?.Invoke(_remainingTime);
             }
 
-            if (IsPlaying && !_isFireFlareUpPending && (_fireExtinguisherController.IsDepleted || _remainingTime <= 0f))
+            if (IsFighting && !_isFireFlareUpPending && (_fireExtinguisherController.IsDepleted || _remainingTime <= 0f))
             {
                 BeginEscape(true);
                 return;
             }
 
-            if (IsEscaping && _isEscapeTimeLimited && _remainingTime <= 0f) SetState(ApplicationState.Lost);
+            if (IsEscaping && _isEscapeTimeLimited && _remainingTime <= 0f) SetState(ApplicationState.Failed);
         }
 
         private void OnDestroy()
@@ -170,9 +170,6 @@ namespace _Scripts.Controller
             switch (_state)
             {
                 case ApplicationState.Start:
-                    ResetApplication();
-                    break;
-
                 case ApplicationState.Language:
                 case ApplicationState.Guide:
                     ResetExtinguisher();
@@ -181,6 +178,10 @@ namespace _Scripts.Controller
                     _isEscapeTimeLimited = false;
                     SetEmergencyExitActive(false);
                     ResetPlayerPose();
+                    break;
+
+                case ApplicationState.SelectEnvironment:
+                    ResetApplication();
                     break;
 
                 case ApplicationState.Explore:
@@ -194,14 +195,14 @@ namespace _Scripts.Controller
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
                     break;
 
-                case ApplicationState.Selecting:
+                case ApplicationState.SelectExtinguisher:
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.SpawnFires(_playerRoot);
-                    _enviromentController?.PositionEmergencyExit(GetPlayerView());
+                    _EnvironmentController?.PositionEmergencyExit(GetPlayerView());
                     break;
 
-                case ApplicationState.Playing:
+                case ApplicationState.Fighting:
                     _isEscapeTimeLimited = false;
                     _isFireFlareUpPending = false;
                     ResetExtinguisher();
@@ -218,12 +219,12 @@ namespace _Scripts.Controller
                     SetEmergencyExitActive(true);
                     break;
 
-                case ApplicationState.Won:
+                case ApplicationState.Completed:
                     _fireExtinguisherController.SetInputEnabled(false);
                     _emergencyExit?.Disarm();
                     break;
 
-                case ApplicationState.Lost:
+                case ApplicationState.Failed:
                     _fireExtinguisherController.SetInputEnabled(false);
                     SetEmergencyExitActive(false);
                     break;
@@ -236,7 +237,7 @@ namespace _Scripts.Controller
         private void ResetApplication()
         {
             _fireController.ClearFires();
-            _enviromentController?.ShowStartEnviroment();
+            _EnvironmentController?.ShowStartEnvironment();
             ResetExtinguisher();
             SelectExtinguisher(FireExtinguisherType.Unselect);
             _isEscapeTimeLimited = false;
@@ -271,7 +272,7 @@ namespace _Scripts.Controller
         public void CompleteExplore()
         {
             if (!IsExploring) return;
-            SetState(ApplicationState.Selecting);
+            SetState(ApplicationState.SelectExtinguisher);
         }
 
         private void SetEmergencyExitActive(bool isActive)
@@ -310,19 +311,19 @@ namespace _Scripts.Controller
 
         private void HandleAllFiresExtinguished()
         {
-            if (IsPlaying) BeginEscape(false);
+            if (IsFighting) BeginEscape(false);
         }
 
         private void HandleFireFlareUpStarted()
         {
-            if (!IsPlaying || _isFireFlareUpPending) return;
+            if (!IsFighting || _isFireFlareUpPending) return;
 
             _isFireFlareUpPending = true;
         }
 
         private void HandleFireFlareUpCompleted()
         {
-            if (!IsPlaying || !_isFireFlareUpPending) return;
+            if (!IsFighting || !_isFireFlareUpPending) return;
 
             _isFireFlareUpPending = false;
             BeginEscape(true);
@@ -330,13 +331,7 @@ namespace _Scripts.Controller
 
         private void HandleEmergencyExitReached()
         {
-            if (IsPlaying)
-            {
-                SetState(ApplicationState.Guide);
-                return;
-            }
-
-            if (IsEscaping) SetState(ApplicationState.Won);
+            if (IsEscaping) SetState(ApplicationState.Completed);
         }
 
         private void BeginEscape(bool isTimeLimited)
@@ -349,8 +344,8 @@ namespace _Scripts.Controller
         {
             return state == ApplicationState.Guide
                 || state == ApplicationState.Explore
-                || state == ApplicationState.Selecting
-                || state == ApplicationState.Playing
+                || state == ApplicationState.SelectExtinguisher
+                || state == ApplicationState.Fighting
                 || state == ApplicationState.Escape;
         }
     }

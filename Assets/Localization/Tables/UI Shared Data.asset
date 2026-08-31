@@ -43,10 +43,6 @@ MonoBehaviour:
     m_Key: common.restart
     m_Metadata:
       m_Items: []
-  - m_Id: 1337040899
-    m_Key: common.loading
-    m_Metadata:
-      m_Items: []
   - m_Id: 1337040900
     m_Key: start.title
     m_Metadata:
@@ -229,6 +225,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1337040945
     m_Key: exit.label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448646678781953
+    m_Key: start.reset_safety_pin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448646678781952
+    m_Key: environment.title
     m_Metadata:
       m_Items: []
   m_Metadata:

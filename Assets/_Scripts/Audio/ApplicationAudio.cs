@@ -79,11 +79,11 @@ namespace _Scripts.Audio
                         _audioManager.PlayLoop(_escapeLoopSource, _escapeClip);
                     break;
 
-                case ApplicationState.Won:
+                case ApplicationState.Completed:
                     _completedRoutine = StartCoroutine(PlayCompletedAfterExit());
                     break;
 
-                case ApplicationState.Lost:
+                case ApplicationState.Failed:
                     _audioManager.PlayOneShot(_oneShotSource, _failedClip);
                     break;
             }

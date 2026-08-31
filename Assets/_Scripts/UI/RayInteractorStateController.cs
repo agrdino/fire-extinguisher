@@ -34,7 +34,7 @@ namespace _Scripts.UI
         {
             if (_rayInteractor == null) return;
 
-            bool shouldEnable = state != ApplicationState.Playing && state != ApplicationState.Escape;
+            bool shouldEnable = state != ApplicationState.Fighting && state != ApplicationState.Escape;
             if (_rayInteractor.activeSelf != shouldEnable)
                 _rayInteractor.SetActive(shouldEnable);
         }

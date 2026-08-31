@@ -41,6 +41,8 @@ namespace _Scripts.FireExtinguishers
         public Key LastReceivedKey => _lastReceivedKey;
         public bool HasReceivedKey => _hasReceivedKey;
         public bool IsInputEnabled => _isInputEnabled;
+        public bool IsReadyToStart =>
+            _isConnected && _hasReceivedKey && _lastReceivedKey == Key.A;
         
         public event Action<float> OnCapacityChanged
         {
@@ -79,10 +81,13 @@ namespace _Scripts.FireExtinguishers
         public bool TryReceiveKey(Key key)
         {
             if (!_inputSettings.TryGetState(key, out FireExtinguisherState state)) return false;
-            if (!_isInputEnabled) return true;
-            
+
+            _lastReceiveTime = Time.unscaledTime;
+            _isConnected = true;
             _lastReceivedKey = key;
             _hasReceivedKey = true;
+            if (!_isInputEnabled) return true;
+
             ReceiveState(state);
             return true;
         }
@@ -110,7 +115,6 @@ namespace _Scripts.FireExtinguishers
             _isInputEnabled = isEnabled;
             if (isEnabled) return;
 
-            _isConnected = false;
             _currentState = _currentState.WithLever(LeverState.Released);
             _fireExtinguisher.SetState(_currentState);
         }
@@ -118,22 +122,19 @@ namespace _Scripts.FireExtinguishers
         public void ResetInputState()
         {
             _isInputEnabled = false;
-            _lastReceiveTime = float.NegativeInfinity;
-            _isConnected = false;
             _currentState = FireExtinguisherState.DefaultState;
-            _lastReceivedKey = Key.None;
-            _hasReceivedKey = false;
 
             _fireExtinguisher.SetState(_currentState);
         }
 
         private void UpdateConnectionTimeout()
         {
-            if (!_isInputEnabled) return;
             if (!_isConnected) return;
             if (Time.unscaledTime - _lastReceiveTime < Mathf.Max(0.01f, _connectionTimeout)) return;
             
             _isConnected = false;
+            if (!_isInputEnabled) return;
+
             _currentState = _currentState.WithLever(LeverState.Released);
 
             _fireExtinguisher.SetState(_currentState);

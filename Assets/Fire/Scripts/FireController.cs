@@ -76,10 +76,10 @@ namespace _Scripts.Fires
 
         private FireSpawnPoint GetRandomSpawnPoint(Vector3 playerPosition)
         {
-            EnviromentController enviromentController = EnviromentController.Instance;
-            if (enviromentController == null) return null;
+            EnvironmentController EnvironmentController = EnvironmentController.Instance;
+            if (EnvironmentController == null) return null;
 
-            IReadOnlyList<FireSpawnPoint> spawnPoints = enviromentController.GetActiveFireSpawnPoints();
+            IReadOnlyList<FireSpawnPoint> spawnPoints = EnvironmentController.GetActiveFireSpawnPoints();
             float minimumDistanceSquared = _minimumSpawnDistanceFromPlayer * _minimumSpawnDistanceFromPlayer;
             int validPointCount = 0;
             for (int i = 0; i < spawnPoints.Count; i++)

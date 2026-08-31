@@ -23,8 +23,6 @@ namespace _Scripts.UI
         private Transform _target;
         private Renderer[] _targetRenderers;
         private float _targetGap;
-        private float _popupGap;
-        private float _viewportMargin;
         private float _curveStrength;
         private Color _lineColor;
         private float _lastAlpha = -1f;
@@ -47,8 +45,6 @@ namespace _Scripts.UI
             _camera = viewCamera;
             _lineColor = lineColor;
             _targetGap = Mathf.Max(0f, targetGap);
-            _popupGap = Mathf.Max(0f, popupGap);
-            _viewportMargin = Mathf.Max(0f, viewportMargin);
             _curveStrength = Mathf.Max(0f, curveStrength);
 
             _lineRenderer = GetComponent<LineRenderer>();
@@ -95,18 +91,11 @@ namespace _Scripts.UI
 
             float alpha = _canvasGroup != null ? _canvasGroup.alpha : 1f;
             Vector3 targetPosition = GetTargetSurfacePoint(_popupRect.position);
-            Vector3 viewportPosition = _camera.WorldToViewportPoint(targetPosition);
-            bool targetIsInView = viewportPosition.z > _camera.nearClipPlane
-                && viewportPosition.x >= -_viewportMargin
-                && viewportPosition.x <= 1f + _viewportMargin
-                && viewportPosition.y >= -_viewportMargin
-                && viewportPosition.y <= 1f + _viewportMargin;
-
-            bool shouldRender = _requestedVisible && alpha > 0.001f && targetIsInView;
+            bool shouldRender = _requestedVisible && alpha > 0.001f;
             _lineRenderer.enabled = shouldRender;
             if (!shouldRender) return;
 
-            Vector3 popupPoint = GetClosestPopupEdgePoint(targetPosition);
+            Vector3 popupPoint = GetPopupMiddleLeftPoint();
             Vector3 popupToTarget = targetPosition - popupPoint;
             if (popupToTarget.sqrMagnitude < 0.000001f)
             {
@@ -116,31 +105,16 @@ namespace _Scripts.UI
 
             Vector3 direction = popupToTarget.normalized;
             float maximumGap = popupToTarget.magnitude * 0.4f;
-            Vector3 start = popupPoint + direction * Mathf.Min(_popupGap, maximumGap);
+            Vector3 start = popupPoint;
             Vector3 end = targetPosition - direction * Mathf.Min(_targetGap, maximumGap);
             DrawCurve(start, end);
             SetLineAlpha(alpha);
         }
 
-        private Vector3 GetClosestPopupEdgePoint(Vector3 targetPosition)
+        private Vector3 GetPopupMiddleLeftPoint()
         {
             _popupRect.GetWorldCorners(_popupCorners);
-
-            Vector3 bestPoint = _popupCorners[0];
-            float bestDistance = float.PositiveInfinity;
-            for (int index = 0; index < 4; index++)
-            {
-                Vector3 edgeStart = _popupCorners[index];
-                Vector3 edgeEnd = _popupCorners[(index + 1) % 4];
-                Vector3 candidate = ClosestPointOnSegment(edgeStart, edgeEnd, targetPosition);
-                float distance = (candidate - targetPosition).sqrMagnitude;
-                if (distance >= bestDistance) continue;
-
-                bestDistance = distance;
-                bestPoint = candidate;
-            }
-
-            return bestPoint;
+            return (_popupCorners[0] + _popupCorners[1]) * 0.5f;
         }
 
         private Vector3 GetTargetSurfacePoint(Vector3 popupPosition)
@@ -220,16 +194,6 @@ namespace _Scripts.UI
                     new GradientAlphaKey(alpha, 1f)
                 });
             _lineRenderer.colorGradient = gradient;
-        }
-
-        private static Vector3 ClosestPointOnSegment(Vector3 start, Vector3 end, Vector3 point)
-        {
-            Vector3 segment = end - start;
-            float lengthSquared = segment.sqrMagnitude;
-            if (lengthSquared <= Mathf.Epsilon) return start;
-
-            float t = Mathf.Clamp01(Vector3.Dot(point - start, segment) / lengthSquared);
-            return start + segment * t;
         }
 
         private static Vector3 CalculateCubicBezierPoint(

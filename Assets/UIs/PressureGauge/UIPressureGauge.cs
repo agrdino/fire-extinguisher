@@ -60,7 +60,7 @@ namespace _Scripts.UI
         {
             ApplicationState state = _applicationManager.State;
             FireExtinguisherType extinguisherType = _applicationManager.SelectedExtinguisherType;
-            bool isSupportedState = state == ApplicationState.Selecting || state == ApplicationState.Playing || state == ApplicationState.Escape;
+            bool isSupportedState = state == ApplicationState.SelectExtinguisher || state == ApplicationState.Fighting || state == ApplicationState.Escape;
             Transform pressureTarget = GetPressureTarget(extinguisherType);
 
             _positionFollow.target = pressureTarget;
