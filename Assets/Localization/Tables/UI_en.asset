@@ -57,16 +57,13 @@ MonoBehaviour:
   - m_Id: 1337040902
     m_Localized: '1. Choose the extinguisher that matches the fire.
 
-
       2. Remove
       the safety pin.
 
-
       3. Aim at the base of the fire.
 
-
-      4. Squeeze
-      the lever and sweep side to side.'
+      4. Squeeze the
+      lever and sweep side to side.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040903
@@ -112,21 +109,16 @@ MonoBehaviour:
   - m_Id: 1337040913
     m_Localized: '1. Explore the area and locate the emergency exit.
 
-
       2. Choose
       an extinguisher that matches the fire.
 
-
       3. Remove the safety pin.
-
 
       4.
       Aim at the base of the fire.
 
-
       5. Squeeze the lever and sweep side to
       side.
-
 
       6. After extinguishing the fire, follow the exit marker.'
     m_Metadata:
@@ -134,24 +126,18 @@ MonoBehaviour:
   - m_Id: 1337040914
     m_Localized: 'Before the fire drill:
 
-
       1. Explore the area and locate the
       emergency exit.
-
 
       2. When a fire appears, choose an extinguisher that
       matches the fire type.
 
-
       3. Remove the safety pin.
 
-
-      4. Aim at
-      the base of the fire.
-
+      4. Aim at the
+      base of the fire.
 
       5. Squeeze the lever and sweep side to side.
-
 
       6.
       After extinguishing the fire, follow the exit marker.'
@@ -196,9 +182,7 @@ MonoBehaviour:
   - m_Id: 1337040923
     m_Localized: 'For flammable-liquid fires.
 
-
       Leaves no residue.
-
 
       Not
       for solid-material fires.'
@@ -211,9 +195,7 @@ MonoBehaviour:
   - m_Id: 1337040925
     m_Localized: 'For solid-material fires.
 
-
       Quickly blankets the flames.
-
 
       Not
       for liquid fires in this training.'

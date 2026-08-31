@@ -1782,9 +1782,6 @@ MonoBehaviour:
     _underlyingValue: {fileID: 5104902911455822533}
   _failedSceneDistance: 2.5
   _failedSceneHeight: 1.55
-  _startFlowSceneDistance: 2.5
-  _startFlowVerticalOffset: 0
-  _startFlowPlacementFrames: 12
 --- !u!4 &1292726914
 Transform:
   m_ObjectHideFlags: 0
@@ -2359,10 +2356,6 @@ PrefabInstance:
     - target: {fileID: 1052189521138179535, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
       propertyPath: m_Name
       value: Idle Hint Popup
-      objectReference: {fileID: 0}
-    - target: {fileID: 7847611471076182927, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
-      propertyPath: m_overflowMode
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8020917336435217465, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
       propertyPath: m_LocalPosition.x

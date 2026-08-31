@@ -665,6 +665,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8791967201778078587, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6637573031588936636}
+    - targetCorrespondingSourceObject: {fileID: 8791967201778078587, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7700000000000202}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5682787560497632375, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
       insertIndex: -1
@@ -690,6 +693,7 @@ MonoBehaviour:
   _btnFactory: {fileID: 7125927683501270083}
   _btnPark: {fileID: 8527415283583191404}
   _btnConfirm: {fileID: 5301656189164745419}
+  _btnBack: {fileID: 7700000000000203}
   _selectedColor: {r: 0.16, g: 0.55, b: 0.82, a: 0.9}
   _unselectedColor: {r: 0, g: 0, b: 0, a: 0.7}
 --- !u!224 &7093445797475328505 stripped
@@ -956,6 +960,47 @@ RectTransform:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5465951296301529592, guid: a4a3e25430175c14585edc7dbc60d608, type: 3}
   m_PrefabInstance: {fileID: 4435344949069082772}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1001 &7700000000000201
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7093445797475328505}
+    m_Modifications:
+    - target: {fileID: 2502109916755691156, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+      propertyPath: m_Name
+      value: btnBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072966233235169675, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072966233235169675, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+--- !u!224 &7700000000000202 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5072966233235169675, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+  m_PrefabInstance: {fileID: 7700000000000201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7700000000000203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1138286460262490956, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+  m_PrefabInstance: {fileID: 7700000000000201}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

@@ -9,6 +9,7 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnFactory;
         [SerializeField] private Button _btnPark;
         [SerializeField] private Button _btnConfirm;
+        [SerializeField] private Button _btnBack;
         [SerializeField] private Color _selectedColor = new(0.16f, 0.55f, 0.82f, 0.9f);
         [SerializeField] private Color _unselectedColor = new(0f, 0f, 0f, 0.7f);
 
@@ -20,6 +21,7 @@ namespace _Scripts.UI
             if (_btnFactory != null) _btnFactory.onClick.AddListener(SelectFactory);
             if (_btnPark != null) _btnPark.onClick.AddListener(SelectPark);
             if (_btnConfirm != null) _btnConfirm.onClick.AddListener(ConfirmSelection);
+            if (_btnBack != null) _btnBack.onClick.AddListener(GoBack);
         }
 
         private void OnDestroy()
@@ -27,6 +29,7 @@ namespace _Scripts.UI
             if (_btnFactory != null) _btnFactory.onClick.RemoveListener(SelectFactory);
             if (_btnPark != null) _btnPark.onClick.RemoveListener(SelectPark);
             if (_btnConfirm != null) _btnConfirm.onClick.RemoveListener(ConfirmSelection);
+            if (_btnBack != null) _btnBack.onClick.RemoveListener(GoBack);
         }
 
         public void Show()
@@ -46,6 +49,11 @@ namespace _Scripts.UI
             ApplicationManager.Instance.SetState(ApplicationState.Start);
         }
 
+        private static void GoBack()
+        {
+            ApplicationManager.Instance.SetState(ApplicationState.Language);
+        }
+
         private void SelectEnvironment(EnvironmentType environmentType)
         {
             _selectedEnvironment = environmentType;
@@ -56,6 +64,8 @@ namespace _Scripts.UI
         {
             if (_btnConfirm == null)
                 _btnConfirm = FindButton("btnConfirm");
+            if (_btnBack == null)
+                _btnBack = FindButton("btnBack");
 
             Transform options = FindChild("Environments");
             if (options == null) return;

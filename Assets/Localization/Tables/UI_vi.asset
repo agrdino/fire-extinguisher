@@ -56,9 +56,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1337040902
     m_Localized: "1. Ch\u1ECDn b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p v\u1EDBi
-      \u0111\xE1m ch\xE1y.\n\n2. R\xFAt ch\u1ED1t an to\xE0n.\n\n3. H\u01B0\u1EDBng
-      v\xF2i phun v\xE0o g\u1ED1c l\u1EEDa.\n\n4. B\xF3p c\xF2 v\xE0 lia v\xF2i qua
-      l\u1EA1i."
+      \u0111\xE1m ch\xE1y.\n2. R\xFAt ch\u1ED1t an to\xE0n.\n3. H\u01B0\u1EDBng v\xF2i
+      phun v\xE0o g\u1ED1c l\u1EEDa.\n4. B\xF3p c\xF2 v\xE0 lia v\xF2i qua l\u1EA1i."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040903
@@ -103,21 +102,21 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1337040913
     m_Localized: "1. Kh\xE1m ph\xE1 khu v\u1EF1c v\xE0 x\xE1c \u0111\u1ECBnh l\u1ED1i
-      tho\xE1t hi\u1EC3m.\n\n2. Ch\u1ECDn b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p
-      v\u1EDBi lo\u1EA1i \u0111\xE1m ch\xE1y.\n\n3. R\xFAt ch\u1ED1t an to\xE0n.\n\n4.
-      H\u01B0\u1EDBng v\xF2i phun v\xE0o g\u1ED1c l\u1EEDa.\n\n5. B\xF3p c\xF2 v\xE0
-      lia v\xF2i qua l\u1EA1i.\n\n6. Sau khi d\u1EADp l\u1EEDa, \u0111i theo ch\u1EC9
+      tho\xE1t hi\u1EC3m.\n2. Ch\u1ECDn b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p
+      v\u1EDBi lo\u1EA1i \u0111\xE1m ch\xE1y.\n3. R\xFAt ch\u1ED1t an to\xE0n.\n4.
+      H\u01B0\u1EDBng v\xF2i phun v\xE0o g\u1ED1c l\u1EEDa.\n5. B\xF3p c\xF2 v\xE0
+      lia v\xF2i qua l\u1EA1i.\n6. Sau khi d\u1EADp l\u1EEDa, \u0111i theo ch\u1EC9
       d\u1EABn \u0111\u1EBFn l\u1ED1i tho\xE1t hi\u1EC3m."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040914
-    m_Localized: "Tr\u01B0\u1EDBc khi di\u1EC5n t\u1EADp:\n\n1. Kh\xE1m ph\xE1 khu
-      v\u1EF1c v\xE0 x\xE1c \u0111\u1ECBnh l\u1ED1i tho\xE1t hi\u1EC3m.\n\n2. Khi
-      c\xF3 ch\xE1y, ch\u1ECDn b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p v\u1EDBi
-      lo\u1EA1i \u0111\xE1m ch\xE1y.\n\n3. R\xFAt ch\u1ED1t an to\xE0n.\n\n4. H\u01B0\u1EDBng
-      v\xF2i phun v\xE0o g\u1ED1c l\u1EEDa.\n\n5. B\xF3p c\xF2 v\xE0 lia v\xF2i qua
-      l\u1EA1i.\n\n6. Sau khi d\u1EADp l\u1EEDa, \u0111i theo ch\u1EC9 d\u1EABn \u0111\u1EBFn
-      l\u1ED1i tho\xE1t hi\u1EC3m."
+    m_Localized: "Tr\u01B0\u1EDBc khi di\u1EC5n t\u1EADp:\n1. Kh\xE1m ph\xE1 khu
+      v\u1EF1c v\xE0 x\xE1c \u0111\u1ECBnh l\u1ED1i tho\xE1t hi\u1EC3m.\n2. Khi c\xF3
+      ch\xE1y, ch\u1ECDn b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p v\u1EDBi lo\u1EA1i
+      \u0111\xE1m ch\xE1y.\n3. R\xFAt ch\u1ED1t an to\xE0n.\n4. H\u01B0\u1EDBng v\xF2i
+      phun v\xE0o g\u1ED1c l\u1EEDa.\n5. B\xF3p c\xF2 v\xE0 lia v\xF2i qua l\u1EA1i.\n6.
+      Sau khi d\u1EADp l\u1EEDa, \u0111i theo ch\u1EC9 d\u1EABn \u0111\u1EBFn l\u1ED1i
+      tho\xE1t hi\u1EC3m."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040915
@@ -157,9 +156,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040923
-    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t l\u1ECFng d\u1EC5 ch\xE1y.\n\nKh\xF4ng
-      \u0111\u1EC3 l\u1EA1i c\u1EB7n.\n\nKh\xF4ng d\xF9ng cho \u0111\xE1m ch\xE1y
-      ch\u1EA5t r\u1EAFn."
+    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t l\u1ECFng d\u1EC5 ch\xE1y.\nKh\xF4ng
+      \u0111\u1EC3 l\u1EA1i c\u1EB7n.\nKh\xF4ng d\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t
+      r\u1EAFn."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040924
@@ -167,8 +166,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040925
-    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t r\u1EAFn.\n\nNhanh ch\xF3ng
-      bao ph\u1EE7 ng\u1ECDn l\u1EEDa.\n\nTrong b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y
+    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t r\u1EAFn.\nNhanh ch\xF3ng
+      bao ph\u1EE7 ng\u1ECDn l\u1EEDa.\nTrong b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y
       kh\xF4ng d\xF9ng cho ch\xE1y ch\u1EA5t l\u1ECFng."
     m_Metadata:
       m_Items: []
@@ -267,7 +266,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1448646678781952
-    m_Localized: "CH\u1ECCN M\u00D4I TR\u01AF\u1EDCNG"
+    m_Localized: "CH\u1ECCN M\xD4I TR\u01AF\u1EDCNG"
     m_Metadata:
       m_Items: []
   references:

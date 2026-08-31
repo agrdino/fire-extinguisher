@@ -8,6 +8,7 @@ namespace _Scripts.UI
     public sealed class StartScene : MonoBehaviour, IScene
     {
         [SerializeField] private Button _btnStart;
+        [SerializeField] private Button _btnBack;
 
         private FireExtinguisherController _fireExtinguisherController;
 
@@ -15,12 +16,16 @@ namespace _Scripts.UI
         {
             if (_btnStart == null)
                 _btnStart = FindButton("btnStart") ?? FindButton("btnConfirm");
+            if (_btnBack == null)
+                _btnBack = FindButton("btnBack");
             if (_btnStart != null) _btnStart.onClick.AddListener(OnClickStartButton);
+            if (_btnBack != null) _btnBack.onClick.AddListener(OnClickBackButton);
         }
 
         private void OnDestroy()
         {
             if (_btnStart != null) _btnStart.onClick.RemoveListener(OnClickStartButton);
+            if (_btnBack != null) _btnBack.onClick.RemoveListener(OnClickBackButton);
         }
 
         private void Update()
@@ -44,6 +49,11 @@ namespace _Scripts.UI
                 return;
 
             ApplicationManager.Instance.SetState(ApplicationState.Guide);
+        }
+
+        private static void OnClickBackButton()
+        {
+            ApplicationManager.Instance.SetState(ApplicationState.SelectEnvironment);
         }
 
         private void RefreshStartButton()

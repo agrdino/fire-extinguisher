@@ -1286,6 +1286,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8791967201778078587, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7039998264212520006}
+    - targetCorrespondingSourceObject: {fileID: 8791967201778078587, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7700000000000102}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5682787560497632375, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
       insertIndex: -1
@@ -1314,3 +1317,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.StartScene
   _btnStart: {fileID: 1212614206535697539}
+  _btnBack: {fileID: 7700000000000103}
+--- !u!1001 &7700000000000101
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 466284190267249582}
+    m_Modifications:
+    - target: {fileID: 2502109916755691156, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+      propertyPath: m_Name
+      value: btnBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072966233235169675, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072966233235169675, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+--- !u!224 &7700000000000102 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5072966233235169675, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+  m_PrefabInstance: {fileID: 7700000000000101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7700000000000103 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1138286460262490956, guid: d1865c54f44538d4c831a402b4d4a209, type: 3}
+  m_PrefabInstance: {fileID: 7700000000000101}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
