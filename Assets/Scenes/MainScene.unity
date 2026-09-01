@@ -291,7 +291,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2698989882325584408}
+  - {fileID: 1714002298}
   m_Father: {fileID: 510384089}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &217023197
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_UpdateType: 0
   m_IgnoreTrackingState: 0
   m_PositionInput:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Position
       m_Type: 0
@@ -344,11 +344,35 @@ MonoBehaviour:
       m_Id: dd3a9abe-58de-4749-8b99-9fb9cc8df524
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: de2459aa-e579-4cca-883f-6ff99f94d79b
+        m_Path: <OculusTouchController>{RightHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 59b5cea7-26ca-489e-8d99-f62951681323
+        m_Path: <QuestTouchPlusController>{RightHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position
+        m_Flags: 0
+      - m_Name: 
+        m_Id: ef9f32a8-2db1-4cbc-8da2-909aa21cc2e3
+        m_Path: <QuestProTouchController>{RightHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: -3326005586356538449, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_Reference: {fileID: 0}
   m_RotationInput:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Rotation
       m_Type: 0
@@ -356,11 +380,35 @@ MonoBehaviour:
       m_Id: f3d6b3ac-5c1c-4f92-87f3-28484c283d01
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: aa7c0f88-e8c4-49cb-92c0-0667cba6296a
+        m_Path: <OculusTouchController>{RightHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 1021a482-fef4-4efc-a8ad-d93eda29b173
+        m_Path: <QuestTouchPlusController>{RightHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 82bb2a03-40a5-4a4b-88c3-2d404dee2f77
+        m_Path: <QuestProTouchController>{RightHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: 5101698808175986029, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_Reference: {fileID: 0}
   m_TrackingStateInput:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Tracking State
       m_Type: 0
@@ -368,9 +416,33 @@ MonoBehaviour:
       m_Id: 4bf1558f-a711-4b3b-87d6-e7316f04cc3d
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: c58a0795-acfe-485f-809e-74696fd27223
+        m_Path: <OculusTouchController>{RightHand}/trackingState
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Tracking State
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 58917df6-efea-4665-ab82-d1706c8fc61f
+        m_Path: <QuestTouchPlusController>{RightHand}/trackingState
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Tracking State
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 3431e63d-5790-4f66-9217-f07bab17b8b5
+        m_Path: <QuestProTouchController>{RightHand}/trackingState
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Tracking State
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: -1277054153949319361, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_Reference: {fileID: 0}
   m_PositionAction:
     m_Name: 
     m_Type: 0
@@ -1967,7 +2039,7 @@ MonoBehaviour:
   m_UpdateType: 0
   m_IgnoreTrackingState: 0
   m_PositionInput:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Position
       m_Type: 0
@@ -1975,11 +2047,35 @@ MonoBehaviour:
       m_Id: e5c34916-0201-4e71-9d10-a5d7b66f1aa8
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: ec766164-09c6-4dbf-8358-bbab30b537f8
+        m_Path: <OculusTouchController>{LeftHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position
+        m_Flags: 0
+      - m_Name: 
+        m_Id: c200d14c-9b75-4917-ae31-c60147f6aff5
+        m_Path: <QuestTouchPlusController>{LeftHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 3273202d-ca9c-4d62-a01b-d7fe743c1910
+        m_Path: <QuestProTouchController>{LeftHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: -2024308242397127297, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_Reference: {fileID: 0}
   m_RotationInput:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Rotation
       m_Type: 0
@@ -1987,11 +2083,35 @@ MonoBehaviour:
       m_Id: b4e4b1b1-3b4a-47f0-87e1-0369817e7547
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 42569b6c-d775-46e3-8266-3f4344d698c8
+        m_Path: <OculusTouchController>{LeftHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 5e8b488e-d889-471d-b65f-f14e74f1fa29
+        m_Path: <QuestTouchPlusController>{LeftHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 924922f0-fa38-4b0e-b15b-77e2d7216dbb
+        m_Path: <QuestProTouchController>{LeftHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: 8248158260566104461, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_Reference: {fileID: 0}
   m_TrackingStateInput:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Tracking State
       m_Type: 0
@@ -1999,9 +2119,33 @@ MonoBehaviour:
       m_Id: b5262af3-2110-42e1-99f8-0989fbe09fea
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 6fde34c3-4077-4983-81d3-fd274ec9b2a6
+        m_Path: <OculusTouchController>{LeftHand}/trackingState
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Tracking State
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 713c8ae0-972d-44d3-bd82-1c92322c83d3
+        m_Path: <QuestTouchPlusController>{LeftHand}/trackingState
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Tracking State
+        m_Flags: 0
+      - m_Name: 
+        m_Id: aeed54ef-1c43-478b-952b-c68efc5917f0
+        m_Path: <QuestProTouchController>{LeftHand}/trackingState
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Tracking State
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: 684395432459739428, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_Reference: {fileID: 0}
   m_PositionAction:
     m_Name: 
     m_Type: 0
@@ -2514,6 +2658,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9161795741285879404, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
   m_PrefabInstance: {fileID: 1638034513}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1714002297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1714002298}
+  m_Layer: 0
+  m_Name: Offset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1714002298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714002297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.48575726, y: -0.18577997, z: -0.26944315, w: 0.8105098}
+  m_LocalPosition: {x: 0.038, y: 0.026, z: -0.174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2698989882325584408}
+  m_Father: {fileID: 217023196}
+  m_LocalEulerAnglesHint: {x: 43.417, y: -50.803, z: -58.189}
 --- !u!1 &1803542065
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,7 +4245,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 217023196}
+    m_TransformParent: {fileID: 1714002298}
     m_Modifications:
     - target: {fileID: 197079462238159122, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: _endAnchor
@@ -4077,7 +4253,7 @@ PrefabInstance:
       objectReference: {fileID: 1638034514}
     - target: {fileID: 3014158271963197912, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3014158271963197912, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalPosition.y
