@@ -28,7 +28,7 @@ namespace _Scripts.UI
 
         private void OnClickRestartButton()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.Start);
+            ApplicationManager.Instance.SetState(ApplicationState.Ready);
         }
     }
 }

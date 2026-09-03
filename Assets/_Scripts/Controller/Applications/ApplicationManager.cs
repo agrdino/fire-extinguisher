@@ -16,31 +16,32 @@ namespace _Scripts.Controller
             private set => _instance = value; 
         }
 
+        [Header("Timing")]
         [SerializeField, Min(0f)] private float _roundDuration = 60f;
         [SerializeField, Min(0f)] private float _escapeDuration = 30f;
         [SerializeField] private bool _isExploreTimeLimited = true;
         [SerializeField, Min(0f)] private float _exploreDuration = 30f;
 
-        [Header("Gameplay References")]
+        [Header("Runtime Controllers")]
+        [SerializeField] private FireController _fireController;
+        [SerializeField] private FireExtinguisherController _fireExtinguisherController;
+        [SerializeField] private EmergencyExitPlacementController _exitPlacementController;
+
+        [Header("Runtime References")]
         [SerializeField] private EmergencyExit _emergencyExit;
         [SerializeField] private Transform _playerRoot;
         [SerializeField] private Transform _playerView;
         [SerializeField] private GameObject _movementProviderObject;
 
-        [Header("Runtime")]
+        [Header("Runtime State")]
         [SerializeField] private ApplicationState _state = ApplicationState.Language;
         [SerializeField, Min(0f)] private float _remainingTime;
         [SerializeField] private FireExtinguisherType _selectedExtinguisherType = FireExtinguisherType.Unselect;
 
         private bool _isEscapeTimeLimited;
         private bool _isFireFlareUpPending;
-
-        private FireController _fireController;
-        private FireExtinguisherController _fireExtinguisherController;
-        private EnvironmentController _EnvironmentController;
+        private IEnvironmentSceneContext _environmentContext;
         private EmergencyExitPathGuide _emergencyExitPathGuide;
-        private Vector3 _initialPlayerPosition;
-        private Quaternion _initialPlayerRotation;
 
         public ApplicationState State => _state;
         public float RoundDuration => _roundDuration;
@@ -67,21 +68,16 @@ namespace _Scripts.Controller
                 Destroy(gameObject);
                 return;
             }
+
             Instance = this;
-            _fireController = FireController.Instance;
-            _fireExtinguisherController = FireExtinguisherController.Instance;
-            _EnvironmentController = EnvironmentController.Instance;
+            Application.targetFrameRate = 60;
+
             _emergencyExitPathGuide = _emergencyExit != null
                 ? _emergencyExit.GetComponentInChildren<EmergencyExitPathGuide>(true)
                 : null;
             if (_emergencyExit != null && _emergencyExitPathGuide == null)
                 Debug.LogError("Emergency Exit prefab is missing its preconfigured Escape Path Guide.", _emergencyExit);
             _emergencyExitPathGuide?.Initialize(_emergencyExit, _playerRoot);
-            if (_playerRoot != null)
-            {
-                _initialPlayerPosition = _playerRoot.position;
-                _initialPlayerRotation = _playerRoot.rotation;
-            }
         }
 
         private void OnEnable()
@@ -92,11 +88,12 @@ namespace _Scripts.Controller
                 _fireController.OnFireFlareUpStarted += HandleFireFlareUpStarted;
                 _fireController.OnFireFlareUpCompleted += HandleFireFlareUpCompleted;
             }
+
             if (_emergencyExit != null)
                 _emergencyExit.OnPlayerReached += HandleEmergencyExitReached;
             if (_fireExtinguisherController != null)
                 _fireExtinguisherController.SetInputEnabled(false);
-            SetMovementEnabled(CanMoveInState(_state));
+            SetMovementEnabled(false);
         }
 
         private void OnDisable()
@@ -107,18 +104,13 @@ namespace _Scripts.Controller
                 _fireController.OnFireFlareUpStarted -= HandleFireFlareUpStarted;
                 _fireController.OnFireFlareUpCompleted -= HandleFireFlareUpCompleted;
             }
+
             if (_emergencyExit != null)
                 _emergencyExit.OnPlayerReached -= HandleEmergencyExitReached;
             if (_fireExtinguisherController != null)
                 _fireExtinguisherController.SetInputEnabled(false);
             _emergencyExitPathGuide?.SetVisible(false);
             SetMovementEnabled(false);
-        }
-
-        private void Start()
-        {
-            Application.targetFrameRate = 60;
-            SetState(ApplicationState.Language, true);
         }
 
         private void LateUpdate()
@@ -132,7 +124,6 @@ namespace _Scripts.Controller
             }
 
             if (IsExploring) return;
-
             if (!IsFighting && !IsEscaping) return;
 
             if (IsFighting || _isEscapeTimeLimited)
@@ -141,13 +132,16 @@ namespace _Scripts.Controller
                 OnRemainingTimeChanged?.Invoke(_remainingTime);
             }
 
-            if (IsFighting && !_isFireFlareUpPending && (_fireExtinguisherController.IsDepleted || _remainingTime <= 0f))
+            if (IsFighting
+                && !_isFireFlareUpPending
+                && (_fireExtinguisherController.IsDepleted || _remainingTime <= 0f))
             {
                 BeginEscape(true);
                 return;
             }
 
-            if (IsEscaping && _isEscapeTimeLimited && _remainingTime <= 0f) SetState(ApplicationState.Failed);
+            if (IsEscaping && _isEscapeTimeLimited && _remainingTime <= 0f)
+                SetState(ApplicationState.Failed);
         }
 
         private void OnDestroy()
@@ -156,12 +150,32 @@ namespace _Scripts.Controller
             Instance = null;
         }
 
+        public void PrepareForSceneTransition()
+        {
+            _fireController.ClearFires();
+            _fireExtinguisherController.SetInputEnabled(false);
+            _emergencyExitPathGuide?.SetVisible(false);
+            SetEmergencyExitActive(false);
+            SetMovementEnabled(false);
+        }
+
+        public void BindEnvironment(
+            IEnvironmentSceneContext environmentContext,
+            ApplicationState entryState)
+        {
+            _environmentContext = environmentContext;
+            _exitPlacementController.BindEnvironment(environmentContext);
+            _fireController.BindEnvironment(environmentContext);
+            ResetPlayerPose();
+            SetState(entryState, true);
+        }
+
         public void SetState(ApplicationState state)
         {
             SetState(state, false);
         }
 
-        private void SetState(ApplicationState state, bool force = false)
+        private void SetState(ApplicationState state, bool force)
         {
             if (_state == state && !force) return;
 
@@ -169,7 +183,7 @@ namespace _Scripts.Controller
             SetMovementEnabled(CanMoveInState(_state));
             switch (_state)
             {
-                case ApplicationState.Start:
+                case ApplicationState.Ready:
                 case ApplicationState.Language:
                 case ApplicationState.Guide:
                     ResetExtinguisher();
@@ -199,7 +213,7 @@ namespace _Scripts.Controller
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.SpawnFires(_playerRoot);
-                    _EnvironmentController?.PositionEmergencyExit(GetPlayerView());
+                    _exitPlacementController.TryPosition(GetPlayerView());
                     break;
 
                 case ApplicationState.Fighting:
@@ -237,7 +251,6 @@ namespace _Scripts.Controller
         private void ResetApplication()
         {
             _fireController.ClearFires();
-            _EnvironmentController?.ShowStartEnvironment();
             ResetExtinguisher();
             SelectExtinguisher(FireExtinguisherType.Unselect);
             _isEscapeTimeLimited = false;
@@ -292,12 +305,15 @@ namespace _Scripts.Controller
 
         private void ResetPlayerPose()
         {
-            if (_playerRoot == null) return;
+            if (_playerRoot == null || _environmentContext?.PlayerSpawnPoint == null) return;
 
             CharacterController characterController = _playerRoot.GetComponent<CharacterController>();
             bool wasEnabled = characterController != null && characterController.enabled;
             if (characterController != null) characterController.enabled = false;
-            _playerRoot.SetPositionAndRotation(_initialPlayerPosition, _initialPlayerRotation);
+
+            Transform spawnPoint = _environmentContext.PlayerSpawnPoint;
+            _playerRoot.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
             if (characterController != null) characterController.enabled = wasEnabled;
         }
 
@@ -317,7 +333,6 @@ namespace _Scripts.Controller
         private void HandleFireFlareUpStarted()
         {
             if (!IsFighting || _isFireFlareUpPending) return;
-
             _isFireFlareUpPending = true;
         }
 

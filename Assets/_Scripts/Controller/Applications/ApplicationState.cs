@@ -2,7 +2,7 @@ namespace _Scripts.Controller
 {
     public enum ApplicationState
     {
-        Start = 0,
+        Ready = 0,
         SelectExtinguisher = 1,
         Fighting = 2,
         Escape = 3,

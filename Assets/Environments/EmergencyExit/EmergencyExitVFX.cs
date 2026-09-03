@@ -8,7 +8,6 @@ namespace _Scripts.Controller
         [SerializeField] private EmergencyExit _emergencyExit;
         [SerializeField] private GameObject _sparks;
 
-        private EnvironmentController _EnvironmentController;
         private bool _hasDisplayedSparks;
 
         private void Reset()
@@ -20,33 +19,28 @@ namespace _Scripts.Controller
         private void OnEnable()
         {
             ResetEffect();
-            _emergencyExit.OnPlayerReached += HandlePlayerReached;
-            _EnvironmentController = EnvironmentController.Instance;
-            _EnvironmentController.OnEnvironmentChanged += EnvironmentController_OnEnvironmentChanged;
+            if (_emergencyExit != null)
+                _emergencyExit.OnPlayerReached += HandlePlayerReached;
         }
 
         private void OnDisable()
         {
-            _emergencyExit.OnPlayerReached -= HandlePlayerReached;
-            _EnvironmentController.OnEnvironmentChanged -= EnvironmentController_OnEnvironmentChanged;
-
-            _EnvironmentController = null;
+            if (_emergencyExit != null)
+                _emergencyExit.OnPlayerReached -= HandlePlayerReached;
         }
 
         private void HandlePlayerReached()
         {
-            if (_hasDisplayedSparks) return;
+            if (_hasDisplayedSparks || _sparks == null) return;
 
             _hasDisplayedSparks = true;
             _sparks.SetActive(true);
         }
 
-        private void EnvironmentController_OnEnvironmentChanged(EnvironmentType _) => ResetEffect();
-
         private void ResetEffect()
         {
             _hasDisplayedSparks = false;
-            _sparks.SetActive(false);
+            if (_sparks != null) _sparks.SetActive(false);
         }
     }
 }

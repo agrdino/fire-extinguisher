@@ -257,7 +257,7 @@ namespace _Scripts.UI
         {
             if (_applicationManager == null) return HintStep.None;
 
-            if (_applicationManager.State == ApplicationState.Start)
+            if (_applicationManager.State == ApplicationState.Ready)
             {
                 return _fireExtinguisherController != null
                     && _fireExtinguisherController.IsReadyToStart

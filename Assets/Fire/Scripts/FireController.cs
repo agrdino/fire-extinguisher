@@ -21,6 +21,7 @@ namespace _Scripts.Fires
         [SerializeField, Min(0f)] private float _minimumSpawnDistanceFromPlayer = 2f;
 
         private bool _hasRaisedAllFiresExtinguished;
+        private IEnvironmentSceneContext _environment;
 
         public event Action OnAllFiresExtinguished;
         public event Action OnFireFlareUpStarted;
@@ -29,6 +30,12 @@ namespace _Scripts.Fires
         
         public IReadOnlyList<Fire> ActiveFires => _activeFires;
         public FireType CurrentFireType { get; private set; }
+
+        public void BindEnvironment(IEnvironmentSceneContext environment)
+        {
+            ClearFires();
+            _environment = environment;
+        }
 
         private void Awake()
         {
@@ -76,10 +83,9 @@ namespace _Scripts.Fires
 
         private FireSpawnPoint GetRandomSpawnPoint(Vector3 playerPosition)
         {
-            EnvironmentController EnvironmentController = EnvironmentController.Instance;
-            if (EnvironmentController == null) return null;
+            if (_environment == null) return null;
 
-            IReadOnlyList<FireSpawnPoint> spawnPoints = EnvironmentController.GetActiveFireSpawnPoints();
+            IReadOnlyList<FireSpawnPoint> spawnPoints = _environment.FireSpawnPoints;
             float minimumDistanceSquared = _minimumSpawnDistanceFromPlayer * _minimumSpawnDistanceFromPlayer;
             int validPointCount = 0;
             for (int i = 0; i < spawnPoints.Count; i++)

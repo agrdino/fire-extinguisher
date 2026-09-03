@@ -1,4 +1,5 @@
 using _Scripts.Controller;
+using _Scripts.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,13 @@ namespace _Scripts.UI
         [SerializeField] private Color _selectedColor = new(0.16f, 0.55f, 0.82f, 0.9f);
         [SerializeField] private Color _unselectedColor = new(0f, 0f, 0f, 0.7f);
 
-        private EnvironmentType _selectedEnvironment = EnvironmentType.Factory;
+        private SceneId _selectedEnvironmentScene = SceneId.Factory;
+        private IApplicationNavigator _navigator;
+
+        public void Initialize(IApplicationNavigator navigator)
+        {
+            _navigator = navigator;
+        }
 
         private void Awake()
         {
@@ -34,19 +41,24 @@ namespace _Scripts.UI
 
         public void Show()
         {
-            _selectedEnvironment = EnvironmentType.Factory;
+            _selectedEnvironmentScene = SceneId.Factory;
             UpdateSelectionVisuals();
         }
 
         public void Hide() { }
 
-        private void SelectFactory() => SelectEnvironment(EnvironmentType.Factory);
-        private void SelectPark() => SelectEnvironment(EnvironmentType.Park);
+        private void SelectFactory() => SelectEnvironment(SceneId.Factory);
+        private void SelectPark() => SelectEnvironment(SceneId.Park);
 
         private void ConfirmSelection()
         {
-            EnvironmentController.Instance.SetEnvironment(_selectedEnvironment);
-            ApplicationManager.Instance.SetState(ApplicationState.Start);
+            if (_navigator == null)
+            {
+                Debug.LogError("SelectEnvironmentScene has no application navigator.", this);
+                return;
+            }
+
+            _navigator.TryEnterEnvironment(_selectedEnvironmentScene);
         }
 
         private static void GoBack()
@@ -54,9 +66,9 @@ namespace _Scripts.UI
             ApplicationManager.Instance.SetState(ApplicationState.Language);
         }
 
-        private void SelectEnvironment(EnvironmentType environmentType)
+        private void SelectEnvironment(SceneId sceneId)
         {
-            _selectedEnvironment = environmentType;
+            _selectedEnvironmentScene = sceneId;
             UpdateSelectionVisuals();
         }
 
@@ -96,14 +108,15 @@ namespace _Scripts.UI
         private void UpdateSelectionVisuals()
         {
             if (_btnFactory != null && _btnFactory.image != null)
-                _btnFactory.image.color = _selectedEnvironment == EnvironmentType.Factory
+                _btnFactory.image.color = _selectedEnvironmentScene == SceneId.Factory
                     ? _selectedColor
                     : _unselectedColor;
             if (_btnPark != null && _btnPark.image != null)
-                _btnPark.image.color = _selectedEnvironment == EnvironmentType.Park
+                _btnPark.image.color = _selectedEnvironmentScene == SceneId.Park
                     ? _selectedColor
                     : _unselectedColor;
-            if (_btnConfirm != null) _btnConfirm.interactable = true;
+            if (_btnConfirm != null)
+                _btnConfirm.interactable = _navigator != null && !_navigator.IsTransitioning;
         }
     }
 }

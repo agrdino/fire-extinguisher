@@ -34,7 +34,7 @@ namespace Spaxtek.EditorTools
         private const string SettingsPath = SettingsFolder + "/Localization Settings.asset";
         private const string CatalogPath = RootFolder + "/Editor/LocalizationTranslations.json";
         private const string LanguagePrefabPath = PrefabsFolder + "/Select Language Scene.prefab";
-        private const string SourcePanelPath = "Assets/UIs/Variants/Start Scene.prefab";
+        private const string SourcePanelPath = "Assets/UIs/Variants/Ready View.prefab";
         private const string TableName = "UI";
 
         [Serializable]
@@ -245,10 +245,10 @@ namespace Spaxtek.EditorTools
             try
             {
                 root.name = "Select Language Scene";
-                StartScene startScene = root.GetComponentInChildren<StartScene>(true);
-                GameObject host = startScene != null ? startScene.gameObject : root;
-                if (startScene != null)
-                    Object.DestroyImmediate(startScene, true);
+                ReadyView readyView = root.GetComponentInChildren<ReadyView>(true);
+                GameObject host = readyView != null ? readyView.gameObject : root;
+                if (readyView != null)
+                    Object.DestroyImmediate(readyView, true);
 
                 SelectLanguageScene languageScene = host.GetComponent<SelectLanguageScene>();
                 if (languageScene == null)

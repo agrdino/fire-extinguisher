@@ -1,7 +1,9 @@
 using System;
 using AYellowpaper;
 using UnityEngine;
+using UnityEngine.Serialization;
 using _Scripts.Controller;
+using _Scripts.SceneManagement;
 
 namespace _Scripts.UI
 {
@@ -12,7 +14,8 @@ namespace _Scripts.UI
         
         [SerializeField] private SelectLanguageScene _selectLanguageScene;
         [SerializeField] private SelectEnvironmentScene _selectEnvironmentScene;
-        [SerializeField] private StartScene _startScene;
+        [FormerlySerializedAs("_startScene")]
+        [SerializeField] private ReadyView _readyView;
         [SerializeField] private GuideScene _guideScene;
         [SerializeField] private ExploreScene _exploreScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectExtinguisherScene;
@@ -27,9 +30,8 @@ namespace _Scripts.UI
 
         private IScene _currentScene;
         private ApplicationManager _applicationManager;
-        private EnvironmentController _environmentController;
-        private ApplicationState _currentState;
-        private bool _hasCurrentState;
+        private IEnvironmentSceneContext _environmentContext;
+        private EmergencyExitPlacementController _exitPlacementController;
 
         public IScene CurrentScene => _currentScene;
         
@@ -37,20 +39,44 @@ namespace _Scripts.UI
         {
             _instance = this;
             _applicationManager = ApplicationManager.Instance;
-            _environmentController = EnvironmentController.Instance;
             ResolveSceneReferences();
-            _applicationManager.OnStateChanged += OnApplicationStateChanged;
-            _environmentController.OnEnvironmentChanged += OnEnvironmentChanged;
 
+            if (_applicationManager == null)
+            {
+                Debug.LogError("UIController requires an ApplicationManager.", this);
+                return;
+            }
+
+            _applicationManager.OnStateChanged += OnApplicationStateChanged;
         }
 
         private void OnDestroy()
         {
             if (_applicationManager != null)
                 _applicationManager.OnStateChanged -= OnApplicationStateChanged;
-            if (_environmentController != null)
-                _environmentController.OnEnvironmentChanged -= OnEnvironmentChanged;
             if (_instance == this) _instance = null;
+        }
+
+        public void InitializeNavigation(IApplicationNavigator navigator)
+        {
+            _selectEnvironmentScene.Initialize(navigator);
+            _readyView.Initialize(navigator);
+        }
+
+        public void PrepareForSceneTransition()
+        {
+            if (_currentScene == null) return;
+
+            _currentScene.Hide();
+            _currentScene.gameObject.SetActive(false);
+        }
+
+public void BindEnvironment(
+            IEnvironmentSceneContext environmentContext,
+            EmergencyExitPlacementController exitPlacementController)
+        {
+            _environmentContext = environmentContext;
+            _exitPlacementController = exitPlacementController;
         }
 
         private void OnApplicationStateChanged(ApplicationState state)
@@ -63,7 +89,7 @@ namespace _Scripts.UI
             
             _currentScene = state switch
             {
-                ApplicationState.Start => _startScene,
+                ApplicationState.Ready => _readyView,
                 ApplicationState.Language => _selectLanguageScene,
                 ApplicationState.SelectEnvironment => _selectEnvironmentScene,
                 ApplicationState.Guide => _guideScene,
@@ -75,9 +101,6 @@ namespace _Scripts.UI
                 ApplicationState.Failed => _failedScene.Value,
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
-            
-            _currentState = state;
-            _hasCurrentState = true;
 
             if (!PlaceScene(_currentScene, state)) return;
 
@@ -85,38 +108,36 @@ namespace _Scripts.UI
             _currentScene.Show();
         }
 
-        private void OnEnvironmentChanged(EnvironmentType EnvironmentType)
-        {
-            if (!_hasCurrentState || _currentScene == null) return;
-            if (_currentState == ApplicationState.Language
-                || _currentState == ApplicationState.SelectEnvironment
-                || EnvironmentType == EnvironmentType.Start)
-                return;
-
-            PlaceScene(_currentScene, _currentState);
-        }
-
         private bool PlaceScene(IScene scene, ApplicationState state)
         {
+            if (_environmentContext == null)
+            {
+                Debug.LogError("Cannot place UI before an EnvironmentSceneContext is bound.", this);
+                scene.gameObject.SetActive(false);
+                return false;
+            }
+
             if (state == ApplicationState.Failed) return PlaceFailedScene(scene);
 
-            bool isStartFlow = state == ApplicationState.Language
-                || state == ApplicationState.SelectEnvironment;
-            EnvironmentType environmentType = isStartFlow
-                ? EnvironmentType.Start
-                : _environmentController.CurrentEnvironment;
-
-            ApplicationState placementState = state switch
+            if (state == ApplicationState.Completed
+                && _exitPlacementController?.SelectedSpawnPoint?.CompleteUIPoint != null)
             {
-                ApplicationState.Language => ApplicationState.Start,
-                ApplicationState.SelectEnvironment => ApplicationState.Start,
-                ApplicationState.Start => ApplicationState.Guide,
-                _ => state
-            };
+                Transform completeAnchor = _exitPlacementController.SelectedSpawnPoint.CompleteUIPoint;
+                scene.gameObject.transform.SetPositionAndRotation(
+                    completeAnchor.position,
+                    completeAnchor.rotation);
+                return true;
+            }
 
-            if (!_environmentController.TryGetUIPoint(environmentType, placementState, out Transform point))
+            ApplicationState placementState = state == ApplicationState.Ready
+                ? ApplicationState.Guide
+                : state;
+
+            if (!_environmentContext.TryGetUIAnchor(placementState, out Transform point))
             {
-                Debug.LogError($"Missing UI point for {environmentType}/{placementState}. Assign it on EnvironmentController.", this);
+                Debug.LogError(
+                    $"Missing UI anchor for {_environmentContext.SceneId}/{placementState}.",
+                    this);
                 scene.gameObject.SetActive(false);
                 return false;
             }
@@ -145,10 +166,9 @@ namespace _Scripts.UI
         {
             _selectLanguageScene ??= GetComponentInChildren<SelectLanguageScene>(true);
             _selectEnvironmentScene ??= GetComponentInChildren<SelectEnvironmentScene>(true);
-            _startScene ??= GetComponentInChildren<StartScene>(true);
+            _readyView ??= GetComponentInChildren<ReadyView>(true);
             _guideScene ??= GetComponentInChildren<GuideScene>(true);
             _exploreScene ??= GetComponentInChildren<ExploreScene>(true);
         }
-
     }
 }
