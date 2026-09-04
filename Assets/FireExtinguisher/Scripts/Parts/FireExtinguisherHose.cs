@@ -81,6 +81,7 @@ namespace _Scripts.FireExtinguishers.Visualizes
         public float CurrentCurveLength => _currentCurveLength;
         public int BoneCount => _bones != null ? _bones.Length : 0;
         public bool IsStretching => _initialized && Vector3.Distance(_curveStart, _curveEnd) > _effectiveRestLength;
+        public Renderer Renderer => _hoseRenderer;
 
         public void SetStartAnchor(Transform startAnchor)
         {

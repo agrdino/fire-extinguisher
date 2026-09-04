@@ -15,6 +15,7 @@ namespace _Scripts.UI
         [SerializeField] private Color _unselectedColor = new Color(0f, 0f, 0f, 0.7f);
 
         private FireExtinguisherType _selectedType = FireExtinguisherType.Unselect;
+        private FireExtinguisherModelSwitcher _modelSwitcher;
 
         public Transform ExtinguisherOptionsHintTarget => _btnCO2 != null
             ? _btnCO2.transform.parent
@@ -33,6 +34,7 @@ namespace _Scripts.UI
 
         private void OnDestroy()
         {
+            UnbindModelSwitcher();
             if (_btnCO2 != null) _btnCO2.onClick.RemoveListener(OnClickCO2Button);
             if (_btnPowder != null) _btnPowder.onClick.RemoveListener(OnClickPowderButton);
             if (_btnSelect != null) _btnSelect.onClick.RemoveListener(OnClickSelectButton);
@@ -41,12 +43,14 @@ namespace _Scripts.UI
         
         public void Show()
         {
+            BindModelSwitcher();
             _selectedType = FireExtinguisherType.Unselect;
             UpdateSelectionVisuals();
         }
 
         public void Hide()
         {
+            UnbindModelSwitcher();
         }
         
         private void OnClickSelectButton()
@@ -72,6 +76,8 @@ namespace _Scripts.UI
 
         private void SelectExtinguisher(FireExtinguisherType extinguisherType)
         {
+            if (_modelSwitcher != null && _modelSwitcher.IsTransitioning) return;
+
             _selectedType = extinguisherType;
             ApplicationManager.Instance.SelectExtinguisher(extinguisherType);
             UpdateSelectionVisuals();
@@ -79,9 +85,34 @@ namespace _Scripts.UI
 
         private void UpdateSelectionVisuals()
         {
+            bool canInteract = _modelSwitcher == null || !_modelSwitcher.IsTransitioning;
             if (_btnCO2 != null && _btnCO2.image != null) _btnCO2.image.color = _selectedType == FireExtinguisherType.CO2 ? _selectedColor : _unselectedColor;
             if (_btnPowder != null && _btnPowder.image != null) _btnPowder.image.color = _selectedType == FireExtinguisherType.Powder ? _selectedColor : _unselectedColor;
-            if (_btnSelect != null) _btnSelect.interactable = _selectedType != FireExtinguisherType.Unselect;
+            if (_btnCO2 != null) _btnCO2.interactable = canInteract;
+            if (_btnPowder != null) _btnPowder.interactable = canInteract;
+            if (_btnSelect != null) _btnSelect.interactable = canInteract && _selectedType != FireExtinguisherType.Unselect;
+        }
+
+        private void BindModelSwitcher()
+        {
+            UnbindModelSwitcher();
+            FireExtinguisher extinguisher = FireExtinguisherController.Instance?.FireExtinguisher;
+            if (extinguisher == null) return;
+
+            _modelSwitcher = extinguisher.GetComponent<FireExtinguisherModelSwitcher>();
+            if (_modelSwitcher == null) return;
+
+            _modelSwitcher.OnTransitionStarted += UpdateSelectionVisuals;
+            _modelSwitcher.OnTransitionCompleted += UpdateSelectionVisuals;
+        }
+
+        private void UnbindModelSwitcher()
+        {
+            if (_modelSwitcher == null) return;
+
+            _modelSwitcher.OnTransitionStarted -= UpdateSelectionVisuals;
+            _modelSwitcher.OnTransitionCompleted -= UpdateSelectionVisuals;
+            _modelSwitcher = null;
         }
     }
 }

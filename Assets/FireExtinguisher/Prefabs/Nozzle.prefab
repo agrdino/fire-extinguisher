@@ -162,6 +162,8 @@ MonoBehaviour:
   _unselectModel: {fileID: 8712345678901234502}
   _co2Model: {fileID: 3675607409340761657}
   _powderModel: {fileID: 3798566193800061278}
+  _dissolveMaterial: {fileID: 2100000, guid: 80353978b24262643ac84f20373da11f, type: 2}
+  _phaseDuration: 0.6
 --- !u!1 &4068275039086699308
 GameObject:
   m_ObjectHideFlags: 0

@@ -77,6 +77,8 @@ MonoBehaviour:
   _unselectModel: {fileID: 9097045077453660844}
   _co2Model: {fileID: 4838769995723459948}
   _powderModel: {fileID: 6059208995970705160}
+  _dissolveMaterial: {fileID: 2100000, guid: 80353978b24262643ac84f20373da11f, type: 2}
+  _phaseDuration: 0.6
 --- !u!114 &7066903038430929422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +98,8 @@ MonoBehaviour:
   _powderAnchor: {fileID: 2101259036231781262}
   _selectedMaterial: {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
   _unselectMaterial: {fileID: 2100000, guid: afa27ed436299b74ab5e92a4f7043757, type: 2}
+  _dissolveMaterial: {fileID: 2100000, guid: 80353978b24262643ac84f20373da11f, type: 2}
+  _phaseDuration: 0.6
 --- !u!82 &7066903038430929423
 AudioSource:
   m_ObjectHideFlags: 0
