@@ -1903,6 +1903,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.SceneManagement.SceneFlowController
   _catalog: {fileID: 11400000, guid: 66888c5d67bb34b4bb11db7cd9fefff0, type: 2}
+  _transitionCamera: {fileID: 8812496317400374687}
+  _transitionColor: {r: 0, g: 0, b: 0, a: 1}
+  _fadeToBlackDuration: 0.8
+  _fadeFromBlackDuration: 0.8
 --- !u!114 &9049481021680548847
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -61,6 +61,10 @@ namespace _Scripts.UI
         {
             _selectEnvironmentScene.Initialize(navigator);
             _readyView.Initialize(navigator);
+            if (_completedScene.Value is CompletedScene completedScene)
+                completedScene.Initialize(navigator);
+            if (_failedScene.Value is FailedScene failedScene)
+                failedScene.Initialize(navigator);
         }
 
         public void PrepareForSceneTransition()

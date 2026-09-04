@@ -1,4 +1,5 @@
 using _Scripts.Controller;
+using _Scripts.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,13 @@ namespace _Scripts.UI
     public sealed class FailedScene : MonoBehaviour, IScene
     {
         [SerializeField] private Button _btnRetry;
+
+        private IApplicationNavigator _navigator;
+
+        public void Initialize(IApplicationNavigator navigator)
+        {
+            _navigator = navigator;
+        }
 
         private void Awake()
         {
@@ -20,6 +28,7 @@ namespace _Scripts.UI
 
         public void Show()
         {
+            RefreshButton();
         }
 
         public void Hide()
@@ -28,7 +37,20 @@ namespace _Scripts.UI
 
         private void OnRetryClicked()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.Ready);
+            if (_navigator == null)
+            {
+                Debug.LogError("FailedScene has no application navigator.", this);
+                return;
+            }
+
+            _navigator.TryRestartCurrentEnvironment();
+            RefreshButton();
+        }
+
+        private void RefreshButton()
+        {
+            if (_btnRetry != null)
+                _btnRetry.interactable = _navigator != null && !_navigator.IsTransitioning;
         }
     }
 }

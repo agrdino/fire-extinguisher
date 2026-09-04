@@ -70,6 +70,17 @@ namespace _Scripts.Controller
             return TryNavigate(SceneId.Start, ApplicationState.SelectEnvironment);
         }
 
+        public bool TryRestartCurrentEnvironment()
+        {
+            if (!_isInitialized || IsTransitioning) return false;
+            if (_applicationManager.State != ApplicationState.Completed
+                && _applicationManager.State != ApplicationState.Failed)
+                return false;
+
+            return _sceneFlowController.TryRunTransition(
+                () => _applicationManager.SetState(ApplicationState.Ready));
+        }
+
         private bool TryNavigate(SceneId sceneId, ApplicationState entryState)
         {
             if (!_isInitialized || IsTransitioning) return false;

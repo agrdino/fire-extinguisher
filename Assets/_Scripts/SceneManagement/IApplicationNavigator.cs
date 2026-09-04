@@ -6,5 +6,6 @@ namespace _Scripts.SceneManagement
 
         bool TryEnterEnvironment(SceneId environmentScene);
         bool TryReturnToEnvironmentSelection();
+        bool TryRestartCurrentEnvironment();
     }
 }
