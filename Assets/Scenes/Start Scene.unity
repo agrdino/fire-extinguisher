@@ -587,7 +587,7 @@ PrefabInstance:
       objectReference: {fileID: 1570428769}
     - target: {fileID: 5143563532995087369, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: _positionOffset.z
-      value: 0.1
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8000270510047640859, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: m_fontMaterial
