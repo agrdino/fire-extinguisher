@@ -218,8 +218,9 @@ MonoBehaviour:
   _curveWidth: 0.01
   _targetGap: 0.08
   _popupGap: 0.015
-  _viewportMargin: 0.08
   _curveStrength: 0.18
+  _targetAnchorRadius: 0.48
+  _targetAnchorVerticalOffset: 0.4
   _idleDelay: 8
   _fadeDuration: 0.2
   _resetSafetyPinHintLocalized:

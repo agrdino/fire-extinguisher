@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _Scripts.Controller;
 using _Scripts.FireExtinguishers;
 using _Scripts.FireExtinguishers.Visualizes;
@@ -30,6 +31,20 @@ namespace _Scripts.UI
             GoToEmergencyExit
         }
 
+        private readonly struct PersistentMessage
+        {
+            public PersistentMessage(LocalizedString message, Transform target, ulong sequence)
+            {
+                Message = message;
+                Target = target;
+                Sequence = sequence;
+            }
+
+            public LocalizedString Message { get; }
+            public Transform Target { get; }
+            public ulong Sequence { get; }
+        }
+
         private const int AlwaysOnTopLayer = 8;
         private const string AlwaysOnTopLayerName = "AlwaysOnTopUI";
         private const string OverlayCameraName = "Always On Top UI Camera";
@@ -46,8 +61,9 @@ namespace _Scripts.UI
         [SerializeField, Min(0.0001f)] private float _curveWidth = 0.003f;
         [SerializeField, Min(0f)] private float _targetGap = 0.08f;
         [SerializeField, Min(0f)] private float _popupGap = 0.015f;
-        [SerializeField, Min(0f)] private float _viewportMargin = 0.08f;
         [SerializeField, Min(0f)] private float _curveStrength = 0.18f;
+        [SerializeField, Min(0.001f)] private float _targetAnchorRadius = 0.48f;
+        [SerializeField] private float _targetAnchorVerticalOffset = 0.4f;
 
         [Header("Timing")]
         [SerializeField, Min(0f)] private float _idleDelay = 8f;
@@ -70,9 +86,13 @@ namespace _Scripts.UI
         private float _targetAlpha;
         private HintStep _currentStep;
         private HintCalloutCurve _calloutCurve;
+        private readonly Dictionary<Object, PersistentMessage> _persistentMessages = new();
+        private Object _activePersistentMessageSource;
+        private ulong _persistentMessageSequence;
         private bool _isShowingTemporaryMessage;
         private float _remainingTemporaryMessageTime;
         private LocalizedString _temporaryMessage;
+        private Transform _temporaryMessageTarget;
 
         private void Awake()
         {
@@ -111,13 +131,18 @@ namespace _Scripts.UI
         {
             if (_canvasGroup == null) return;
 
-            if (_isShowingTemporaryMessage)
+            if (_persistentMessages.Count > 0)
+            {
+                // Persistent warnings are dismissed explicitly by their owner.
+            }
+            else if (_isShowingTemporaryMessage)
             {
                 _remainingTemporaryMessageTime -= Time.unscaledDeltaTime;
                 if (_remainingTemporaryMessageTime <= 0f)
                 {
                     _isShowingTemporaryMessage = false;
                     _temporaryMessage = null;
+                    _temporaryMessageTarget = null;
                     RefreshRequirement(true);
                 }
             }
@@ -166,15 +191,41 @@ namespace _Scripts.UI
 
             _isShowingTemporaryMessage = true;
             _temporaryMessage = message;
+            _temporaryMessageTarget = target;
             _remainingTemporaryMessageTime = Mathf.Max(duration, _fadeDuration);
             _idleTime = 0f;
-            _messageText.SetText(message.GetLocalizedString());
-            if (_calloutCurve != null)
+            if (_persistentMessages.Count == 0)
+                ApplyMessage(message, target);
+        }
+
+        public void ShowPersistentMessage(Object source, LocalizedString message, Transform target)
+        {
+            if (source == null || message == null || message.IsEmpty || _messageText == null) return;
+
+            PersistentMessage persistentMessage = new(message, target, ++_persistentMessageSequence);
+            _persistentMessages[source] = persistentMessage;
+            _activePersistentMessageSource = source;
+            _idleTime = 0f;
+            ApplyMessage(persistentMessage.Message, persistentMessage.Target, true);
+        }
+
+        public void HidePersistentMessage(Object source)
+        {
+            if (source == null || !_persistentMessages.Remove(source)) return;
+            if (_activePersistentMessageSource != source) return;
+
+            if (TryGetLatestPersistentMessage(out Object latestSource, out PersistentMessage latestMessage))
             {
-                _calloutCurve.SetTarget(target);
-                _calloutCurve.SetVisible(target != null);
+                _activePersistentMessageSource = latestSource;
+                ApplyMessage(latestMessage.Message, latestMessage.Target, true);
+                return;
             }
-            _targetAlpha = 1f;
+
+            _activePersistentMessageSource = null;
+            if (_isShowingTemporaryMessage)
+                ApplyMessage(_temporaryMessage, _temporaryMessageTarget);
+            else
+                RefreshRequirement(true);
         }
 
         private void BindEvents()
@@ -202,7 +253,10 @@ namespace _Scripts.UI
         private void OnSelectedLocaleChanged(Locale locale)
         {
             if (_messageText == null || _targetAlpha <= 0f) return;
-            if (_isShowingTemporaryMessage && _temporaryMessage != null)
+            if (_activePersistentMessageSource != null
+                && _persistentMessages.TryGetValue(_activePersistentMessageSource, out PersistentMessage persistentMessage))
+                _messageText.SetText(persistentMessage.Message.GetLocalizedString());
+            else if (_isShowingTemporaryMessage && _temporaryMessage != null)
                 _messageText.SetText(_temporaryMessage.GetLocalizedString());
             else if (_currentStep != HintStep.None)
                 _messageText.SetText(GetHintText(_currentStep));
@@ -226,7 +280,7 @@ namespace _Scripts.UI
         private void RefreshRequirement(bool resetTimer)
         {
             HintStep requiredStep = ResolveRequiredStep();
-            if (_isShowingTemporaryMessage)
+            if (_persistentMessages.Count > 0 || _isShowingTemporaryMessage)
             {
                 _currentStep = requiredStep;
                 if (resetTimer) _idleTime = 0f;
@@ -313,6 +367,35 @@ namespace _Scripts.UI
             if (_canvasGroup == null) return;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+        }
+
+        private void ApplyMessage(LocalizedString message, Transform target, bool useCircularAnchor = false)
+        {
+            if (message == null || message.IsEmpty || _messageText == null) return;
+
+            _messageText.SetText(message.GetLocalizedString());
+            if (_calloutCurve != null)
+            {
+                _calloutCurve.SetTarget(target, useCircularAnchor);
+                _calloutCurve.SetVisible(target != null);
+            }
+            _targetAlpha = 1f;
+        }
+
+        private bool TryGetLatestPersistentMessage(
+            out Object latestSource,
+            out PersistentMessage latestMessage)
+        {
+            latestSource = null;
+            latestMessage = default;
+            foreach (KeyValuePair<Object, PersistentMessage> pair in _persistentMessages)
+            {
+                if (latestSource != null && pair.Value.Sequence <= latestMessage.Sequence) continue;
+                latestSource = pair.Key;
+                latestMessage = pair.Value;
+            }
+
+            return latestSource != null;
         }
 
         private Transform ResolveHintTarget(HintStep step)
@@ -415,8 +498,9 @@ namespace _Scripts.UI
                 _curveWidth,
                 _targetGap,
                 _popupGap,
-                _viewportMargin,
-                _curveStrength);
+                _curveStrength,
+                _targetAnchorRadius,
+                _targetAnchorVerticalOffset);
         }
 
         private static void AddCameraToStack(Camera baseCamera, Camera overlayCamera)

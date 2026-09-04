@@ -13,7 +13,6 @@ namespace _Scripts.UI
     {
         private const int SegmentCount = 16;
 
-        private readonly Vector3[] _popupCorners = new Vector3[4];
         private readonly Vector3[] _curvePoints = new Vector3[SegmentCount + 1];
 
         private LineRenderer _lineRenderer;
@@ -22,11 +21,16 @@ namespace _Scripts.UI
         private Camera _camera;
         private Transform _target;
         private Renderer[] _targetRenderers;
+        private Collider[] _targetColliders;
         private float _targetGap;
+        private float _popupGap;
         private float _curveStrength;
+        private float _targetAnchorRadius;
+        private float _targetAnchorVerticalOffset;
         private Color _lineColor;
         private float _lastAlpha = -1f;
         private bool _requestedVisible;
+        private bool _useCircularAnchor;
 
         public void Initialize(
             RectTransform popupRect,
@@ -37,15 +41,19 @@ namespace _Scripts.UI
             float lineWidth,
             float targetGap,
             float popupGap,
-            float viewportMargin,
-            float curveStrength)
+            float curveStrength,
+            float targetAnchorRadius,
+            float targetAnchorVerticalOffset)
         {
             _popupRect = popupRect;
             _canvasGroup = canvasGroup;
             _camera = viewCamera;
             _lineColor = lineColor;
             _targetGap = Mathf.Max(0f, targetGap);
+            _popupGap = Mathf.Max(0f, popupGap);
             _curveStrength = Mathf.Max(0f, curveStrength);
+            _targetAnchorRadius = Mathf.Max(0.001f, targetAnchorRadius);
+            _targetAnchorVerticalOffset = targetAnchorVerticalOffset;
 
             _lineRenderer = GetComponent<LineRenderer>();
             _lineRenderer.useWorldSpace = true;
@@ -65,20 +73,25 @@ namespace _Scripts.UI
             _lineRenderer.enabled = false;
         }
 
-        public void SetTarget(Transform target)
+        public void SetTarget(Transform target, bool useCircularAnchor = false)
         {
-            if (_target == target) return;
+            if (_target == target && _useCircularAnchor == useCircularAnchor) return;
 
             _target = target;
+            _useCircularAnchor = useCircularAnchor;
             _targetRenderers = _target != null
                 ? _target.GetComponentsInChildren<Renderer>(true)
+                : null;
+            _targetColliders = _target != null
+                ? _target.GetComponentsInChildren<Collider>(true)
                 : null;
         }
 
         public void SetVisible(bool isVisible)
         {
             _requestedVisible = isVisible;
-            if (!isVisible && _lineRenderer != null) _lineRenderer.enabled = false;
+            if (isVisible) return;
+            if (_lineRenderer != null) _lineRenderer.enabled = false;
         }
 
         private void LateUpdate()
@@ -90,12 +103,17 @@ namespace _Scripts.UI
             }
 
             float alpha = _canvasGroup != null ? _canvasGroup.alpha : 1f;
-            Vector3 targetPosition = GetTargetSurfacePoint(_popupRect.position);
             bool shouldRender = _requestedVisible && alpha > 0.001f;
             _lineRenderer.enabled = shouldRender;
             if (!shouldRender) return;
 
-            Vector3 popupPoint = GetPopupMiddleLeftPoint();
+            Vector3 targetCenter = GetTargetCenter();
+            if (_useCircularAnchor)
+                targetCenter += Vector3.up * _targetAnchorVerticalOffset;
+            Vector3 targetPosition = _useCircularAnchor
+                ? targetCenter
+                : GetTargetSurfacePoint(_popupRect.position);
+            Vector3 popupPoint = GetPopupConnectionPoint(targetPosition);
             Vector3 popupToTarget = targetPosition - popupPoint;
             if (popupToTarget.sqrMagnitude < 0.000001f)
             {
@@ -105,16 +123,51 @@ namespace _Scripts.UI
 
             Vector3 direction = popupToTarget.normalized;
             float maximumGap = popupToTarget.magnitude * 0.4f;
-            Vector3 start = popupPoint;
-            Vector3 end = targetPosition - direction * Mathf.Min(_targetGap, maximumGap);
+            Vector3 start = popupPoint + direction * Mathf.Min(_popupGap, maximumGap);
+            Vector3 end;
+            if (_useCircularAnchor)
+            {
+                Vector3 targetToPopup = Vector3.ProjectOnPlane(
+                    popupPoint - targetCenter,
+                    _camera.transform.forward);
+                if (targetToPopup.sqrMagnitude < 0.000001f)
+                    targetToPopup = -direction;
+                else
+                    targetToPopup.Normalize();
+
+                end = targetCenter
+                    + targetToPopup * _targetAnchorRadius;
+            }
+            else
+            {
+                end = targetPosition - direction * Mathf.Min(_targetGap, maximumGap);
+            }
+
             DrawCurve(start, end);
             SetLineAlpha(alpha);
         }
 
-        private Vector3 GetPopupMiddleLeftPoint()
+        private Vector3 GetPopupConnectionPoint(Vector3 targetPosition)
         {
-            _popupRect.GetWorldCorners(_popupCorners);
-            return (_popupCorners[0] + _popupCorners[1]) * 0.5f;
+            return GetClosestRectPoint(_popupRect, targetPosition);
+        }
+
+        private Vector3 GetTargetCenter()
+        {
+            Collider directCollider = _target.GetComponent<Collider>();
+            if (directCollider != null && directCollider.gameObject.activeInHierarchy)
+                return directCollider.bounds.center;
+
+            if (_targetColliders != null)
+            {
+                foreach (Collider targetCollider in _targetColliders)
+                {
+                    if (targetCollider == null || !targetCollider.gameObject.activeInHierarchy) continue;
+                    return targetCollider.bounds.center;
+                }
+            }
+
+            return _target.position;
         }
 
         private Vector3 GetTargetSurfacePoint(Vector3 popupPosition)

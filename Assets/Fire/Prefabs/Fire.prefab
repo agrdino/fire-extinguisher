@@ -338,7 +338,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
+  m_Radius: 3
   m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &638420100000000004
 MonoBehaviour:
@@ -353,5 +353,13 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireProximityWarning
   _trigger: {fileID: 638420100000000003}
-  _warningMessage: Warning! Keep a safe distance from the fire.
-  _messageDuration: 2.5
+  _localizedWarningMessage:
+    m_TableReference:
+      m_TableCollectionName: UI
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: warning.safe_distance
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _flareUpRadiusMultiplier: 2
