@@ -357,8 +357,7 @@ namespace _Scripts.Controller
 
         private static bool CanMoveInState(ApplicationState state)
         {
-            return state == ApplicationState.Guide
-                || state == ApplicationState.Explore
+            return state == ApplicationState.Explore
                 || state == ApplicationState.SelectExtinguisher
                 || state == ApplicationState.Fighting
                 || state == ApplicationState.Escape;
