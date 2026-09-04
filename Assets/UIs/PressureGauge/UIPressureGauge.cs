@@ -1,7 +1,6 @@
 using _Scripts.Controller;
 using _Scripts.FireExtinguishers;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace _Scripts.UI
 {
@@ -11,7 +10,9 @@ namespace _Scripts.UI
         [Header("References")]
         [SerializeField] private GameObject _content;
         [SerializeField] private RectTransform _needle;
-        [SerializeField] private LazyFollow _positionFollow;
+
+        [Header("Position Follow")]
+        [SerializeField] private Vector3 _positionOffset = new(0f, 0f, 0.02f);
 
         [Header("Pressure Targets")]
         [SerializeField] private Transform _co2Pressure;
@@ -25,6 +26,7 @@ namespace _Scripts.UI
 
         private ApplicationManager _applicationManager;
         private FireExtinguisher _fireExtinguisher;
+        private Transform _pressureTarget;
 
         public float MinimumRotation => _minimumRotation;
         public float MaximumRotation => _maximumRotation;
@@ -56,15 +58,26 @@ namespace _Scripts.UI
             if (_fireExtinguisher != null) _fireExtinguisher.OnRemainingAmountChanged -= FireExtinguisher_OnRemainingAmountChanged;
         }
 
+        private void LateUpdate()
+        {
+            SnapToPressureTarget();
+        }
+
         private void Refresh()
         {
             ApplicationState state = _applicationManager.State;
             FireExtinguisherType extinguisherType = _applicationManager.SelectedExtinguisherType;
             bool isSupportedState = state == ApplicationState.SelectExtinguisher || state == ApplicationState.Fighting || state == ApplicationState.Escape;
-            Transform pressureTarget = GetPressureTarget(extinguisherType);
+            _pressureTarget = GetPressureTarget(extinguisherType);
 
-            _positionFollow.target = pressureTarget;
-            SetVisible(isSupportedState && extinguisherType != FireExtinguisherType.Unselect && pressureTarget != null);
+            SnapToPressureTarget();
+            SetVisible(isSupportedState && extinguisherType != FireExtinguisherType.Unselect && _pressureTarget != null);
+        }
+
+        private void SnapToPressureTarget()
+        {
+            if (_pressureTarget == null) return;
+            transform.position = _pressureTarget.TransformPoint(_positionOffset);
         }
 
         private Transform GetPressureTarget(FireExtinguisherType extinguisherType)
