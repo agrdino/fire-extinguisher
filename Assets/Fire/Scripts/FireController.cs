@@ -60,13 +60,13 @@ namespace _Scripts.Fires
         {
             ClearFires();
 
-            if (playerRoot == null) return;
+            // if (playerRoot == null) return;
 
             FireSpawnPoint spawnPoint = GetRandomSpawnPoint(playerRoot.position);
-            if (spawnPoint == null) return;
+            // if (spawnPoint == null) return;
 
             Fire firePrefab = GetRandomFirePrefab(spawnPoint.FireType);
-            if (firePrefab == null) return;
+            // if (firePrefab == null) return;
 
             CurrentFireType = spawnPoint.FireType;
             OnFireTypeSelected?.Invoke(CurrentFireType);
@@ -83,7 +83,7 @@ namespace _Scripts.Fires
 
         private FireSpawnPoint GetRandomSpawnPoint(Vector3 playerPosition)
         {
-            if (_environment == null) return null;
+            // if (_environment == null) return null;
 
             IReadOnlyList<FireSpawnPoint> spawnPoints = _environment.FireSpawnPoints;
             float minimumDistanceSquared = _minimumSpawnDistanceFromPlayer * _minimumSpawnDistanceFromPlayer;
@@ -93,7 +93,7 @@ namespace _Scripts.Fires
                 if (IsValidSpawnPoint(spawnPoints[i], playerPosition, minimumDistanceSquared)) validPointCount++;
             }
 
-            if (validPointCount == 0) return null;
+            // if (validPointCount == 0) return null;
 
             int selectedIndex = UnityEngine.Random.Range(0, validPointCount);
             for (int i = 0; i < spawnPoints.Count; i++)

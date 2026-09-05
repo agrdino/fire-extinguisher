@@ -101,16 +101,5 @@ namespace _Scripts.Controller
             return true;
         }
 
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (_environmentRoot == null) return;
-
-            _fireSpawnPoints.Clear();
-            _fireSpawnPoints.AddRange(_environmentRoot.GetComponentsInChildren<FireSpawnPoint>(true));
-            _exitSpawnPoints.Clear();
-            _exitSpawnPoints.AddRange(_environmentRoot.GetComponentsInChildren<EmergencyExitSpawnPoint>(true));
-        }
-#endif
     }
 }
