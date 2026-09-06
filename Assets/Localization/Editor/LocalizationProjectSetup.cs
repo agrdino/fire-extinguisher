@@ -437,7 +437,9 @@ namespace Spaxtek.EditorTools
                 if (text == null)
                     continue;
 
-                if (fontAsset != null && text.font != fontAsset)
+                // Preserve typography assigned by the Apple Vision theme. The localization
+                // rebuild only supplies a safe default for newly-created labels.
+                if (fontAsset != null && text.font == null)
                 {
                     text.font = fontAsset;
                     EditorUtility.SetDirty(text);

@@ -1,5 +1,6 @@
 using _Scripts.Controller;
 using _Scripts.SceneManagement;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,10 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnPark;
         [SerializeField] private Button _btnConfirm;
         [SerializeField] private Button _btnBack;
-        [SerializeField] private Color _selectedColor = new(0.16f, 0.55f, 0.82f, 0.9f);
-        [SerializeField] private Color _unselectedColor = new(0f, 0f, 0f, 0.7f);
+        [SerializeField] private Color _selectedColor = new(0f, 0.478f, 1f, 1f);
+        [SerializeField] private Color _unselectedColor = new(1f, 1f, 1f, 0.78f);
+        [SerializeField] private Color _selectedTextColor = Color.white;
+        [SerializeField] private Color _unselectedTextColor = new(0.11f, 0.11f, 0.12f, 1f);
 
         private SceneId _selectedEnvironmentScene = SceneId.Factory;
         private IApplicationNavigator _navigator;
@@ -107,16 +110,21 @@ namespace _Scripts.UI
 
         private void UpdateSelectionVisuals()
         {
-            if (_btnFactory != null && _btnFactory.image != null)
-                _btnFactory.image.color = _selectedEnvironmentScene == SceneId.Factory
-                    ? _selectedColor
-                    : _unselectedColor;
-            if (_btnPark != null && _btnPark.image != null)
-                _btnPark.image.color = _selectedEnvironmentScene == SceneId.Park
-                    ? _selectedColor
-                    : _unselectedColor;
+            SetButtonVisual(_btnFactory, _selectedEnvironmentScene == SceneId.Factory);
+            SetButtonVisual(_btnPark, _selectedEnvironmentScene == SceneId.Park);
             if (_btnConfirm != null)
                 _btnConfirm.interactable = _navigator != null && !_navigator.IsTransitioning;
+        }
+
+        private void SetButtonVisual(Button button, bool selected)
+        {
+            if (button == null) return;
+            if (button.image != null)
+                button.image.color = selected ? _selectedColor : _unselectedColor;
+
+            Color textColor = selected ? _selectedTextColor : _unselectedTextColor;
+            foreach (TMP_Text label in button.GetComponentsInChildren<TMP_Text>(true))
+                label.color = textColor;
         }
     }
 }

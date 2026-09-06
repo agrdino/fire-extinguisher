@@ -1,5 +1,6 @@
 using _Scripts.FireExtinguishers;
 using _Scripts.Controller;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,10 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnPowder;
         [SerializeField] private Button _btnSelect;
         [SerializeField] private Button _btnBack;
-        [SerializeField] private Color _selectedColor = new Color(0.16f, 0.55f, 0.82f, 0.9f);
-        [SerializeField] private Color _unselectedColor = new Color(0f, 0f, 0f, 0.7f);
+        [SerializeField] private Color _selectedColor = new Color(0f, 0.478f, 1f, 1f);
+        [SerializeField] private Color _unselectedColor = new Color(1f, 1f, 1f, 0.78f);
+        [SerializeField] private Color _selectedTextColor = Color.white;
+        [SerializeField] private Color _unselectedTextColor = new Color(0.11f, 0.11f, 0.12f, 1f);
 
         private FireExtinguisherType _selectedType = FireExtinguisherType.Unselect;
         private FireExtinguisherModelSwitcher _modelSwitcher;
@@ -86,11 +89,22 @@ namespace _Scripts.UI
         private void UpdateSelectionVisuals()
         {
             bool canInteract = _modelSwitcher == null || !_modelSwitcher.IsTransitioning;
-            if (_btnCO2 != null && _btnCO2.image != null) _btnCO2.image.color = _selectedType == FireExtinguisherType.CO2 ? _selectedColor : _unselectedColor;
-            if (_btnPowder != null && _btnPowder.image != null) _btnPowder.image.color = _selectedType == FireExtinguisherType.Powder ? _selectedColor : _unselectedColor;
+            SetButtonVisual(_btnCO2, _selectedType == FireExtinguisherType.CO2);
+            SetButtonVisual(_btnPowder, _selectedType == FireExtinguisherType.Powder);
             if (_btnCO2 != null) _btnCO2.interactable = canInteract;
             if (_btnPowder != null) _btnPowder.interactable = canInteract;
             if (_btnSelect != null) _btnSelect.interactable = canInteract && _selectedType != FireExtinguisherType.Unselect;
+        }
+
+        private void SetButtonVisual(Button button, bool selected)
+        {
+            if (button == null) return;
+            if (button.image != null)
+                button.image.color = selected ? _selectedColor : _unselectedColor;
+
+            Color textColor = selected ? _selectedTextColor : _unselectedTextColor;
+            foreach (TMP_Text label in button.GetComponentsInChildren<TMP_Text>(true))
+                label.color = textColor;
         }
 
         private void BindModelSwitcher()

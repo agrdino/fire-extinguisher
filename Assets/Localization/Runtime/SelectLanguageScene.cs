@@ -18,10 +18,10 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnEnglish;
         [SerializeField] private Button _btnJapanese;
         [SerializeField] private Button _btnContinue;
-        [SerializeField] private Color _selectedColor = new(0.16f, 0.55f, 0.82f, 0.9f);
-        [SerializeField] private Color _unselectedColor = new(0f, 0f, 0f, 0.7f);
+        [SerializeField] private Color _selectedColor = new(0f, 0.478f, 1f, 1f);
+        [SerializeField] private Color _unselectedColor = new(1f, 1f, 1f, 0.78f);
         [SerializeField] private Color _selectedTextColor = Color.white;
-        [SerializeField] private Color _unselectedTextColor = Color.white;
+        [SerializeField] private Color _unselectedTextColor = new(0.11f, 0.11f, 0.12f, 1f);
 
         private void Awake()
         {
