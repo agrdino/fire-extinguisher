@@ -1,6 +1,5 @@
 using _Scripts.FireExtinguishers;
 using _Scripts.Controller;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,10 +11,6 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnPowder;
         [SerializeField] private Button _btnSelect;
         [SerializeField] private Button _btnBack;
-        [SerializeField] private Color _selectedColor = new Color(0f, 0.478f, 1f, 1f);
-        [SerializeField] private Color _unselectedColor = new Color(1f, 1f, 1f, 0.78f);
-        [SerializeField] private Color _selectedTextColor = Color.white;
-        [SerializeField] private Color _unselectedTextColor = new Color(0.11f, 0.11f, 0.12f, 1f);
 
         private FireExtinguisherType _selectedType = FireExtinguisherType.Unselect;
         private FireExtinguisherModelSwitcher _modelSwitcher;
@@ -29,6 +24,7 @@ namespace _Scripts.UI
 
         private void Awake()
         {
+            ResolveButtons();
             if (_btnCO2 != null) _btnCO2.onClick.AddListener(OnClickCO2Button);
             if (_btnPowder != null) _btnPowder.onClick.AddListener(OnClickPowderButton);
             if (_btnSelect != null) _btnSelect.onClick.AddListener(OnClickSelectButton);
@@ -96,15 +92,23 @@ namespace _Scripts.UI
             if (_btnSelect != null) _btnSelect.interactable = canInteract && _selectedType != FireExtinguisherType.Unselect;
         }
 
-        private void SetButtonVisual(Button button, bool selected)
+        private static void SetButtonVisual(Button button, bool selected)
         {
             if (button == null) return;
-            if (button.image != null)
-                button.image.color = selected ? _selectedColor : _unselectedColor;
+            UIButtonTween tween = button.GetComponent<UIButtonTween>();
+            if (tween != null) tween.SetSelected(selected);
+        }
 
-            Color textColor = selected ? _selectedTextColor : _unselectedTextColor;
-            foreach (TMP_Text label in button.GetComponentsInChildren<TMP_Text>(true))
-                label.color = textColor;
+        private void ResolveButtons()
+        {
+            if (_btnSelect == null)
+                _btnSelect = UIComponentLookup.FindButton(this, "btnConfirm");
+            if (_btnBack == null)
+                _btnBack = UIComponentLookup.FindButton(this, "btnBack");
+
+            Button[] optionButtons = UIComponentLookup.FindButtonsUnder(this, "Options");
+            if (_btnCO2 == null && optionButtons.Length > 0) _btnCO2 = optionButtons[0];
+            if (_btnPowder == null && optionButtons.Length > 1) _btnPowder = optionButtons[1];
         }
 
         private void BindModelSwitcher()

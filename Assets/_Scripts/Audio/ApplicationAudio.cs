@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using _Scripts.Controller;
 using _Scripts.Fires;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Scripts.Audio
 {
@@ -21,9 +19,6 @@ namespace _Scripts.Audio
         [SerializeField] private AudioClip _escapeClip;
         [SerializeField] private AudioClip _exitClip;
         [SerializeField] private AudioClip _failedClip;
-        [SerializeField] private AudioClip _uiClickClip;
-
-        private readonly List<Button> _buttons = new List<Button>();
 
         private ApplicationManager _applicationManager;
         private FireController _fireController;
@@ -52,7 +47,6 @@ namespace _Scripts.Audio
             if (_emergencyExit != null)
                 _emergencyExit.OnPlayerReached += EmergencyExit_OnPlayerReached;
 
-            SubscribeToButtons();
         }
 
         private void OnDisable()
@@ -62,7 +56,6 @@ namespace _Scripts.Audio
             if (_emergencyExit != null)
                 _emergencyExit.OnPlayerReached -= EmergencyExit_OnPlayerReached;
 
-            UnsubscribeFromButtons();
             CancelCompletedRoutine();
             StopEscapeLoop();
         }
@@ -121,37 +114,6 @@ namespace _Scripts.Audio
             if (source == null) return;
             source.playOnAwake = false;
             source.loop = false;
-        }
-
-        private void SubscribeToButtons()
-        {
-            UnsubscribeFromButtons();
-
-            Button[] buttons = FindObjectsByType<Button>(
-                FindObjectsInactive.Include,
-                FindObjectsSortMode.None);
-
-            foreach (Button button in buttons)
-            {
-                if (button == null) continue;
-                button.onClick.AddListener(PlayUIClick);
-                _buttons.Add(button);
-            }
-        }
-
-        private void UnsubscribeFromButtons()
-        {
-            foreach (Button button in _buttons)
-            {
-                if (button != null) button.onClick.RemoveListener(PlayUIClick);
-            }
-
-            _buttons.Clear();
-        }
-
-        private void PlayUIClick()
-        {
-            _audioManager.PlayOneShot(_oneShotSource, _uiClickClip);
         }
 
         private void CancelCompletedRoutine()

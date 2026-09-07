@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 namespace _Scripts.UI
 {
     public class EscapeScene : MonoBehaviour, IScene
     {
         [SerializeField] private TMP_Text _txtGuide;
+        [SerializeField] private Slider _timerBar;
         [SerializeField] private LocalizedString _unlimitedString = new("UI", "escape.unlimited");
         [SerializeField] private LocalizedString _timedString = new("UI", "escape.timed");
 
@@ -22,6 +24,12 @@ namespace _Scripts.UI
             }
             ApplicationManager.Instance.OnRemainingTimeChanged += OnRemainingTimeChanged;
             LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
+            if (_timerBar != null)
+            {
+                _timerBar.minValue = 0f;
+                _timerBar.maxValue = Mathf.Max(0.01f, ApplicationManager.Instance.EscapeDuration);
+                _timerBar.gameObject.SetActive(ApplicationManager.Instance.IsEscapeTimeLimited);
+            }
             OnRemainingTimeChanged(ApplicationManager.Instance.RemainingTime);
         }
 
@@ -57,6 +65,7 @@ namespace _Scripts.UI
             int minutes = totalSeconds / 60;
             int seconds = totalSeconds % 60;
             _txtGuide.SetText(_timedString.GetLocalizedString(minutes.ToString("00"), seconds.ToString("00")));
+            if (_timerBar != null) _timerBar.value = remainingTime;
         }
 
         private void OnSelectedLocaleChanged(Locale locale)

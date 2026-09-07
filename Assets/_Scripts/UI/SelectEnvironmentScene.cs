@@ -1,6 +1,5 @@
 using _Scripts.Controller;
 using _Scripts.SceneManagement;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +11,8 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnPark;
         [SerializeField] private Button _btnConfirm;
         [SerializeField] private Button _btnBack;
-        [SerializeField] private Color _selectedColor = new(0f, 0.478f, 1f, 1f);
-        [SerializeField] private Color _unselectedColor = new(1f, 1f, 1f, 0.78f);
-        [SerializeField] private Color _selectedTextColor = Color.white;
-        [SerializeField] private Color _unselectedTextColor = new(0.11f, 0.11f, 0.12f, 1f);
 
-        private SceneId _selectedEnvironmentScene = SceneId.Factory;
+        private SceneId? _selectedEnvironmentScene;
         private IApplicationNavigator _navigator;
 
         public void Initialize(IApplicationNavigator navigator)
@@ -44,7 +39,7 @@ namespace _Scripts.UI
 
         public void Show()
         {
-            _selectedEnvironmentScene = SceneId.Factory;
+            _selectedEnvironmentScene = null;
             UpdateSelectionVisuals();
         }
 
@@ -55,13 +50,15 @@ namespace _Scripts.UI
 
         private void ConfirmSelection()
         {
+            if (!_selectedEnvironmentScene.HasValue) return;
+
             if (_navigator == null)
             {
                 Debug.LogError("SelectEnvironmentScene has no application navigator.", this);
                 return;
             }
 
-            _navigator.TryEnterEnvironment(_selectedEnvironmentScene);
+            _navigator.TryEnterEnvironment(_selectedEnvironmentScene.Value);
         }
 
         private static void GoBack()
@@ -78,34 +75,13 @@ namespace _Scripts.UI
         private void ResolveButtons()
         {
             if (_btnConfirm == null)
-                _btnConfirm = FindButton("btnConfirm");
+                _btnConfirm = UIComponentLookup.FindButton(this, "btnConfirm");
             if (_btnBack == null)
-                _btnBack = FindButton("btnBack");
+                _btnBack = UIComponentLookup.FindButton(this, "btnBack");
 
-            Transform options = FindChild("Environments");
-            if (options == null) return;
-
-            Button[] optionButtons = options.GetComponentsInChildren<Button>(true);
+            Button[] optionButtons = UIComponentLookup.FindButtonsUnder(this, "Environments");
             if (_btnFactory == null && optionButtons.Length > 0) _btnFactory = optionButtons[0];
             if (_btnPark == null && optionButtons.Length > 1) _btnPark = optionButtons[1];
-        }
-
-        private Transform FindChild(string childName)
-        {
-            Transform[] children = GetComponentsInChildren<Transform>(true);
-            foreach (Transform child in children)
-                if (child.name == childName)
-                    return child;
-            return null;
-        }
-
-        private Button FindButton(string buttonName)
-        {
-            Button[] buttons = GetComponentsInChildren<Button>(true);
-            foreach (Button button in buttons)
-                if (button.name == buttonName)
-                    return button;
-            return null;
         }
 
         private void UpdateSelectionVisuals()
@@ -113,18 +89,16 @@ namespace _Scripts.UI
             SetButtonVisual(_btnFactory, _selectedEnvironmentScene == SceneId.Factory);
             SetButtonVisual(_btnPark, _selectedEnvironmentScene == SceneId.Park);
             if (_btnConfirm != null)
-                _btnConfirm.interactable = _navigator != null && !_navigator.IsTransitioning;
+                _btnConfirm.interactable = _selectedEnvironmentScene.HasValue
+                    && _navigator != null
+                    && !_navigator.IsTransitioning;
         }
 
-        private void SetButtonVisual(Button button, bool selected)
+        private static void SetButtonVisual(Button button, bool selected)
         {
             if (button == null) return;
-            if (button.image != null)
-                button.image.color = selected ? _selectedColor : _unselectedColor;
-
-            Color textColor = selected ? _selectedTextColor : _unselectedTextColor;
-            foreach (TMP_Text label in button.GetComponentsInChildren<TMP_Text>(true))
-                label.color = textColor;
+            UIButtonTween tween = button.GetComponent<UIButtonTween>();
+            if (tween != null) tween.SetSelected(selected);
         }
     }
 }

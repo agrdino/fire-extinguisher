@@ -22,9 +22,9 @@ namespace _Scripts.UI
         private void Awake()
         {
             if (_btnStart == null)
-                _btnStart = FindButton("btnStart") ?? FindButton("btnConfirm");
+                _btnStart = UIComponentLookup.FindButton(this, "btnStart") ?? UIComponentLookup.FindButton(this, "btnConfirm");
             if (_btnBack == null)
-                _btnBack = FindButton("btnBack");
+                _btnBack = UIComponentLookup.FindButton(this, "btnBack");
             if (_btnStart != null) _btnStart.onClick.AddListener(OnClickStartButton);
             if (_btnBack != null) _btnBack.onClick.AddListener(OnClickBackButton);
         }
@@ -84,13 +84,5 @@ namespace _Scripts.UI
                 _fireExtinguisherController = FireExtinguisherController.Instance;
         }
 
-        private Button FindButton(string buttonName)
-        {
-            Button[] buttons = GetComponentsInChildren<Button>(true);
-            foreach (Button button in buttons)
-                if (button.name == buttonName)
-                    return button;
-            return null;
-        }
     }
 }

@@ -26,7 +26,7 @@ namespace _Scripts.UI
 
         [Header("Failed UI Placement")]
         [SerializeField, Min(0f)] private float _failedSceneDistance = 2.5f;
-        [SerializeField] private float _failedSceneHeight = 1.55f;
+        [SerializeField] private float _failedSceneHeight = 1.4f;
 
         private IScene _currentScene;
         private ApplicationManager _applicationManager;
@@ -72,7 +72,7 @@ namespace _Scripts.UI
             if (_currentScene == null) return;
 
             _currentScene.Hide();
-            _currentScene.gameObject.SetActive(false);
+            HideSceneObject(_currentScene);
         }
 
 public void BindEnvironment(
@@ -88,7 +88,7 @@ public void BindEnvironment(
             if (_currentScene != null)
             {
                 _currentScene.Hide();
-                _currentScene.gameObject.SetActive(false);
+                HideSceneObject(_currentScene);
             }
             
             _currentScene = state switch
@@ -109,7 +109,17 @@ public void BindEnvironment(
             if (!PlaceScene(_currentScene, state)) return;
 
             _currentScene.gameObject.SetActive(true);
+            if (_currentScene.gameObject.TryGetComponent(out UIPanelTween transition))
+                transition.PlayIn();
             _currentScene.Show();
+        }
+
+        private static void HideSceneObject(IScene scene)
+        {
+            if (scene.gameObject.TryGetComponent(out UIPanelTween transition))
+                transition.PlayOutAndDeactivate();
+            else
+                scene.gameObject.SetActive(false);
         }
 
         private bool PlaceScene(IScene scene, ApplicationState state)

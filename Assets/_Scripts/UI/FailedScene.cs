@@ -18,6 +18,7 @@ namespace _Scripts.UI
 
         private void Awake()
         {
+            if (_btnRetry == null) _btnRetry = UIComponentLookup.FindButton(this, "btnRetry");
             if (_btnRetry != null) _btnRetry.onClick.AddListener(OnRetryClicked);
         }
 

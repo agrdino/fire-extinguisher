@@ -1,72 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-7443639167128422428
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Inter - Bold Material
-  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 421558881650786822}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _CullMode: 0
-    - _FaceDilate: 0
-    - _GradientScale: 10
-    - _MaskSoftnessX: 0
-    - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
-    - _OutlineWidth: 0
-    - _PerspectiveFilter: 0.875
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 0.73125
-    - _ScaleX: 1
-    - _ScaleY: 1
-    - _ShaderFlags: 0
-    - _Sharpness: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _TextureHeight: 2048
-    - _TextureWidth: 2048
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
-    - _VertexOffsetX: 0
-    - _VertexOffsetY: 0
-    - _WeightBold: 0.75
-    - _WeightNormal: 0
-    m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Inter-Bold Dynamic SDF
+  m_Name: Rajdhani-Light Dynamic SDF
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_FontAsset
   m_Version: 1.1.0
   m_FaceInfo:
     m_FaceIndex: 0
-    m_FamilyName: Inter
-    m_StyleName: Bold
+    m_FamilyName: Rajdhani
+    m_StyleName: Light
     m_PointSize: 90
     m_Scale: 1
-    m_UnitsPerEM: 2816
-    m_LineHeight: 108.920456
-    m_AscentLine: 87.1875
-    m_CapLine: 66
-    m_MeanLine: 50
+    m_UnitsPerEM: 1000
+    m_LineHeight: 114.840004
+    m_AscentLine: 83.700005
+    m_CapLine: 58
+    m_MeanLine: 46
     m_Baseline: 0
-    m_DescentLine: -21.732954
-    m_SuperscriptOffset: 87.1875
+    m_DescentLine: -31.140001
+    m_SuperscriptOffset: 83.700005
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -21.732954
+    m_SubscriptOffset: -31.140001
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -17.897728
-    m_UnderlineThickness: 6.1363635
-    m_StrikethroughOffset: 20
-    m_StrikethroughThickness: 6.1363635
-    m_TabWidth: 21
-  m_Material: {fileID: -7443639167128422428}
-  m_SourceFontFileGUID: d57015b57b4f98145ab16ee2bcfd7ea7
+    m_UnderlineOffset: -9
+    m_UnderlineThickness: 4.5
+    m_StrikethroughOffset: 18.4
+    m_StrikethroughThickness: 4.5
+    m_TabWidth: 25
+  m_Material: {fileID: 3117627979784639396}
+  m_SourceFontFileGUID: 8d1bd003b1fb64f4b85afabd88c97335
   m_CreationSettings:
     sourceFontFileName: 
     sourceFontFileGUID: 
@@ -123,14 +56,14 @@ MonoBehaviour:
     fontStyleModifier: 0
     renderMode: 0
     includeFontFeatures: 0
-  m_SourceFontFile: {fileID: 12800000, guid: d57015b57b4f98145ab16ee2bcfd7ea7, type: 3}
+  m_SourceFontFile: {fileID: 12800000, guid: 8d1bd003b1fb64f4b85afabd88c97335, type: 3}
   m_SourceFontFilePath: 
   m_AtlasPopulationMode: 1
   InternalDynamicOS: 0
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: 421558881650786822}
+  - {fileID: 3367458297461195665}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 1
   m_GetFontFeatures: 1
@@ -209,13 +142,80 @@ MonoBehaviour:
     kerningPairs: []
   fallbackFontAssets: []
   atlas: {fileID: 0}
---- !u!28 &421558881650786822
+--- !u!21 &3117627979784639396
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Rajdhani - Light Material
+  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 3367458297461195665}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _FaceDilate: 0
+    - _GradientScale: 10
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _ScaleRatioA: 1
+    - _ScaleRatioB: 1
+    - _ScaleRatioC: 1
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 2048
+    - _TextureWidth: 2048
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!28 &3367458297461195665
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Inter - Bold Atlas
+  m_Name: Rajdhani - Light Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -249,7 +249,7 @@ Texture2D:
   m_ColorSpace: 1
   m_PlatformBlob: 
   image data: 1
-  _typelessdata: 00
+  _typelessdata: cd
   m_StreamData:
     serializedVersion: 2
     offset: 0

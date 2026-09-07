@@ -1,5 +1,4 @@
 using _Scripts.Controller;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -18,13 +17,10 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnEnglish;
         [SerializeField] private Button _btnJapanese;
         [SerializeField] private Button _btnContinue;
-        [SerializeField] private Color _selectedColor = new(0f, 0.478f, 1f, 1f);
-        [SerializeField] private Color _unselectedColor = new(1f, 1f, 1f, 0.78f);
-        [SerializeField] private Color _selectedTextColor = Color.white;
-        [SerializeField] private Color _unselectedTextColor = new(0.11f, 0.11f, 0.12f, 1f);
 
         private void Awake()
         {
+            ResolveButtons();
             if (_btnVietnamese != null) _btnVietnamese.onClick.AddListener(SelectVietnamese);
             if (_btnEnglish != null) _btnEnglish.onClick.AddListener(SelectEnglish);
             if (_btnJapanese != null) _btnJapanese.onClick.AddListener(SelectJapanese);
@@ -87,15 +83,22 @@ namespace _Scripts.UI
             SetButtonColor(_btnJapanese, selectedCode == JapaneseCode);
         }
 
-        private void SetButtonColor(Button button, bool isSelected)
+        private static void SetButtonColor(Button button, bool isSelected)
         {
             if (button == null) return;
-            if (button.image != null)
-                button.image.color = isSelected ? _selectedColor : _unselectedColor;
+            UIButtonTween tween = button.GetComponent<UIButtonTween>();
+            if (tween != null) tween.SetSelected(isSelected);
+        }
 
-            TMP_Text[] labels = button.GetComponentsInChildren<TMP_Text>(true);
-            Color textColor = isSelected ? _selectedTextColor : _unselectedTextColor;
-            foreach (TMP_Text label in labels) label.color = textColor;
+        private void ResolveButtons()
+        {
+            if (_btnContinue == null)
+                _btnContinue = UIComponentLookup.FindButton(this, "btnContinue");
+
+            Button[] languageButtons = UIComponentLookup.FindButtonsUnder(this, "Languages");
+            if (_btnVietnamese == null && languageButtons.Length > 0) _btnVietnamese = languageButtons[0];
+            if (_btnEnglish == null && languageButtons.Length > 1) _btnEnglish = languageButtons[1];
+            if (_btnJapanese == null && languageButtons.Length > 2) _btnJapanese = languageButtons[2];
         }
     }
 }

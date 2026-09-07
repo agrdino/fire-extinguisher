@@ -18,6 +18,7 @@ namespace _Scripts.UI
 
         private void Awake()
         {
+            if (_btnRestart == null) _btnRestart = UIComponentLookup.FindButton(this, "btnRestart");
             if (_btnRestart != null) _btnRestart.onClick.AddListener(OnClickRestartButton);
         }
 

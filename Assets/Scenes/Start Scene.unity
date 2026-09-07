@@ -581,18 +581,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 339853538157059226, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4292265896
+      objectReference: {fileID: 0}
     - target: {fileID: 2093163172033902248, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 1570428769}
+    - target: {fileID: 2202322661535820517, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098506054630638858, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4219429246815082194, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871280091408194320, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5143563532995087369, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: _positionOffset.z
       value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5363198879010075140, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158987956244559029, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897967159238505083, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7898054268903654934, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 8000270510047640859, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 506829736}
+    - target: {fileID: 8226351996176480510, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488257130791199612, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8869943852659707387, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: m_Name
       value: Application Runtime

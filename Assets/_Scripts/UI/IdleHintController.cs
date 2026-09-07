@@ -54,6 +54,7 @@ namespace _Scripts.UI
         [Header("View")]
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private TMP_Text _messageText;
+        [SerializeField] private UIPopupTween _popupAnimation;
 
         [Header("Callout")]
         [SerializeField] private Material _curveMaterial;
@@ -120,6 +121,8 @@ namespace _Scripts.UI
             _canvasGroup.alpha = 0f;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+            if (_popupAnimation == null)
+                _popupAnimation = GetComponentInChildren<UIPopupTween>(true);
 
             EnsureOverlayCamera();
             EnsureCalloutCurve(layer);
@@ -357,11 +360,13 @@ namespace _Scripts.UI
                 _calloutCurve.SetTarget(ResolveHintTarget(_currentStep));
                 _calloutCurve.SetVisible(true);
             }
+            if (_targetAlpha <= 0f && _popupAnimation != null) _popupAnimation.PlayIn();
             _targetAlpha = 1f;
         }
 
         private void HideHint()
         {
+            if (_targetAlpha > 0f && _popupAnimation != null) _popupAnimation.PlayOut();
             _targetAlpha = 0f;
             if (_calloutCurve != null) _calloutCurve.SetVisible(false);
             if (_canvasGroup == null) return;
@@ -379,6 +384,7 @@ namespace _Scripts.UI
                 _calloutCurve.SetTarget(target, useCircularAnchor);
                 _calloutCurve.SetVisible(target != null);
             }
+            if (_targetAlpha <= 0f && _popupAnimation != null) _popupAnimation.PlayIn();
             _targetAlpha = 1f;
         }
 

@@ -12,6 +12,8 @@ namespace _Scripts.UI
 
         private void Awake()
         {
+            if (_btnContinue == null) _btnContinue = UIComponentLookup.FindButton(this, "btnContinue");
+            if (_btnBack == null) _btnBack = UIComponentLookup.FindButton(this, "btnBack");
             if (_btnContinue != null) _btnContinue.onClick.AddListener(OnClickContinueButton);
             if (_btnBack != null) _btnBack.onClick.AddListener(OnClickBackButton);
         }
