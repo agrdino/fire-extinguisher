@@ -30,6 +30,7 @@ namespace _Scripts.Fires
         
         public IReadOnlyList<Fire> ActiveFires => _activeFires;
         public FireType CurrentFireType { get; private set; }
+        public FireSpawnPoint SelectedSpawnPoint { get; private set; }
 
         public void BindEnvironment(IEnvironmentSceneContext environment)
         {
@@ -64,6 +65,7 @@ namespace _Scripts.Fires
 
             FireSpawnPoint spawnPoint = GetRandomSpawnPoint(playerRoot.position);
             // if (spawnPoint == null) return;
+            SelectedSpawnPoint = spawnPoint;
 
             Fire firePrefab = GetRandomFirePrefab(spawnPoint.FireType);
             // if (firePrefab == null) return;
@@ -149,6 +151,7 @@ namespace _Scripts.Fires
 
             _activeFires.Clear();
             _hasRaisedAllFiresExtinguished = false;
+            SelectedSpawnPoint = null;
         }
 
         private void UnsubscribeFromFires()

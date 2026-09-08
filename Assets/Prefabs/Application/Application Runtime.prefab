@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.GameManager
   _roundDuration: 45
-  _escapeDuration: 20
+  _escapeDuration: 30
   _isExploreTimeLimited: 0
   _exploreDuration: 30
   _fireController: {fileID: 152316646840582338}
@@ -68,6 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5756225617467672712}
   - component: {fileID: 537917409395689674}
+  - component: {fileID: 6726242965575118831}
   m_Layer: 0
   m_Name: Move
   m_TagString: Untagged
@@ -138,6 +139,21 @@ MonoBehaviour:
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: {x: 0, y: 0}
   m_UseGravity: 1
+--- !u!114 &6726242965575118831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062887305970671403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c25d3e5b3a34f50b279dbdf02d727c1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.ForwardMoveSpeedRamp
+  _rampDuration: 4
+  _maximumSpeedMultiplier: 2
+  _forwardInputThreshold: 0.1
 --- !u!1 &1203372496599113712
 GameObject:
   m_ObjectHideFlags: 0

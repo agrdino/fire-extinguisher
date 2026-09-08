@@ -494,7 +494,8 @@ Transform:
   m_LocalPosition: {x: 16.7, y: 0.075, z: 8.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 770000000000000102}
   m_Father: {fileID: 629603223231746108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4328471436315488305
@@ -510,6 +511,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 0
+  _selectExtinguisherUIPoint: {fileID: 770000000000000102}
+--- !u!1 &770000000000000101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000102}
+  m_Layer: 0
+  m_Name: Select Extinguisher UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000101}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.5165333, z: 0, w: 0.8562671}
+  m_LocalPosition: {x: -1.77, y: 1.325, z: -0.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6067445995120295209}
+  m_LocalEulerAnglesHint: {x: 0, y: 62.2, z: 0}
 --- !u!1 &2952211499094892415
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +733,8 @@ Transform:
   m_LocalPosition: {x: 8.9, y: 0.075, z: 1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 770000000000000104}
   m_Father: {fileID: 629603223231746108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3114135290637332181
@@ -716,6 +750,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 1
+  _selectExtinguisherUIPoint: {fileID: 770000000000000104}
+--- !u!1 &770000000000000103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000104}
+  m_Layer: 0
+  m_Name: Select Extinguisher UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.6580326, z: 0, w: 0.7529894}
+  m_LocalPosition: {x: -1.98, y: 1.325, z: -0.27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3915470006464708732}
+  m_LocalEulerAnglesHint: {x: 0, y: 82.3, z: 0}
 --- !u!1 &5486391800429475012
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +864,8 @@ Transform:
   m_LocalPosition: {x: -8.3, y: 0.075, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 770000000000000106}
   m_Father: {fileID: 629603223231746108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &309069038828063652
@@ -814,6 +881,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 0
+  _selectExtinguisherUIPoint: {fileID: 770000000000000106}
+--- !u!1 &770000000000000105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000106}
+  m_Layer: 0
+  m_Name: Select Extinguisher UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000105}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.8902128, z: 0, w: 0.4555449}
+  m_LocalPosition: {x: 1.62, y: 1.325, z: 1.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2912665704667660679}
+  m_LocalEulerAnglesHint: {x: 0, y: -125.8, z: 0}
 --- !u!1 &5909746928714682771
 GameObject:
   m_ObjectHideFlags: 0

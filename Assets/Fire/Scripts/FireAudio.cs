@@ -4,7 +4,7 @@ using UnityEngine;
 namespace _Scripts.Fires
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(Fire), typeof(AudioSource))]
+    [RequireComponent(typeof(Fire))]
     public sealed class FireAudio : MonoBehaviour
     {
         [SerializeField] private Fire _fire;
@@ -14,12 +14,13 @@ namespace _Scripts.Fires
         [SerializeField, Min(0f)] private float _overlapDuration = 0.1f;
         [SerializeField, Min(1f)] private float _flareUpVolumeMultiplier = 1.5f;
 
-        private volatile float _fireLoopGain = 1f;
+        private AudioGainFilter _firstGainFilter;
+        private AudioGainFilter _secondGainFilter;
 
         private void Reset()
         {
             _fire = GetComponent<Fire>();
-            AudioSource[] sources = GetComponents<AudioSource>();
+            AudioSource[] sources = GetComponentsInChildren<AudioSource>(true);
             if (sources.Length > 0) _firstAudioSource = sources[0];
             if (sources.Length > 1) _secondAudioSource = sources[1];
             ConfigureAudioSources();
@@ -40,15 +41,20 @@ namespace _Scripts.Fires
         private void OnDisable()
         {
             _fire.OnIntensityChanged -= Fire_OnIntensityChanged;
-            _fireLoopGain = 1f;
+            SetFireLoopGain(1f);
             StopFireLoop();
         }
 
         private void ConfigureAudioSources()
         {
-            AudioSource[] sources = GetComponents<AudioSource>();
+            AudioSource[] sources = GetComponentsInChildren<AudioSource>(true);
             if (_firstAudioSource == null && sources.Length > 0) _firstAudioSource = sources[0];
             if (_secondAudioSource == null && sources.Length > 1) _secondAudioSource = sources[1];
+
+            if (_firstAudioSource != null)
+                _firstGainFilter = _firstAudioSource.GetComponent<AudioGainFilter>();
+            if (_secondAudioSource != null)
+                _secondGainFilter = _secondAudioSource.GetComponent<AudioGainFilter>();
 
             ConfigureAudioSource(_firstAudioSource);
             ConfigureAudioSource(_secondAudioSource);
@@ -78,17 +84,18 @@ namespace _Scripts.Fires
 
         private void UpdateFireAudio()
         {
-            _fireLoopGain = Mathf.Lerp(1f, _flareUpVolumeMultiplier, _fire.FlareUpProgress);
+            float gain = Mathf.Lerp(
+                1f,
+                _flareUpVolumeMultiplier,
+                _fire.FlareUpProgress);
+            SetFireLoopGain(gain);
             UpdateFireLoop();
         }
 
-        private void OnAudioFilterRead(float[] data, int channels)
+        private void SetFireLoopGain(float gain)
         {
-            float gain = _fireLoopGain;
-            if (gain <= 1f) return;
-
-            for (int i = 0; i < data.Length; i++)
-                data[i] *= gain;
+            if (_firstGainFilter != null) _firstGainFilter.Gain = gain;
+            if (_secondGainFilter != null) _secondGainFilter.Gain = gain;
         }
 
         private void StopFireLoop()

@@ -3,6 +3,7 @@ using AYellowpaper;
 using UnityEngine;
 using UnityEngine.Serialization;
 using _Scripts.Controller;
+using _Scripts.Fires;
 using _Scripts.SceneManagement;
 
 namespace _Scripts.UI
@@ -132,6 +133,16 @@ public void BindEnvironment(
             }
 
             if (state == ApplicationState.Failed) return PlaceFailedScene(scene);
+
+            if (state == ApplicationState.SelectExtinguisher
+                && FireController.Instance?.SelectedSpawnPoint?.SelectExtinguisherUIPoint != null)
+            {
+                Transform selectAnchor = FireController.Instance.SelectedSpawnPoint.SelectExtinguisherUIPoint;
+                scene.gameObject.transform.SetPositionAndRotation(
+                    selectAnchor.position,
+                    selectAnchor.rotation);
+                return true;
+            }
 
             if (state == ApplicationState.Completed
                 && _exitPlacementController?.SelectedSpawnPoint?.CompleteUIPoint != null)

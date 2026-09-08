@@ -6,8 +6,10 @@ namespace _Scripts.Fires
     public sealed class FireSpawnPoint : MonoBehaviour
     {
         [SerializeField] private FireType _fireType = FireType.Solid;
+        [SerializeField] private Transform _selectExtinguisherUIPoint;
 
         public FireType FireType => _fireType;
+        public Transform SelectExtinguisherUIPoint => _selectExtinguisherUIPoint;
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
@@ -17,6 +19,11 @@ namespace _Scripts.Fires
                 : new Color(0.2f, 0.65f, 1f, 0.9f);
             Gizmos.DrawWireSphere(transform.position, 0.2f);
             Gizmos.DrawLine(transform.position, transform.position + transform.forward * 0.4f);
+
+            if (_selectExtinguisherUIPoint == null) return;
+            Gizmos.color = new Color(0.2f, 0.75f, 1f, 0.9f);
+            Gizmos.DrawLine(transform.position, _selectExtinguisherUIPoint.position);
+            Gizmos.DrawWireSphere(_selectExtinguisherUIPoint.position, 0.15f);
         }
 #endif
     }
