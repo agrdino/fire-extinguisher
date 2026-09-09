@@ -106,11 +106,11 @@ namespace _Scripts.FireExtinguishers
             ApplySharedWorldYBounds();
         }
 
-        private static void ApplySharedWorldYBounds()
+        public static bool TryGetSharedWorldYBounds(out float minWorldY, out float maxWorldY)
         {
             bool hasBounds = false;
-            float minWorldY = float.PositiveInfinity;
-            float maxWorldY = float.NegativeInfinity;
+            minWorldY = float.PositiveInfinity;
+            maxWorldY = float.NegativeInfinity;
 
             foreach (DissolveRendererMaterials instance in ActiveInstances)
             {
@@ -126,7 +126,28 @@ namespace _Scripts.FireExtinguishers
                 }
             }
 
-            if (!hasBounds) return;
+            return hasBounds;
+        }
+
+        public static void GetActiveRenderers(List<Renderer> results)
+        {
+            if (results == null) return;
+
+            results.Clear();
+            foreach (DissolveRendererMaterials instance in ActiveInstances)
+            {
+                for (int index = 0; index < instance._bindings.Count; index++)
+                {
+                    Renderer renderer = instance._bindings[index].Renderer;
+                    if (renderer != null && !results.Contains(renderer))
+                        results.Add(renderer);
+                }
+            }
+        }
+
+        private static void ApplySharedWorldYBounds()
+        {
+            if (!TryGetSharedWorldYBounds(out float minWorldY, out float maxWorldY)) return;
 
             foreach (DissolveRendererMaterials instance in ActiveInstances)
             {
