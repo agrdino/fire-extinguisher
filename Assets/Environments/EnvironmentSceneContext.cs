@@ -14,6 +14,7 @@ namespace _Scripts.Controller
         Transform PlayerSpawnPoint { get; }
         IReadOnlyList<FireSpawnPoint> FireSpawnPoints { get; }
         IReadOnlyList<EmergencyExitSpawnPoint> ExitSpawnPoints { get; }
+        bool EscapeSmokeEnabled { get; }
 
         bool TryGetUIAnchor(ApplicationState state, out Transform anchor);
         bool ValidateConfiguration(out string error);
@@ -46,12 +47,16 @@ namespace _Scripts.Controller
         [SerializeField] private List<FireSpawnPoint> _fireSpawnPoints = new();
         [SerializeField] private List<EmergencyExitSpawnPoint> _exitSpawnPoints = new();
 
+        [Header("Environment Effects")]
+        [SerializeField] private bool _escapeSmokeEnabled;
+
         public SceneId SceneId => _sceneId;
         public EnvironmentType EnvironmentType => _environmentType;
         public ApplicationState DefaultEntryState => _defaultEntryState;
         public Transform PlayerSpawnPoint => _playerSpawnPoint;
         public IReadOnlyList<FireSpawnPoint> FireSpawnPoints => _fireSpawnPoints;
         public IReadOnlyList<EmergencyExitSpawnPoint> ExitSpawnPoints => _exitSpawnPoints;
+        public bool EscapeSmokeEnabled => _escapeSmokeEnabled;
 
         public bool TryGetUIAnchor(ApplicationState state, out Transform anchor)
         {

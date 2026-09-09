@@ -29,6 +29,7 @@ namespace _Scripts.Fires
         public event Action<FireType> OnFireTypeSelected;
         
         public IReadOnlyList<Fire> ActiveFires => _activeFires;
+        public bool HasBurningFires => _activeFires.Exists(fire => fire != null && !fire.IsExtinguished);
         public FireType CurrentFireType { get; private set; }
         public FireSpawnPoint SelectedSpawnPoint { get; private set; }
 

@@ -434,6 +434,7 @@ MonoBehaviour:
   - {fileID: 4022321237784748847}
   - {fileID: 4022321237784748834}
   - {fileID: 4022321237784748856}
+  _escapeSmokeEnabled: 0
 --- !u!114 &1175440973
 MonoBehaviour:
   m_ObjectHideFlags: 0

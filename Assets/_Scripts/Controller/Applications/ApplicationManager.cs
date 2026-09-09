@@ -56,6 +56,7 @@ namespace _Scripts.Controller
         public FireExtinguisherType SelectedExtinguisherType => _selectedExtinguisherType;
         public EmergencyExit EmergencyExit => _emergencyExit;
         public Transform PlayerView => GetPlayerView();
+        public IEnvironmentSceneContext CurrentEnvironment => _environmentContext;
 
         public event Action<ApplicationState> OnStateChanged;
         public event Action<float> OnRemainingTimeChanged;

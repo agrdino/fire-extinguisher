@@ -1980,6 +1980,7 @@ GameObject:
   - component: {fileID: 8494820004097332148}
   - component: {fileID: 9049481021680548847}
   - component: {fileID: 7650832480718130776}
+  - component: {fileID: 4349127096955075404}
   m_Layer: 0
   m_Name: Application Runtime
   m_TagString: Untagged
@@ -2005,6 +2006,7 @@ Transform:
   - {fileID: 1155254006912287413}
   - {fileID: 6638267439811074903}
   - {fileID: 879176445503378012}
+  - {fileID: 1137958935237934507}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2009777817877864980
@@ -2067,6 +2069,23 @@ MonoBehaviour:
   _emergencyExit: {fileID: 8306390398397067562}
   _minimumDistanceFromPlayer: 2
   _behindPlayerDotThreshold: 0
+--- !u!114 &4349127096955075404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869943852659707387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e986449ab9302458fd1de779fbb2a9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.EscapeSmokeController
+  _applicationManager: {fileID: 8962677695553302094}
+  _fireController: {fileID: 152316646840582338}
+  _transition: {fileID: 4834213386209574127}
+  _effectRoot: {fileID: 1137958935237934507}
+  _heightAbovePlayerView: 0.5
 --- !u!1001 &393946040925770636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3812,6 +3831,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 544985344951232393, guid: 17501f4c3eb858a489979666536d9be8, type: 3}
   m_PrefabInstance: {fileID: 4404029794725015899}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4639442142932272422
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 225403172073639742}
+    m_Modifications:
+    - target: {fileID: 5557725862819113163, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_Name
+      value: Escape Smoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+--- !u!4 &1137958935237934507 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5739920819860158605, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+  m_PrefabInstance: {fileID: 4639442142932272422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4834213386209574127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 248840896341162441, guid: 1efd77822c0e4f94d9c3c551bd5414c3, type: 3}
+  m_PrefabInstance: {fileID: 4639442142932272422}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe1de84c09d9334f80ad280df528105, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.ParticleSystemBlendTransition
 --- !u!1001 &4731794323973409881
 PrefabInstance:
   m_ObjectHideFlags: 0

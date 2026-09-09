@@ -1,0 +1,227 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5557725862819113163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5739920819860158605}
+  - component: {fileID: 5140790987694356987}
+  - component: {fileID: 248840896341162441}
+  m_Layer: 0
+  m_Name: Escape Smoke
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5739920819860158605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557725862819113163}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1290594976144713388}
+  - {fileID: 5021295143432510283}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5140790987694356987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557725862819113163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5fbc2bc5b997d14083d4a13e3ada612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.ParticleSystemLerpGroup
+  _lerpers:
+  - {fileID: 8269485183279471756}
+  - {fileID: 2775687328084566379}
+  _blend: 0
+--- !u!114 &248840896341162441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557725862819113163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe1de84c09d9334f80ad280df528105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.ParticleSystemBlendTransition
+  _lerpGroup: {fileID: 5140790987694356987}
+  _particleSystems:
+  - {fileID: 1379675556783307602}
+  - {fileID: 5144152583969539765}
+  _fadeInDuration: 5
+  _fadeOutDuration: 2
+--- !u!1001 &2447806840757587923
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5739920819860158605}
+    m_Modifications:
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232063817506047470, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_Name
+      value: Upper Layer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+--- !u!114 &2775687328084566379 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 539697143962152632, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+  m_PrefabInstance: {fileID: 2447806840757587923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8770ad37b259d4a83881eae150aa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.ParticleSystemLerper
+--- !u!4 &5021295143432510283 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+  m_PrefabInstance: {fileID: 2447806840757587923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5144152583969539765 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7393759259542489446, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+  m_PrefabInstance: {fileID: 2447806840757587923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8484358680204194356
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5739920819860158605}
+    m_Modifications:
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232063817506047470, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_Name
+      value: Lower Layer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+--- !u!4 &1290594976144713388 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+  m_PrefabInstance: {fileID: 8484358680204194356}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1379675556783307602 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7393759259542489446, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+  m_PrefabInstance: {fileID: 8484358680204194356}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8269485183279471756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 539697143962152632, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+  m_PrefabInstance: {fileID: 8484358680204194356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8770ad37b259d4a83881eae150aa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.ParticleSystemLerper

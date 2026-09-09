@@ -867,6 +867,7 @@ MonoBehaviour:
   - {fileID: 739999999616175113}
   - {fileID: 739999999616175108}
   - {fileID: 739999999616175134}
+  _escapeSmokeEnabled: 1
 --- !u!114 &1384057070
 MonoBehaviour:
   m_ObjectHideFlags: 0
