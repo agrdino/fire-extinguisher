@@ -134,13 +134,20 @@ public void BindEnvironment(
 
             if (state == ApplicationState.Failed) return PlaceFailedScene(scene);
 
-            if (state == ApplicationState.SelectExtinguisher
-                && FireController.Instance?.SelectedSpawnPoint?.SelectExtinguisherUIPoint != null)
+            FireSpawnPoint selectedFireSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
+            Transform fireUIAnchor = state switch
             {
-                Transform selectAnchor = FireController.Instance.SelectedSpawnPoint.SelectExtinguisherUIPoint;
+                ApplicationState.SelectExtinguisher => selectedFireSpawnPoint?.SelectExtinguisherUIPoint,
+                ApplicationState.Fighting => selectedFireSpawnPoint?.FightingUIPoint,
+                ApplicationState.Escape => selectedFireSpawnPoint?.EscapeUIPoint,
+                _ => null
+            };
+
+            if (fireUIAnchor != null)
+            {
                 scene.gameObject.transform.SetPositionAndRotation(
-                    selectAnchor.position,
-                    selectAnchor.rotation);
+                    fireUIAnchor.position,
+                    fireUIAnchor.rotation);
                 return true;
             }
 

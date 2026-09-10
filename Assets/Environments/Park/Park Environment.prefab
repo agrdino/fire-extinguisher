@@ -496,6 +496,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 770000000000000102}
+  - {fileID: 770000000000000202}
+  - {fileID: 770000000000000302}
   m_Father: {fileID: 629603223231746108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4328471436315488305
@@ -512,6 +514,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 0
   _selectExtinguisherUIPoint: {fileID: 770000000000000102}
+  _fightingUIPoint: {fileID: 770000000000000202}
+  _escapeUIPoint: {fileID: 770000000000000302}
 --- !u!1 &770000000000000101
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +739,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 770000000000000104}
+  - {fileID: 770000000000000204}
+  - {fileID: 770000000000000304}
   m_Father: {fileID: 629603223231746108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3114135290637332181
@@ -751,6 +757,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 1
   _selectExtinguisherUIPoint: {fileID: 770000000000000104}
+  _fightingUIPoint: {fileID: 770000000000000204}
+  _escapeUIPoint: {fileID: 770000000000000304}
 --- !u!1 &770000000000000103
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,6 +874,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 770000000000000106}
+  - {fileID: 770000000000000206}
+  - {fileID: 770000000000000306}
   m_Father: {fileID: 629603223231746108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &309069038828063652
@@ -882,6 +892,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 0
   _selectExtinguisherUIPoint: {fileID: 770000000000000106}
+  _fightingUIPoint: {fileID: 770000000000000206}
+  _escapeUIPoint: {fileID: 770000000000000306}
 --- !u!1 &770000000000000105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,3 +1242,189 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd35e25710b7b8c4ca6c03a138208ffa, type: 3}
   m_PrefabInstance: {fileID: 7614445236404231949}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &770000000000000201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000202}
+  m_Layer: 0
+  m_Name: Fighting UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.5165333, z: 0, w: 0.8562671}
+  m_LocalPosition: {x: -1.77, y: 1.325, z: -0.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6067445995120295209}
+  m_LocalEulerAnglesHint: {x: 0, y: 62.2, z: 0}
+--- !u!1 &770000000000000301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000302}
+  m_Layer: 0
+  m_Name: Escape UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.5165333, z: 0, w: 0.8562671}
+  m_LocalPosition: {x: -1.77, y: 1.325, z: -0.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6067445995120295209}
+  m_LocalEulerAnglesHint: {x: 0, y: 62.2, z: 0}
+--- !u!1 &770000000000000203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000204}
+  m_Layer: 0
+  m_Name: Fighting UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000203}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.6580326, z: 0, w: 0.7529894}
+  m_LocalPosition: {x: -1.98, y: 1.325, z: -0.27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3915470006464708732}
+  m_LocalEulerAnglesHint: {x: 0, y: 82.3, z: 0}
+--- !u!1 &770000000000000303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000304}
+  m_Layer: 0
+  m_Name: Escape UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000303}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.6580326, z: 0, w: 0.7529894}
+  m_LocalPosition: {x: -1.98, y: 1.325, z: -0.27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3915470006464708732}
+  m_LocalEulerAnglesHint: {x: 0, y: 82.3, z: 0}
+--- !u!1 &770000000000000205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000206}
+  m_Layer: 0
+  m_Name: Fighting UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000205}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.8902128, z: 0, w: 0.4555449}
+  m_LocalPosition: {x: 1.62, y: 1.325, z: 1.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2912665704667660679}
+  m_LocalEulerAnglesHint: {x: 0, y: -125.8, z: 0}
+--- !u!1 &770000000000000305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770000000000000306}
+  m_Layer: 0
+  m_Name: Escape UI Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770000000000000306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770000000000000305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.8902128, z: 0, w: 0.4555449}
+  m_LocalPosition: {x: 1.62, y: 1.325, z: 1.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2912665704667660679}
+  m_LocalEulerAnglesHint: {x: 0, y: -125.8, z: 0}
