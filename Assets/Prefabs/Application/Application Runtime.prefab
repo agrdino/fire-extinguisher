@@ -204,6 +204,10 @@ MonoBehaviour:
   - {fileID: 8241274920004296457, guid: 030b859b7bb0e574da3bb2e25df9442c, type: 3}
   _activeFires: []
   _minimumSpawnDistanceFromPlayer: 2
+  _electricalSparksPrefab: {fileID: 4749980201479958301, guid: a4cbca814b838a5458720cd2f8d6a501, type: 3}
+  _preIgnitionDuration: 3
+  _fireRevealDuration: 1
+  _sparksOverlapDuration: 2
 --- !u!1 &1229881592274559765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,7 +1326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
+  m_RequiresDepthTextureOption: 1
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras:
@@ -1344,7 +1348,7 @@ MonoBehaviour:
   m_UseScreenCoordOverride: 0
   m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
+  m_RequiresDepthTexture: 1
   m_RequiresColorTexture: 0
   m_TaaSettings:
     m_Quality: 3
@@ -2085,7 +2089,7 @@ MonoBehaviour:
   _fireController: {fileID: 152316646840582338}
   _transition: {fileID: 4834213386209574127}
   _effectRoot: {fileID: 1137958935237934507}
-  _heightAbovePlayerView: 0.5
+  _fixedWorldHeight: 2
 --- !u!1001 &393946040925770636
 PrefabInstance:
   m_ObjectHideFlags: 0

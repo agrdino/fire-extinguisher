@@ -12,7 +12,7 @@ namespace _Scripts.ParticleSystemLerps
         [SerializeField] private FireController _fireController;
         [SerializeField] private ParticleSystemBlendTransition _transition;
         [SerializeField] private Transform _effectRoot;
-        [SerializeField, Min(0f)] private float _heightAbovePlayerView = 0.5f;
+        [SerializeField] private float _fixedWorldHeight = 2f;
 
         private void Reset()
         {
@@ -97,7 +97,7 @@ namespace _Scripts.ParticleSystemLerps
                 return;
 
             Vector3 position = _applicationManager.PlayerView.position;
-            position.y += _heightAbovePlayerView;
+            position.y = _fixedWorldHeight;
             _effectRoot.SetPositionAndRotation(position, Quaternion.identity);
         }
     }

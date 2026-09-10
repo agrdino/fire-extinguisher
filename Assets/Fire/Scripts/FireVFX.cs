@@ -1,3 +1,4 @@
+using System.Collections;
 using _Scripts.ParticleSystemLerps;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ namespace _Scripts.Fires.Visualizes
         [SerializeField, Min(0f)] private float _lightIntensityPerBlend = 2f;
         [SerializeField, Min(0f)] private float _lightRange = 4f;
         [SerializeField, Min(1f)] private float _flareUpRangeMultiplier = 1.5f;
+
+        private float _revealBlend = 1f;
+        private Coroutine _revealRoutine;
 
         private void Reset()
         {
@@ -48,9 +52,44 @@ namespace _Scripts.Fires.Visualizes
             _fire.OnIntensityChanged -= Fire_OnIntensityChanged;
         }
 
+        public void RevealFromZero(float duration)
+        {
+            if (_revealRoutine != null)
+                StopCoroutine(_revealRoutine);
+
+            _revealBlend = 0f;
+            UpdateBlend();
+
+            if (duration <= 0f)
+            {
+                _revealBlend = 1f;
+                UpdateBlend();
+                _revealRoutine = null;
+                return;
+            }
+
+            _revealRoutine = StartCoroutine(RevealRoutine(duration));
+        }
+
+        private IEnumerator RevealRoutine(float duration)
+        {
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                _revealBlend = Mathf.Clamp01(elapsed / duration);
+                UpdateBlend();
+                yield return null;
+                elapsed += Time.deltaTime;
+            }
+
+            _revealBlend = 1f;
+            UpdateBlend();
+            _revealRoutine = null;
+        }
+
         private void UpdateBlend()
         {
-            float blend = GetBlend(_fire.IntensityRatio);
+            float blend = GetBlend(_fire.IntensityRatio) * _revealBlend;
             _fireEffect.SetBlend(blend);
             UpdateLight(blend);
         }

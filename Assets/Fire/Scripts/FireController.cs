@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using _Scripts.Controller;
+using _Scripts.Fires.Visualizes;
 using UnityEngine;
 
 namespace _Scripts.Fires
@@ -20,8 +22,16 @@ namespace _Scripts.Fires
         [SerializeField] private List<Fire> _activeFires = new();
         [SerializeField, Min(0f)] private float _minimumSpawnDistanceFromPlayer = 2f;
 
+        [Header("Solid Fire Ignition")]
+        [SerializeField] private GameObject _electricalSparksPrefab;
+        [SerializeField, Min(0f)] private float _preIgnitionDuration = 3f;
+        [SerializeField, Min(0f)] private float _fireRevealDuration = 1f;
+        [SerializeField, Min(0f)] private float _sparksOverlapDuration = 2f;
+
         private bool _hasRaisedAllFiresExtinguished;
         private IEnvironmentSceneContext _environment;
+        private Coroutine _solidFireIgnitionRoutine;
+        private GameObject _activeElectricalSparks;
 
         public event Action OnAllFiresExtinguished;
         public event Action OnFireFlareUpStarted;
@@ -74,8 +84,55 @@ namespace _Scripts.Fires
             CurrentFireType = spawnPoint.FireType;
             OnFireTypeSelected?.Invoke(CurrentFireType);
 
+            if (CurrentFireType == FireType.Solid && _electricalSparksPrefab != null)
+            {
+                _solidFireIgnitionRoutine = StartCoroutine(
+                    RunSolidFireIgnition(firePrefab, spawnPoint, playerRoot));
+                return;
+            }
+
+            SpawnFire(firePrefab, spawnPoint, playerRoot, false);
+        }
+
+        private IEnumerator RunSolidFireIgnition(
+            Fire firePrefab,
+            FireSpawnPoint spawnPoint,
+            Transform playerRoot)
+        {
+            _activeElectricalSparks = Instantiate(
+                _electricalSparksPrefab,
+                spawnPoint.transform.position,
+                spawnPoint.transform.rotation,
+                transform);
+
+            if (_preIgnitionDuration > 0f)
+                yield return new WaitForSeconds(_preIgnitionDuration);
+
+            SpawnFire(firePrefab, spawnPoint, playerRoot, true);
+
+            if (_sparksOverlapDuration > 0f)
+                yield return new WaitForSeconds(_sparksOverlapDuration);
+
+            DestroyActiveElectricalSparks();
+            _solidFireIgnitionRoutine = null;
+        }
+
+        private void SpawnFire(
+            Fire firePrefab,
+            FireSpawnPoint spawnPoint,
+            Transform playerRoot,
+            bool revealFromZero)
+        {
             Fire fire = Instantiate(firePrefab, spawnPoint.transform.position, spawnPoint.transform.rotation, transform);
             fire.name = $"{firePrefab.name} ({spawnPoint.FireType})";
+
+            if (revealFromZero)
+            {
+                FireVFX[] fireVisuals = fire.GetComponentsInChildren<FireVFX>(true);
+                for (int i = 0; i < fireVisuals.Length; i++)
+                    fireVisuals[i].RevealFromZero(_fireRevealDuration);
+            }
+
             FireProximityWarning proximityWarning = fire.GetComponentInChildren<FireProximityWarning>(true);
             if (proximityWarning != null) proximityWarning.Arm(playerRoot);
             fire.OnIntensityChanged += Fire_OnIntensityChanged;
@@ -143,6 +200,13 @@ namespace _Scripts.Fires
 
         public void ClearFires()
         {
+            if (_solidFireIgnitionRoutine != null)
+            {
+                StopCoroutine(_solidFireIgnitionRoutine);
+                _solidFireIgnitionRoutine = null;
+            }
+
+            DestroyActiveElectricalSparks();
             UnsubscribeFromFires();
             for (int i = _activeFires.Count - 1; i >= 0; i--)
             {
@@ -153,6 +217,14 @@ namespace _Scripts.Fires
             _activeFires.Clear();
             _hasRaisedAllFiresExtinguished = false;
             SelectedSpawnPoint = null;
+        }
+
+        private void DestroyActiveElectricalSparks()
+        {
+            if (_activeElectricalSparks == null) return;
+
+            Destroy(_activeElectricalSparks);
+            _activeElectricalSparks = null;
         }
 
         private void UnsubscribeFromFires()
