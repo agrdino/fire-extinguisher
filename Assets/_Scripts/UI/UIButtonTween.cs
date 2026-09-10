@@ -166,8 +166,9 @@ namespace _Scripts.UI
             if (_button == null) return;
 
             VisualState state;
-            if (!_button.interactable) state = VisualState.Disabled;
-            else if (_pointerDown || _selected) state = VisualState.Pressed;
+            if (_selected) state = VisualState.Pressed;
+            else if (!_button.interactable) state = VisualState.Disabled;
+            else if (_pointerDown) state = VisualState.Pressed;
             else if (_pointerInside) state = VisualState.Hover;
             else state = VisualState.Normal;
 
