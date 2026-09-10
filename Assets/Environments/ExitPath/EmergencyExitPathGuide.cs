@@ -9,8 +9,14 @@ namespace _Scripts.Controller
     public sealed class EmergencyExitPathGuide : MonoBehaviour
     {
         [SerializeField] private LineRenderer _lineRenderer;
+        [SerializeField] private Transform _playerGroundMarker;
         [SerializeField, Min(0.01f)] private float _lineWidth = 0.1f;
         [SerializeField, Min(0f)] private float _groundOffset = 0.035f;
+        [SerializeField, Min(0f)] private float _markerGroundOffset = 0.01f;
+        [SerializeField, Min(0f)] private float _playerPathStartOffset = 0.5f;
+        [SerializeField, Min(0f)] private float _exitPathEndOffset = 0.25f;
+        [SerializeField, Min(0.01f)] private float _markerPositionSmoothTime = 0.08f;
+        [SerializeField, Min(0f)] private float _markerRotationSpeed = 360f;
         [SerializeField, Min(0.1f)] private float _sampleRadius = 2f;
         [SerializeField, Min(0.02f)] private float _refreshInterval = 0.2f;
 
@@ -18,6 +24,10 @@ namespace _Scripts.Controller
         private Transform _playerRoot;
         private NavMeshPath _path;
         private float _nextRefreshTime;
+        private Vector3 _markerTargetPosition;
+        private Vector3 _markerPositionVelocity;
+        private float _markerTargetYaw;
+        private bool _hasMarkerTarget;
         private bool _isVisible;
 
         private void Awake()
@@ -29,6 +39,7 @@ namespace _Scripts.Controller
         private void OnDisable()
         {
             if (_lineRenderer != null) _lineRenderer.enabled = false;
+            SetMarkerVisible(false);
         }
 
         public void Initialize(EmergencyExit emergencyExit, Transform playerRoot)
@@ -46,6 +57,7 @@ namespace _Scripts.Controller
             if (!_isVisible)
             {
                 if (_lineRenderer != null) _lineRenderer.enabled = false;
+                SetMarkerVisible(false);
                 return;
             }
 
@@ -54,8 +66,12 @@ namespace _Scripts.Controller
 
         private void LateUpdate()
         {
-            if (!_isVisible || Time.unscaledTime < _nextRefreshTime) return;
-            RefreshPath();
+            if (!_isVisible) return;
+
+            if (Time.unscaledTime >= _nextRefreshTime)
+                RefreshPath();
+
+            SmoothPlayerGroundMarker();
         }
 
         private void RefreshPath()
@@ -63,7 +79,7 @@ namespace _Scripts.Controller
             _nextRefreshTime = Time.unscaledTime + _refreshInterval;
             if (_lineRenderer == null || _emergencyExit == null || _playerRoot == null)
             {
-                HideLine();
+                HideGuide();
                 return;
             }
 
@@ -72,14 +88,14 @@ namespace _Scripts.Controller
                 || !NavMesh.CalculatePath(startHit.position, endHit.position, NavMesh.AllAreas, _path)
                 || _path.status != NavMeshPathStatus.PathComplete)
             {
-                HideLine();
+                HideGuide();
                 return;
             }
 
             Vector3[] corners = _path.corners;
             if (corners.Length < 2)
             {
-                HideLine();
+                HideGuide();
                 return;
             }
 
@@ -90,7 +106,13 @@ namespace _Scripts.Controller
             for (int i = 0; i < corners.Length; i++)
                 _lineRenderer.SetPosition(i, corners[corners.Length - 1 - i] + Vector3.up * _groundOffset);
 
+            Vector3 pathStart = Vector3.MoveTowards(corners[0], corners[1], _playerPathStartOffset);
+            Vector3 pathEnd = Vector3.MoveTowards(corners[corners.Length - 1], corners[corners.Length - 2], _exitPathEndOffset);
+            _lineRenderer.SetPosition(corners.Length - 1, pathStart + Vector3.up * _groundOffset);
+            _lineRenderer.SetPosition(0, pathEnd + Vector3.up * _groundOffset);
+
             _lineRenderer.enabled = true;
+            UpdatePlayerGroundMarker(startHit.position, corners[1]);
         }
 
         private void ConfigureLineRenderer()
@@ -105,9 +127,64 @@ namespace _Scripts.Controller
         }
 
 
-        private void HideLine()
+        private void UpdatePlayerGroundMarker(Vector3 groundPosition, Vector3 firstCorner)
+        {
+            if (_playerGroundMarker == null) return;
+
+            Vector3 direction = firstCorner - groundPosition;
+            direction.y = 0f;
+
+            _markerTargetPosition = groundPosition + Vector3.up * _markerGroundOffset;
+            if (direction.sqrMagnitude > Mathf.Epsilon)
+                _markerTargetYaw = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+            if (!_hasMarkerTarget)
+            {
+                _playerGroundMarker.position = _markerTargetPosition;
+                _playerGroundMarker.rotation = Quaternion.Euler(0f, _markerTargetYaw, 0f);
+                _markerPositionVelocity = Vector3.zero;
+            }
+
+            _hasMarkerTarget = true;
+            SetMarkerVisible(true);
+        }
+
+        private void SmoothPlayerGroundMarker()
+        {
+            if (!_hasMarkerTarget || _playerGroundMarker == null) return;
+
+            float deltaTime = Time.unscaledDeltaTime;
+            _playerGroundMarker.position = Vector3.SmoothDamp(
+                _playerGroundMarker.position,
+                _markerTargetPosition,
+                ref _markerPositionVelocity,
+                _markerPositionSmoothTime,
+                Mathf.Infinity,
+                deltaTime);
+
+            float yaw = Mathf.MoveTowardsAngle(
+                _playerGroundMarker.eulerAngles.y,
+                _markerTargetYaw,
+                _markerRotationSpeed * deltaTime);
+            _playerGroundMarker.rotation = Quaternion.Euler(0f, yaw, 0f);
+        }
+
+        private void SetMarkerVisible(bool isVisible)
+        {
+            if (!isVisible)
+            {
+                _hasMarkerTarget = false;
+                _markerPositionVelocity = Vector3.zero;
+            }
+
+            if (_playerGroundMarker != null)
+                _playerGroundMarker.gameObject.SetActive(isVisible);
+        }
+
+        private void HideGuide()
         {
             if (_lineRenderer != null) _lineRenderer.enabled = false;
+            SetMarkerVisible(false);
         }
     }
 }
