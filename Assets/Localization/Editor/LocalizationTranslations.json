@@ -33,12 +33,12 @@
     {"key":"explore.countdown","en":"Fire drill starts in {0}s","vi":"Diễn tập bắt đầu sau {0} giây","ja":"消火訓練はあと{0}秒で始まります"},
 
     {"key":"select.title","en":"CHOOSE A FIRE EXTINGUISHER","vi":"CHỌN BÌNH CHỮA CHÁY","ja":"消火器を選択"},
-    {"key":"select.subtitle","en":"CO2 is for liquid fires. Dry powder is for solid fires. Select one, then confirm.","vi":"CO₂ dùng cho cháy chất lỏng. Bột khô dùng cho cháy chất rắn. Chọn một bình rồi xác nhận.","ja":"CO₂消火器は液体火災、粉末消火器は固体火災に使用します。1つ選んで確認してください。"},
+    {"key":"select.subtitle","en":"CO2 is for liquid fires. Dry powder is for electrical fires. Select one, then confirm.","vi":"CO₂ dùng cho cháy chất lỏng. Bột khô dùng cho cháy điện. Chọn một bình rồi xác nhận.","ja":"CO₂消火器は液体火災、粉末消火器は電気火災に使用します。1つ選んで確認してください。"},
     {"key":"select.co2_short","en":"CO2","vi":"CO₂","ja":"CO₂"},
     {"key":"select.co2_name","en":"CO2 EXTINGUISHER","vi":"BÌNH CHỮA CHÁY CO₂","ja":"CO₂消火器"},
-    {"key":"select.co2_description","en":"For flammable-liquid fires.\n\nLeaves no residue.\n\nNot for solid-material fires.","vi":"Dùng cho đám cháy chất lỏng dễ cháy.\n\nKhông để lại cặn.\n\nKhông dùng cho đám cháy chất rắn.","ja":"可燃性液体の火災に使用します。\n\n消火後に残留物がありません。\n\n固体火災には使用しません。"},
+    {"key":"select.co2_description","en":"For flammable-liquid fires.\n\nLeaves no residue.\n\nNot for electrical fires in this training.","vi":"Dùng cho đám cháy chất lỏng dễ cháy.\n\nKhông để lại cặn.\n\nTrong bài huấn luyện này không dùng cho cháy điện.","ja":"可燃性液体の火災に使用します。\n\n消火後に残留物がありません。\n\nこの訓練では電気火災には使用しません。"},
     {"key":"select.powder_name","en":"DRY POWDER EXTINGUISHER","vi":"BÌNH CHỮA CHÁY BỘT KHÔ","ja":"粉末消火器"},
-    {"key":"select.powder_description","en":"For solid-material fires.\n\nQuickly blankets the flames.\n\nNot for liquid fires in this training.","vi":"Dùng cho đám cháy chất rắn.\n\nNhanh chóng bao phủ ngọn lửa.\n\nTrong bài huấn luyện này không dùng cho cháy chất lỏng.","ja":"固体火災に使用します。\n\n炎を素早く覆って消火します。\n\nこの訓練では液体火災には使用しません。"},
+    {"key":"select.powder_description","en":"For electrical fires.\n\nQuickly blankets the flames.\n\nNot for liquid fires in this training.","vi":"Dùng cho đám cháy điện.\n\nNhanh chóng bao phủ ngọn lửa.\n\nTrong bài huấn luyện này không dùng cho cháy chất lỏng.","ja":"電気火災に使用します。\n\n炎を素早く覆って消火します。\n\nこの訓練では液体火災には使用しません。"},
     {"key":"select.placeholder_description","en":"Bla bla","vi":"Mô tả","ja":"説明"},
 
     {"key":"fighting.title","en":"EXTINGUISH ALL FIRES","vi":"DẬP TẮT TẤT CẢ ĐÁM CHÁY","ja":"すべての火を消す"},

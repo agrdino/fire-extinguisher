@@ -114012,7 +114012,7 @@ GameObject:
   - component: {fileID: 6234302537784246876}
   - component: {fileID: 1521720039556908767}
   m_Layer: 0
-  m_Name: Fire Point 3 - Solid
+  m_Name: Fire Point 3 - Electrical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114120,7 +114120,7 @@ GameObject:
   - component: {fileID: 2459236865231068299}
   - component: {fileID: 6419938941248935311}
   m_Layer: 0
-  m_Name: Fire Point 1 - Solid
+  m_Name: Fire Point 1 - Electrical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1920,7 +1920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6524490427946553663, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_text
-      value: CO2 is for liquid fires. Dry powder is for solid fires. Select one,
+      value: CO2 is for liquid fires. Dry powder is for electrical fires. Select one,
         then confirm.
       objectReference: {fileID: 0}
     - target: {fileID: 6524490427946553663, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
@@ -2486,7 +2486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5881238643980604567, guid: 2321c94a283f0664dab4225dfc999173, type: 3}
       propertyPath: m_text
-      value: 'For solid-material fires.
+      value: 'For electrical fires.
 
         Quickly blankets the flames.
 

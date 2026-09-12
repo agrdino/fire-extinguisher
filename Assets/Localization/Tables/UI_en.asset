@@ -167,7 +167,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040920
-    m_Localized: CO2 is for liquid fires. Dry powder is for solid fires. Select one,
+    m_Localized: CO2 is for liquid fires. Dry powder is for electrical fires. Select one,
       then confirm.
     m_Metadata:
       m_Items: []
@@ -185,7 +185,7 @@ MonoBehaviour:
       Leaves no residue.
 
       Not
-      for solid-material fires.'
+      for electrical fires in this training.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040924
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040925
-    m_Localized: 'For solid-material fires.
+    m_Localized: 'For electrical fires.
 
       Quickly blankets the flames.
 

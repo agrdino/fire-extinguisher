@@ -8,7 +8,7 @@ namespace _Scripts.Fires
     public class Fire : MonoBehaviour
     {
         [Header("Type")]
-        [SerializeField] private FireType _fireType = FireType.Solid;
+        [SerializeField] private FireType _fireType = FireType.Electrical;
 
         [SerializeField] private SphereCollider _collider;
         [FormerlySerializedAs("_hp")]

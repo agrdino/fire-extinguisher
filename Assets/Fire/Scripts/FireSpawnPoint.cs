@@ -5,7 +5,7 @@ namespace _Scripts.Fires
     [DisallowMultipleComponent]
     public sealed class FireSpawnPoint : MonoBehaviour
     {
-        [SerializeField] private FireType _fireType = FireType.Solid;
+        [SerializeField] private FireType _fireType = FireType.Electrical;
         [SerializeField] private Transform _selectExtinguisherUIPoint;
         [SerializeField] private Transform _fightingUIPoint;
         [SerializeField] private Transform _escapeUIPoint;
@@ -18,7 +18,7 @@ namespace _Scripts.Fires
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            Gizmos.color = _fireType == FireType.Solid
+            Gizmos.color = _fireType == FireType.Electrical
                 ? new Color(1f, 0.45f, 0.1f, 0.9f)
                 : new Color(0.2f, 0.65f, 1f, 0.9f);
             Gizmos.DrawWireSphere(transform.position, 0.2f);

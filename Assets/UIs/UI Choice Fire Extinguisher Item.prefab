@@ -71,7 +71,7 @@ PrefabInstance:
         Leaves no residue.
 
         Not
-        for solid-material fires.'
+        for electrical fires in this training.'
       objectReference: {fileID: 0}
     - target: {fileID: 2636325300729656182, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_fontAsset

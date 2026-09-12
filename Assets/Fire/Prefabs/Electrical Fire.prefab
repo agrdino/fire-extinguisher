@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9209849650117579791, guid: edcd5f3b93819b440bce7f3b554e890b, type: 3}
       propertyPath: m_Name
-      value: Solid Fire
+      value: Electrical Fire
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

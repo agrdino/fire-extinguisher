@@ -143,7 +143,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1337040920
     m_Localized: "CO\u2082 d\xF9ng cho ch\xE1y ch\u1EA5t l\u1ECFng. B\u1ED9t kh\xF4
-      d\xF9ng cho ch\xE1y ch\u1EA5t r\u1EAFn. Ch\u1ECDn m\u1ED9t b\xECnh r\u1ED3i
+      d\xF9ng cho ch\xE1y \u0111i\u1EC7n. Ch\u1ECDn m\u1ED9t b\xECnh r\u1ED3i
       x\xE1c nh\u1EADn."
     m_Metadata:
       m_Items: []
@@ -157,8 +157,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1337040923
     m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t l\u1ECFng d\u1EC5 ch\xE1y.\nKh\xF4ng
-      \u0111\u1EC3 l\u1EA1i c\u1EB7n.\nKh\xF4ng d\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t
-      r\u1EAFn."
+      \u0111\u1EC3 l\u1EA1i c\u1EB7n.\nTrong b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y kh\xF4ng
+      d\xF9ng cho ch\xE1y \u0111i\u1EC7n."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040924
@@ -166,7 +166,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040925
-    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t r\u1EAFn.\nNhanh ch\xF3ng
+    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y \u0111i\u1EC7n.\nNhanh ch\xF3ng
       bao ph\u1EE7 ng\u1ECDn l\u1EEDa.\nTrong b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y
       kh\xF4ng d\xF9ng cho ch\xE1y ch\u1EA5t l\u1ECFng."
     m_Metadata:

@@ -22,7 +22,7 @@ namespace _Scripts.Fires
         [SerializeField] private List<Fire> _activeFires = new();
         [SerializeField, Min(0f)] private float _minimumSpawnDistanceFromPlayer = 2f;
 
-        [Header("Solid Fire Ignition")]
+        [Header("Electrical Fire Ignition")]
         [SerializeField] private GameObject _electricalSparksPrefab;
         [SerializeField, Min(0f)] private float _preIgnitionDuration = 3f;
         [SerializeField, Min(0f)] private float _fireRevealDuration = 1f;
@@ -30,7 +30,7 @@ namespace _Scripts.Fires
 
         private bool _hasRaisedAllFiresExtinguished;
         private IEnvironmentSceneContext _environment;
-        private Coroutine _solidFireIgnitionRoutine;
+        private Coroutine _electricalFireIgnitionRoutine;
         private GameObject _activeElectricalSparks;
 
         public event Action OnAllFiresExtinguished;
@@ -84,20 +84,16 @@ namespace _Scripts.Fires
             CurrentFireType = spawnPoint.FireType;
             OnFireTypeSelected?.Invoke(CurrentFireType);
 
-            if (CurrentFireType == FireType.Solid && _electricalSparksPrefab != null)
+            if (CurrentFireType == FireType.Electrical && _electricalSparksPrefab != null)
             {
-                _solidFireIgnitionRoutine = StartCoroutine(
-                    RunSolidFireIgnition(firePrefab, spawnPoint, playerRoot));
+                _electricalFireIgnitionRoutine = StartCoroutine(RunElectricalFireIgnition(firePrefab, spawnPoint, playerRoot));
                 return;
             }
 
             SpawnFire(firePrefab, spawnPoint, playerRoot, false);
         }
 
-        private IEnumerator RunSolidFireIgnition(
-            Fire firePrefab,
-            FireSpawnPoint spawnPoint,
-            Transform playerRoot)
+        private IEnumerator RunElectricalFireIgnition(Fire firePrefab, FireSpawnPoint spawnPoint, Transform playerRoot)
         {
             _activeElectricalSparks = Instantiate(
                 _electricalSparksPrefab,
@@ -114,7 +110,7 @@ namespace _Scripts.Fires
                 yield return new WaitForSeconds(_sparksOverlapDuration);
 
             DestroyActiveElectricalSparks();
-            _solidFireIgnitionRoutine = null;
+            _electricalFireIgnitionRoutine = null;
         }
 
         private void SpawnFire(
@@ -200,10 +196,10 @@ namespace _Scripts.Fires
 
         public void ClearFires()
         {
-            if (_solidFireIgnitionRoutine != null)
+            if (_electricalFireIgnitionRoutine != null)
             {
-                StopCoroutine(_solidFireIgnitionRoutine);
-                _solidFireIgnitionRoutine = null;
+                StopCoroutine(_electricalFireIgnitionRoutine);
+                _electricalFireIgnitionRoutine = null;
             }
 
             DestroyActiveElectricalSparks();
