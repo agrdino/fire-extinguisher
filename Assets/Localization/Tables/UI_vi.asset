@@ -142,9 +142,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040920
-    m_Localized: "CO\u2082 d\xF9ng cho ch\xE1y ch\u1EA5t l\u1ECFng. B\u1ED9t kh\xF4
-      d\xF9ng cho ch\xE1y \u0111i\u1EC7n. Ch\u1ECDn m\u1ED9t b\xECnh r\u1ED3i
-      x\xE1c nh\u1EADn."
+    m_Localized: "CO₂ dùng cho cháy điện. Bột khô dùng cho cháy xăng. Chọn một bình rồi xác nhận."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040921
@@ -156,9 +154,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040923
-    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y ch\u1EA5t l\u1ECFng d\u1EC5 ch\xE1y.\nKh\xF4ng
-      \u0111\u1EC3 l\u1EA1i c\u1EB7n.\nTrong b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y kh\xF4ng
-      d\xF9ng cho ch\xE1y \u0111i\u1EC7n."
+    m_Localized: "Dùng cho đám cháy điện.\n\nKhông dẫn điện và không gây ăn mòn thiết bị.\n\nTrong bài huấn luyện này không dùng cho cháy xăng."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040924
@@ -166,9 +162,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040925
-    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y \u0111i\u1EC7n.\nNhanh ch\xF3ng
-      bao ph\u1EE7 ng\u1ECDn l\u1EEDa.\nTrong b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y
-      kh\xF4ng d\xF9ng cho ch\xE1y ch\u1EA5t l\u1ECFng."
+    m_Localized: "Dùng cho đám cháy xăng.\n\nTạo lớp cách ly, ngăn không khí tiếp xúc với nhiên liệu.\n\nTrong bài huấn luyện này không dùng cho cháy điện."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040926
@@ -213,8 +207,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040935
-    m_Localized: "T\u1EA5t c\u1EA3 \u0111\xE1m ch\xE1y \u0111\xE3 \u0111\u01B0\u1EE3c
-      d\u1EADp v\xE0 anh \u0111\xE3 \u0111\u1EBFn n\u01A1i an to\xE0n."
+    m_Localized: "Tất cả đám cháy đã được dập và bạn đã đến nơi an toàn."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040936
@@ -222,9 +215,39 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040937
-    m_Localized: "Anh ch\u01B0a \u0111\u1EBFn n\u01A1i an to\xE0n k\u1ECBp th\u1EDDi.
-      H\xE3y th\u1EED l\u1EA1i v\xE0 th\u1EF1c hi\u1EC7n \u0111\xFAng quy tr\xECnh
-      d\xF9ng b\xECnh ch\u1EEFa ch\xE1y."
+    m_Localized: "Đám cháy chưa được dập tắt. Hãy thử lại và thực hiện đúng quy trình dùng bình chữa cháy."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040946
+    m_Localized: "Bạn đã thực hiện rất tốt công tác chữa cháy cơ sở. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn!\n\nBạn đã chọn đúng loại bình chữa cháy phù hợp vì khi sử dụng bình CO₂, bình này sẽ không dẫn điện và không gây ăn mòn thiết bị."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040947
+    m_Localized: "Bạn đã thực hiện rất tốt công tác chữa cháy cơ sở. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn!\n\nBạn đã chọn đúng loại bình chữa cháy phù hợp vì khi tiếp xúc với lửa do xăng gây nên sẽ tạo ra lớp màng cách ly, ngăn không khí tiếp xúc với nhiên liệu và dập tắt lửa hiệu quả."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040948
+    m_Localized: "Bạn chưa đến nơi an toàn trong thời gian quy định. Hãy đi theo chỉ dẫn và tới lối thoát hiểm kịp thời."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040949
+    m_Localized: "Bạn chưa dập tắt đám cháy trong thời gian quy định. Hãy thao tác nhanh chóng, hướng vòi vào gốc lửa và lia vòi qua lại."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040950
+    m_Localized: "Bình chữa cháy đã hết trước khi bạn dập tắt được đám cháy. Hãy hướng vòi chính xác vào gốc lửa và sử dụng chất chữa cháy hiệu quả hơn."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040951
+    m_Localized: "Bạn đã đến lối thoát hiểm khi đám cháy chưa được dập tắt. Trong bài huấn luyện này, bạn cần dập tắt hoàn toàn đám cháy trước khi thoát hiểm."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040952
+    m_Localized: "Bạn chưa chọn đúng loại bình chữa cháy phù hợp vì khi sử dụng bình bột sẽ gây hư hỏng thiết bị, tạo màn bụi dày đặc, cản trở tầm nhìn và gây khó thở. Đối với đám cháy điện, cần sử dụng bình chữa cháy CO₂ nhé."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040953
+    m_Localized: "Bạn chưa chọn đúng loại bình chữa cháy phù hợp. Đối với đám cháy xăng, cần sử dụng bình chữa cháy bột nhé vì ở khu vực bên ngoài trống trải hoặc có gió mạnh, CO₂ dễ bị phân tán, làm giảm hiệu quả chữa cháy."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040938

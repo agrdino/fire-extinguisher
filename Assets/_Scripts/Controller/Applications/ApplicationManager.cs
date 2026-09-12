@@ -5,6 +5,17 @@ using UnityEngine;
 
 namespace _Scripts.Controller
 {
+    [Flags]
+    public enum TrainingFailureReason
+    {
+        None = 0,
+        FireNotExtinguished = 1 << 0,
+        FirefightingTimedOut = 1 << 1,
+        ExtinguisherDepleted = 1 << 2,
+        IncompatibleExtinguisherSelected = 1 << 3,
+        EscapeTimedOut = 1 << 4
+    }
+
     [DefaultExecutionOrder(-100)]
     [DisallowMultipleComponent]
     public sealed class ApplicationManager : MonoBehaviour
@@ -37,6 +48,7 @@ namespace _Scripts.Controller
         [SerializeField] private ApplicationState _state = ApplicationState.Language;
         [SerializeField, Min(0f)] private float _remainingTime;
         [SerializeField] private FireExtinguisherType _selectedExtinguisherType = FireExtinguisherType.Unselect;
+        [SerializeField] private TrainingFailureReason _failureReasons;
 
         private bool _isEscapeTimeLimited;
         private bool _isFireFlareUpPending;
@@ -54,6 +66,7 @@ namespace _Scripts.Controller
         public bool IsEscaping => _state == ApplicationState.Escape;
         public bool IsEscapeTimeLimited => IsEscaping && _isEscapeTimeLimited;
         public FireExtinguisherType SelectedExtinguisherType => _selectedExtinguisherType;
+        public TrainingFailureReason FailureReasons => _failureReasons;
         public EmergencyExit EmergencyExit => _emergencyExit;
         public Transform PlayerView => GetPlayerView();
         public IEnvironmentSceneContext CurrentEnvironment => _environmentContext;
@@ -93,7 +106,10 @@ namespace _Scripts.Controller
             if (_emergencyExit != null)
                 _emergencyExit.OnPlayerReached += HandleEmergencyExitReached;
             if (_fireExtinguisherController != null)
+            {
                 _fireExtinguisherController.SetInputEnabled(false);
+                _fireExtinguisherController.OnIncompatibleFireTargeted += HandleIncompatibleFireTargeted;
+            }
             SetMovementEnabled(false);
         }
 
@@ -109,7 +125,10 @@ namespace _Scripts.Controller
             if (_emergencyExit != null)
                 _emergencyExit.OnPlayerReached -= HandleEmergencyExitReached;
             if (_fireExtinguisherController != null)
+            {
+                _fireExtinguisherController.OnIncompatibleFireTargeted -= HandleIncompatibleFireTargeted;
                 _fireExtinguisherController.SetInputEnabled(false);
+            }
             _emergencyExitPathGuide?.SetVisible(false);
             SetMovementEnabled(false);
         }
@@ -137,12 +156,18 @@ namespace _Scripts.Controller
                 && !_isFireFlareUpPending
                 && (_fireExtinguisherController.IsDepleted || _remainingTime <= 0f))
             {
+                AddFailureReason(TrainingFailureReason.FireNotExtinguished);
+                if (_remainingTime <= 0f) AddFailureReason(TrainingFailureReason.FirefightingTimedOut);
+                if (_fireExtinguisherController.IsDepleted) AddFailureReason(TrainingFailureReason.ExtinguisherDepleted);
                 BeginEscape(true);
                 return;
             }
 
             if (IsEscaping && _isEscapeTimeLimited && _remainingTime <= 0f)
+            {
+                AddFailureReason(TrainingFailureReason.FireNotExtinguished | TrainingFailureReason.EscapeTimedOut);
                 SetState(ApplicationState.Failed);
+            }
         }
 
         private void OnDestroy()
@@ -187,6 +212,7 @@ namespace _Scripts.Controller
                 case ApplicationState.Ready:
                 case ApplicationState.Language:
                 case ApplicationState.Guide:
+                    ResetTrainingResult();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.ClearFires();
@@ -211,6 +237,7 @@ namespace _Scripts.Controller
                     break;
 
                 case ApplicationState.SelectExtinguisher:
+                    ResetTrainingResult();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.SpawnFires(_playerRoot);
@@ -221,6 +248,8 @@ namespace _Scripts.Controller
                     _isEscapeTimeLimited = false;
                     _isFireFlareUpPending = false;
                     ResetExtinguisher();
+                    if (!_fireExtinguisherController.FireExtinguisher.CanExtinguish(_fireController.CurrentFireType))
+                        AddFailureReason(TrainingFailureReason.IncompatibleExtinguisherSelected);
                     _remainingTime = _roundDuration;
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
                     _fireExtinguisherController.SetInputEnabled(true);
@@ -251,6 +280,7 @@ namespace _Scripts.Controller
 
         private void ResetApplication()
         {
+            ResetTrainingResult();
             _fireController.ClearFires();
             ResetExtinguisher();
             SelectExtinguisher(FireExtinguisherType.Unselect);
@@ -342,13 +372,32 @@ namespace _Scripts.Controller
             if (!IsFighting || !_isFireFlareUpPending) return;
 
             _isFireFlareUpPending = false;
+            AddFailureReason(TrainingFailureReason.FireNotExtinguished);
             BeginEscape(true);
         }
 
         private void HandleEmergencyExitReached()
         {
-            if (IsEscaping) SetState(ApplicationState.Completed);
+            if (!IsFighting && !IsEscaping) return;
+
+            if (_fireController.AreAllFiresExtinguished())
+            {
+                SetState(ApplicationState.Completed);
+                return;
+            }
+
+            AddFailureReason(TrainingFailureReason.FireNotExtinguished);
+            SetState(ApplicationState.Failed);
         }
+
+        private void HandleIncompatibleFireTargeted(FireExtinguisherType extinguisherType, FireType fireType)
+        {
+            if (IsFighting) AddFailureReason(TrainingFailureReason.IncompatibleExtinguisherSelected);
+        }
+
+        private void AddFailureReason(TrainingFailureReason reason) => _failureReasons |= reason;
+
+        private void ResetTrainingResult() => _failureReasons = TrainingFailureReason.None;
 
         private void BeginEscape(bool isTimeLimited)
         {

@@ -83,8 +83,8 @@ namespace _Scripts.FireExtinguishers
         {
             return (_extinguisherType, fireType) switch
             {
-                (FireExtinguisherType.Powder, FireType.Electrical) => true,
-                (FireExtinguisherType.CO2, FireType.Liquid) => true,
+                (FireExtinguisherType.CO2, FireType.Electrical) => true,
+                (FireExtinguisherType.Powder, FireType.Liquid) => true,
                 _ => false
             };
         }

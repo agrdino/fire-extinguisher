@@ -195,6 +195,38 @@ MonoBehaviour:
     m_Key: failed.message
     m_Metadata:
       m_Items: []
+  - m_Id: 1337040946
+    m_Key: complete.message.electrical
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040947
+    m_Key: complete.message.liquid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040948
+    m_Key: failed.reason.escape_timeout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040949
+    m_Key: failed.reason.firefighting_timeout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040950
+    m_Key: failed.reason.extinguisher_depleted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040951
+    m_Key: failed.reason.fire_not_extinguished
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040952
+    m_Key: failed.tip.wrong_extinguisher.electrical
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040953
+    m_Key: failed.tip.wrong_extinguisher.liquid
+    m_Metadata:
+      m_Items: []
   - m_Id: 1337040938
     m_Key: hint.title
     m_Metadata:

@@ -167,7 +167,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040920
-    m_Localized: CO2 is for liquid fires. Dry powder is for electrical fires. Select one,
+    m_Localized: CO2 is for electrical fires. Dry powder is for gasoline fires. Select one,
       then confirm.
     m_Metadata:
       m_Items: []
@@ -180,12 +180,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040923
-    m_Localized: 'For flammable-liquid fires.
+    m_Localized: 'For electrical fires.
 
-      Leaves no residue.
+      Does not conduct electricity or corrode equipment.
 
       Not
-      for electrical fires in this training.'
+      for gasoline fires in this training.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040924
@@ -193,12 +193,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040925
-    m_Localized: 'For electrical fires.
+    m_Localized: 'For gasoline fires.
 
-      Quickly blankets the flames.
+      Creates an isolating layer that keeps air away from the fuel.
 
       Not
-      for liquid fires in this training.'
+      for electrical fires in this training.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040926
@@ -257,8 +257,40 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040937
-    m_Localized: You did not reach safety in time. Retry and follow the correct extinguisher
+    m_Localized: The fire was not extinguished. Retry and follow the correct extinguisher
       procedure.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040946
+    m_Localized: "You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you!\n\nYou chose the correct type of fire extinguisher. A CO2 extinguisher does not conduct electricity and does not corrode equipment, making it suitable for electrical fires."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040947
+    m_Localized: "You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you!\n\nYou chose the correct type of fire extinguisher. When dry powder contacts a gasoline fire, it creates an isolating layer that prevents air from reaching the fuel and extinguishes the flames effectively."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040948
+    m_Localized: You did not reach safety within the required time. Follow the guidance and reach the emergency exit promptly.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040949
+    m_Localized: You did not extinguish the fire within the required time. Act quickly, aim at the base of the fire, and sweep the nozzle from side to side.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040950
+    m_Localized: The extinguisher ran out before the fire was extinguished. Aim accurately at the base of the fire and use the extinguishing agent more efficiently.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040951
+    m_Localized: You reached the emergency exit before the fire was extinguished. You must extinguish the fire completely before evacuating in this training.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040952
+    m_Localized: You did not choose the correct extinguisher. Dry powder can damage equipment, create a dense dust cloud, obstruct vision, and make breathing difficult. For an electrical fire, use a CO2 extinguisher because it does not conduct electricity or corrode equipment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1337040953
+    m_Localized: You did not choose the correct extinguisher. For a gasoline fire, use a dry powder extinguisher. In an open outdoor area or strong wind, CO2 disperses easily and becomes less effective at extinguishing the fire.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040938
