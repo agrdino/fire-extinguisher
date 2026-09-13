@@ -11,6 +11,7 @@ namespace _Scripts.Controller
         Guide = 6,
         Explore = 7,
         Language = 8,
-        SelectEnvironment = 9
+        SelectEnvironment = 9,
+        FactoryResponse = 10
     }
 }

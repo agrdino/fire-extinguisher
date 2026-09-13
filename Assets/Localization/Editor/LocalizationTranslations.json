@@ -70,6 +70,8 @@
     {"key":"hint.remove_safety_pin","en":"Remove the safety pin.","vi":"Rút chốt an toàn.","ja":"安全ピンを抜いてください。"},
     {"key":"hint.aim_and_squeeze","en":"Aim at the base of the fire and squeeze the lever.","vi":"Hướng vòi vào gốc lửa và bóp cò.","ja":"火元に向けてレバーを握ってください。"},
     {"key":"hint.go_to_exit","en":"Follow the EXIT signs and go to the emergency exit.","vi":"Đi theo biển LỐI THOÁT đến lối thoát hiểm.","ja":"「非常口」の表示に従って避難してください。"},
+    {"key":"factory.switch_off_power","en":"Go to the highlighted circuit breaker and switch off the power.","vi":"Đi đến cầu dao được đánh dấu và ngắt nguồn điện.","ja":"ハイライトされたブレーカーへ移動し、電源を切ってください。"},
+    {"key":"factory.activate_fire_alarm","en":"Activate any highlighted fire alarm.","vi":"Kích hoạt một trong các nút báo cháy được đánh dấu.","ja":"ハイライトされた火災報知器のいずれかを作動させてください。"},
     {"key":"warning.safe_distance","en":"Warning! Keep a safe distance from the fire.","vi":"Cảnh báo! Hãy giữ khoảng cách an toàn với đám cháy.","ja":"警告！火から安全な距離を保ってください。"},
     {"key":"exit.label","en":"EXIT","vi":"LỐI THOÁT","ja":"非常口"}
   ]

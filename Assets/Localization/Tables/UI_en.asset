@@ -333,6 +333,14 @@ MonoBehaviour:
     m_Localized: SELECT ENVIRONMENT
     m_Metadata:
       m_Items: []
+  - m_Id: 1448646678781954
+    m_Localized: Go to the highlighted circuit breaker and switch off the power.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448646678781955
+    m_Localized: Activate any highlighted fire alarm.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

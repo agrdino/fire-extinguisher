@@ -1109,6 +1109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.RayInteractorStateController
   _rayInteractor: {fileID: 6203155216862590207}
+  _factoryInteractionLineLength: 2
 --- !u!1 &5765939093464380304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1589,7 @@ GameObject:
   - component: {fileID: 6359299723703630821}
   - component: {fileID: 6028195792035678197}
   - component: {fileID: 756354008215608911}
+  - component: {fileID: 910000000000000001}
   m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
@@ -1779,6 +1781,23 @@ MonoBehaviour:
     m_InputActionReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
+--- !u!114 &910000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474536171371523134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455116b4410f43948a68e638b448fc63, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.LeftHandObjectInteractor
+  _maximumDistance: 2
+  _interactionMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _pressThreshold: 0.5
 --- !u!1 &6689828537375574554
 GameObject:
   m_ObjectHideFlags: 0

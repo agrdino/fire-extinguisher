@@ -91,6 +91,12 @@ public void BindEnvironment(
                 _currentScene.Hide();
                 HideSceneObject(_currentScene);
             }
+
+            if (state == ApplicationState.FactoryResponse)
+            {
+                _currentScene = null;
+                return;
+            }
             
             _currentScene = state switch
             {

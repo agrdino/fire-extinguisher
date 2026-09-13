@@ -267,6 +267,14 @@ MonoBehaviour:
     m_Key: environment.title
     m_Metadata:
       m_Items: []
+  - m_Id: 1448646678781954
+    m_Key: factory.switch_off_power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448646678781955
+    m_Key: factory.activate_fire_alarm
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

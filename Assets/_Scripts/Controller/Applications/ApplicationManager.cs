@@ -62,6 +62,7 @@ namespace _Scripts.Controller
         public float RemainingTime => _remainingTime;
         public bool IsExploring => _state == ApplicationState.Explore;
         public bool IsExploreTimeLimited => IsExploring && _isExploreTimeLimited;
+        public bool IsFactoryResponding => _state == ApplicationState.FactoryResponse;
         public bool IsFighting => _state == ApplicationState.Fighting;
         public bool IsEscaping => _state == ApplicationState.Escape;
         public bool IsEscapeTimeLimited => IsEscaping && _isEscapeTimeLimited;
@@ -205,6 +206,7 @@ namespace _Scripts.Controller
         {
             if (_state == state && !force) return;
 
+            ApplicationState previousState = _state;
             _state = state;
             SetMovementEnabled(CanMoveInState(_state));
             switch (_state)
@@ -236,11 +238,20 @@ namespace _Scripts.Controller
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
                     break;
 
+                case ApplicationState.FactoryResponse:
+                    ResetTrainingResult();
+                    ResetExtinguisher();
+                    SelectExtinguisher(FireExtinguisherType.Unselect);
+                    _fireController.SpawnFires(_playerRoot, true);
+                    _exitPlacementController.TryPosition(GetPlayerView());
+                    break;
+
                 case ApplicationState.SelectExtinguisher:
                     ResetTrainingResult();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
-                    _fireController.SpawnFires(_playerRoot);
+                    if (previousState != ApplicationState.FactoryResponse || _fireController.SelectedSpawnPoint == null)
+                        _fireController.SpawnFires(_playerRoot);
                     _exitPlacementController.TryPosition(GetPlayerView());
                     break;
 
@@ -316,6 +327,14 @@ namespace _Scripts.Controller
         public void CompleteExplore()
         {
             if (!IsExploring) return;
+            SetState(_environmentContext?.EnvironmentType == EnvironmentType.Factory
+                ? ApplicationState.FactoryResponse
+                : ApplicationState.SelectExtinguisher);
+        }
+
+        public void CompleteFactoryResponse()
+        {
+            if (!IsFactoryResponding) return;
             SetState(ApplicationState.SelectExtinguisher);
         }
 
@@ -408,6 +427,7 @@ namespace _Scripts.Controller
         private static bool CanMoveInState(ApplicationState state)
         {
             return state == ApplicationState.Explore
+                || state == ApplicationState.FactoryResponse
                 || state == ApplicationState.SelectExtinguisher
                 || state == ApplicationState.Fighting
                 || state == ApplicationState.Escape;

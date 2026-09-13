@@ -10,6 +10,7 @@ namespace _Scripts.UI
     public sealed class RayInteractorStateController : MonoBehaviour
     {
         [SerializeField] private GameObject _rayInteractor;
+        [SerializeField, Min(0.1f)] private float _factoryInteractionLineLength = 2f;
 
         private ApplicationManager _applicationManager;
         private XRRayInteractor _xrRayInteractor;
@@ -75,6 +76,8 @@ namespace _Scripts.UI
                 return;
 
             float lineLength = _maxLineLength;
+            if (_applicationManager != null && _applicationManager.IsFactoryResponding)
+                lineLength = Mathf.Min(lineLength, _factoryInteractionLineLength);
             if (_xrRayInteractor.TryGetCurrentUIRaycastResult(out var uiHit)
                 && uiHit.gameObject != null)
             {

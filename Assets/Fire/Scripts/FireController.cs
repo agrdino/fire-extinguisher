@@ -68,7 +68,7 @@ namespace _Scripts.Fires
 
         public bool AreAllFiresExtinguished() => _activeFires.Count > 0 && _activeFires.TrueForAll(fire => fire.IsExtinguished);
 
-        public void SpawnFires(Transform playerRoot)
+        public void SpawnFires(Transform playerRoot, bool keepElectricalSparksUntilPowerOff = false)
         {
             ClearFires();
 
@@ -86,14 +86,14 @@ namespace _Scripts.Fires
 
             if (CurrentFireType == FireType.Electrical && _electricalSparksPrefab != null)
             {
-                _electricalFireIgnitionRoutine = StartCoroutine(RunElectricalFireIgnition(firePrefab, spawnPoint, playerRoot));
+                _electricalFireIgnitionRoutine = StartCoroutine(RunElectricalFireIgnition(firePrefab, spawnPoint, playerRoot, keepElectricalSparksUntilPowerOff));
                 return;
             }
 
             SpawnFire(firePrefab, spawnPoint, playerRoot, false);
         }
 
-        private IEnumerator RunElectricalFireIgnition(Fire firePrefab, FireSpawnPoint spawnPoint, Transform playerRoot)
+        private IEnumerator RunElectricalFireIgnition(Fire firePrefab, FireSpawnPoint spawnPoint, Transform playerRoot, bool keepSparksUntilPowerOff)
         {
             _activeElectricalSparks = Instantiate(
                 _electricalSparksPrefab,
@@ -106,11 +106,20 @@ namespace _Scripts.Fires
 
             SpawnFire(firePrefab, spawnPoint, playerRoot, true);
 
-            if (_sparksOverlapDuration > 0f)
-                yield return new WaitForSeconds(_sparksOverlapDuration);
+            if (keepSparksUntilPowerOff)
+            {
+                _electricalFireIgnitionRoutine = null;
+                yield break;
+            }
 
+            if (_sparksOverlapDuration > 0f) yield return new WaitForSeconds(_sparksOverlapDuration);
             DestroyActiveElectricalSparks();
             _electricalFireIgnitionRoutine = null;
+        }
+
+        public void StopElectricalSparks()
+        {
+            DestroyActiveElectricalSparks();
         }
 
         private void SpawnFire(

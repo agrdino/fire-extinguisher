@@ -292,6 +292,14 @@ MonoBehaviour:
     m_Localized: "CH\u1ECCN M\xD4I TR\u01AF\u1EDCNG"
     m_Metadata:
       m_Items: []
+  - m_Id: 1448646678781954
+    m_Localized: "\u0110i \u0111\u1EBFn c\u1EA7u dao \u0111\u01B0\u1EE3c \u0111\xE1nh d\u1EA5u v\xE0 ng\u1EAFt ngu\u1ED3n \u0111i\u1EC7n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448646678781955
+    m_Localized: "K\xEDch ho\u1EA1t m\u1ED9t trong c\xE1c n\xFAt b\xE1o ch\xE1y \u0111\u01B0\u1EE3c \u0111\xE1nh d\u1EA5u."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
