@@ -28,7 +28,7 @@ namespace _Scripts.Controller
         }
 
         [Header("Timing")]
-        [SerializeField, Min(0f)] private float _roundDuration = 60f;
+        [SerializeField, Min(0f)] private float _roundDuration = 90f;
         [SerializeField, Min(0f)] private float _escapeDuration = 30f;
         [SerializeField] private bool _isExploreTimeLimited = true;
         [SerializeField, Min(0f)] private float _exploreDuration = 30f;
@@ -52,6 +52,7 @@ namespace _Scripts.Controller
 
         private bool _isEscapeTimeLimited;
         private bool _isFireFlareUpPending;
+        private bool _isRoundTimerRunning;
         private IEnvironmentSceneContext _environmentContext;
         private EmergencyExitPathGuide _emergencyExitPathGuide;
 
@@ -145,21 +146,24 @@ namespace _Scripts.Controller
             }
 
             if (IsExploring) return;
-            if (!IsFighting && !IsEscaping) return;
+            if (!IsRoundInProgress() && !IsEscaping) return;
 
-            if (IsFighting || _isEscapeTimeLimited)
+            if (_isRoundTimerRunning || _isEscapeTimeLimited)
             {
                 _remainingTime = Mathf.Max(0f, _remainingTime - Time.deltaTime);
                 OnRemainingTimeChanged?.Invoke(_remainingTime);
             }
 
-            if (IsFighting
-                && !_isFireFlareUpPending
-                && (_fireExtinguisherController.IsDepleted || _remainingTime <= 0f))
+            if (_isRoundTimerRunning && _remainingTime <= 0f)
             {
-                AddFailureReason(TrainingFailureReason.FireNotExtinguished);
-                if (_remainingTime <= 0f) AddFailureReason(TrainingFailureReason.FirefightingTimedOut);
-                if (_fireExtinguisherController.IsDepleted) AddFailureReason(TrainingFailureReason.ExtinguisherDepleted);
+                AddFailureReason(TrainingFailureReason.FireNotExtinguished | TrainingFailureReason.FirefightingTimedOut);
+                BeginEscape(true);
+                return;
+            }
+
+            if (IsFighting && !_isFireFlareUpPending && _fireExtinguisherController.IsDepleted)
+            {
+                AddFailureReason(TrainingFailureReason.FireNotExtinguished | TrainingFailureReason.ExtinguisherDepleted);
                 BeginEscape(true);
                 return;
             }
@@ -219,6 +223,7 @@ namespace _Scripts.Controller
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.ClearFires();
                     _isEscapeTimeLimited = false;
+                    _isRoundTimerRunning = false;
                     SetEmergencyExitActive(false);
                     ResetPlayerPose();
                     break;
@@ -232,6 +237,7 @@ namespace _Scripts.Controller
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     _fireController.ClearFires();
                     _isEscapeTimeLimited = false;
+                    _isRoundTimerRunning = false;
                     SetEmergencyExitActive(false);
                     ResetPlayerPose();
                     _remainingTime = _exploreDuration;
@@ -242,6 +248,7 @@ namespace _Scripts.Controller
                     ResetTrainingResult();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
+                    EnsureRoundTimerStarted();
                     _fireController.SpawnFires(_playerRoot, true);
                     _exitPlacementController.TryPosition(GetPlayerView());
                     break;
@@ -250,6 +257,7 @@ namespace _Scripts.Controller
                     ResetTrainingResult();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
+                    EnsureRoundTimerStarted();
                     if (previousState != ApplicationState.FactoryResponse || _fireController.SelectedSpawnPoint == null)
                         _fireController.SpawnFires(_playerRoot);
                     _exitPlacementController.TryPosition(GetPlayerView());
@@ -261,13 +269,13 @@ namespace _Scripts.Controller
                     ResetExtinguisher();
                     if (!_fireExtinguisherController.FireExtinguisher.CanExtinguish(_fireController.CurrentFireType))
                         AddFailureReason(TrainingFailureReason.IncompatibleExtinguisherSelected);
-                    _remainingTime = _roundDuration;
-                    OnRemainingTimeChanged?.Invoke(_remainingTime);
+                    EnsureRoundTimerStarted();
                     _fireExtinguisherController.SetInputEnabled(true);
                     SetEmergencyExitActive(true);
                     break;
 
                 case ApplicationState.Escape:
+                    _isRoundTimerRunning = false;
                     _fireExtinguisherController.SetInputEnabled(false);
                     if (_isEscapeTimeLimited) _remainingTime = _escapeDuration;
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
@@ -275,11 +283,13 @@ namespace _Scripts.Controller
                     break;
 
                 case ApplicationState.Completed:
+                    _isRoundTimerRunning = false;
                     _fireExtinguisherController.SetInputEnabled(false);
                     _emergencyExit?.Disarm();
                     break;
 
                 case ApplicationState.Failed:
+                    _isRoundTimerRunning = false;
                     _fireExtinguisherController.SetInputEnabled(false);
                     SetEmergencyExitActive(false);
                     break;
@@ -296,6 +306,7 @@ namespace _Scripts.Controller
             ResetExtinguisher();
             SelectExtinguisher(FireExtinguisherType.Unselect);
             _isEscapeTimeLimited = false;
+            _isRoundTimerRunning = false;
             SetEmergencyExitActive(false);
             ResetPlayerPose();
             _remainingTime = _roundDuration;
@@ -422,6 +433,19 @@ namespace _Scripts.Controller
         {
             _isEscapeTimeLimited = isTimeLimited;
             SetState(ApplicationState.Escape);
+        }
+
+        private void EnsureRoundTimerStarted()
+        {
+            if (_isRoundTimerRunning) return;
+            _isRoundTimerRunning = true;
+            _remainingTime = _roundDuration;
+            OnRemainingTimeChanged?.Invoke(_remainingTime);
+        }
+
+        private bool IsRoundInProgress()
+        {
+            return IsFactoryResponding || _state == ApplicationState.SelectExtinguisher || IsFighting;
         }
 
         private static bool CanMoveInState(ApplicationState state)

@@ -43,6 +43,7 @@ namespace _Scripts.UI
         public void Show()
         {
             BindModelSwitcher();
+            if (_btnBack != null) _btnBack.gameObject.SetActive(false);
             _selectedType = FireExtinguisherType.Unselect;
             UpdateSelectionVisuals();
         }

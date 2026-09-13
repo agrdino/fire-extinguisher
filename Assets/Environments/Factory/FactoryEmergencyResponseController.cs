@@ -3,7 +3,6 @@ using _Scripts.Controller;
 using _Scripts.Fires;
 using _Scripts.UI;
 using UnityEngine;
-using UnityEngine.Localization;
 
 namespace _Scripts.Environments.Factory
 {
@@ -18,9 +17,6 @@ namespace _Scripts.Environments.Factory
     [DisallowMultipleComponent]
     public sealed class FactoryEmergencyResponseController : MonoBehaviour
     {
-        [SerializeField] private LocalizedString _switchOffPowerMessage = new("UI", "factory.switch_off_power");
-        [SerializeField] private LocalizedString _activateFireAlarmMessage = new("UI", "factory.activate_fire_alarm");
-
         private ApplicationManager _applicationManager;
         private FactoryEmergencyInteractable[] _interactables;
         private FactoryEmergencyInteractable _activeCircuitBreaker;
@@ -51,7 +47,6 @@ namespace _Scripts.Environments.Factory
         private void OnDestroy()
         {
             if (_applicationManager != null) _applicationManager.OnStateChanged -= HandleApplicationStateChanged;
-            IdleHintController.Instance?.HidePersistentMessage(this);
         }
 
         public void HandleInteraction(FactoryEmergencyInteractable interactable)
@@ -96,7 +91,6 @@ namespace _Scripts.Environments.Factory
             }
 
             SetStep(FactoryEmergencyResponseStep.SwitchOffPower, _activeCircuitBreaker.HintTarget);
-            IdleHintController.Instance?.ShowPersistentMessage(this, _switchOffPowerMessage, CurrentHintTarget);
         }
 
         private void BeginFireAlarmStep()
@@ -121,14 +115,12 @@ namespace _Scripts.Environments.Factory
             }
 
             SetStep(FactoryEmergencyResponseStep.ActivateFireAlarm, hintAlarm.HintTarget);
-            IdleHintController.Instance?.ShowPersistentMessage(this, _activateFireAlarmMessage, CurrentHintTarget);
         }
 
         private void CompleteResponse()
         {
             for (int index = 0; index < _interactables.Length; index++)
                 _interactables[index].SetInteractionEnabled(false);
-            IdleHintController.Instance?.HidePersistentMessage(this);
             SetStep(FactoryEmergencyResponseStep.Completed, null);
             _applicationManager.CompleteFactoryResponse();
         }
@@ -142,7 +134,6 @@ namespace _Scripts.Environments.Factory
             }
 
             _activeCircuitBreaker = null;
-            IdleHintController.Instance?.HidePersistentMessage(this);
             SetStep(FactoryEmergencyResponseStep.None, null);
         }
 
@@ -151,6 +142,7 @@ namespace _Scripts.Environments.Factory
             CurrentStep = step;
             CurrentHintTarget = hintTarget;
             OnStepChanged?.Invoke(step);
+            IdleHintController.Instance?.NotifyActivity();
         }
     }
 }

@@ -11,7 +11,6 @@ namespace _Scripts.UI
     public class FightingScene : MonoBehaviour, IScene
     {
         [SerializeField] private Slider _sldFireExtinguisher;
-        [SerializeField] private Slider _timerBar;
         [SerializeField] private TMP_Text _txtGuide;
         [SerializeField] private LocalizedString _guideString = new("UI", "fighting.guide");
         
@@ -29,11 +28,6 @@ namespace _Scripts.UI
                 _sldFireExtinguisher.minValue = 0f;
                 _sldFireExtinguisher.maxValue = 100f;
                 _sldFireExtinguisher.value = FireExtinguisherController.Instance.FireExtinguisher.RemainingRatio * 100f;
-            }
-            if (_timerBar != null)
-            {
-                _timerBar.minValue = 0f;
-                _timerBar.maxValue = Mathf.Max(0.01f, ApplicationManager.Instance.RoundDuration);
             }
             FireExtinguisherController.Instance.FireExtinguisher.OnRemainingAmountChanged += OnValueChanged;
             ApplicationManager.Instance.OnRemainingTimeChanged += OnRemainingTimeChanged;
@@ -66,7 +60,6 @@ namespace _Scripts.UI
             int minutes = totalSeconds / 60;
             int seconds = totalSeconds % 60;
             _txtGuide.SetText(_guideString.GetLocalizedString(minutes.ToString("00"), seconds.ToString("00")));
-            if (_timerBar != null) _timerBar.value = remainingTime;
         }
     }
 }

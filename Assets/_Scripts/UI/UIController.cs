@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using _Scripts.Controller;
 using _Scripts.Fires;
+using _Scripts.Environments.Factory;
 using _Scripts.SceneManagement;
 
 namespace _Scripts.UI
@@ -19,6 +20,7 @@ namespace _Scripts.UI
         [SerializeField] private ReadyView _readyView;
         [SerializeField] private GuideScene _guideScene;
         [SerializeField] private ExploreScene _exploreScene;
+        [SerializeField] private FactoryResponseScene _factoryResponseScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectExtinguisherScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _fightingScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapeScene;
@@ -76,7 +78,7 @@ namespace _Scripts.UI
             HideSceneObject(_currentScene);
         }
 
-public void BindEnvironment(
+        public void BindEnvironment(
             IEnvironmentSceneContext environmentContext,
             EmergencyExitPlacementController exitPlacementController)
         {
@@ -92,12 +94,6 @@ public void BindEnvironment(
                 HideSceneObject(_currentScene);
             }
 
-            if (state == ApplicationState.FactoryResponse)
-            {
-                _currentScene = null;
-                return;
-            }
-            
             _currentScene = state switch
             {
                 ApplicationState.Ready => _readyView,
@@ -105,6 +101,7 @@ public void BindEnvironment(
                 ApplicationState.SelectEnvironment => _selectEnvironmentScene,
                 ApplicationState.Guide => _guideScene,
                 ApplicationState.Explore => _exploreScene,
+                ApplicationState.FactoryResponse => _factoryResponseScene,
                 ApplicationState.SelectExtinguisher => _selectExtinguisherScene.Value,
                 ApplicationState.Fighting => _fightingScene.Value,
                 ApplicationState.Escape => _escapeScene.Value,
@@ -141,8 +138,11 @@ public void BindEnvironment(
             if (state == ApplicationState.Failed) return PlaceFailedScene(scene);
 
             FireSpawnPoint selectedFireSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
+            FactoryEmergencyResponseController factoryResponseController = FindFirstObjectByType<FactoryEmergencyResponseController>();
             Transform fireUIAnchor = state switch
             {
+                ApplicationState.FactoryResponse when factoryResponseController?.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm => selectedFireSpawnPoint?.FireAlarmUIPoint,
+                ApplicationState.FactoryResponse => selectedFireSpawnPoint?.CircuitBreakerUIPoint,
                 ApplicationState.SelectExtinguisher => selectedFireSpawnPoint?.SelectExtinguisherUIPoint,
                 ApplicationState.Fighting => selectedFireSpawnPoint?.FightingUIPoint,
                 ApplicationState.Escape => selectedFireSpawnPoint?.EscapeUIPoint,
@@ -184,6 +184,11 @@ public void BindEnvironment(
             return true;
         }
 
+        public void RefreshCurrentScenePlacement()
+        {
+            if (_currentScene != null) PlaceScene(_currentScene, _applicationManager.State);
+        }
+
         private bool PlaceFailedScene(IScene scene)
         {
             Transform playerView = _applicationManager.PlayerView;
@@ -207,6 +212,7 @@ public void BindEnvironment(
             _readyView ??= GetComponentInChildren<ReadyView>(true);
             _guideScene ??= GetComponentInChildren<GuideScene>(true);
             _exploreScene ??= GetComponentInChildren<ExploreScene>(true);
+            _factoryResponseScene ??= GetComponentInChildren<FactoryResponseScene>(true);
         }
     }
 }

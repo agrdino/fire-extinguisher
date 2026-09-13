@@ -42,9 +42,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad2757292609bdb459cb3fcb338b5beb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.GameManager
-  _roundDuration: 45
+  _roundDuration: 90
   _escapeDuration: 30
   _isExploreTimeLimited: 0
   _exploreDuration: 30
@@ -58,6 +58,7 @@ MonoBehaviour:
   _state: 8
   _remainingTime: 0
   _selectedExtinguisherType: 2
+  _failureReasons: 0
 --- !u!1 &1062887305970671403
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 626a4d6723d6ad24b9aebb811ad5a3dd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement.ContinuousMoveProvider
   m_Mediator: {fileID: 6125409957341347569}
   m_TransformationPriority: 0
@@ -117,8 +118,8 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Vector2
       m_Id: 679eee30-b43b-41f3-9f62-ab060f000e37
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_InputActionReference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -131,8 +132,8 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Vector2
       m_Id: 804f5c08-fde7-43c7-a528-0a3c216da35e
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_InputActionReference: {fileID: 0}
@@ -197,7 +198,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4c1250a8772f3a48b9d335c3db8dd9b, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.FireController
   _firePrefabs:
   - {fileID: 8415777033562236230, guid: a839b63f2902a7040a9f89b2d96ee988, type: 3}
@@ -284,7 +285,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6554850beb2485a4a9f168d292529c80, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherController
   _fireExtinguisher: {fileID: 836178444688057233}
   _inputSettings: {fileID: 11400000, guid: 336796254df630d49a3f5282e28a41a5, type: 2}
@@ -375,7 +376,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99cbaea2bca94278bc68e867de95889b, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Audio.AudioManager
 --- !u!82 &8241853663682226992
 AudioSource:
@@ -581,7 +582,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8e496d945b74c509c2d368116a8ee21, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Audio.ApplicationAudio
   _audioManager: {fileID: 7004579857169789835}
   _oneShotSource: {fileID: 8241853663682226992}
@@ -697,7 +698,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13ecaf1f25b1f0c41b7de1e17bd206a4, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.UIAudioFeedback
   _audioSource: {fileID: 8034227045019496165}
   _hoverClip: {fileID: 8300000, guid: f0cb06f9461ea8b4bba64f3f7064a702, type: 3}
@@ -778,7 +779,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.XR.TrackedPoseDriver
   m_TrackingType: 0
   m_UpdateType: 0
@@ -790,31 +791,31 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Vector3
       m_Id: dd3a9abe-58de-4749-8b99-9fb9cc8df524
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: de2459aa-e579-4cca-883f-6ff99f94d79b
         m_Path: <OculusTouchController>{RightHand}/devicePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Position
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 59b5cea7-26ca-489e-8d99-f62951681323
         m_Path: <QuestTouchPlusController>{RightHand}/devicePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Position
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: ef9f32a8-2db1-4cbc-8da2-909aa21cc2e3
         m_Path: <QuestProTouchController>{RightHand}/devicePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Position
         m_Flags: 0
       m_Flags: 0
@@ -826,31 +827,31 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Quaternion
       m_Id: f3d6b3ac-5c1c-4f92-87f3-28484c283d01
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: aa7c0f88-e8c4-49cb-92c0-0667cba6296a
         m_Path: <OculusTouchController>{RightHand}/deviceRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Rotation
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 1021a482-fef4-4efc-a8ad-d93eda29b173
         m_Path: <QuestTouchPlusController>{RightHand}/deviceRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Rotation
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 82bb2a03-40a5-4a4b-88c3-2d404dee2f77
         m_Path: <QuestProTouchController>{RightHand}/deviceRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Rotation
         m_Flags: 0
       m_Flags: 0
@@ -862,51 +863,51 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Integer
       m_Id: 4bf1558f-a711-4b3b-87d6-e7316f04cc3d
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: c58a0795-acfe-485f-809e-74696fd27223
         m_Path: <OculusTouchController>{RightHand}/trackingState
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Tracking State
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 58917df6-efea-4665-ab82-d1706c8fc61f
         m_Path: <QuestTouchPlusController>{RightHand}/trackingState
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Tracking State
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 3431e63d-5790-4f66-9217-f07bab17b8b5
         m_Path: <QuestProTouchController>{RightHand}/trackingState
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Tracking State
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_PositionAction:
-    m_Name: 
+    m_Name:
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: 9ab535cc-8ecb-469f-a78b-9069f4d1dc04
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings: []
     m_Flags: 0
   m_RotationAction:
-    m_Name: 
+    m_Name:
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: 01ffba8e-1cec-4189-8712-00bcc22a3718
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings: []
     m_Flags: 0
 --- !u!114 &2167513476881491978
@@ -919,7 +920,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e9e01e56509461e8ad8c0c530027576, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.HandController
   _triggerInput:
     m_InputSourceMode: 2
@@ -928,8 +929,8 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Axis
       m_Id: fa21efcb-011a-4985-8501-39e2d6abf904
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_InputActionReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -978,7 +979,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
@@ -993,8 +994,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab68ce6587aab0146b8dabefbd806791, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_SendPointerHoverToParent: 1
   m_ClickSpeed: 0.3
   m_MoveDeadzone: 0.6
@@ -1065,6 +1066,7 @@ Transform:
   - {fileID: 4098506054630638858}
   - {fileID: 8732639276663502519}
   - {fileID: 2560323378940020930}
+  - {fileID: 9017077243467211216}
   m_Father: {fileID: 225403172073639742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8542549861634836574
@@ -1077,13 +1079,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39e53427dac44de79f16d56779550bec, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.UIController
   _selectLanguageScene: {fileID: 8295800806315673963}
   _selectEnvironmentScene: {fileID: 58668765137061427}
   _readyView: {fileID: 3441429159544759982}
   _guideScene: {fileID: 4203264153229684036}
   _exploreScene: {fileID: 2684154617169046517}
+  _factoryResponseScene: {fileID: 8847345871223827991}
   _selectExtinguisherScene:
     _underlyingValue: {fileID: 917346808306020792}
   _fightingScene:
@@ -1106,7 +1109,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e65ad5bd2df47ce92e31752d7fe0ee5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.RayInteractorStateController
   _rayInteractor: {fileID: 6203155216862590207}
   _factoryInteractionLineLength: 2
@@ -1215,7 +1218,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.XR.TrackedPoseDriver
   m_TrackingType: 0
   m_UpdateType: 0
@@ -1227,23 +1230,23 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Vector3
       m_Id: 07689398-e905-4978-89c4-b0086001d411
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: 7d061771-5972-49d3-b5e9-9d480ec93a2c
         m_Path: <XRHMD>/centerEyePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Position
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 21122021-da5a-46ba-8e9d-8afece72a6e8
         m_Path: <HandheldARInputDevice>/devicePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Position
         m_Flags: 0
       m_Flags: 0
@@ -1255,23 +1258,23 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Quaternion
       m_Id: 90b4e37b-9480-4849-a321-933a6c68d6ad
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: 4504f452-5fdb-4302-a295-08a3edbeff03
         m_Path: <XRHMD>/centerEyeRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Rotation
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: dfc606d3-96fb-4435-b8ea-66d35934dc6e
         m_Path: <HandheldARInputDevice>/deviceRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Rotation
         m_Flags: 0
       m_Flags: 0
@@ -1283,35 +1286,35 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Integer
       m_Id: d483da40-b0af-4d5b-a785-3f7f40cfde45
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: b93541c1-b900-4302-88b3-56036a9f14d6
         m_Path: <XRHMD>/trackingState
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Tracking State
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_PositionAction:
-    m_Name: 
+    m_Name:
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: 6767ea26-0f61-40c6-9430-81d2978ba480
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings: []
     m_Flags: 0
   m_RotationAction:
-    m_Name: 
+    m_Name:
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: 74c8be42-97f9-4216-864c-e5b323a12ada
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings: []
     m_Flags: 0
 --- !u!114 &5034080655267449083
@@ -1324,7 +1327,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 1
@@ -1405,7 +1408,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.CoreUtils::Unity.XR.CoreUtils.XROrigin
   m_Camera: {fileID: 8812496317400374687}
   m_OriginBaseGameObject: {fileID: 5780164110627380808}
@@ -1422,7 +1425,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 017c5e3933235514c9520e1dace2a4b2, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Inputs.InputActionManager
   m_ActionAssets: []
 --- !u!143 &2093163172033902248
@@ -1544,7 +1547,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
@@ -1624,7 +1627,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.XR.TrackedPoseDriver
   m_TrackingType: 0
   m_UpdateType: 0
@@ -1636,31 +1639,31 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Vector3
       m_Id: e5c34916-0201-4e71-9d10-a5d7b66f1aa8
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: ec766164-09c6-4dbf-8358-bbab30b537f8
         m_Path: <OculusTouchController>{LeftHand}/devicePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Position
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: c200d14c-9b75-4917-ae31-c60147f6aff5
         m_Path: <QuestTouchPlusController>{LeftHand}/devicePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Position
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 3273202d-ca9c-4d62-a01b-d7fe743c1910
         m_Path: <QuestProTouchController>{LeftHand}/devicePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Position
         m_Flags: 0
       m_Flags: 0
@@ -1672,31 +1675,31 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Quaternion
       m_Id: b4e4b1b1-3b4a-47f0-87e1-0369817e7547
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: 42569b6c-d775-46e3-8266-3f4344d698c8
         m_Path: <OculusTouchController>{LeftHand}/deviceRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Rotation
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 5e8b488e-d889-471d-b65f-f14e74f1fa29
         m_Path: <QuestTouchPlusController>{LeftHand}/deviceRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Rotation
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 924922f0-fa38-4b0e-b15b-77e2d7216dbb
         m_Path: <QuestProTouchController>{LeftHand}/deviceRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Rotation
         m_Flags: 0
       m_Flags: 0
@@ -1708,51 +1711,51 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Integer
       m_Id: b5262af3-2110-42e1-99f8-0989fbe09fea
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings:
-      - m_Name: 
+      - m_Name:
         m_Id: 6fde34c3-4077-4983-81d3-fd274ec9b2a6
         m_Path: <OculusTouchController>{LeftHand}/trackingState
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Tracking State
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: 713c8ae0-972d-44d3-bd82-1c92322c83d3
         m_Path: <QuestTouchPlusController>{LeftHand}/trackingState
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Tracking State
         m_Flags: 0
-      - m_Name: 
+      - m_Name:
         m_Id: aeed54ef-1c43-478b-952b-c68efc5917f0
         m_Path: <QuestProTouchController>{LeftHand}/trackingState
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
+        m_Interactions:
+        m_Processors:
+        m_Groups:
         m_Action: Tracking State
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_PositionAction:
-    m_Name: 
+    m_Name:
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: ce573e5b-21c7-4701-b02a-6ec0e96b5c6f
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings: []
     m_Flags: 0
   m_RotationAction:
-    m_Name: 
+    m_Name:
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: 342144a3-7559-4045-b492-2dee8ba07b03
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings: []
     m_Flags: 0
 --- !u!114 &756354008215608911
@@ -1765,7 +1768,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e9e01e56509461e8ad8c0c530027576, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.HandController
   _triggerInput:
     m_InputSourceMode: 2
@@ -1774,8 +1777,8 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Axis
       m_Id: 01014643-b9eb-40f3-8a04-7965a4a21003
-      m_Processors: 
-      m_Interactions: 
+      m_Processors:
+      m_Interactions:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_InputActionReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -1840,7 +1843,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afc95e8731170a6468b9abfe1c576b84, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherKeyboardInput
   _controller: {fileID: 0}
 --- !u!1 &7397346996478336096
@@ -1885,7 +1888,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bca63f02dda2a3c4ba76b8191832dbf4, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherKeyboardSimulator
   _controller: {fileID: 0}
   _simulateKeyboardHeartbeat: 1
@@ -1935,7 +1938,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a26c941eb8a46f7b6d00416227ab8c0, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Locomotion.XRBodyTransformer
   m_XROrigin: {fileID: 5106734827232106633}
   m_BodyPositionEvaluatorObject: {fileID: 0}
@@ -1951,7 +1954,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fa7b4195685c3846be746c74f0ab2f8, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Locomotion.LocomotionMediator
 --- !u!1 &8646589029653471958
 GameObject:
@@ -2042,7 +2045,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dab17e8e2824ef841964e90f88ced9f7, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.SceneManagement.PersistentRuntimeRoot
 --- !u!114 &8494820004097332148
 MonoBehaviour:
@@ -2054,7 +2057,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 287dfd1b4108823409b9bb16f753e257, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.SceneManagement.SceneFlowController
   _catalog: {fileID: 11400000, guid: 66888c5d67bb34b4bb11db7cd9fefff0, type: 2}
   _transitionCamera: {fileID: 8812496317400374687}
@@ -2071,7 +2074,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49c51841fc06241488e313dca2322c36, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.ApplicationFlowController
   _sceneFlowController: {fileID: 8494820004097332148}
   _applicationManager: {fileID: 8962677695553302094}
@@ -2087,7 +2090,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49c286243daa85c4ab2afff0b7921166, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.EmergencyExitPlacementController
   _emergencyExit: {fileID: 8306390398397067562}
   _minimumDistanceFromPlayer: 2
@@ -2231,7 +2234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5061980051898715263, guid: a283bc4fe5a4cf041990415994b63b58, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 4081828125750461553}
     - target: {fileID: 5061980051898715263, guid: a283bc4fe5a4cf041990415994b63b58, type: 3}
       propertyPath: _hoverTextColor.g
@@ -2363,7 +2366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7443051423490567655, guid: a283bc4fe5a4cf041990415994b63b58, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 784132180980786093}
     - target: {fileID: 7443051423490567655, guid: a283bc4fe5a4cf041990415994b63b58, type: 3}
       propertyPath: _hoverTextColor.g
@@ -2483,7 +2486,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 816bcac96f434b4e949dc4f60d9e5571, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.SelectEnvironmentScene
 --- !u!225 &784132180980786093 stripped
 CanvasGroup:
@@ -2587,8 +2590,81 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: babab8b2b03d472c87cfb5607bb2e35c, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.FightingScene
+--- !u!1001 &1083981001825329164
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6638267439811074903}
+    m_Modifications:
+    - target: {fileID: 6041777625918835803, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_Name
+      value: Factory Response Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+--- !u!114 &8847345871223827991 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8485631395207745051, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+  m_PrefabInstance: {fileID: 1083981001825329164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1895c91d454bcc8d72ed870b945f5f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.FactoryResponseScene
+--- !u!4 &9017077243467211216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
+  m_PrefabInstance: {fileID: 1083981001825329164}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1145051638417458629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2643,7 +2719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8768764030793352861, guid: a900309a95a41be4fbcb4b4abefb0828, type: 3}
       propertyPath: m_Camera
-      value: 
+      value:
       objectReference: {fileID: 8812496317400374687}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2664,7 +2740,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbac0bd0e29b6804fb5423883047741a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.EmergencyExit
 --- !u!1001 &1326639561495841003
 PrefabInstance:
@@ -2676,7 +2752,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 75009644656401614, guid: 40ed160e7e2721f4caae1881ca4565c8, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 7458788457473641545}
     - target: {fileID: 75009644656401614, guid: 40ed160e7e2721f4caae1881ca4565c8, type: 3}
       propertyPath: _hoverTextColor.g
@@ -2896,7 +2972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5060677046482083164, guid: 40ed160e7e2721f4caae1881ca4565c8, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 3427930350654585309}
     - target: {fileID: 5060677046482083164, guid: 40ed160e7e2721f4caae1881ca4565c8, type: 3}
       propertyPath: _hoverTextColor.g
@@ -3064,7 +3140,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57adb4d1190c44dda79acedeb832250c, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.SelectExtinguisherScene
 --- !u!4 &2202322661535820517 stripped
 Transform:
@@ -3157,11 +3233,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1684791653009937374, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
       propertyPath: _fireExtinguisher
-      value: 
+      value:
       objectReference: {fileID: 836178444688057233}
     - target: {fileID: 2841395514262302519, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
       propertyPath: _fireExtinguisher
-      value: 
+      value:
       objectReference: {fileID: 836178444688057233}
     - target: {fileID: 3030531174534443987, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
       propertyPath: m_Name
@@ -3169,11 +3245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8712345678901234507, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
       propertyPath: _fireExtinguisher
-      value: 
+      value:
       objectReference: {fileID: 836178444688057233}
     - target: {fileID: 9052882761576765703, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
       propertyPath: _fireExtinguisher
-      value: 
+      value:
       objectReference: {fileID: 836178444688057233}
     - target: {fileID: 9161795741285879404, guid: 9e5418d9888f68d409e57609d27d9bf5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3279,15 +3355,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3938529313065317905, guid: 8e93748e58d18784eb8556e7c84224ee, type: 3}
       propertyPath: m_Target
-      value: 
+      value:
       objectReference: {fileID: 1796502122913468420}
     - target: {fileID: 7253449786809036291, guid: 8e93748e58d18784eb8556e7c84224ee, type: 3}
       propertyPath: _co2Pressure
-      value: 
+      value:
       objectReference: {fileID: 262122518852065322}
     - target: {fileID: 7253449786809036291, guid: 8e93748e58d18784eb8556e7c84224ee, type: 3}
       propertyPath: _powderPressure
-      value: 
+      value:
       objectReference: {fileID: 1796502122913468420}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3357,7 +3433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4883026633319624090, guid: 4d3292506a5644dba4c5af6b30ae297b, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 1082523579413996222}
     - target: {fileID: 4883026633319624090, guid: 4d3292506a5644dba4c5af6b30ae297b, type: 3}
       propertyPath: _hoverTextColor.g
@@ -3401,7 +3477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7162216849160489401, guid: 4d3292506a5644dba4c5af6b30ae297b, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 6112477154747456784}
     - target: {fileID: 7162216849160489401, guid: 4d3292506a5644dba4c5af6b30ae297b, type: 3}
       propertyPath: _hoverTextColor.g
@@ -3446,7 +3522,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d406fb7df3244c91b7824283603aa06b, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.ExploreScene
 --- !u!4 &5363198879010075140 stripped
 Transform:
@@ -3612,7 +3688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4445527158653842918, guid: 8cdb3a218ddf41fca23b79236d453de4, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 799775824863591807}
     - target: {fileID: 4445527158653842918, guid: 8cdb3a218ddf41fca23b79236d453de4, type: 3}
       propertyPath: _hoverTextColor.g
@@ -3692,7 +3768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8328476104317152693, guid: 8cdb3a218ddf41fca23b79236d453de4, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 5224431203766638433}
     - target: {fileID: 8328476104317152693, guid: 8cdb3a218ddf41fca23b79236d453de4, type: 3}
       propertyPath: _hoverTextColor.g
@@ -3749,7 +3825,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0a93dc2b5f64d64b3355a416ab646b3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.GuideScene
 --- !u!225 &5224431203766638433 stripped
 CanvasGroup:
@@ -3811,7 +3887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2600754377209363726, guid: 17501f4c3eb858a489979666536d9be8, type: 3}
       propertyPath: m_Camera
-      value: 
+      value:
       objectReference: {fileID: 8812496317400374687}
     - target: {fileID: 2765382751402732046, guid: 17501f4c3eb858a489979666536d9be8, type: 3}
       propertyPath: m_Name
@@ -3847,7 +3923,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c08690552b9405daab842c4b43e38eb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.EscapeScene
 --- !u!4 &4219429246815082194 stripped
 Transform:
@@ -3957,11 +4033,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4087479629215077442, guid: d168ee2ff47a43449b0bb6b21ff6a61a, type: 3}
       propertyPath: m_Camera
-      value: 
+      value:
       objectReference: {fileID: 8812496317400374687}
     - target: {fileID: 5163137460039266648, guid: d168ee2ff47a43449b0bb6b21ff6a61a, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 259958034813438570}
     - target: {fileID: 5163137460039266648, guid: d168ee2ff47a43449b0bb6b21ff6a61a, type: 3}
       propertyPath: _hoverTextColor.g
@@ -4058,7 +4134,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39a580630318a194b832365f59c19b78, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.FailedScene
 --- !u!4 &4098506054630638858 stripped
 Transform:
@@ -4131,11 +4207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7462879561657043759, guid: ad818c36731146e994540a1896ad8f24, type: 3}
       propertyPath: m_UIPressInput.m_InputActionReferenceValue
-      value: 
+      value:
       objectReference: {fileID: 71106601250685021, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 7462879561657043759, guid: ad818c36731146e994540a1896ad8f24, type: 3}
       propertyPath: m_UIPressInput.m_InputActionReferencePerformed
-      value: 
+      value:
       objectReference: {fileID: -6395602842196007441, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4326,7 +4402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3239694457498981044, guid: 9b11d2cdb050fd44ca16b8894826666e, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 5736960114576323484}
     - target: {fileID: 3239694457498981044, guid: 9b11d2cdb050fd44ca16b8894826666e, type: 3}
       propertyPath: _hoverTextColor.g
@@ -4350,7 +4426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5061980051898715347, guid: 9b11d2cdb050fd44ca16b8894826666e, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 1795374287938088601}
     - target: {fileID: 5061980051898715347, guid: 9b11d2cdb050fd44ca16b8894826666e, type: 3}
       propertyPath: _hoverTextColor.g
@@ -4459,7 +4535,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e0cb07d8dd345fcb7a8997e1f61ae3b, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.ReadyView
 --- !u!4 &4871280091408194320 stripped
 Transform:
@@ -4529,7 +4605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1943994533254981903, guid: bc2c335d191fa2a4fa8526de5df85da7, type: 3}
       propertyPath: m_Camera
-      value: 
+      value:
       objectReference: {fileID: 8812496317400374687}
     - target: {fileID: 3407001437195912975, guid: bc2c335d191fa2a4fa8526de5df85da7, type: 3}
       propertyPath: m_Color.a
@@ -4573,7 +4649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8054510058550349566, guid: bc2c335d191fa2a4fa8526de5df85da7, type: 3}
       propertyPath: _pressedState
-      value: 
+      value:
       objectReference: {fileID: 2125163990459463406}
     - target: {fileID: 8054510058550349566, guid: bc2c335d191fa2a4fa8526de5df85da7, type: 3}
       propertyPath: _hoverTextColor.g
@@ -4602,7 +4678,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65a39c2cba5c4aaeb43024ce9eaf77f0, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.CompletedScene
 --- !u!4 &7898054268903654934 stripped
 Transform:
@@ -4619,7 +4695,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 197079462238159122, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: _endAnchor
-      value: 
+      value:
       objectReference: {fileID: 7040445056584746088}
     - target: {fileID: 3014158271963197912, guid: 8edd713196a8e294a899debe8acd6fcc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4684,7 +4760,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b040b886435676447b1208d4cc754c79, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisher
 --- !u!4 &1796502122913468420 stripped
 Transform:
@@ -4843,5 +4919,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9373ce22ba0a3f34cb024c400f9e3ac0, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.SelectLanguageScene

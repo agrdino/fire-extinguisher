@@ -8,6 +8,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit.UI;
+using _Scripts.Environments.Factory;
 
 namespace _Scripts.UI
 {
@@ -28,7 +29,9 @@ namespace _Scripts.UI
             ConfirmExtinguisher,
             RemoveSafetyPin,
             AimAndSqueeze,
-            GoToEmergencyExit
+            GoToEmergencyExit,
+            SwitchOffPower,
+            ActivateFireAlarm
         }
 
         private readonly struct PersistentMessage
@@ -77,6 +80,8 @@ namespace _Scripts.UI
         [SerializeField] private LocalizedString _removeSafetyPinHintLocalized = new("UI", "hint.remove_safety_pin");
         [SerializeField] private LocalizedString _aimAndSqueezeHintLocalized = new("UI", "hint.aim_and_squeeze");
         [SerializeField] private LocalizedString _goToEmergencyExitHintLocalized = new("UI", "hint.go_to_exit");
+        [SerializeField] private LocalizedString _switchOffPowerHintLocalized = new("UI", "factory.switch_off_power");
+        [SerializeField] private LocalizedString _activateFireAlarmHintLocalized = new("UI", "factory.activate_fire_alarm");
 
         private ApplicationManager _applicationManager;
         private FireExtinguisherController _fireExtinguisherController;
@@ -329,6 +334,14 @@ namespace _Scripts.UI
                     : HintStep.ConfirmExtinguisher;
             }
 
+            if (_applicationManager.State == ApplicationState.FactoryResponse)
+            {
+                FactoryEmergencyResponseController responseController = FindFirstObjectByType<FactoryEmergencyResponseController>();
+                return responseController?.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm
+                    ? HintStep.ActivateFireAlarm
+                    : HintStep.SwitchOffPower;
+            }
+
             if (_applicationManager.State == ApplicationState.Escape)
                 return HintStep.GoToEmergencyExit;
 
@@ -433,6 +446,10 @@ namespace _Scripts.UI
                 case HintStep.GoToEmergencyExit:
                     return _applicationManager?.EmergencyExit?.HintTarget;
 
+                case HintStep.SwitchOffPower:
+                case HintStep.ActivateFireAlarm:
+                    return FindFirstObjectByType<FactoryEmergencyResponseController>()?.CurrentHintTarget;
+
                 default:
                     return null;
             }
@@ -465,6 +482,8 @@ namespace _Scripts.UI
                 HintStep.RemoveSafetyPin => _removeSafetyPinHintLocalized.GetLocalizedString(),
                 HintStep.AimAndSqueeze => _aimAndSqueezeHintLocalized.GetLocalizedString(),
                 HintStep.GoToEmergencyExit => _goToEmergencyExitHintLocalized.GetLocalizedString(),
+                HintStep.SwitchOffPower => _switchOffPowerHintLocalized.GetLocalizedString(),
+                HintStep.ActivateFireAlarm => _activateFireAlarmHintLocalized.GetLocalizedString(),
                 _ => string.Empty
             };
         }
