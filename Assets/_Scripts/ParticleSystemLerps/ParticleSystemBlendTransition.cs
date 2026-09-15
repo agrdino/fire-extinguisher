@@ -26,6 +26,8 @@ namespace _Scripts.ParticleSystemLerps
         private readonly Dictionary<ulong, byte> _fadeOutStartAlphas = new();
 
         public bool IsVisible => _state != TransitionState.Cleared;
+        public float FadeInDuration => _fadeInDuration;
+        public float FadeOutDuration => _fadeOutDuration;
 
         private void Reset()
         {

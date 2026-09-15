@@ -11,6 +11,7 @@ namespace _Scripts.ParticleSystemLerps
         [SerializeField] private ApplicationManager _applicationManager;
         [SerializeField] private FireController _fireController;
         [SerializeField] private ParticleSystemBlendTransition _transition;
+        [SerializeField] private VisibilityFogController _fogVisibilityController;
         [SerializeField] private Transform _effectRoot;
         [SerializeField] private float _fixedWorldHeight = 2f;
 
@@ -19,6 +20,7 @@ namespace _Scripts.ParticleSystemLerps
             _applicationManager = GetComponentInParent<ApplicationManager>();
             _fireController = GetComponentInParent<FireController>();
             _transition = GetComponentInChildren<ParticleSystemBlendTransition>(true);
+            _fogVisibilityController = GetComponentInParent<VisibilityFogController>();
             _effectRoot = _transition != null ? _transition.transform : null;
         }
 
@@ -34,6 +36,7 @@ namespace _Scripts.ParticleSystemLerps
             else
             {
                 _transition?.ClearImmediately();
+                _fogVisibilityController?.SetSmokeActive(false, 0f);
             }
         }
 
@@ -43,6 +46,7 @@ namespace _Scripts.ParticleSystemLerps
                 _applicationManager.OnStateChanged -= HandleStateChanged;
 
             _transition?.ClearImmediately();
+            _fogVisibilityController?.SetSmokeActive(false, 0f);
         }
 
         private void LateUpdate()
@@ -57,6 +61,8 @@ namespace _Scripts.ParticleSystemLerps
                 _applicationManager = ApplicationManager.Instance;
             if (_fireController == null)
                 _fireController = FireController.Instance;
+            if (_fogVisibilityController == null)
+                _fogVisibilityController = GetComponentInParent<VisibilityFogController>();
         }
 
         private void HandleStateChanged(ApplicationState state)
@@ -67,6 +73,7 @@ namespace _Scripts.ParticleSystemLerps
             if (state == ApplicationState.Completed)
             {
                 _transition.FadeOutAndClear();
+                _fogVisibilityController?.SetSmokeActive(false, _transition.FadeOutDuration);
                 return;
             }
 
@@ -77,10 +84,12 @@ namespace _Scripts.ParticleSystemLerps
             {
                 PlaceAbovePlayerView();
                 _transition.FadeInFromClear();
+                _fogVisibilityController?.SetSmokeActive(true, _transition.FadeInDuration);
                 return;
             }
 
             _transition.ClearImmediately();
+            _fogVisibilityController?.SetSmokeActive(false, 0f);
         }
 
         private bool ShouldShowSmoke(ApplicationState state)

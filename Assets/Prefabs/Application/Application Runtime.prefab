@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.GameManager
   _roundDuration: 90
-  _escapeDuration: 30
+  _escapeDuration: 40
   _isExploreTimeLimited: 0
   _exploreDuration: 30
   _fireController: {fileID: 152316646840582338}
@@ -2007,6 +2007,7 @@ GameObject:
   - component: {fileID: 9049481021680548847}
   - component: {fileID: 7650832480718130776}
   - component: {fileID: 4349127096955075404}
+  - component: {fileID: 5401238497502841123}
   m_Layer: 0
   m_Name: Application Runtime
   m_TagString: Untagged
@@ -2110,8 +2111,26 @@ MonoBehaviour:
   _applicationManager: {fileID: 8962677695553302094}
   _fireController: {fileID: 152316646840582338}
   _transition: {fileID: 4834213386209574127}
+  _fogVisibilityController: {fileID: 5401238497502841123}
   _effectRoot: {fileID: 1137958935237934507}
   _fixedWorldHeight: 2
+--- !u!114 &5401238497502841123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869943852659707387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47d91f2acb64b38b7d52de5f69c10e4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ParticleSystemLerps.VisibilityFogController
+  _fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _defaultFogStart: 50
+  _defaultFogEnd: 100
+  _smokeFogStart: 20
+  _smokeFogEnd: 30
 --- !u!1001 &393946040925770636
 PrefabInstance:
   m_ObjectHideFlags: 0

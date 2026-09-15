@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5739920819860158605}
   - component: {fileID: 5140790987694356987}
   - component: {fileID: 248840896341162441}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Escape Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +118,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7232063817506047470, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232063817506047470, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
       propertyPath: m_Name
       value: Upper Layer
       objectReference: {fileID: 0}
@@ -194,6 +198,10 @@ PrefabInstance:
     - target: {fileID: 7230355541159105688, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232063817506047470, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7232063817506047470, guid: a9dc1e56328056948a1493b75ea4b489, type: 3}
       propertyPath: m_Name

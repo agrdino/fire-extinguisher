@@ -29,7 +29,7 @@ namespace _Scripts.Controller
 
         [Header("Timing")]
         [SerializeField, Min(0f)] private float _roundDuration = 90f;
-        [SerializeField, Min(0f)] private float _escapeDuration = 30f;
+        [SerializeField, Min(0f)] private float _escapeDuration = 40f;
         [SerializeField] private bool _isExploreTimeLimited = true;
         [SerializeField, Min(0f)] private float _exploreDuration = 30f;
 
