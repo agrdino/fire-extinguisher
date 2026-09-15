@@ -23,15 +23,14 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private bool _isPrimaryHintTarget;
         [SerializeField] private Transform _hintTarget;
         [Header("Feedback")]
-        [SerializeField] private Color _hoverColor = new(0.05f, 0.85f, 1f, 1f);
-        [SerializeField] private Color _hoverEmission = new(0f, 2.5f, 3.5f, 1f);
+        [SerializeField] private HoverMaterialHighlight _hoverHighlight;
         [SerializeField] private Color _pressedColor = new(0.65f, 1f, 1f, 1f);
         [SerializeField] private Color _pressedEmission = new(0.5f, 4f, 5f, 1f);
         [SerializeField, Min(0f)] private float _pressedDuration = 0.18f;
         [SerializeField, Range(0.8f, 1f)] private float _pressedScale = 0.94f;
 
-        private FactoryEmergencyResponseController _responseController;
-        private Renderer[] _renderers;
+        [SerializeField] private FactoryEmergencyResponseController _responseController;
+        [SerializeField] private Renderer[] _renderers = System.Array.Empty<Renderer>();
         private MaterialPropertyBlock _propertyBlock;
         private Color[] _baseColors;
         private Vector3 _initialScale;
@@ -47,8 +46,6 @@ namespace _Scripts.Environments.Factory
 
         private void Awake()
         {
-            _responseController = GetComponentInParent<FactoryEmergencyResponseController>();
-            _renderers = GetComponentsInChildren<Renderer>(true);
             _propertyBlock = new MaterialPropertyBlock();
             _baseColors = new Color[_renderers.Length];
             _initialScale = transform.localScale;
@@ -114,6 +111,7 @@ namespace _Scripts.Environments.Factory
 
         private void ApplyVisual()
         {
+            _hoverHighlight?.SetHovered(_isHovered && IsInteractionEnabled);
             if (_renderers == null || _propertyBlock == null) return;
 
             for (int index = 0; index < _renderers.Length; index++)
@@ -121,8 +119,8 @@ namespace _Scripts.Environments.Factory
                 Renderer targetRenderer = _renderers[index];
                 if (targetRenderer == null) continue;
 
-                Color color = _isPressed ? _pressedColor : _isHovered ? _hoverColor : _baseColors[index];
-                Color emission = _isPressed ? _pressedEmission : _isHovered ? _hoverEmission : Color.black;
+                Color color = _isPressed ? _pressedColor : _baseColors[index];
+                Color emission = _isPressed ? _pressedEmission : Color.black;
                 targetRenderer.GetPropertyBlock(_propertyBlock);
                 _propertyBlock.SetColor(BaseColorProperty, color);
                 _propertyBlock.SetColor(ColorProperty, color);

@@ -18,18 +18,13 @@ namespace _Scripts.Environments.Factory
     public sealed class FactoryEmergencyResponseController : MonoBehaviour
     {
         private ApplicationManager _applicationManager;
-        private FactoryEmergencyInteractable[] _interactables;
+        [SerializeField] private FactoryEmergencyInteractable[] _interactables = Array.Empty<FactoryEmergencyInteractable>();
         private FactoryEmergencyInteractable _activeCircuitBreaker;
 
         public FactoryEmergencyResponseStep CurrentStep { get; private set; }
         public Transform CurrentHintTarget { get; private set; }
 
         public event Action<FactoryEmergencyResponseStep> OnStepChanged;
-
-        private void Awake()
-        {
-            _interactables = GetComponentsInChildren<FactoryEmergencyInteractable>(true);
-        }
 
         private void Start()
         {

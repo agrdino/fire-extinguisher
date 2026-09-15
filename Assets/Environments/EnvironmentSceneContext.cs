@@ -106,5 +106,57 @@ namespace _Scripts.Controller
             return true;
         }
 
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            _fireSpawnPoints.RemoveAll(point => point == null);
+            _exitSpawnPoints.RemoveAll(point => point == null);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Color previousColor = Gizmos.color;
+            Matrix4x4 previousMatrix = Gizmos.matrix;
+
+            if (_playerSpawnPoint != null)
+            {
+                Gizmos.color = new Color(1f, 0.75f, 0.15f, 0.9f);
+                Gizmos.matrix = Matrix4x4.TRS(_playerSpawnPoint.position, _playerSpawnPoint.rotation, Vector3.one);
+                Gizmos.DrawWireSphere(Vector3.zero, 0.25f);
+                Gizmos.DrawLine(Vector3.zero, Vector3.up * 1.6f);
+                Gizmos.DrawWireSphere(Vector3.up * 1.6f, 0.15f);
+                DrawForwardArrow();
+                UnityEditor.Handles.Label(_playerSpawnPoint.position + Vector3.up * 1.85f, "Player Spawn Point");
+            }
+
+            foreach (SceneUIAnchor entry in _uiAnchors)
+            {
+                if (entry == null || entry.Anchor == null) continue;
+                if (entry.State != ApplicationState.Guide && entry.State != ApplicationState.Explore) continue;
+
+                Transform anchor = entry.Anchor;
+                bool isGuide = entry.State == ApplicationState.Guide;
+                Gizmos.color = isGuide
+                    ? new Color(0.2f, 0.75f, 1f, 0.9f)
+                    : new Color(0.35f, 1f, 0.4f, 0.9f);
+                Gizmos.matrix = Matrix4x4.TRS(anchor.position, anchor.rotation, Vector3.one);
+                Gizmos.DrawWireSphere(Vector3.zero, isGuide ? 0.15f : 0.2f);
+                Gizmos.DrawWireCube(Vector3.zero, new Vector3(0.8f, 0.45f, 0.02f));
+                DrawForwardArrow();
+                UnityEditor.Handles.Label(anchor.position + Vector3.up * (isGuide ? 0.4f : 0.65f), $"UI Point - {entry.State}");
+            }
+
+            Gizmos.matrix = previousMatrix;
+            Gizmos.color = previousColor;
+        }
+
+        private static void DrawForwardArrow()
+        {
+            Vector3 tip = Vector3.forward * 0.6f;
+            Gizmos.DrawLine(Vector3.zero, tip);
+            Gizmos.DrawLine(tip, tip - Vector3.forward * 0.15f + Vector3.right * 0.1f);
+            Gizmos.DrawLine(tip, tip - Vector3.forward * 0.15f - Vector3.right * 0.1f);
+        }
+#endif
     }
 }

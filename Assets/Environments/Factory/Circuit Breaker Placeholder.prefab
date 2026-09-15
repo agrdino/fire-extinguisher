@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 811000000000000003}
   - component: {fileID: 811000000000000004}
   - component: {fileID: 811000000000000005}
+  - component: {fileID: 811000000000000006}
   m_Layer: 9
   m_Name: Circuit Breaker Placeholder
   m_TagString: Untagged
@@ -125,13 +126,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9029f15705c54da1bfafd29b8d87097c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryEmergencyInteractable
+  _responseController: {fileID: 0}
+  _renderers:
+  - {fileID: 811000000000000003}
   _kind: 0
   _fireSpawnPoint: {fileID: 0}
   _isPrimaryHintTarget: 0
   _hintTarget: {fileID: 0}
-  _hoverColor: {r: 0.05, g: 0.85, b: 1, a: 1}
-  _hoverEmission: {r: 0, g: 2.5, b: 3.5, a: 1}
+  _hoverHighlight: {fileID: 811000000000000006}
   _pressedColor: {r: 0.65, g: 1, b: 1, a: 1}
   _pressedEmission: {r: 0.5, g: 4, b: 5, a: 1}
   _pressedDuration: 0.18
   _pressedScale: 0.94
+--- !u!114 &811000000000000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811000000000000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778425f300dd40e49c2997b094416585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.HoverMaterialHighlight
+  _renderers:
+  - {fileID: 811000000000000003}
+  _highlightMaterial: {fileID: 2100000, guid: a52aae6963334a4aac5c65ce17849a56, type: 2}
