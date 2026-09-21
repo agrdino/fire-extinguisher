@@ -125,7 +125,10 @@ namespace _Scripts.Environments.Factory
             if (_interactables != null)
             {
                 for (int index = 0; index < _interactables.Length; index++)
+                {
+                    _interactables[index].ResetInteractionState();
                     _interactables[index].SetInteractionEnabled(false);
+                }
             }
 
             _activeCircuitBreaker = null;
