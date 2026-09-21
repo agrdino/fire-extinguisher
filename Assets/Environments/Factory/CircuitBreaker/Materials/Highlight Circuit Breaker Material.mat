@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Highlight Circuit Breaker
+  m_Name: Highlight Circuit Breaker Material
   m_Shader: {fileID: -6465566751694194690, guid: 08f3045ec37d431ebdfd290c895e6116, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
