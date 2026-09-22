@@ -169,11 +169,12 @@ MonoBehaviour:
   _pressedScale: 0.94
   _breakerHinge: {fileID: 2445202398880030477}
   _breakerClosedEulerAngles: {x: 0, y: 0, z: 0}
-  _breakerOpenEulerAngles: {x: 0, y: 120, z: 0}
+  _breakerOpenEulerAngles: {x: 0, y: -120, z: 0}
   _breakerOpenDuration: 1
   _responseController: {fileID: 0}
   _renderers:
-  - {fileID: 0}
+  - {fileID: 1294625818507452466}
+  - {fileID: 2826200534714893744}
 --- !u!114 &811000000000000006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.HoverMaterialHighlight
   _renderers:
-  - {fileID: 0}
+  - {fileID: 1294625818507452466}
+  - {fileID: 2826200534714893744}
   _highlightMaterial: {fileID: 2100000, guid: a52aae6963334a4aac5c65ce17849a56, type: 2}
 --- !u!1 &1154858861376117816
 GameObject:
@@ -213,14 +215,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154858861376117816}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.86602545, z: 0, w: 0.49999994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.87145406, y: 0.95315284, z: 0.94770414}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6585997664114336249}
   m_Father: {fileID: 1487983858628106685}
-  m_LocalEulerAnglesHint: {x: 0, y: -120, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2300690436131078919
 GameObject:
   m_ObjectHideFlags: 0

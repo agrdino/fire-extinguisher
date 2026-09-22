@@ -25,6 +25,7 @@ namespace _Scripts.Environments.Factory
         public Transform CurrentHintTarget { get; private set; }
 
         public event Action<FactoryEmergencyResponseStep> OnStepChanged;
+        public event Action<FactoryEmergencyInteractable> OnInteractionCompleted;
 
         private void Start()
         {
@@ -51,12 +52,16 @@ namespace _Scripts.Environments.Factory
             if (CurrentStep == FactoryEmergencyResponseStep.SwitchOffPower && interactable == _activeCircuitBreaker)
             {
                 FireController.Instance?.StopElectricalSparks();
+                OnInteractionCompleted?.Invoke(interactable);
                 BeginFireAlarmStep();
                 return;
             }
 
             if (CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm && interactable.Kind == FactoryEmergencyInteractableKind.FireAlarm)
+            {
+                OnInteractionCompleted?.Invoke(interactable);
                 CompleteResponse();
+            }
         }
 
         private void HandleApplicationStateChanged(ApplicationState state)
