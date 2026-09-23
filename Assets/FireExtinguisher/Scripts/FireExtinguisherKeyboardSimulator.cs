@@ -22,7 +22,6 @@ namespace _Scripts.FireExtinguishers
             if (_controller == null) _controller = FindFirstObjectByType<FireExtinguisherController>();
             if (_controller == null)
             {
-                Debug.LogError("FireExtinguisherKeyboardSimulator requires a FireExtinguisherController.", this);
                 enabled = false;
                 return;
             }
@@ -30,7 +29,6 @@ namespace _Scripts.FireExtinguishers
             SO_FireExtinguisherInputSettings inputSettings = _controller.InputSettings;
             if (inputSettings == null)
             {
-                Debug.LogError("The simulator requires valid input settings with a mapped default key.", this);
                 enabled = false;
                 return;
             }
@@ -38,7 +36,6 @@ namespace _Scripts.FireExtinguishers
             bool isSent = SendKey(inputSettings.DefaultKey);
             if (!isSent)
             {
-                Debug.LogError($"The simulator can't sent {inputSettings.DefaultKey}", this);
                 enabled = false;
                 return;
             }

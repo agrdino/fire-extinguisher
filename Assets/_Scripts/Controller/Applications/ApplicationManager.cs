@@ -91,8 +91,6 @@ namespace _Scripts.Controller
             _emergencyExitPathGuide = _emergencyExit != null
                 ? _emergencyExit.GetComponentInChildren<EmergencyExitPathGuide>(true)
                 : null;
-            if (_emergencyExit != null && _emergencyExitPathGuide == null)
-                Debug.LogError("Emergency Exit prefab is missing its preconfigured Escape Path Guide.", _emergencyExit);
             _emergencyExitPathGuide?.Initialize(_emergencyExit, _playerRoot);
         }
 

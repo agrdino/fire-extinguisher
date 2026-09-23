@@ -165,6 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8444529954007292610}
   - component: {fileID: 152316646840582338}
+  - component: {fileID: 7123836906576039554}
   m_Layer: 0
   m_Name: Fire Controller
   m_TagString: Untagged
@@ -209,6 +210,21 @@ MonoBehaviour:
   _preIgnitionDuration: 3
   _fireRevealDuration: 1
   _sparksOverlapDuration: 2
+--- !u!114 &7123836906576039554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203372496599113712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a820c117dd804e86af071c60c99f8361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.Visualizes.FireCompletionVfxObserver
+  _fireController: {fileID: 152316646840582338}
+  _checkVfxPrefab: {fileID: 5352567032913689116, guid: 0fc8456d61fa8cc43a287b840f70623c, type: 3}
+  _localOffset: {x: 0, y: 0.6, z: 0}
 --- !u!1 &1229881592274559765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3187,6 +3203,10 @@ PrefabInstance:
     - target: {fileID: 1052189521138179535, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
       propertyPath: m_Name
       value: Idle Hint Popup
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357819944927657492, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4292265896
       objectReference: {fileID: 0}
     - target: {fileID: 2478641081430630078, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
       propertyPath: m_Enabled

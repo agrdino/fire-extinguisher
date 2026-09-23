@@ -19,23 +19,11 @@ namespace _Scripts.SceneManagement
 
             if (_runtimePrefab == null)
             {
-                Debug.LogError(
-                    $"{nameof(SceneRuntimeBootstrap)} requires an Application Runtime prefab.",
-                    this);
                 return;
             }
 
             Instantiate(_runtimePrefab);
         }
 
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (_runtimePrefab == null)
-                Debug.LogError(
-                    $"{nameof(SceneRuntimeBootstrap)} requires an Application Runtime prefab.",
-                    this);
-        }
-#endif
     }
 }

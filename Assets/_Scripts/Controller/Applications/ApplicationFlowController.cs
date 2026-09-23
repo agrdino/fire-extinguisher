@@ -181,15 +181,6 @@ namespace _Scripts.Controller
 
         private bool ValidateRuntimeReferences()
         {
-            if (_sceneFlowController == null)
-                Debug.LogError("ApplicationFlowController requires a SceneFlowController.", this);
-            if (_applicationManager == null)
-                Debug.LogError("ApplicationFlowController requires an ApplicationManager.", this);
-            if (_uiController == null)
-                Debug.LogError("ApplicationFlowController requires a UIController.", this);
-            if (_exitPlacementController == null)
-                Debug.LogError("ApplicationFlowController requires an EmergencyExitPlacementController.", this);
-
             return _sceneFlowController != null
                 && _applicationManager != null
                 && _uiController != null

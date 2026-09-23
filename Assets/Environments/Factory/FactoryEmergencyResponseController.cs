@@ -32,7 +32,6 @@ namespace _Scripts.Environments.Factory
             _applicationManager = ApplicationManager.Instance;
             if (_applicationManager == null)
             {
-                Debug.LogError("FactoryEmergencyResponseController requires an ApplicationManager.", this);
                 return;
             }
 
@@ -67,9 +66,19 @@ namespace _Scripts.Environments.Factory
         private void HandleApplicationStateChanged(ApplicationState state)
         {
             if (state == ApplicationState.FactoryResponse)
-                BeginCircuitBreakerStep();
-            else
+            {
                 ResetResponse();
+                BeginCircuitBreakerStep();
+                return;
+            }
+
+            if (state == ApplicationState.Completed || state == ApplicationState.Failed)
+            {
+                ResetResponse();
+                return;
+            }
+
+            DisableInteractions();
         }
 
         private void BeginCircuitBreakerStep()
@@ -86,7 +95,6 @@ namespace _Scripts.Environments.Factory
 
             if (_activeCircuitBreaker == null)
             {
-                Debug.LogError($"No circuit breaker is mapped to fire point {selectedSpawnPoint?.name ?? "<null>"}.", this);
                 return;
             }
 
@@ -101,7 +109,8 @@ namespace _Scripts.Environments.Factory
             {
                 FactoryEmergencyInteractable interactable = _interactables[index];
                 bool isAlarm = interactable.Kind == FactoryEmergencyInteractableKind.FireAlarm;
-                interactable.SetInteractionEnabled(isAlarm);
+                bool isOptionalCircuitCloser = interactable == _activeCircuitBreaker;
+                interactable.SetInteractionEnabled(isAlarm || isOptionalCircuitCloser);
                 if (!isAlarm) continue;
                 fallbackAlarm ??= interactable;
                 if (interactable.IsPrimaryHintTarget) primaryAlarm = interactable;
@@ -110,7 +119,6 @@ namespace _Scripts.Environments.Factory
             FactoryEmergencyInteractable hintAlarm = primaryAlarm != null ? primaryAlarm : fallbackAlarm;
             if (hintAlarm == null)
             {
-                Debug.LogError("FactoryEmergencyResponseController requires at least one fire alarm.", this);
                 return;
             }
 
@@ -123,6 +131,17 @@ namespace _Scripts.Environments.Factory
                 _interactables[index].SetInteractionEnabled(false);
             SetStep(FactoryEmergencyResponseStep.Completed, null);
             _applicationManager.CompleteFactoryResponse();
+        }
+
+        private void DisableInteractions()
+        {
+            if (_interactables != null)
+            {
+                for (int index = 0; index < _interactables.Length; index++)
+                    _interactables[index].SetInteractionEnabled(false);
+            }
+
+            _activeCircuitBreaker = null;
         }
 
         private void ResetResponse()

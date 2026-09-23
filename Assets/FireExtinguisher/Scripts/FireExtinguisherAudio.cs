@@ -58,7 +58,6 @@ namespace _Scripts.FireExtinguishers
             if (!AudioManager.TryGetInstance(out AudioManager audioManager))
             {
                 StopAudioSources();
-                if (canSpray) Debug.LogError("No AudioManager exists in the active scene.", this);
                 return;
             }
 

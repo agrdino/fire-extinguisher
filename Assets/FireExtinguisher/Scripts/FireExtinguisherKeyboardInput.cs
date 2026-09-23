@@ -24,7 +24,6 @@ namespace _Scripts.FireExtinguishers
             if (_controller == null) _controller = FindFirstObjectByType<FireExtinguisherController>();
             if (_controller == null)
             {
-                Debug.LogError("FireExtinguisherKeyboardSimulator requires a FireExtinguisherController.", this);
                 enabled = false;
                 return;
             }

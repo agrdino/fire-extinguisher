@@ -27,7 +27,6 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private Color _pressedColor = new(0.65f, 1f, 1f, 1f);
         [SerializeField] private Color _pressedEmission = new(0.5f, 4f, 5f, 1f);
         [SerializeField, Min(0f)] private float _pressedDuration = 0.18f;
-        [SerializeField, Range(0.8f, 1f)] private float _pressedScale = 0.94f;
 
         [Header("Circuit Breaker")]
         [SerializeField] private Transform _breakerHinge;
@@ -39,7 +38,6 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private Renderer[] _renderers = System.Array.Empty<Renderer>();
         private MaterialPropertyBlock _propertyBlock;
         private Color[] _baseColors;
-        private Vector3 _initialScale;
         private Coroutine _pressedRoutine;
         private Coroutine _breakerHingeRoutine;
         private bool _isHovered;
@@ -56,7 +54,6 @@ namespace _Scripts.Environments.Factory
         {
             _propertyBlock = new MaterialPropertyBlock();
             _baseColors = new Color[_renderers.Length];
-            _initialScale = transform.localScale;
 
             for (int index = 0; index < _renderers.Length; index++)
             {
@@ -80,7 +77,6 @@ namespace _Scripts.Environments.Factory
             _breakerHingeRoutine = null;
             _isHovered = false;
             _isPressed = false;
-            transform.localScale = _initialScale;
             ResetBreakerHinge();
             ApplyVisual();
         }
@@ -113,6 +109,13 @@ namespace _Scripts.Environments.Factory
                     OpenBreakerHinge();
                     return true;
                 }
+
+                if (_responseController.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm)
+                {
+                    PlayPressedFeedbackFromStart();
+                    CloseBreakerHinge();
+                    return true;
+                }
             }
 
             PlayPressedFeedbackFromStart();
@@ -128,7 +131,6 @@ namespace _Scripts.Environments.Factory
             _breakerHingeRoutine = null;
             _isHovered = false;
             _isPressed = false;
-            transform.localScale = _initialScale;
             ResetBreakerHinge();
             ApplyVisual();
         }
@@ -141,26 +143,42 @@ namespace _Scripts.Environments.Factory
 
         private void OpenBreakerHinge()
         {
-            _isBreakerOpen = true;
+            SetBreakerHingeState(true, false);
+        }
+
+        private void CloseBreakerHinge()
+        {
+            SetBreakerHingeState(false, true);
+        }
+
+        private void SetBreakerHingeState(bool isOpen, bool disableInteractionWhenComplete)
+        {
+            _isBreakerOpen = isOpen;
+            Quaternion targetRotation = Quaternion.Euler(
+                isOpen ? _breakerOpenEulerAngles : _breakerClosedEulerAngles);
+
             if (_breakerHinge == null)
             {
-                Debug.LogError("Circuit breaker requires a hinge Transform.", this);
+                if (disableInteractionWhenComplete) SetInteractionEnabled(false);
                 return;
             }
 
             if (_breakerOpenDuration <= 0f)
             {
-                _breakerHinge.localRotation = Quaternion.Euler(_breakerOpenEulerAngles);
+                _breakerHinge.localRotation = targetRotation;
+                if (disableInteractionWhenComplete) SetInteractionEnabled(false);
                 return;
             }
 
-            _breakerHingeRoutine = StartCoroutine(AnimateBreakerHingeOpen());
+            _breakerHingeRoutine = StartCoroutine(
+                AnimateBreakerHinge(targetRotation, disableInteractionWhenComplete));
         }
 
-        private IEnumerator AnimateBreakerHingeOpen()
+        private IEnumerator AnimateBreakerHinge(
+            Quaternion targetRotation,
+            bool disableInteractionWhenComplete)
         {
             Quaternion startRotation = _breakerHinge.localRotation;
-            Quaternion targetRotation = Quaternion.Euler(_breakerOpenEulerAngles);
             float elapsedTime = 0f;
 
             while (elapsedTime < _breakerOpenDuration)
@@ -173,6 +191,7 @@ namespace _Scripts.Environments.Factory
 
             _breakerHinge.localRotation = targetRotation;
             _breakerHingeRoutine = null;
+            if (disableInteractionWhenComplete) SetInteractionEnabled(false);
         }
 
         private void ResetBreakerHinge()
@@ -185,11 +204,9 @@ namespace _Scripts.Environments.Factory
         private IEnumerator PlayPressedFeedback()
         {
             _isPressed = true;
-            transform.localScale = _initialScale * _pressedScale;
             ApplyVisual();
             if (_pressedDuration > 0f) yield return new WaitForSecondsRealtime(_pressedDuration);
             _isPressed = false;
-            transform.localScale = _initialScale;
             ApplyVisual();
             _pressedRoutine = null;
         }

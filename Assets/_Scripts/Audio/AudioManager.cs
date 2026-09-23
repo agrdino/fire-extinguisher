@@ -36,7 +36,6 @@ namespace _Scripts.Audio
         {
             if (_instance != null && _instance != this)
             {
-                Debug.LogError("Only one AudioManager can be active at a time.", this);
                 Destroy(gameObject);
                 return;
             }
@@ -61,7 +60,6 @@ namespace _Scripts.Audio
             if (firstSource == null || secondSource == null || clip == null) return;
             if (firstSource == secondSource)
             {
-                Debug.LogError("An alternating loop requires two different AudioSources.", firstSource);
                 return;
             }
 

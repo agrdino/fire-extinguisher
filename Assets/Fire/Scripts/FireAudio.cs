@@ -71,7 +71,6 @@ namespace _Scripts.Fires
             if (!AudioManager.TryGetInstance(out AudioManager audioManager))
             {
                 StopAudioSources();
-                Debug.LogError("No AudioManager exists in the active scene.", this);
                 return;
             }
 

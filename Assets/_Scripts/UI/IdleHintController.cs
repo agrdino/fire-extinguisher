@@ -48,8 +48,6 @@ namespace _Scripts.UI
             public ulong Sequence { get; }
         }
 
-        private const int AlwaysOnTopLayer = 8;
-        private const string AlwaysOnTopLayerName = "AlwaysOnTopUI";
         private const string OverlayCameraName = "Always On Top UI Camera";
         private static IdleHintController _instance;
         public static IdleHintController Instance => _instance;
@@ -116,12 +114,7 @@ namespace _Scripts.UI
             if (_applicationManager == null) return;
             if (_canvasGroup == null || _messageText == null) return;
 
-            int layer = LayerMask.NameToLayer(AlwaysOnTopLayerName);
-            if (layer != AlwaysOnTopLayer || gameObject.layer != layer)
-            {
-                Debug.LogError($"Idle Hint Popup must use layer {AlwaysOnTopLayer} ({AlwaysOnTopLayerName}).", this);
-                layer = gameObject.layer;
-            }
+            int layer = gameObject.layer;
 
             _canvasGroup.alpha = 0f;
             _canvasGroup.interactable = false;
@@ -507,7 +500,6 @@ namespace _Scripts.UI
             RectTransform popupRect = _canvasGroup != null ? _canvasGroup.transform as RectTransform : null;
             if (popupRect == null)
             {
-                Debug.LogError("Idle Hint Popup requires its CanvasGroup on a RectTransform.", this);
                 return;
             }
 

@@ -25,7 +25,6 @@ namespace _Scripts.UI
             _applicationManager = ApplicationManager.Instance;
             if (_applicationManager == null)
             {
-                Debug.LogError("RayInteractorStateController requires an ApplicationManager in the scene.", this);
                 return;
             }
 
@@ -59,7 +58,6 @@ namespace _Scripts.UI
             _lineVisual = _rayInteractor.GetComponent<XRInteractorLineVisual>();
             if (_xrRayInteractor == null || _lineVisual == null)
             {
-                Debug.LogError("RayInteractorStateController requires an XRRayInteractor and XRInteractorLineVisual.", this);
                 return;
             }
 

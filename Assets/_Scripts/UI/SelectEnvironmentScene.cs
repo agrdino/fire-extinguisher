@@ -54,7 +54,6 @@ namespace _Scripts.UI
 
             if (_navigator == null)
             {
-                Debug.LogError("SelectEnvironmentScene has no application navigator.", this);
                 return;
             }
 

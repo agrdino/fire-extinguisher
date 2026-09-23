@@ -76,7 +76,6 @@ MonoBehaviour:
   _pressedColor: {r: 0.65, g: 1, b: 1, a: 1}
   _pressedEmission: {r: 0.5, g: 4, b: 5, a: 1}
   _pressedDuration: 0.18
-  _pressedScale: 0.94
   _breakerHinge: {fileID: 0}
   _breakerClosedEulerAngles: {x: 0, y: 0, z: 0}
   _breakerOpenEulerAngles: {x: 0, y: 120, z: 0}

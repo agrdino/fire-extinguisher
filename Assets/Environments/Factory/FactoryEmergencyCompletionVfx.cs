@@ -23,13 +23,11 @@ namespace _Scripts.Environments.Factory
         {
             if (_responseController == null)
             {
-                Debug.LogError("FactoryEmergencyCompletionVfx requires a response controller.", this);
                 return;
             }
 
             if (_checkVfxPrefab == null)
             {
-                Debug.LogError("FactoryEmergencyCompletionVfx requires a check VFX prefab.", this);
                 return;
             }
 
@@ -87,7 +85,11 @@ namespace _Scripts.Environments.Factory
 
         private void HandleStepChanged(FactoryEmergencyResponseStep step)
         {
-            if (step == FactoryEmergencyResponseStep.SwitchOffPower) HideAll();
+            if (step == FactoryEmergencyResponseStep.None
+                || step == FactoryEmergencyResponseStep.SwitchOffPower)
+            {
+                HideAll();
+            }
         }
 
         private void HideAll()

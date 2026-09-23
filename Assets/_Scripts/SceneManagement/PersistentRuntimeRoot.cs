@@ -33,12 +33,5 @@ namespace _Scripts.SceneManagement
             IsPrimaryInstance = false;
         }
 
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (transform.parent != null)
-                Debug.LogError("PersistentRuntimeRoot must be placed at the root of a scene.", this);
-        }
-#endif
     }
 }

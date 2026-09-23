@@ -46,7 +46,6 @@ namespace _Scripts.UI
 
             if (_applicationManager == null)
             {
-                Debug.LogError("UIController requires an ApplicationManager.", this);
                 return;
             }
 
@@ -130,7 +129,6 @@ namespace _Scripts.UI
         {
             if (_environmentContext == null)
             {
-                Debug.LogError("Cannot place UI before an EnvironmentSceneContext is bound.", this);
                 scene.gameObject.SetActive(false);
                 return false;
             }
@@ -173,9 +171,6 @@ namespace _Scripts.UI
 
             if (!_environmentContext.TryGetUIAnchor(placementState, out Transform point))
             {
-                Debug.LogError(
-                    $"Missing UI anchor for {_environmentContext.SceneId}/{placementState}.",
-                    this);
                 scene.gameObject.SetActive(false);
                 return false;
             }
@@ -194,7 +189,6 @@ namespace _Scripts.UI
             Transform playerView = _applicationManager.PlayerView;
             if (playerView == null)
             {
-                Debug.LogError("Cannot place Failed UI because the player view is missing.", this);
                 return false;
             }
 

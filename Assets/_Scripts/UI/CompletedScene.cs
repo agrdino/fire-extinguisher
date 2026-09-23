@@ -62,7 +62,6 @@ namespace _Scripts.UI
         {
             if (_navigator == null)
             {
-                Debug.LogError("CompletedScene has no application navigator.", this);
                 return;
             }
 
