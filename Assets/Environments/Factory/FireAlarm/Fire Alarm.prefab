@@ -1,0 +1,207 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &812000000000000000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812000000000000001}
+  - component: {fileID: 812000000000000004}
+  - component: {fileID: 812000000000000005}
+  - component: {fileID: 812000000000000006}
+  m_Layer: 9
+  m_Name: Fire Alarm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &812000000000000001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812000000000000000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6856920587416440693}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &812000000000000004
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812000000000000000}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 0.16, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &812000000000000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812000000000000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9029f15705c54da1bfafd29b8d87097c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryEmergencyInteractable
+  _kind: 1
+  _fireSpawnPoint: {fileID: 0}
+  _isPrimaryHintTarget: 0
+  _hintTarget: {fileID: 0}
+  _hoverHighlight: {fileID: 812000000000000006}
+  _pressedColor: {r: 0.65, g: 1, b: 1, a: 1}
+  _pressedEmission: {r: 0.5, g: 4, b: 5, a: 1}
+  _pressedDuration: 0.18
+  _pressedScale: 0.94
+  _breakerHinge: {fileID: 0}
+  _breakerClosedEulerAngles: {x: 0, y: 0, z: 0}
+  _breakerOpenEulerAngles: {x: 0, y: 120, z: 0}
+  _breakerOpenDuration: 1
+  _responseController: {fileID: 0}
+  _renderers:
+  - {fileID: 7394786420544939119}
+  - {fileID: 3995298821276312599}
+--- !u!114 &812000000000000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812000000000000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778425f300dd40e49c2997b094416585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.HoverMaterialHighlight
+  _renderers:
+  - {fileID: 7394786420544939119}
+  - {fileID: 3995298821276312599}
+  _highlightMaterial: {fileID: 2100000, guid: ceab109f9f2346e4a5f652871aa1f274, type: 2}
+--- !u!1 &5212942496527523678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6856920587416440693}
+  m_Layer: 9
+  m_Name: View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6856920587416440693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212942496527523678}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6801433522107232154}
+  m_Father: {fileID: 812000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6478765329603348593
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6856920587416440693}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+      propertyPath: m_Name
+      value: fire-alarm-button
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+--- !u!23 &3995298821276312599 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1253384286239069082, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+  m_PrefabInstance: {fileID: 6478765329603348593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6801433522107232154 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+  m_PrefabInstance: {fileID: 6478765329603348593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7394786420544939119 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4650321017767891938, guid: 79481579647466145ab3ce3d67a59a96, type: 3}
+  m_PrefabInstance: {fileID: 6478765329603348593}
+  m_PrefabAsset: {fileID: 0}
