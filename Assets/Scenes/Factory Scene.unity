@@ -5595,6 +5595,78 @@ Transform:
   - {fileID: 405079548}
   m_Father: {fileID: 919520158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &139938945
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1509213423}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 050
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.335
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.994
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &139938946 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 139938945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &139938947 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 569469846776744883, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 139938945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &139938948 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6502029358681623848, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 139938945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &143511096
 GameObject:
   m_ObjectHideFlags: 0
@@ -13667,6 +13739,78 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55999947, y: 5.88, z: 0.19314003}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &371458366
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1509213423}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 040
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.8825
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &371458367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 371458366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &371458368 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 569469846776744883, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 371458366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &371458369 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6502029358681623848, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 371458366}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &374432160
 GameObject:
   m_ObjectHideFlags: 0
@@ -17862,6 +18006,78 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.46943998, y: 0.7106, z: 0.060001373}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &501759972
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1509213423}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 030
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &501759973 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 501759972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &501759974 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 569469846776744883, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 501759972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &501759975 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6502029358681623848, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 501759972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &501861028
 GameObject:
   m_ObjectHideFlags: 0
@@ -26860,6 +27076,78 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.44639015, y: 0.2834499, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &735929214
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1509213423}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 060
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.888
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &735929215 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 735929214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &735929216 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 569469846776744883, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 735929214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &735929217 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6502029358681623848, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 735929214}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &738288602
 GameObject:
   m_ObjectHideFlags: 0
@@ -42340,6 +42628,78 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18493009, y: 4.76, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1134934129
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1509213423}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 021
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.013
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &1134934130 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1134934129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1134934131 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 569469846776744883, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1134934129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &1134934132 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6502029358681623848, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1134934129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1136457111
 GameObject:
   m_ObjectHideFlags: 0
@@ -45291,6 +45651,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.26715088, y: 5.8, z: 0.20000076}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!108 &1212737666 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6502029358681623848, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1877939676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1214119640
 GameObject:
   m_ObjectHideFlags: 0
@@ -56869,6 +57234,77 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2408247, y: 1.21761, z: 3.956255}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1509213422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1509213423}
+  - component: {fileID: 1509213424}
+  m_Layer: 0
+  m_Name: Fire Alarm Lights
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1509213423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509213422}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1877939677}
+  - {fileID: 1567521205}
+  - {fileID: 1134934130}
+  - {fileID: 501759973}
+  - {fileID: 371458367}
+  - {fileID: 139938946}
+  - {fileID: 735929215}
+  m_Father: {fileID: 1395916737285745493}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1509213424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509213422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d8667dba54b1987f999826c06a32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryFireAlarmLightController
+  _responseController: {fileID: 813000000000000002}
+  _alarmLights:
+  - {fileID: 1877939678}
+  - {fileID: 1567521206}
+  - {fileID: 1134934131}
+  - {fileID: 501759974}
+  - {fileID: 371458368}
+  - {fileID: 139938947}
+  - {fileID: 735929216}
+  _ceilingLights:
+  - {fileID: 1212737666}
+  - {fileID: 1567521207}
+  - {fileID: 1134934132}
+  - {fileID: 501759975}
+  - {fileID: 371458369}
+  - {fileID: 139938948}
+  - {fileID: 735929217}
+  _ceilingLightColor: {r: 1, g: 0.02, b: 0.01, a: 1}
+  _ceilingLightPeakIntensity: 20
+  _ceilingLightFrequency: 1.5
 --- !u!1 &1510692237
 GameObject:
   m_ObjectHideFlags: 0
@@ -58222,6 +58658,78 @@ Transform:
   - {fileID: 233186477}
   m_Father: {fileID: 1898551943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1567521204
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1509213423}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 020
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.013
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &1567521205 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1567521204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1567521206 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 569469846776744883, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1567521204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &1567521207 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6502029358681623848, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1567521204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1568949755
 GameObject:
   m_ObjectHideFlags: 0
@@ -69455,6 +69963,73 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.51000977, y: 11.18133, z: 0.50499725}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1877939676
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1509213423}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 010
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &1877939677 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1877939676}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1877939678 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 569469846776744883, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1877939676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1878398641
 GameObject:
   m_ObjectHideFlags: 0
@@ -113219,6 +113794,7 @@ Transform:
   m_Children:
   - {fileID: 8994863139744416850}
   - {fileID: 294396585566579345}
+  - {fileID: 1509213423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1521720039556908767

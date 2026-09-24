@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 812000000000000005}
   - component: {fileID: 812000000000000006}
   m_Layer: 9
-  m_Name: Fire Alarm
+  m_Name: Fire Alarm Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
