@@ -28,7 +28,7 @@ namespace _Scripts.Environments.Factory
 
         private void OnDisable()
         {
-            SetCeilingLightsActive(false);
+            SetAlarmLightsActive(false);
 
             if (_responseController == null) return;
             _responseController.OnInteractionCompleted -= HandleInteractionCompleted;
@@ -54,7 +54,7 @@ namespace _Scripts.Environments.Factory
 
         private void HandleStepChanged(FactoryEmergencyResponseStep step)
         {
-            if (step == FactoryEmergencyResponseStep.SwitchOffPower)
+            if (step == FactoryEmergencyResponseStep.None || step == FactoryEmergencyResponseStep.SwitchOffPower)
                 SetAlarmLightsActive(false);
         }
 

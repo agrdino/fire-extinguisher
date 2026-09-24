@@ -70,7 +70,7 @@ namespace _Scripts.ParticleSystemLerps
             if (_transition == null)
                 return;
 
-            if (state == ApplicationState.Completed)
+            if (state == ApplicationState.Completed || state == ApplicationState.Escaped)
             {
                 _transition.FadeOutAndClear();
                 _fogVisibilityController?.SetSmokeActive(false, _transition.FadeOutDuration);

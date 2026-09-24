@@ -91,7 +91,7 @@ namespace _Scripts.Controller
             _emergencyExitPathGuide = _emergencyExit != null
                 ? _emergencyExit.GetComponentInChildren<EmergencyExitPathGuide>(true)
                 : null;
-            _emergencyExitPathGuide?.Initialize(_emergencyExit, _playerRoot);
+            _emergencyExitPathGuide?.Initialize(_emergencyExit, GetPlayerView(), _playerRoot);
         }
 
         private void OnEnable()
@@ -281,6 +281,7 @@ namespace _Scripts.Controller
                     break;
 
                 case ApplicationState.Completed:
+                case ApplicationState.Escaped:
                     _isRoundTimerRunning = false;
                     _fireExtinguisherController.SetInputEnabled(false);
                     _emergencyExit?.Disarm();
@@ -415,7 +416,7 @@ namespace _Scripts.Controller
             }
 
             AddFailureReason(TrainingFailureReason.FireNotExtinguished);
-            SetState(ApplicationState.Failed);
+            SetState(ApplicationState.Escaped);
         }
 
         private void HandleIncompatibleFireTargeted(FireExtinguisherType extinguisherType, FireType fireType)

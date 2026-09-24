@@ -72,7 +72,7 @@ namespace _Scripts.Environments.Factory
                 return;
             }
 
-            if (state == ApplicationState.Completed || state == ApplicationState.Failed)
+            if (state == ApplicationState.Completed || state == ApplicationState.Escaped || state == ApplicationState.Failed)
             {
                 ResetResponse();
                 return;

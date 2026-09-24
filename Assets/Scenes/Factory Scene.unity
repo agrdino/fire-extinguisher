@@ -5601,23 +5601,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1509213423}
+    m_TransformParent: {fileID: 1656462869}
     m_Modifications:
     - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_Name
-      value: Fire Alarm Light 050
+      value: Fire Alarm Light 030
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.335
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.994
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5625,15 +5625,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13745,23 +13745,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1509213423}
+    m_TransformParent: {fileID: 1664095934}
     m_Modifications:
     - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_Name
-      value: Fire Alarm Light 040
+      value: Fire Alarm Light 020
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.8825
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13769,15 +13769,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -18012,23 +18012,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1509213423}
+    m_TransformParent: {fileID: 1656462869}
     m_Modifications:
     - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_Name
-      value: Fire Alarm Light 030
+      value: Fire Alarm Light 031
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.99
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18036,15 +18036,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19664,6 +19664,68 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9000006, y: 2.14331, z: 0.10000992}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &553380325
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 647611197}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 040
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &553380326 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 553380325}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &554711133
 GameObject:
   m_ObjectHideFlags: 0
@@ -23284,6 +23346,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.776001, y: 3.098, z: 0.28300095}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &647611196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 647611197}
+  m_Layer: 0
+  m_Name: 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &647611197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647611196}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -28, y: 7.994, z: 14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 553380326}
+  - {fileID: 1743124900}
+  - {fileID: 1738751472}
+  m_Father: {fileID: 1509213423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &649192594
 GameObject:
   m_ObjectHideFlags: 0
@@ -27082,23 +27178,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1509213423}
+    m_TransformParent: {fileID: 1652814903}
     m_Modifications:
     - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_Name
-      value: Fire Alarm Light 060
+      value: Fire Alarm Light 010
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.888
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42634,7 +42730,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1509213423}
+    m_TransformParent: {fileID: 1664095934}
     m_Modifications:
     - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_Name
@@ -42642,15 +42738,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.013
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42658,15 +42754,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -57264,13 +57360,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1877939677}
-  - {fileID: 1567521205}
-  - {fileID: 1134934130}
-  - {fileID: 501759973}
-  - {fileID: 371458367}
-  - {fileID: 139938946}
-  - {fileID: 735929215}
+  - {fileID: 1652814903}
+  - {fileID: 1664095934}
+  - {fileID: 1656462869}
+  - {fileID: 647611197}
   m_Father: {fileID: 1395916737285745493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1509213424
@@ -58664,23 +58757,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1509213423}
+    m_TransformParent: {fileID: 1664095934}
     m_Modifications:
     - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_Name
-      value: Fire Alarm Light 020
+      value: Fire Alarm Light 022
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.013
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -58688,15 +58781,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -61637,6 +61730,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2000008, y: 0.12999964, z: 0.80150604}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1652814902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652814903}
+  m_Layer: 0
+  m_Name: 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1652814903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652814902}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26, y: 5.888, z: 14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 735929215}
+  m_Father: {fileID: 1509213423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653787239
 GameObject:
   m_ObjectHideFlags: 0
@@ -61870,6 +61995,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2176285, y: 1.4195938, z: 0.80249023}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1656462868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656462869}
+  m_Layer: 0
+  m_Name: 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1656462869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656462868}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12, y: 7.994, z: 14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 139938946}
+  - {fileID: 501759973}
+  - {fileID: 1877939677}
+  m_Father: {fileID: 1509213423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1657034235
 GameObject:
   m_ObjectHideFlags: 0
@@ -62135,6 +62294,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.96, y: 4.1600003, z: 0.049999237}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1664095933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664095934}
+  m_Layer: 0
+  m_Name: 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1664095934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664095933}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10, y: 5.8825, z: 14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 371458367}
+  - {fileID: 1134934130}
+  - {fileID: 1567521205}
+  m_Father: {fileID: 1509213423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1666620098
 GameObject:
   m_ObjectHideFlags: 0
@@ -64444,6 +64637,68 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.12, y: 1, z: 0.05001068}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1738751471
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 647611197}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 042
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &1738751472 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1738751471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1738840452
 GameObject:
   m_ObjectHideFlags: 0
@@ -64637,6 +64892,68 @@ Transform:
   - {fileID: 1378543944}
   m_Father: {fileID: 787748983}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1743124899
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 647611197}
+    m_Modifications:
+    - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_Name
+      value: Fire Alarm Light 041
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+--- !u!4 &1743124900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
+  m_PrefabInstance: {fileID: 1743124899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1743964687
 GameObject:
   m_ObjectHideFlags: 0
@@ -69969,23 +70286,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1509213423}
+    m_TransformParent: {fileID: 1656462869}
     m_Modifications:
     - target: {fileID: 8141308836269364742, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_Name
-      value: Fire Alarm Light 010
+      value: Fire Alarm Light 032
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.99
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.w
@@ -69993,15 +70310,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8471405914793365991, guid: 0f483f8035f90eb45a40aa6e56585c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

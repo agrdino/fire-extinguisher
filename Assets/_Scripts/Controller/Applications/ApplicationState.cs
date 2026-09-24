@@ -12,6 +12,7 @@ namespace _Scripts.Controller
         Explore = 7,
         Language = 8,
         SelectEnvironment = 9,
-        FactoryResponse = 10
+        FactoryResponse = 10,
+        Escaped = 11
     }
 }

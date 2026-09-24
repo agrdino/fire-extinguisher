@@ -21,7 +21,8 @@ namespace _Scripts.Controller
         [SerializeField, Min(0.02f)] private float _refreshInterval = 0.2f;
 
         private EmergencyExit _emergencyExit;
-        private Transform _playerRoot;
+        private Transform _playerPositionSource;
+        private Transform _playerGroundReference;
         private NavMeshPath _path;
         private float _nextRefreshTime;
         private Vector3 _markerTargetPosition;
@@ -42,10 +43,11 @@ namespace _Scripts.Controller
             SetMarkerVisible(false);
         }
 
-        public void Initialize(EmergencyExit emergencyExit, Transform playerRoot)
+        public void Initialize(EmergencyExit emergencyExit, Transform playerPositionSource, Transform playerGroundReference)
         {
             _emergencyExit = emergencyExit;
-            _playerRoot = playerRoot;
+            _playerPositionSource = playerPositionSource;
+            _playerGroundReference = playerGroundReference;
             SetVisible(false);
         }
 
@@ -77,13 +79,16 @@ namespace _Scripts.Controller
         private void RefreshPath()
         {
             _nextRefreshTime = Time.unscaledTime + _refreshInterval;
-            if (_lineRenderer == null || _emergencyExit == null || _playerRoot == null)
+            if (_lineRenderer == null || _emergencyExit == null || _playerPositionSource == null)
             {
                 HideGuide();
                 return;
             }
 
-            if (!NavMesh.SamplePosition(_playerRoot.position, out NavMeshHit startHit, _sampleRadius,  NavMesh.AllAreas)
+            Vector3 playerPosition = _playerPositionSource.position;
+            if (_playerGroundReference != null) playerPosition.y = _playerGroundReference.position.y;
+
+            if (!NavMesh.SamplePosition(playerPosition, out NavMeshHit startHit, _sampleRadius, NavMesh.AllAreas)
                 || !NavMesh.SamplePosition(_emergencyExit.transform.position, out NavMeshHit endHit, _sampleRadius, NavMesh.AllAreas)
                 || !NavMesh.CalculatePath(startHit.position, endHit.position, NavMesh.AllAreas, _path)
                 || _path.status != NavMeshPathStatus.PathComplete)

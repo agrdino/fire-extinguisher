@@ -74,6 +74,7 @@ namespace _Scripts.Controller
         {
             if (!_isInitialized || IsTransitioning) return false;
             if (_applicationManager.State != ApplicationState.Completed
+                && _applicationManager.State != ApplicationState.Escaped
                 && _applicationManager.State != ApplicationState.Failed)
                 return false;
 

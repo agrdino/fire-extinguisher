@@ -25,6 +25,7 @@ namespace _Scripts.UI
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _fightingScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapeScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _completedScene;
+        [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapedScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _failedScene;
 
         [Header("Failed UI Placement")]
@@ -65,6 +66,8 @@ namespace _Scripts.UI
             _readyView.Initialize(navigator);
             if (_completedScene.Value is CompletedScene completedScene)
                 completedScene.Initialize(navigator);
+            if (_escapedScene.Value is EscapedScene escapedScene)
+                escapedScene.Initialize(navigator);
             if (_failedScene.Value is FailedScene failedScene)
                 failedScene.Initialize(navigator);
         }
@@ -105,6 +108,7 @@ namespace _Scripts.UI
                 ApplicationState.Fighting => _fightingScene.Value,
                 ApplicationState.Escape => _escapeScene.Value,
                 ApplicationState.Completed => _completedScene.Value,
+                ApplicationState.Escaped => _escapedScene.Value,
                 ApplicationState.Failed => _failedScene.Value,
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
@@ -155,7 +159,7 @@ namespace _Scripts.UI
                 return true;
             }
 
-            if (state == ApplicationState.Completed
+            if ((state == ApplicationState.Completed || state == ApplicationState.Escaped)
                 && _exitPlacementController?.SelectedSpawnPoint?.CompleteUIPoint != null)
             {
                 Transform completeAnchor = _exitPlacementController.SelectedSpawnPoint.CompleteUIPoint;
