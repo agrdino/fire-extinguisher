@@ -283,6 +283,18 @@ MonoBehaviour:
     m_Key: escaped.message
     m_Metadata:
       m_Items: []
+  - m_Id: 10877759133290496
+    m_Key: contact.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10877759292674048
+    m_Key: contact.instruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10877759292674049
+    m_Key: hint.contact_emergency_team
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

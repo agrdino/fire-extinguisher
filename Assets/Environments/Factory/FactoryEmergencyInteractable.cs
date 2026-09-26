@@ -1,4 +1,5 @@
 using System.Collections;
+using _Scripts.Controller;
 using _Scripts.Fires;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace _Scripts.Environments.Factory
 
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Collider))]
-    public sealed class FactoryEmergencyInteractable : MonoBehaviour
+    public sealed class FactoryEmergencyInteractable : HandRayInteractable
     {
         private static readonly int BaseColorProperty = Shader.PropertyToID("_BaseColor");
         private static readonly int ColorProperty = Shader.PropertyToID("_Color");
@@ -43,12 +44,13 @@ namespace _Scripts.Environments.Factory
         private bool _isHovered;
         private bool _isPressed;
         private bool _isBreakerOpen;
+        private bool _isInteractionEnabled;
 
         public FactoryEmergencyInteractableKind Kind => _kind;
         public FireSpawnPoint FireSpawnPoint => _fireSpawnPoint;
         public bool IsPrimaryHintTarget => _isPrimaryHintTarget;
         public Transform HintTarget => _hintTarget != null ? _hintTarget : transform;
-        public bool IsInteractionEnabled { get; private set; }
+        public override bool IsInteractionEnabled => _isInteractionEnabled;
 
         private void Awake()
         {
@@ -83,12 +85,12 @@ namespace _Scripts.Environments.Factory
 
         public void SetInteractionEnabled(bool isEnabled)
         {
-            IsInteractionEnabled = isEnabled;
+            _isInteractionEnabled = isEnabled;
             if (!isEnabled) _isHovered = false;
             ApplyVisual();
         }
 
-        public void SetHovered(bool isHovered)
+        public override void SetHovered(bool isHovered)
         {
             bool nextValue = isHovered && IsInteractionEnabled;
             if (_isHovered == nextValue) return;
@@ -96,7 +98,7 @@ namespace _Scripts.Environments.Factory
             ApplyVisual();
         }
 
-        public bool TryActivate()
+        public override bool TryActivate()
         {
             if (!IsInteractionEnabled || _responseController == null) return false;
 

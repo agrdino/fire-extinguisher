@@ -65,6 +65,7 @@ namespace _Scripts.Controller
         public bool IsExploreTimeLimited => IsExploring && _isExploreTimeLimited;
         public bool IsFactoryResponding => _state == ApplicationState.FactoryResponse;
         public bool IsFighting => _state == ApplicationState.Fighting;
+        public bool IsEmergencyContacting => _state == ApplicationState.ContactEmergencyTeam;
         public bool IsEscaping => _state == ApplicationState.Escape;
         public bool IsEscapeTimeLimited => IsEscaping && _isEscapeTimeLimited;
         public FireExtinguisherType SelectedExtinguisherType => _selectedExtinguisherType;
@@ -280,6 +281,13 @@ namespace _Scripts.Controller
                     SetEmergencyExitActive(true);
                     break;
 
+                case ApplicationState.ContactEmergencyTeam:
+                    _isRoundTimerRunning = false;
+                    _isEscapeTimeLimited = false;
+                    _fireExtinguisherController.SetInputEnabled(false);
+                    SetEmergencyExitActive(false);
+                    break;
+
                 case ApplicationState.Completed:
                 case ApplicationState.Escaped:
                     _isRoundTimerRunning = false;
@@ -348,6 +356,12 @@ namespace _Scripts.Controller
             SetState(ApplicationState.SelectExtinguisher);
         }
 
+        public void CompleteEmergencyContact()
+        {
+            if (!IsEmergencyContacting) return;
+            BeginEscape(false);
+        }
+
         private void SetEmergencyExitActive(bool isActive)
         {
             if (_emergencyExit == null) return;
@@ -387,7 +401,7 @@ namespace _Scripts.Controller
 
         private void HandleAllFiresExtinguished()
         {
-            if (IsFighting) BeginEscape(false);
+            if (IsFighting) SetState(ApplicationState.ContactEmergencyTeam);
         }
 
         private void HandleFireFlareUpStarted()
@@ -453,6 +467,7 @@ namespace _Scripts.Controller
                 || state == ApplicationState.FactoryResponse
                 || state == ApplicationState.SelectExtinguisher
                 || state == ApplicationState.Fighting
+                || state == ApplicationState.ContactEmergencyTeam
                 || state == ApplicationState.Escape;
         }
     }

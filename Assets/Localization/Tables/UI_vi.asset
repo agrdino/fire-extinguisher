@@ -110,13 +110,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040914
-    m_Localized: "Tr\u01B0\u1EDBc khi di\u1EC5n t\u1EADp:\n1. Kh\xE1m ph\xE1 khu
-      v\u1EF1c v\xE0 x\xE1c \u0111\u1ECBnh l\u1ED1i tho\xE1t hi\u1EC3m.\n2. Khi c\xF3
-      ch\xE1y, ch\u1ECDn b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p v\u1EDBi lo\u1EA1i
-      \u0111\xE1m ch\xE1y.\n3. R\xFAt ch\u1ED1t an to\xE0n.\n4. H\u01B0\u1EDBng v\xF2i
-      phun v\xE0o g\u1ED1c l\u1EEDa.\n5. B\xF3p c\xF2 v\xE0 lia v\xF2i qua l\u1EA1i.\n6.
-      Sau khi d\u1EADp l\u1EEDa, \u0111i theo ch\u1EC9 d\u1EABn \u0111\u1EBFn l\u1ED1i
-      tho\xE1t hi\u1EC3m."
+    m_Localized: "Tr\u01B0\u1EDBc khi di\u1EC5n t\u1EADp:\n\n1. Kh\xE1m ph\xE1 khu
+      v\u1EF1c v\xE0 x\xE1c \u0111\u1ECBnh l\u1ED1i tho\xE1t hi\u1EC3m.\n\n2. Khi
+      c\xF3 ch\xE1y, ch\u1ECDn b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p v\u1EDBi
+      lo\u1EA1i \u0111\xE1m ch\xE1y.\n\n3. R\xFAt ch\u1ED1t an to\xE0n.\n\n4. H\u01B0\u1EDBng
+      v\xF2i phun v\xE0o g\u1ED1c l\u1EEDa.\n\n5. B\xF3p c\xF2 v\xE0 lia v\xF2i qua
+      l\u1EA1i.\n\n6. Sau khi d\u1EADp l\u1EEDa, d\xF9ng \u0111i\u1EC7n tho\u1EA1i
+      kh\u1EA9n c\u1EA5p \u0111\u1EC3 li\xEAn l\u1EA1c GA ho\u1EB7c B\u1EA3o v\u1EC7.\n\n7.
+      \u0110i theo ch\u1EC9 d\u1EABn \u0111\u1EBFn l\u1ED1i tho\xE1t hi\u1EC3m."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040915
@@ -142,7 +143,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040920
-    m_Localized: "CO₂ dùng cho cháy điện. Bột khô dùng cho cháy xăng. Chọn một bình rồi xác nhận."
+    m_Localized: "CO\u2082 d\xF9ng cho ch\xE1y \u0111i\u1EC7n. B\u1ED9t kh\xF4 d\xF9ng
+      cho ch\xE1y x\u0103ng. Ch\u1ECDn m\u1ED9t b\xECnh r\u1ED3i x\xE1c nh\u1EADn."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040921
@@ -154,7 +156,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040923
-    m_Localized: "Dùng cho đám cháy điện.\n\nKhông dẫn điện và không gây ăn mòn thiết bị.\n\nTrong bài huấn luyện này không dùng cho cháy xăng."
+    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y \u0111i\u1EC7n.\n\nKh\xF4ng d\u1EABn
+      \u0111i\u1EC7n v\xE0 kh\xF4ng g\xE2y \u0103n m\xF2n thi\u1EBFt b\u1ECB.\n\nTrong
+      b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y kh\xF4ng d\xF9ng cho ch\xE1y x\u0103ng."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040924
@@ -162,7 +166,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040925
-    m_Localized: "Dùng cho đám cháy xăng.\n\nTạo lớp cách ly, ngăn không khí tiếp xúc với nhiên liệu.\n\nTrong bài huấn luyện này không dùng cho cháy điện."
+    m_Localized: "D\xF9ng cho \u0111\xE1m ch\xE1y x\u0103ng.\n\nT\u1EA1o l\u1EDBp
+      c\xE1ch ly, ng\u0103n kh\xF4ng kh\xED ti\u1EBFp x\xFAc v\u1EDBi nhi\xEAn li\u1EC7u.\n\nTrong
+      b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y kh\xF4ng d\xF9ng cho ch\xE1y \u0111i\u1EC7n."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040926
@@ -207,7 +213,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040935
-    m_Localized: "Tất cả đám cháy đã được dập và bạn đã đến nơi an toàn."
+    m_Localized: "T\u1EA5t c\u1EA3 \u0111\xE1m ch\xE1y \u0111\xE3 \u0111\u01B0\u1EE3c
+      d\u1EADp v\xE0 b\u1EA1n \u0111\xE3 \u0111\u1EBFn n\u01A1i an to\xE0n."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040936
@@ -215,39 +222,73 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040937
-    m_Localized: "Đám cháy chưa được dập tắt. Hãy thử lại và thực hiện đúng quy trình dùng bình chữa cháy."
+    m_Localized: "\u0110\xE1m ch\xE1y ch\u01B0a \u0111\u01B0\u1EE3c d\u1EADp t\u1EAFt.
+      H\xE3y th\u1EED l\u1EA1i v\xE0 th\u1EF1c hi\u1EC7n \u0111\xFAng quy tr\xECnh
+      d\xF9ng b\xECnh ch\u1EEFa ch\xE1y."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040946
-    m_Localized: "Bạn đã thực hiện rất tốt công tác chữa cháy cơ sở. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn!\n\nBạn đã chọn đúng loại bình chữa cháy phù hợp vì khi sử dụng bình CO₂, bình này sẽ không dẫn điện và không gây ăn mòn thiết bị."
+    m_Localized: "B\u1EA1n \u0111\xE3 th\u1EF1c hi\u1EC7n r\u1EA5t t\u1ED1t c\xF4ng
+      t\xE1c ch\u1EEFa ch\xE1y c\u01A1 s\u1EDF. Ch\xFAc m\u1EEBng b\u1EA1n \u0111\xE3
+      ho\xE0n th\xE0nh tr\u1EA3i nghi\u1EC7m. Xin c\u1EA3m \u01A1n!\n\nB\u1EA1n \u0111\xE3
+      ch\u1ECDn \u0111\xFAng lo\u1EA1i b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p
+      v\xEC khi s\u1EED d\u1EE5ng b\xECnh CO\u2082, b\xECnh n\xE0y s\u1EBD kh\xF4ng
+      d\u1EABn \u0111i\u1EC7n v\xE0 kh\xF4ng g\xE2y \u0103n m\xF2n thi\u1EBFt b\u1ECB."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040947
-    m_Localized: "Bạn đã thực hiện rất tốt công tác chữa cháy cơ sở. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn!\n\nBạn đã chọn đúng loại bình chữa cháy phù hợp vì khi tiếp xúc với lửa do xăng gây nên sẽ tạo ra lớp màng cách ly, ngăn không khí tiếp xúc với nhiên liệu và dập tắt lửa hiệu quả."
+    m_Localized: "B\u1EA1n \u0111\xE3 th\u1EF1c hi\u1EC7n r\u1EA5t t\u1ED1t c\xF4ng
+      t\xE1c ch\u1EEFa ch\xE1y c\u01A1 s\u1EDF. Ch\xFAc m\u1EEBng b\u1EA1n \u0111\xE3
+      ho\xE0n th\xE0nh tr\u1EA3i nghi\u1EC7m. Xin c\u1EA3m \u01A1n!\n\nB\u1EA1n \u0111\xE3
+      ch\u1ECDn \u0111\xFAng lo\u1EA1i b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p
+      v\xEC khi ti\u1EBFp x\xFAc v\u1EDBi l\u1EEDa do x\u0103ng g\xE2y n\xEAn s\u1EBD
+      t\u1EA1o ra l\u1EDBp m\xE0ng c\xE1ch ly, ng\u0103n kh\xF4ng kh\xED ti\u1EBFp
+      x\xFAc v\u1EDBi nhi\xEAn li\u1EC7u v\xE0 d\u1EADp t\u1EAFt l\u1EEDa hi\u1EC7u
+      qu\u1EA3."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040948
-    m_Localized: "Bạn chưa đến nơi an toàn trong thời gian quy định. Hãy đi theo chỉ dẫn và tới lối thoát hiểm kịp thời."
+    m_Localized: "B\u1EA1n ch\u01B0a \u0111\u1EBFn n\u01A1i an to\xE0n trong th\u1EDDi
+      gian quy \u0111\u1ECBnh. H\xE3y \u0111i theo ch\u1EC9 d\u1EABn v\xE0 t\u1EDBi
+      l\u1ED1i tho\xE1t hi\u1EC3m k\u1ECBp th\u1EDDi."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040949
-    m_Localized: "Bạn chưa dập tắt đám cháy trong thời gian quy định. Hãy thao tác nhanh chóng, hướng vòi vào gốc lửa và lia vòi qua lại."
+    m_Localized: "B\u1EA1n ch\u01B0a d\u1EADp t\u1EAFt \u0111\xE1m ch\xE1y trong
+      th\u1EDDi gian quy \u0111\u1ECBnh. H\xE3y thao t\xE1c nhanh ch\xF3ng, h\u01B0\u1EDBng
+      v\xF2i v\xE0o g\u1ED1c l\u1EEDa v\xE0 lia v\xF2i qua l\u1EA1i."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040950
-    m_Localized: "Bình chữa cháy đã hết trước khi bạn dập tắt được đám cháy. Hãy hướng vòi chính xác vào gốc lửa và sử dụng chất chữa cháy hiệu quả hơn."
+    m_Localized: "B\xECnh ch\u1EEFa ch\xE1y \u0111\xE3 h\u1EBFt tr\u01B0\u1EDBc khi
+      b\u1EA1n d\u1EADp t\u1EAFt \u0111\u01B0\u1EE3c \u0111\xE1m ch\xE1y. H\xE3y
+      h\u01B0\u1EDBng v\xF2i ch\xEDnh x\xE1c v\xE0o g\u1ED1c l\u1EEDa v\xE0 s\u1EED
+      d\u1EE5ng ch\u1EA5t ch\u1EEFa ch\xE1y hi\u1EC7u qu\u1EA3 h\u01A1n."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040951
-    m_Localized: "Bạn đã đến lối thoát hiểm khi đám cháy chưa được dập tắt. Trong bài huấn luyện này, bạn cần dập tắt hoàn toàn đám cháy trước khi thoát hiểm."
+    m_Localized: "B\u1EA1n \u0111\xE3 \u0111\u1EBFn l\u1ED1i tho\xE1t hi\u1EC3m khi
+      \u0111\xE1m ch\xE1y ch\u01B0a \u0111\u01B0\u1EE3c d\u1EADp t\u1EAFt. Trong
+      b\xE0i hu\u1EA5n luy\u1EC7n n\xE0y, b\u1EA1n c\u1EA7n d\u1EADp t\u1EAFt ho\xE0n
+      to\xE0n \u0111\xE1m ch\xE1y tr\u01B0\u1EDBc khi tho\xE1t hi\u1EC3m."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040952
-    m_Localized: "Bạn chưa chọn đúng loại bình chữa cháy phù hợp vì khi sử dụng bình bột sẽ gây hư hỏng thiết bị, tạo màn bụi dày đặc, cản trở tầm nhìn và gây khó thở. Đối với đám cháy điện, cần sử dụng bình chữa cháy CO₂ nhé."
+    m_Localized: "B\u1EA1n ch\u01B0a ch\u1ECDn \u0111\xFAng lo\u1EA1i b\xECnh ch\u1EEFa
+      ch\xE1y ph\xF9 h\u1EE3p v\xEC khi s\u1EED d\u1EE5ng b\xECnh b\u1ED9t s\u1EBD
+      g\xE2y h\u01B0 h\u1ECFng thi\u1EBFt b\u1ECB, t\u1EA1o m\xE0n b\u1EE5i d\xE0y
+      \u0111\u1EB7c, c\u1EA3n tr\u1EDF t\u1EA7m nh\xECn v\xE0 g\xE2y kh\xF3 th\u1EDF.
+      \u0110\u1ED1i v\u1EDBi \u0111\xE1m ch\xE1y \u0111i\u1EC7n, c\u1EA7n s\u1EED
+      d\u1EE5ng b\xECnh ch\u1EEFa ch\xE1y CO\u2082 nh\xE9."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040953
-    m_Localized: "Bạn chưa chọn đúng loại bình chữa cháy phù hợp. Đối với đám cháy xăng, cần sử dụng bình chữa cháy bột nhé vì ở khu vực bên ngoài trống trải hoặc có gió mạnh, CO₂ dễ bị phân tán, làm giảm hiệu quả chữa cháy."
+    m_Localized: "B\u1EA1n ch\u01B0a ch\u1ECDn \u0111\xFAng lo\u1EA1i b\xECnh ch\u1EEFa
+      ch\xE1y ph\xF9 h\u1EE3p. \u0110\u1ED1i v\u1EDBi \u0111\xE1m ch\xE1y x\u0103ng,
+      c\u1EA7n s\u1EED d\u1EE5ng b\xECnh ch\u1EEFa ch\xE1y b\u1ED9t nh\xE9 v\xEC
+      \u1EDF khu v\u1EF1c b\xEAn ngo\xE0i tr\u1ED1ng tr\u1EA3i ho\u1EB7c c\xF3 gi\xF3
+      m\u1EA1nh, CO\u2082 d\u1EC5 b\u1ECB ph\xE2n t\xE1n, l\xE0m gi\u1EA3m hi\u1EC7u
+      qu\u1EA3 ch\u1EEFa ch\xE1y."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040938
@@ -293,11 +334,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1448646678781954
-    m_Localized: "\u0110i \u0111\u1EBFn c\u1EA7u dao \u0111\u01B0\u1EE3c \u0111\xE1nh d\u1EA5u v\xE0 ng\u1EAFt ngu\u1ED3n \u0111i\u1EC7n."
+    m_Localized: "\u0110i \u0111\u1EBFn c\u1EA7u dao \u0111\u01B0\u1EE3c \u0111\xE1nh
+      d\u1EA5u v\xE0 ng\u1EAFt ngu\u1ED3n \u0111i\u1EC7n."
     m_Metadata:
       m_Items: []
   - m_Id: 1448646678781955
-    m_Localized: "K\xEDch ho\u1EA1t m\u1ED9t trong c\xE1c n\xFAt b\xE1o ch\xE1y \u0111\u01B0\u1EE3c \u0111\xE1nh d\u1EA5u."
+    m_Localized: "K\xEDch ho\u1EA1t m\u1ED9t trong c\xE1c n\xFAt b\xE1o ch\xE1y \u0111\u01B0\u1EE3c
+      \u0111\xE1nh d\u1EA5u."
     m_Metadata:
       m_Items: []
   - m_Id: 10302763491102720
@@ -305,7 +348,24 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10302763574988800
-    m_Localized: "B\u1EA1n \u0111\xE3 tho\xE1t ra an to\xE0n, nh\u01B0ng \u0111\xE1m ch\xE1y v\u1EABn ch\u01B0a \u0111\u01B0\u1EE3c d\u1EADp t\u1EAFt."
+    m_Localized: "B\u1EA1n \u0111\xE3 tho\xE1t ra an to\xE0n, nh\u01B0ng \u0111\xE1m
+      ch\xE1y v\u1EABn ch\u01B0a \u0111\u01B0\u1EE3c d\u1EADp t\u1EAFt."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10877759133290496
+    m_Localized: "LI\xCAN L\u1EA0C \u0110\u1ED8I \u1EE8NG PH\xD3 KH\u1EA8N C\u1EA4P"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10877759292674048
+    m_Localized: "\u0110i \u0111\u1EBFn \u0111i\u1EC7n tho\u1EA1i kh\u1EA9n c\u1EA5p
+      g\u1EA7n l\u1ED1i tho\xE1t v\xE0 t\u01B0\u01A1ng t\xE1c \u0111\u1EC3 li\xEAn
+      l\u1EA1c GA (2121) ho\u1EB7c B\u1EA3o v\u1EC7 (2480)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10877759292674049
+    m_Localized: "D\xF9ng \u0111i\u1EC7n tho\u1EA1i kh\u1EA9n c\u1EA5p g\u1EA7n l\u1ED1i
+      tho\xE1t \u0111\u1EC3 li\xEAn l\u1EA1c GA (2121) ho\u1EB7c B\u1EA3o v\u1EC7
+      (2480)."
     m_Metadata:
       m_Items: []
   references:

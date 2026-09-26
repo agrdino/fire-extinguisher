@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 using _Scripts.Controller;
 using _Scripts.Fires;
 using _Scripts.Environments.Factory;
+using _Scripts.Environments.EmergencyContact;
 using _Scripts.SceneManagement;
 
 namespace _Scripts.UI
@@ -21,6 +22,7 @@ namespace _Scripts.UI
         [SerializeField] private GuideScene _guideScene;
         [SerializeField] private ExploreScene _exploreScene;
         [SerializeField] private FactoryResponseScene _factoryResponseScene;
+        [SerializeField] private ContactEmergencyScene _contactEmergencyScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectExtinguisherScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _fightingScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapeScene;
@@ -106,6 +108,7 @@ namespace _Scripts.UI
                 ApplicationState.FactoryResponse => _factoryResponseScene,
                 ApplicationState.SelectExtinguisher => _selectExtinguisherScene.Value,
                 ApplicationState.Fighting => _fightingScene.Value,
+                ApplicationState.ContactEmergencyTeam => _contactEmergencyScene,
                 ApplicationState.Escape => _escapeScene.Value,
                 ApplicationState.Completed => _completedScene.Value,
                 ApplicationState.Escaped => _escapedScene.Value,
@@ -141,12 +144,14 @@ namespace _Scripts.UI
 
             FireSpawnPoint selectedFireSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
             FactoryEmergencyResponseController factoryResponseController = FindFirstObjectByType<FactoryEmergencyResponseController>();
+            EmergencyContactController emergencyContactController = FindFirstObjectByType<EmergencyContactController>();
             Transform fireUIAnchor = state switch
             {
                 ApplicationState.FactoryResponse when factoryResponseController?.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm => selectedFireSpawnPoint?.FireAlarmUIPoint,
                 ApplicationState.FactoryResponse => selectedFireSpawnPoint?.CircuitBreakerUIPoint,
                 ApplicationState.SelectExtinguisher => selectedFireSpawnPoint?.SelectExtinguisherUIPoint,
                 ApplicationState.Fighting => selectedFireSpawnPoint?.FightingUIPoint,
+                ApplicationState.ContactEmergencyTeam => emergencyContactController?.UIAnchor,
                 ApplicationState.Escape => selectedFireSpawnPoint?.EscapeUIPoint,
                 _ => null
             };
@@ -211,6 +216,7 @@ namespace _Scripts.UI
             _guideScene ??= GetComponentInChildren<GuideScene>(true);
             _exploreScene ??= GetComponentInChildren<ExploreScene>(true);
             _factoryResponseScene ??= GetComponentInChildren<FactoryResponseScene>(true);
+            _contactEmergencyScene ??= GetComponentInChildren<ContactEmergencyScene>(true);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace _Scripts.Controller
         Language = 8,
         SelectEnvironment = 9,
         FactoryResponse = 10,
-        Escaped = 11
+        Escaped = 11,
+        ContactEmergencyTeam = 12
     }
 }

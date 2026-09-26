@@ -1,4 +1,3 @@
-using _Scripts.Environments.Factory;
 using UnityEngine;
 
 namespace _Scripts.Controller
@@ -12,7 +11,7 @@ namespace _Scripts.Controller
         [SerializeField, Range(0f, 1f)] private float _pressThreshold = 0.5f;
 
         private HandController _handController;
-        private FactoryEmergencyInteractable _hoveredInteractable;
+        private HandRayInteractable _hoveredInteractable;
         private bool _wasPressed;
 
         private void Awake()
@@ -35,16 +34,16 @@ namespace _Scripts.Controller
         private void Update()
         {
             ApplicationManager applicationManager = ApplicationManager.Instance;
-            if (applicationManager == null || !applicationManager.IsFactoryResponding)
+            if (applicationManager == null || (!applicationManager.IsFactoryResponding && !applicationManager.IsEmergencyContacting))
             {
                 SetHoveredInteractable(null);
                 return;
             }
 
-            FactoryEmergencyInteractable candidate = null;
+            HandRayInteractable candidate = null;
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _maximumDistance, _interactionMask, QueryTriggerInteraction.Collide))
             {
-                FactoryEmergencyInteractable interactable = hit.collider.GetComponentInParent<FactoryEmergencyInteractable>();
+                HandRayInteractable interactable = hit.collider.GetComponentInParent<HandRayInteractable>();
                 if (interactable != null && interactable.IsInteractionEnabled) candidate = interactable;
             }
 
@@ -59,7 +58,7 @@ namespace _Scripts.Controller
             _wasPressed = isPressed;
         }
 
-        private void SetHoveredInteractable(FactoryEmergencyInteractable interactable)
+        private void SetHoveredInteractable(HandRayInteractable interactable)
         {
             if (_hoveredInteractable == interactable) return;
             if (_hoveredInteractable != null) _hoveredInteractable.SetHovered(false);

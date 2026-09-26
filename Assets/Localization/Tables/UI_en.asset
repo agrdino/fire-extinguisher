@@ -126,21 +126,31 @@ MonoBehaviour:
   - m_Id: 1337040914
     m_Localized: 'Before the fire drill:
 
+
       1. Explore the area and locate the
       emergency exit.
+
 
       2. When a fire appears, choose an extinguisher that
       matches the fire type.
 
+
       3. Remove the safety pin.
 
-      4. Aim at the
-      base of the fire.
+
+      4. Aim at
+      the base of the fire.
+
 
       5. Squeeze the lever and sweep side to side.
 
+
       6.
-      After extinguishing the fire, follow the exit marker.'
+      After extinguishing the fire, use the emergency phone to contact GA or Security.
+
+
+      7.
+      Follow the exit marker.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040915
@@ -167,8 +177,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040920
-    m_Localized: CO2 is for electrical fires. Dry powder is for gasoline fires. Select one,
-      then confirm.
+    m_Localized: CO2 is for electrical fires. Dry powder is for gasoline fires. Select
+      one, then confirm.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040921
@@ -182,10 +192,10 @@ MonoBehaviour:
   - m_Id: 1337040923
     m_Localized: 'For electrical fires.
 
-      Does not conduct electricity or corrode equipment.
+      Does not conduct electricity or corrode
+      equipment.
 
-      Not
-      for gasoline fires in this training.'
+      Not for gasoline fires in this training.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040924
@@ -195,10 +205,10 @@ MonoBehaviour:
   - m_Id: 1337040925
     m_Localized: 'For gasoline fires.
 
-      Creates an isolating layer that keeps air away from the fuel.
+      Creates an isolating layer that keeps
+      air away from the fuel.
 
-      Not
-      for electrical fires in this training.'
+      Not for electrical fires in this training.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040926
@@ -262,35 +272,57 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040946
-    m_Localized: "You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you!\n\nYou chose the correct type of fire extinguisher. A CO2 extinguisher does not conduct electricity and does not corrode equipment, making it suitable for electrical fires."
+    m_Localized: 'You performed the on-site firefighting procedure very well. Congratulations
+      on completing the experience. Thank you!
+
+
+      You chose the correct type
+      of fire extinguisher. A CO2 extinguisher does not conduct electricity and does
+      not corrode equipment, making it suitable for electrical fires.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040947
-    m_Localized: "You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you!\n\nYou chose the correct type of fire extinguisher. When dry powder contacts a gasoline fire, it creates an isolating layer that prevents air from reaching the fuel and extinguishes the flames effectively."
+    m_Localized: 'You performed the on-site firefighting procedure very well. Congratulations
+      on completing the experience. Thank you!
+
+
+      You chose the correct type
+      of fire extinguisher. When dry powder contacts a gasoline fire, it creates
+      an isolating layer that prevents air from reaching the fuel and extinguishes
+      the flames effectively.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040948
-    m_Localized: You did not reach safety within the required time. Follow the guidance and reach the emergency exit promptly.
+    m_Localized: You did not reach safety within the required time. Follow the guidance
+      and reach the emergency exit promptly.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040949
-    m_Localized: You did not extinguish the fire within the required time. Act quickly, aim at the base of the fire, and sweep the nozzle from side to side.
+    m_Localized: You did not extinguish the fire within the required time. Act quickly,
+      aim at the base of the fire, and sweep the nozzle from side to side.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040950
-    m_Localized: The extinguisher ran out before the fire was extinguished. Aim accurately at the base of the fire and use the extinguishing agent more efficiently.
+    m_Localized: The extinguisher ran out before the fire was extinguished. Aim accurately
+      at the base of the fire and use the extinguishing agent more efficiently.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040951
-    m_Localized: You reached the emergency exit before the fire was extinguished. You must extinguish the fire completely before evacuating in this training.
+    m_Localized: You reached the emergency exit before the fire was extinguished.
+      You must extinguish the fire completely before evacuating in this training.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040952
-    m_Localized: You did not choose the correct extinguisher. Dry powder can damage equipment, create a dense dust cloud, obstruct vision, and make breathing difficult. For an electrical fire, use a CO2 extinguisher because it does not conduct electricity or corrode equipment.
+    m_Localized: You did not choose the correct extinguisher. Dry powder can damage
+      equipment, create a dense dust cloud, obstruct vision, and make breathing difficult.
+      For an electrical fire, use a CO2 extinguisher because it does not conduct
+      electricity or corrode equipment.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040953
-    m_Localized: You did not choose the correct extinguisher. For a gasoline fire, use a dry powder extinguisher. In an open outdoor area or strong wind, CO2 disperses easily and becomes less effective at extinguishing the fire.
+    m_Localized: You did not choose the correct extinguisher. For a gasoline fire,
+      use a dry powder extinguisher. In an open outdoor area or strong wind, CO2
+      disperses easily and becomes less effective at extinguishing the fire.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040938
@@ -347,6 +379,20 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10302763574988800
     m_Localized: You reached safety, but the fire was not extinguished.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10877759133290496
+    m_Localized: CONTACT THE EMERGENCY TEAM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10877759292674048
+    m_Localized: Go to the emergency phone near the exit and interact with it to
+      contact GA (2121) or Security (2480).
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10877759292674049
+    m_Localized: Use the emergency phone near the exit to contact GA (2121) or Security
+      (2480).
     m_Metadata:
       m_Items: []
   references:

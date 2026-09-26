@@ -74,7 +74,7 @@ namespace _Scripts.UI
                 return;
 
             float lineLength = _maxLineLength;
-            if (_applicationManager != null && _applicationManager.IsFactoryResponding)
+            if (_applicationManager != null && (_applicationManager.IsFactoryResponding || _applicationManager.IsEmergencyContacting))
                 lineLength = Mathf.Min(lineLength, _factoryInteractionLineLength);
             if (_xrRayInteractor.TryGetCurrentUIRaycastResult(out var uiHit)
                 && uiHit.gameObject != null)
