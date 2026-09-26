@@ -5,7 +5,6 @@ using UnityEngine.Serialization;
 using _Scripts.Controller;
 using _Scripts.Fires;
 using _Scripts.Environments.Factory;
-using _Scripts.Environments.EmergencyContact;
 using _Scripts.SceneManagement;
 
 namespace _Scripts.UI
@@ -45,7 +44,6 @@ namespace _Scripts.UI
         {
             _instance = this;
             _applicationManager = ApplicationManager.Instance;
-            ResolveSceneReferences();
 
             if (_applicationManager == null)
             {
@@ -144,14 +142,13 @@ namespace _Scripts.UI
 
             FireSpawnPoint selectedFireSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
             FactoryEmergencyResponseController factoryResponseController = FindFirstObjectByType<FactoryEmergencyResponseController>();
-            EmergencyContactController emergencyContactController = FindFirstObjectByType<EmergencyContactController>();
             Transform fireUIAnchor = state switch
             {
                 ApplicationState.FactoryResponse when factoryResponseController?.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm => selectedFireSpawnPoint?.FireAlarmUIPoint,
                 ApplicationState.FactoryResponse => selectedFireSpawnPoint?.CircuitBreakerUIPoint,
                 ApplicationState.SelectExtinguisher => selectedFireSpawnPoint?.SelectExtinguisherUIPoint,
                 ApplicationState.Fighting => selectedFireSpawnPoint?.FightingUIPoint,
-                ApplicationState.ContactEmergencyTeam => emergencyContactController?.UIAnchor,
+                ApplicationState.ContactEmergencyTeam => _environmentContext.EmergencyContactController?.UIAnchor,
                 ApplicationState.Escape => selectedFireSpawnPoint?.EscapeUIPoint,
                 _ => null
             };
@@ -208,15 +205,5 @@ namespace _Scripts.UI
             return true;
         }
 
-        private void ResolveSceneReferences()
-        {
-            _selectLanguageScene ??= GetComponentInChildren<SelectLanguageScene>(true);
-            _selectEnvironmentScene ??= GetComponentInChildren<SelectEnvironmentScene>(true);
-            _readyView ??= GetComponentInChildren<ReadyView>(true);
-            _guideScene ??= GetComponentInChildren<GuideScene>(true);
-            _exploreScene ??= GetComponentInChildren<ExploreScene>(true);
-            _factoryResponseScene ??= GetComponentInChildren<FactoryResponseScene>(true);
-            _contactEmergencyScene ??= GetComponentInChildren<ContactEmergencyScene>(true);
-        }
     }
 }

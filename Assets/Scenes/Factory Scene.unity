@@ -39874,6 +39874,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fa690d219dc54549b93c8a7eb1d11fe, type: 3}
+--- !u!114 &1064236171 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 363079523202525764, guid: 1fa690d219dc54549b93c8a7eb1d11fe, type: 3}
+  m_PrefabInstance: {fileID: 1064236170}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f519bbaf794f7e4e8b6cf539048cada, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.EmergencyContact.EmergencyContactController
 --- !u!1 &1065510585
 GameObject:
   m_ObjectHideFlags: 0
@@ -52202,6 +52213,7 @@ MonoBehaviour:
   _defaultEntryState: 0
   _playerSpawnPoint: {fileID: 1302521873}
   _environmentRoot: {fileID: 1395916737285745493}
+  _emergencyContactController: {fileID: 1064236171}
   _uiAnchors:
   - _state: 6
     _anchor: {fileID: 719999998509140998}

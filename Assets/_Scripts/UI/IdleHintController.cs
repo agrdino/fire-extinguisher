@@ -9,7 +9,6 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit.UI;
 using _Scripts.Environments.Factory;
-using _Scripts.Environments.EmergencyContact;
 
 namespace _Scripts.UI
 {
@@ -450,7 +449,7 @@ namespace _Scripts.UI
                     return FindFirstObjectByType<FactoryEmergencyResponseController>()?.CurrentHintTarget;
 
                 case HintStep.ContactEmergencyTeam:
-                    return FindFirstObjectByType<EmergencyContactController>()?.CurrentHintTarget;
+                    return _applicationManager?.CurrentEnvironment?.EmergencyContactController?.CurrentHintTarget;
 
                 default:
                     return null;

@@ -40,6 +40,7 @@ namespace _Scripts.Controller
 
         [Header("Runtime References")]
         [SerializeField] private EmergencyExit _emergencyExit;
+        [SerializeField] private EmergencyPathGuide _emergencyPathGuide;
         [SerializeField] private Transform _playerRoot;
         [SerializeField] private Transform _playerView;
         [SerializeField] private GameObject _movementProviderObject;
@@ -54,7 +55,6 @@ namespace _Scripts.Controller
         private bool _isFireFlareUpPending;
         private bool _isRoundTimerRunning;
         private IEnvironmentSceneContext _environmentContext;
-        private EmergencyExitPathGuide _emergencyExitPathGuide;
 
         public ApplicationState State => _state;
         public float RoundDuration => _roundDuration;
@@ -89,10 +89,7 @@ namespace _Scripts.Controller
             Instance = this;
             Application.targetFrameRate = 60;
 
-            _emergencyExitPathGuide = _emergencyExit != null
-                ? _emergencyExit.GetComponentInChildren<EmergencyExitPathGuide>(true)
-                : null;
-            _emergencyExitPathGuide?.Initialize(_emergencyExit, GetPlayerView(), _playerRoot);
+            _emergencyPathGuide?.Initialize(GetPlayerView(), _playerRoot);
         }
 
         private void OnEnable()
@@ -130,7 +127,7 @@ namespace _Scripts.Controller
                 _fireExtinguisherController.OnIncompatibleFireTargeted -= HandleIncompatibleFireTargeted;
                 _fireExtinguisherController.SetInputEnabled(false);
             }
-            _emergencyExitPathGuide?.SetVisible(false);
+            SetEmergencyPathTarget(null);
             SetMovementEnabled(false);
         }
 
@@ -184,7 +181,7 @@ namespace _Scripts.Controller
         {
             _fireController.ClearFires();
             _fireExtinguisherController.SetInputEnabled(false);
-            _emergencyExitPathGuide?.SetVisible(false);
+            SetEmergencyPathTarget(null);
             SetEmergencyExitActive(false);
             SetMovementEnabled(false);
         }
@@ -302,7 +299,7 @@ namespace _Scripts.Controller
                     break;
             }
 
-            _emergencyExitPathGuide?.SetVisible(_state == ApplicationState.Escape);
+            UpdateEmergencyPathTarget();
             OnStateChanged?.Invoke(_state);
         }
 
@@ -375,6 +372,24 @@ namespace _Scripts.Controller
 
             _emergencyExit.Disarm();
             _emergencyExit.gameObject.SetActive(false);
+        }
+
+        private void UpdateEmergencyPathTarget()
+        {
+            Transform target = _state switch
+            {
+                ApplicationState.ContactEmergencyTeam => _environmentContext?.EmergencyContactController?.transform,
+                ApplicationState.Escape => _emergencyExit != null ? _emergencyExit.transform : null,
+                _ => null
+            };
+            SetEmergencyPathTarget(target);
+        }
+
+        private void SetEmergencyPathTarget(Transform target)
+        {
+            if (_emergencyPathGuide == null) return;
+            _emergencyPathGuide.SetTarget(target);
+            _emergencyPathGuide.SetVisible(target != null);
         }
 
         private void ResetPlayerPose()

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Environments.EmergencyContact;
 using _Scripts.Fires;
 using _Scripts.SceneManagement;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace _Scripts.Controller
         Transform PlayerSpawnPoint { get; }
         IReadOnlyList<FireSpawnPoint> FireSpawnPoints { get; }
         IReadOnlyList<EmergencyExitSpawnPoint> ExitSpawnPoints { get; }
+        EmergencyContactController EmergencyContactController { get; }
         bool EscapeSmokeEnabled { get; }
 
         bool TryGetUIAnchor(ApplicationState state, out Transform anchor);
@@ -41,6 +43,7 @@ namespace _Scripts.Controller
         [Header("Scene References")]
         [SerializeField] private Transform _playerSpawnPoint;
         [SerializeField] private Transform _environmentRoot;
+        [SerializeField] private EmergencyContactController _emergencyContactController;
         [SerializeField] private List<SceneUIAnchor> _uiAnchors = new();
 
         [Header("Cached Environment Points")]
@@ -56,6 +59,7 @@ namespace _Scripts.Controller
         public Transform PlayerSpawnPoint => _playerSpawnPoint;
         public IReadOnlyList<FireSpawnPoint> FireSpawnPoints => _fireSpawnPoints;
         public IReadOnlyList<EmergencyExitSpawnPoint> ExitSpawnPoints => _exitSpawnPoints;
+        public EmergencyContactController EmergencyContactController => _emergencyContactController;
         public bool EscapeSmokeEnabled => _escapeSmokeEnabled;
 
         public bool TryGetUIAnchor(ApplicationState state, out Transform anchor)
@@ -83,6 +87,12 @@ namespace _Scripts.Controller
             if (_playerSpawnPoint == null)
             {
                 error = $"{name} requires a Player Spawn Point.";
+                return false;
+            }
+
+            if (_emergencyContactController == null)
+            {
+                error = $"{name} requires an Emergency Contact Controller.";
                 return false;
             }
 
