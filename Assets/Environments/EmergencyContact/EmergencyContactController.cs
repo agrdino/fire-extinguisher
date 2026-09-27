@@ -15,8 +15,9 @@ namespace _Scripts.Environments.EmergencyContact
     [DisallowMultipleComponent]
     public sealed class EmergencyContactController : MonoBehaviour
     {
-        [Tooltip("Ordered interactions required to complete the emergency call. The cube is the only step for now; handset and keypad actions can be appended later.")]
+        [Tooltip("Legacy ordered interactions. Used only when no keypad controller is assigned.")]
         [SerializeField] private EmergencyContactInteractable[] _steps = Array.Empty<EmergencyContactInteractable>();
+        [SerializeField] private EmergencyPhoneKeypadController _keypad;
         [SerializeField] private Transform _uiAnchor;
 
         private ApplicationManager _applicationManager;
@@ -24,7 +25,7 @@ namespace _Scripts.Environments.EmergencyContact
 
         public EmergencyContactStep CurrentStep { get; private set; }
         public int CurrentStepIndex => _currentStepIndex;
-        public Transform CurrentHintTarget => GetCurrentInteractable()?.HintTarget;
+        public Transform CurrentHintTarget => _keypad != null ? _keypad.HintTarget : GetCurrentInteractable()?.HintTarget;
         public Transform UIAnchor => _uiAnchor != null ? _uiAnchor : transform;
 
         public event Action<int, EmergencyContactInteractable> OnInteractionCompleted;
@@ -33,6 +34,8 @@ namespace _Scripts.Environments.EmergencyContact
         private void Start()
         {
             _applicationManager = ApplicationManager.Instance;
+            if (_keypad == null) _keypad = GetComponent<EmergencyPhoneKeypadController>();
+            if (_keypad != null) _keypad.ValidCallSubmitted += HandleValidCallSubmitted;
             if (_applicationManager == null) return;
             _applicationManager.OnStateChanged += HandleApplicationStateChanged;
             HandleApplicationStateChanged(_applicationManager.State);
@@ -40,6 +43,7 @@ namespace _Scripts.Environments.EmergencyContact
 
         private void OnDestroy()
         {
+            if (_keypad != null) _keypad.ValidCallSubmitted -= HandleValidCallSubmitted;
             if (_applicationManager != null) _applicationManager.OnStateChanged -= HandleApplicationStateChanged;
         }
 
@@ -78,6 +82,16 @@ namespace _Scripts.Environments.EmergencyContact
         private void BeginSequence()
         {
             ResetSequence();
+            if (_keypad != null)
+            {
+                CurrentStep = EmergencyContactStep.InProgress;
+                _currentStepIndex = 0;
+                _keypad.BeginSession();
+                OnStepChanged?.Invoke(_currentStepIndex);
+                IdleHintController.Instance?.NotifyActivity();
+                return;
+            }
+
             if (_steps == null || _steps.Length == 0)
             {
                 Debug.LogError($"{name} has no emergency contact interaction steps.", this);
@@ -104,6 +118,7 @@ namespace _Scripts.Environments.EmergencyContact
 
         private void ResetSequence()
         {
+            _keypad?.EndSession();
             DisableAllSteps();
             if (_steps != null)
             {
@@ -111,6 +126,17 @@ namespace _Scripts.Environments.EmergencyContact
             }
             _currentStepIndex = -1;
             CurrentStep = EmergencyContactStep.None;
+        }
+
+        private void HandleValidCallSubmitted(EmergencyContactEntry contact)
+        {
+            if (CurrentStep != EmergencyContactStep.InProgress || _applicationManager == null) return;
+
+            CurrentStep = EmergencyContactStep.Completed;
+            _currentStepIndex = 1;
+            OnStepChanged?.Invoke(_currentStepIndex);
+            IdleHintController.Instance?.NotifyActivity();
+            _applicationManager.CompleteEmergencyContact();
         }
 
         private void DisableAllSteps()
