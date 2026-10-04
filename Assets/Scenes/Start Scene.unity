@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f74713df0d914bd09d1a2b5be68737bc, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -167,7 +167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0
@@ -446,6 +446,7 @@ MonoBehaviour:
   _defaultEntryState: 8
   _playerSpawnPoint: {fileID: 384461262}
   _environmentRoot: {fileID: 2093457025}
+  _emergencyContactController: {fileID: 0}
   _uiAnchors:
   - _state: 8
     _anchor: {fileID: 5600149445161288996}
@@ -453,6 +454,7 @@ MonoBehaviour:
     _anchor: {fileID: 5600149445161288996}
   _fireSpawnPoints: []
   _exitSpawnPoints: []
+  _escapeSmokeEnabled: 0
 --- !u!134 &1570428769
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -612,6 +614,10 @@ PrefabInstance:
     - target: {fileID: 5363198879010075140, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901389772452431670, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6158987956244559029, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: m_LocalPosition.y
