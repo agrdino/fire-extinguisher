@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b07cb428e298a4e4d84ec556156237f2
+guid: a4f370cb1d826e5499dc2695c8ce11d4
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -18,7 +18,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Hose
-    second: {fileID: 2100000, guid: afa27ed436299b74ab5e92a4f7043757, type: 2}
+    second: {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -45,7 +45,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
