@@ -34,8 +34,8 @@ namespace _Scripts.Fires
         private GameObject _activeElectricalSparks;
 
         public event Action OnAllFiresExtinguished;
-        public event Action OnFireFlareUpStarted;
-        public event Action OnFireFlareUpCompleted;
+        public event Action OnIncompatibleExposureStarted;
+        public event Action OnDangerThresholdReached;
         public event Action<FireType> OnFireTypeSelected;
         
         public IReadOnlyList<Fire> ActiveFires => _activeFires;
@@ -141,8 +141,8 @@ namespace _Scripts.Fires
             FireProximityWarning proximityWarning = fire.GetComponentInChildren<FireProximityWarning>(true);
             if (proximityWarning != null) proximityWarning.Arm(playerRoot);
             fire.OnIntensityChanged += Fire_OnIntensityChanged;
-            fire.OnFlareUpStarted += Fire_OnFlareUpStarted;
-            fire.OnFlareUpCompleted += Fire_OnFlareUpCompleted;
+            fire.OnIncompatibleExposureStarted += Fire_OnIncompatibleExposureStarted;
+            fire.OnDangerThresholdReached += Fire_OnDangerThresholdReached;
             _activeFires.Add(fire);
         }
 
@@ -239,8 +239,8 @@ namespace _Scripts.Fires
                 if (fire == null) continue;
 
                 fire.OnIntensityChanged -= Fire_OnIntensityChanged;
-                fire.OnFlareUpStarted -= Fire_OnFlareUpStarted;
-                fire.OnFlareUpCompleted -= Fire_OnFlareUpCompleted;
+                fire.OnIncompatibleExposureStarted -= Fire_OnIncompatibleExposureStarted;
+                fire.OnDangerThresholdReached -= Fire_OnDangerThresholdReached;
             }
         }
 
@@ -253,9 +253,9 @@ namespace _Scripts.Fires
             OnAllFiresExtinguished?.Invoke();
         }
 
-        private void Fire_OnFlareUpStarted() => OnFireFlareUpStarted?.Invoke();
+        private void Fire_OnIncompatibleExposureStarted() => OnIncompatibleExposureStarted?.Invoke();
 
-        private void Fire_OnFlareUpCompleted() => OnFireFlareUpCompleted?.Invoke();
+        private void Fire_OnDangerThresholdReached() => OnDangerThresholdReached?.Invoke();
 
     }
 }

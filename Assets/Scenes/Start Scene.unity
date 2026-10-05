@@ -444,6 +444,7 @@ MonoBehaviour:
   _sceneId: 0
   _environmentType: 0
   _defaultEntryState: 8
+  _features: 0
   _playerSpawnPoint: {fileID: 384461262}
   _environmentRoot: {fileID: 2093457025}
   _emergencyContactController: {fileID: 0}
@@ -453,6 +454,7 @@ MonoBehaviour:
   - _state: 9
     _anchor: {fileID: 5600149445161288996}
   _fireSpawnPoints: []
+  _fireExtinguisherStations: []
   _exitSpawnPoints: []
   _escapeSmokeEnabled: 0
 --- !u!134 &1570428769

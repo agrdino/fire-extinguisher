@@ -1133,6 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.RayInteractorStateController
   _rayInteractor: {fileID: 6203155216862590207}
+  _objectInteractor: {fileID: 910000000000000001}
   _factoryInteractionLineLength: 2
 --- !u!1 &5765939093464380304
 GameObject:

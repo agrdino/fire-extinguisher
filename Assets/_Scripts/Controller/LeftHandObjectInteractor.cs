@@ -14,6 +14,9 @@ namespace _Scripts.Controller
         private HandRayInteractable _hoveredInteractable;
         private bool _wasPressed;
 
+        public bool HasHoveredInteractable => _hoveredInteractable != null;
+        public float HoveredDistance { get; private set; }
+
         private void Awake()
         {
             _handController = GetComponent<HandController>();
@@ -28,25 +31,36 @@ namespace _Scripts.Controller
         {
             if (_handController != null) _handController.onPress -= HandlePress;
             SetHoveredInteractable(null);
+            HoveredDistance = 0f;
             _wasPressed = false;
         }
 
         private void Update()
         {
             ApplicationManager applicationManager = ApplicationManager.Instance;
-            if (applicationManager == null || (!applicationManager.IsFactoryResponding && !applicationManager.IsEmergencyContacting))
+            if (applicationManager == null
+                || (!applicationManager.IsFactoryResponding
+                    && !applicationManager.IsEmergencyContacting
+                    && !applicationManager.IsFighting))
             {
                 SetHoveredInteractable(null);
+                HoveredDistance = 0f;
                 return;
             }
 
             HandRayInteractable candidate = null;
+            float candidateDistance = 0f;
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _maximumDistance, _interactionMask, QueryTriggerInteraction.Collide))
             {
                 HandRayInteractable interactable = hit.collider.GetComponentInParent<HandRayInteractable>();
-                if (interactable != null && interactable.IsInteractionEnabled) candidate = interactable;
+                if (interactable != null && interactable.IsInteractionEnabled)
+                {
+                    candidate = interactable;
+                    candidateDistance = hit.distance;
+                }
             }
 
+            HoveredDistance = candidateDistance;
             SetHoveredInteractable(candidate);
         }
 

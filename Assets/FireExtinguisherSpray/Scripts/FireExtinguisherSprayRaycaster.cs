@@ -67,7 +67,11 @@ namespace _Scripts.FireExtinguishers
                 if (!_fireExtinguisher.CanExtinguish(fire.FireType))
                 {
                     _incompatibleFiresThisFrame.Add(fire);
-                    fire.BeginFlareUp();
+                    if (_intensityReductionPerSecond > 0f)
+                    {
+                        float intensityIncrease = _intensityReductionPerSecond * hitFire.Value * Time.deltaTime;
+                        fire.IncreaseFromIncompatibleExtinguisher(intensityIncrease);
+                    }
                     if (!_incompatibleFiresLastFrame.Contains(fire))
                         _fireExtinguisher.NotifyIncompatibleFireTargeted(fire.FireType);
                     continue;

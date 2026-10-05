@@ -1,23 +1,35 @@
 using System;
 using System.Collections.Generic;
 using _Scripts.Environments.EmergencyContact;
+using _Scripts.FireExtinguishers;
 using _Scripts.Fires;
 using _Scripts.SceneManagement;
 using UnityEngine;
 
 namespace _Scripts.Controller
 {
+    [Flags]
+    public enum EnvironmentFeature
+    {
+        None = 0,
+        EmergencyContact = 1 << 0,
+        VisibilityFog = 1 << 1
+    }
+
     public interface IEnvironmentSceneContext
     {
         SceneId SceneId { get; }
         EnvironmentType EnvironmentType { get; }
         ApplicationState DefaultEntryState { get; }
+        EnvironmentFeature Features { get; }
         Transform PlayerSpawnPoint { get; }
         IReadOnlyList<FireSpawnPoint> FireSpawnPoints { get; }
+        IReadOnlyList<FireExtinguisherStation> FireExtinguisherStations { get; }
         IReadOnlyList<EmergencyExitSpawnPoint> ExitSpawnPoints { get; }
         EmergencyContactController EmergencyContactController { get; }
         bool EscapeSmokeEnabled { get; }
 
+        bool Supports(EnvironmentFeature feature);
         bool TryGetUIAnchor(ApplicationState state, out Transform anchor);
         bool ValidateConfiguration(out string error);
     }
@@ -40,6 +52,9 @@ namespace _Scripts.Controller
         [SerializeField] private EnvironmentType _environmentType;
         [SerializeField] private ApplicationState _defaultEntryState = ApplicationState.Ready;
 
+        [Header("Features")]
+        [SerializeField] private EnvironmentFeature _features = EnvironmentFeature.None;
+
         [Header("Scene References")]
         [SerializeField] private Transform _playerSpawnPoint;
         [SerializeField] private Transform _environmentRoot;
@@ -48,6 +63,7 @@ namespace _Scripts.Controller
 
         [Header("Cached Environment Points")]
         [SerializeField] private List<FireSpawnPoint> _fireSpawnPoints = new();
+        [SerializeField] private List<FireExtinguisherStation> _fireExtinguisherStations = new();
         [SerializeField] private List<EmergencyExitSpawnPoint> _exitSpawnPoints = new();
 
         [Header("Environment Effects")]
@@ -56,11 +72,18 @@ namespace _Scripts.Controller
         public SceneId SceneId => _sceneId;
         public EnvironmentType EnvironmentType => _environmentType;
         public ApplicationState DefaultEntryState => _defaultEntryState;
+        public EnvironmentFeature Features => _features;
         public Transform PlayerSpawnPoint => _playerSpawnPoint;
         public IReadOnlyList<FireSpawnPoint> FireSpawnPoints => _fireSpawnPoints;
+        public IReadOnlyList<FireExtinguisherStation> FireExtinguisherStations => _fireExtinguisherStations;
         public IReadOnlyList<EmergencyExitSpawnPoint> ExitSpawnPoints => _exitSpawnPoints;
         public EmergencyContactController EmergencyContactController => _emergencyContactController;
         public bool EscapeSmokeEnabled => _escapeSmokeEnabled;
+
+        public bool Supports(EnvironmentFeature feature)
+        {
+            return (_features & feature) == feature;
+        }
 
         public bool TryGetUIAnchor(ApplicationState state, out Transform anchor)
         {
@@ -90,7 +113,8 @@ namespace _Scripts.Controller
                 return false;
             }
 
-            if (_emergencyContactController == null)
+            if (Supports(EnvironmentFeature.EmergencyContact)
+                && _emergencyContactController == null)
             {
                 error = $"{name} requires an Emergency Contact Controller.";
                 return false;
@@ -120,6 +144,7 @@ namespace _Scripts.Controller
         private void OnValidate()
         {
             _fireSpawnPoints.RemoveAll(point => point == null);
+            _fireExtinguisherStations.RemoveAll(station => station == null);
             _exitSpawnPoints.RemoveAll(point => point == null);
         }
 

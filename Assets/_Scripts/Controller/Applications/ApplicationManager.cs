@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using _Scripts.FireExtinguishers;
 using _Scripts.Fires;
 using UnityEngine;
@@ -49,11 +50,16 @@ namespace _Scripts.Controller
         [SerializeField] private ApplicationState _state = ApplicationState.Language;
         [SerializeField, Min(0f)] private float _remainingTime;
         [SerializeField] private FireExtinguisherType _selectedExtinguisherType = FireExtinguisherType.Unselect;
+        [SerializeField, Range(0f, 1f)] private float _co2RemainingRatio = 1f;
+        [SerializeField, Range(0f, 1f)] private float _powderRemainingRatio = 1f;
         [SerializeField] private TrainingFailureReason _failureReasons;
 
         private bool _isEscapeTimeLimited;
-        private bool _isFireFlareUpPending;
         private bool _isRoundTimerRunning;
+        private bool _hasPendingExtinguisherSelection;
+        private FireExtinguisherType _pendingExtinguisherType = FireExtinguisherType.Unselect;
+        private FireExtinguisherModelSwitcher _modelSwitcher;
+        private FireExtinguisherStation _activeExtinguisherStation;
         private IEnvironmentSceneContext _environmentContext;
 
         public ApplicationState State => _state;
@@ -73,10 +79,12 @@ namespace _Scripts.Controller
         public EmergencyExit EmergencyExit => _emergencyExit;
         public Transform PlayerView => GetPlayerView();
         public IEnvironmentSceneContext CurrentEnvironment => _environmentContext;
+        public FireExtinguisherStation ActiveExtinguisherStation => _activeExtinguisherStation;
 
         public event Action<ApplicationState> OnStateChanged;
         public event Action<float> OnRemainingTimeChanged;
         public event Action<FireExtinguisherType> OnExtinguisherSelected;
+        public event Action<IEnvironmentSceneContext> OnEnvironmentBound;
 
         private void Awake()
         {
@@ -88,6 +96,9 @@ namespace _Scripts.Controller
 
             Instance = this;
             Application.targetFrameRate = 60;
+            _modelSwitcher = _fireExtinguisherController?.FireExtinguisher != null
+                ? _fireExtinguisherController.FireExtinguisher.GetComponent<FireExtinguisherModelSwitcher>()
+                : null;
 
             _emergencyPathGuide?.Initialize(GetPlayerView(), _playerRoot);
         }
@@ -97,8 +108,7 @@ namespace _Scripts.Controller
             if (_fireController != null)
             {
                 _fireController.OnAllFiresExtinguished += HandleAllFiresExtinguished;
-                _fireController.OnFireFlareUpStarted += HandleFireFlareUpStarted;
-                _fireController.OnFireFlareUpCompleted += HandleFireFlareUpCompleted;
+                _fireController.OnDangerThresholdReached += HandleDangerThresholdReached;
             }
 
             if (_emergencyExit != null)
@@ -108,6 +118,13 @@ namespace _Scripts.Controller
                 _fireExtinguisherController.SetInputEnabled(false);
                 _fireExtinguisherController.OnIncompatibleFireTargeted += HandleIncompatibleFireTargeted;
             }
+            if (_modelSwitcher != null)
+            {
+                _modelSwitcher.OnOutgoingDissolveStarted += HandleOutgoingDissolveStarted;
+                _modelSwitcher.OnIncomingDissolveStarted += HandleIncomingDissolveStarted;
+                _modelSwitcher.OnVisualTypeChanged += HandleVisualTypeChanged;
+                _modelSwitcher.OnTransitionCompleted += HandleExtinguisherTransitionCompleted;
+            }
             SetMovementEnabled(false);
         }
 
@@ -116,8 +133,7 @@ namespace _Scripts.Controller
             if (_fireController != null)
             {
                 _fireController.OnAllFiresExtinguished -= HandleAllFiresExtinguished;
-                _fireController.OnFireFlareUpStarted -= HandleFireFlareUpStarted;
-                _fireController.OnFireFlareUpCompleted -= HandleFireFlareUpCompleted;
+                _fireController.OnDangerThresholdReached -= HandleDangerThresholdReached;
             }
 
             if (_emergencyExit != null)
@@ -126,6 +142,13 @@ namespace _Scripts.Controller
             {
                 _fireExtinguisherController.OnIncompatibleFireTargeted -= HandleIncompatibleFireTargeted;
                 _fireExtinguisherController.SetInputEnabled(false);
+            }
+            if (_modelSwitcher != null)
+            {
+                _modelSwitcher.OnOutgoingDissolveStarted -= HandleOutgoingDissolveStarted;
+                _modelSwitcher.OnIncomingDissolveStarted -= HandleIncomingDissolveStarted;
+                _modelSwitcher.OnVisualTypeChanged -= HandleVisualTypeChanged;
+                _modelSwitcher.OnTransitionCompleted -= HandleExtinguisherTransitionCompleted;
             }
             SetEmergencyPathTarget(null);
             SetMovementEnabled(false);
@@ -157,7 +180,11 @@ namespace _Scripts.Controller
                 return;
             }
 
-            if (IsFighting && !_isFireFlareUpPending && _fireExtinguisherController.IsDepleted)
+            if (IsFighting
+                && !_hasPendingExtinguisherSelection
+                && _selectedExtinguisherType != FireExtinguisherType.Unselect
+                && _fireExtinguisherController.IsDepleted
+                && _fireExtinguisherController.FireExtinguisher.CanExtinguish(_fireController.CurrentFireType))
             {
                 AddFailureReason(TrainingFailureReason.FireNotExtinguished | TrainingFailureReason.ExtinguisherDepleted);
                 BeginEscape(true);
@@ -193,6 +220,7 @@ namespace _Scripts.Controller
             _environmentContext = environmentContext;
             _exitPlacementController.BindEnvironment(environmentContext);
             _fireController.BindEnvironment(environmentContext);
+            OnEnvironmentBound?.Invoke(_environmentContext);
             ResetPlayerPose();
             SetState(entryState, true);
         }
@@ -246,6 +274,7 @@ namespace _Scripts.Controller
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     EnsureRoundTimerStarted();
                     _fireController.SpawnFires(_playerRoot, true);
+                    ConfigureExtinguisherStations();
                     _exitPlacementController.TryPosition(GetPlayerView());
                     break;
 
@@ -261,12 +290,13 @@ namespace _Scripts.Controller
 
                 case ApplicationState.Fighting:
                     _isEscapeTimeLimited = false;
-                    _isFireFlareUpPending = false;
                     ResetExtinguisher();
-                    if (!_fireExtinguisherController.FireExtinguisher.CanExtinguish(_fireController.CurrentFireType))
-                        AddFailureReason(TrainingFailureReason.IncompatibleExtinguisherSelected);
+                    SelectExtinguisher(FireExtinguisherType.Unselect);
+                    if (previousState != ApplicationState.FactoryResponse || _fireController.SelectedSpawnPoint == null)
+                        _fireController.SpawnFires(_playerRoot);
+                    ConfigureExtinguisherStations();
                     EnsureRoundTimerStarted();
-                    _fireExtinguisherController.SetInputEnabled(true);
+                    _fireExtinguisherController.SetInputEnabled(false);
                     SetEmergencyExitActive(true);
                     break;
 
@@ -300,6 +330,7 @@ namespace _Scripts.Controller
             }
 
             UpdateEmergencyPathTarget();
+            RefreshExtinguisherStationInteractions();
             OnStateChanged?.Invoke(_state);
         }
 
@@ -322,6 +353,10 @@ namespace _Scripts.Controller
             _fireExtinguisherController.SetInputEnabled(false);
             _fireExtinguisherController.ResetInputState();
             _fireExtinguisherController.Refill();
+            _co2RemainingRatio = 1f;
+            _powderRemainingRatio = 1f;
+            _hasPendingExtinguisherSelection = false;
+            _pendingExtinguisherType = FireExtinguisherType.Unselect;
         }
 
         private void SetMovementEnabled(bool isEnabled)
@@ -336,6 +371,40 @@ namespace _Scripts.Controller
             OnExtinguisherSelected?.Invoke(extinguisherType);
         }
 
+        public bool TrySelectExtinguisher(
+            FireExtinguisherType extinguisherType,
+            FireExtinguisherStation station)
+        {
+            if (!IsFighting
+                || station == null
+                || station != _activeExtinguisherStation
+                || extinguisherType == FireExtinguisherType.Unselect
+                || extinguisherType == _selectedExtinguisherType
+                || _hasPendingExtinguisherSelection
+                || _modelSwitcher == null
+                || _modelSwitcher.IsTransitioning)
+                return false;
+
+            SaveSelectedExtinguisherAmount();
+            _hasPendingExtinguisherSelection = true;
+            _pendingExtinguisherType = extinguisherType;
+            _fireExtinguisherController.SetInputEnabled(false);
+            station.BeginTransition();
+
+            if (_modelSwitcher.TryTransitionTo(extinguisherType))
+            {
+                // Confirm the accepted object interaction immediately; the logical
+                // type still commits at the dissolve midpoint as before.
+                station.PlaySelectionFeedback(extinguisherType);
+                return true;
+            }
+
+            _hasPendingExtinguisherSelection = false;
+            _pendingExtinguisherType = FireExtinguisherType.Unselect;
+            station.CompleteTransition();
+            return false;
+        }
+
         public void SelectCO2Extinguisher() => SelectExtinguisher(FireExtinguisherType.CO2);
         public void SelectPowderExtinguisher() => SelectExtinguisher(FireExtinguisherType.Powder);
 
@@ -344,13 +413,13 @@ namespace _Scripts.Controller
             if (!IsExploring) return;
             SetState(_environmentContext?.EnvironmentType == EnvironmentType.Factory
                 ? ApplicationState.FactoryResponse
-                : ApplicationState.SelectExtinguisher);
+                : ApplicationState.Fighting);
         }
 
         public void CompleteFactoryResponse()
         {
             if (!IsFactoryResponding) return;
-            SetState(ApplicationState.SelectExtinguisher);
+            SetState(ApplicationState.Fighting);
         }
 
         public void CompleteEmergencyContact()
@@ -416,21 +485,18 @@ namespace _Scripts.Controller
 
         private void HandleAllFiresExtinguished()
         {
-            if (IsFighting) SetState(ApplicationState.ContactEmergencyTeam);
+            if (!IsFighting) return;
+
+            if (_environmentContext?.Supports(EnvironmentFeature.EmergencyContact) == true)
+                SetState(ApplicationState.ContactEmergencyTeam);
+            else
+                BeginEscape(false);
         }
 
-        private void HandleFireFlareUpStarted()
+        private void HandleDangerThresholdReached()
         {
-            if (!IsFighting || _isFireFlareUpPending) return;
-            _isFireFlareUpPending = true;
-        }
-
-        private void HandleFireFlareUpCompleted()
-        {
-            if (!IsFighting || !_isFireFlareUpPending) return;
-
-            _isFireFlareUpPending = false;
-            AddFailureReason(TrainingFailureReason.FireNotExtinguished);
+            if (!IsFighting) return;
+            AddFailureReason(TrainingFailureReason.FireNotExtinguished | TrainingFailureReason.IncompatibleExtinguisherSelected);
             BeginEscape(true);
         }
 
@@ -451,6 +517,88 @@ namespace _Scripts.Controller
         private void HandleIncompatibleFireTargeted(FireExtinguisherType extinguisherType, FireType fireType)
         {
             if (IsFighting) AddFailureReason(TrainingFailureReason.IncompatibleExtinguisherSelected);
+        }
+
+        private void HandleOutgoingDissolveStarted(FireExtinguisherType outgoingType)
+        {
+            if (!_hasPendingExtinguisherSelection || _activeExtinguisherStation == null) return;
+            _activeExtinguisherStation.PlayOutgoingToGround(outgoingType, _modelSwitcher.PhaseDuration);
+        }
+
+        private void HandleIncomingDissolveStarted(FireExtinguisherType incomingType)
+        {
+            if (!_hasPendingExtinguisherSelection || _activeExtinguisherStation == null) return;
+            _activeExtinguisherStation.PlayIncomingFromGround(incomingType, _modelSwitcher.PhaseDuration);
+        }
+
+        private void HandleVisualTypeChanged(FireExtinguisherType visualType)
+        {
+            if (!_hasPendingExtinguisherSelection || visualType != _pendingExtinguisherType) return;
+
+            _selectedExtinguisherType = visualType;
+            _fireExtinguisherController.FireExtinguisher.SetRemainingRatio(GetStoredRemainingRatio(visualType));
+            OnExtinguisherSelected?.Invoke(visualType);
+        }
+
+        private void HandleExtinguisherTransitionCompleted()
+        {
+            if (!_hasPendingExtinguisherSelection) return;
+
+            _hasPendingExtinguisherSelection = false;
+            _pendingExtinguisherType = FireExtinguisherType.Unselect;
+            _activeExtinguisherStation?.CompleteTransition();
+            if (IsFighting && _selectedExtinguisherType != FireExtinguisherType.Unselect)
+                _fireExtinguisherController.SetInputEnabled(true);
+        }
+
+        private void SaveSelectedExtinguisherAmount()
+        {
+            float ratio = _fireExtinguisherController.FireExtinguisher.RemainingRatio;
+            switch (_selectedExtinguisherType)
+            {
+                case FireExtinguisherType.CO2:
+                    _co2RemainingRatio = ratio;
+                    break;
+                case FireExtinguisherType.Powder:
+                    _powderRemainingRatio = ratio;
+                    break;
+            }
+        }
+
+        private float GetStoredRemainingRatio(FireExtinguisherType type)
+        {
+            return type switch
+            {
+                FireExtinguisherType.CO2 => _co2RemainingRatio,
+                FireExtinguisherType.Powder => _powderRemainingRatio,
+                _ => 1f
+            };
+        }
+
+        private void ConfigureExtinguisherStations()
+        {
+            _activeExtinguisherStation = null;
+            IReadOnlyList<FireExtinguisherStation> stations = _environmentContext?.FireExtinguisherStations;
+            if (stations == null) return;
+
+            FireSpawnPoint selectedSpawnPoint = _fireController.SelectedSpawnPoint;
+            for (int index = 0; index < stations.Count; index++)
+            {
+                FireExtinguisherStation station = stations[index];
+                if (station == null) continue;
+
+                bool isActive = _activeExtinguisherStation == null && station.Matches(selectedSpawnPoint);
+                if (isActive) _activeExtinguisherStation = station;
+                station.Configure(isActive, _selectedExtinguisherType);
+            }
+        }
+
+        private void RefreshExtinguisherStationInteractions()
+        {
+            IReadOnlyList<FireExtinguisherStation> stations = _environmentContext?.FireExtinguisherStations;
+            if (stations == null) return;
+            for (int index = 0; index < stations.Count; index++)
+                stations[index]?.RefreshInteractionState();
         }
 
         private void AddFailureReason(TrainingFailureReason reason) => _failureReasons |= reason;

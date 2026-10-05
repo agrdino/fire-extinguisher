@@ -24,30 +24,32 @@ namespace _Scripts.Fires
         [SerializeField, Min(0f)] private float _intensityRecoveryPerSecond = 10f;
 
         [Header("Incompatible Extinguisher")]
-        [FormerlySerializedAs("_flareUpDuration")]
-        [SerializeField, Min(0f)] private float _flareUpGrowthDuration = 3f;
-        [SerializeField, Min(0f)] private float _wrongExtinguisherEscapeDelay = 6f;
-        [SerializeField, Min(1f)] private float _flareUpIntensityRatio = 2.5f;
+        [FormerlySerializedAs("_flareUpIntensityRatio")]
+        [SerializeField, Min(1f)] private float _dangerIntensityRatio = 2.5f;
 
         private float _remainingDeactivationDelay;
         private float _remainingRecoveryDelay;
-        private float _flareUpElapsedTime;
-        private float _flareUpStartIntensity;
-        private bool _isFlaringUp;
+        private bool _hasIncompatibleExposure;
+        private bool _hasReachedDangerThreshold;
 
         public event Action<float> OnIntensityChanged;
-        public event Action OnFlareUpStarted;
-        public event Action OnFlareUpCompleted;
+        public event Action OnIncompatibleExposureStarted;
+        public event Action OnDangerThresholdReached;
 
         public FireType FireType => _fireType;
         public float MaxIntensity => _maxIntensity;
         public float CurrentIntensity => _currentIntensity;
         public float IntensityRatio => _maxIntensity > 0f ? _currentIntensity / _maxIntensity : 0f;
         public bool IsExtinguished => _currentIntensity <= 0f;
-        public bool IsFlaringUp => _isFlaringUp;
-        public float FlareUpProgress => _isFlaringUp
-            ? (_flareUpGrowthDuration > 0f ? Mathf.Clamp01(_flareUpElapsedTime / _flareUpGrowthDuration) : 1f)
-            : (_currentIntensity > _maxIntensity ? 1f : 0f);
+        public bool HasIncompatibleExposure => _hasIncompatibleExposure;
+        // Kept as compatibility aliases for the existing audio, VFX, and proximity-warning
+        // components. A wrong-extinguisher exposure is now intensity-driven rather than timed.
+        public bool IsFlaringUp => _hasIncompatibleExposure && !_hasReachedDangerThreshold;
+        public float DangerIntensity => _maxIntensity * Mathf.Max(1f, _dangerIntensityRatio);
+        public float DangerProgress => _hasIncompatibleExposure && DangerIntensity > _maxIntensity
+            ? Mathf.InverseLerp(_maxIntensity, DangerIntensity, _currentIntensity)
+            : 0f;
+        public float FlareUpProgress => DangerProgress;
 
         private void Reset()
         {
@@ -59,19 +61,12 @@ namespace _Scripts.Fires
             _currentIntensity = _maxIntensity;
             _remainingDeactivationDelay = _deactivationDelay;
             _remainingRecoveryDelay = _recoveryDelay;
-            _flareUpElapsedTime = 0f;
-            _flareUpStartIntensity = _currentIntensity;
-            _isFlaringUp = false;
+            _hasIncompatibleExposure = false;
+            _hasReachedDangerThreshold = false;
         }
 
         private void Update()
         {
-            if (_isFlaringUp)
-            {
-                UpdateFlareUp();
-                return;
-            }
-
             if (!IsExtinguished)
             {
                 RecoverIntensity();
@@ -85,56 +80,46 @@ namespace _Scripts.Fires
 
         public void ReduceIntensity(float amount)
         {
-            if (amount <= 0f || IsExtinguished || _isFlaringUp) return;
+            if (amount <= 0f || IsExtinguished || _hasReachedDangerThreshold) return;
 
             _remainingRecoveryDelay = _recoveryDelay;
             _currentIntensity = Mathf.Max(0f, _currentIntensity - amount);
             OnIntensityChanged?.Invoke(_currentIntensity);
         }
 
-        public void BeginFlareUp()
+        public void IncreaseFromIncompatibleExtinguisher(float amount)
         {
-            if (_isFlaringUp || IsExtinguished) return;
+            if (amount <= 0f || IsExtinguished || _hasReachedDangerThreshold) return;
 
-            _isFlaringUp = true;
-            _flareUpElapsedTime = 0f;
-            _flareUpStartIntensity = _currentIntensity;
-            OnFlareUpStarted?.Invoke();
+            if (!_hasIncompatibleExposure)
+            {
+                _hasIncompatibleExposure = true;
+                OnIncompatibleExposureStarted?.Invoke();
+            }
 
-            if (_wrongExtinguisherEscapeDelay <= 0f) CompleteFlareUp();
-        }
-
-        private void UpdateFlareUp()
-        {
-            _flareUpElapsedTime += Time.deltaTime;
-            float progress = _flareUpGrowthDuration > 0f
-                ? Mathf.Clamp01(_flareUpElapsedTime / _flareUpGrowthDuration)
-                : 1f;
-            float targetIntensity = _maxIntensity * Mathf.Max(1f, _flareUpIntensityRatio);
-            _currentIntensity = Mathf.Lerp(_flareUpStartIntensity, targetIntensity, progress);
-            OnIntensityChanged?.Invoke(_currentIntensity);
-
-            float escapeDelay = Mathf.Max(_flareUpGrowthDuration, _wrongExtinguisherEscapeDelay);
-            if (_flareUpElapsedTime >= escapeDelay) CompleteFlareUp();
-        }
-
-        private void CompleteFlareUp()
-        {
-            _currentIntensity = _maxIntensity * Mathf.Max(1f, _flareUpIntensityRatio);
-            _isFlaringUp = false;
-            OnIntensityChanged?.Invoke(_currentIntensity);
-            OnFlareUpCompleted?.Invoke();
+            _remainingRecoveryDelay = _recoveryDelay;
+            SetIntensity(Mathf.Min(DangerIntensity, _currentIntensity + amount));
         }
 
         private void RecoverIntensity()
         {
-            if (_currentIntensity >= _maxIntensity || _intensityRecoveryPerSecond <= 0f) return;
+            float recoveryTarget = _hasIncompatibleExposure ? DangerIntensity : _maxIntensity;
+            if (_currentIntensity >= recoveryTarget || _intensityRecoveryPerSecond <= 0f) return;
 
             _remainingRecoveryDelay -= Time.deltaTime;
             if (_remainingRecoveryDelay > 0f) return;
 
-            _currentIntensity = Mathf.Min(_maxIntensity, _currentIntensity + _intensityRecoveryPerSecond * Time.deltaTime);
+            SetIntensity(Mathf.Min(recoveryTarget, _currentIntensity + _intensityRecoveryPerSecond * Time.deltaTime));
+        }
+
+        private void SetIntensity(float intensity)
+        {
+            _currentIntensity = Mathf.Max(0f, intensity);
             OnIntensityChanged?.Invoke(_currentIntensity);
+            if (_hasReachedDangerThreshold || !_hasIncompatibleExposure || _currentIntensity < DangerIntensity) return;
+
+            _hasReachedDangerThreshold = true;
+            OnDangerThresholdReached?.Invoke();
         }
 
     }

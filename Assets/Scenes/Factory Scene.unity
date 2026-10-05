@@ -3064,6 +3064,83 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.91760004, y: 2.57333, z: 0.14305973}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &70714729
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1705101658}
+    m_Modifications:
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.812
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.881
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764312853512047232, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_Name
+      value: Fire Extinguisher Station - Fire Point 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: _fireSpawnPoint
+      value: 
+      objectReference: {fileID: 6419938941248935311}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+--- !u!4 &70714730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 70714729}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &70714731 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 70714729}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb85bda8a2863464fbd8d94b83a2c972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherStation
 --- !u!1 &73402114
 GameObject:
   m_ObjectHideFlags: 0
@@ -3523,6 +3600,83 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.9199982, y: 0.2514801, z: 0.39999962}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &87747360
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1705101658}
+    m_Modifications:
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.846
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 17.791
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764312853512047232, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_Name
+      value: Fire Extinguisher Station - Fire Point 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: _fireSpawnPoint
+      value: 
+      objectReference: {fileID: 7351656275345314667}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+--- !u!4 &87747361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 87747360}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &87747362 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 87747360}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb85bda8a2863464fbd8d94b83a2c972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherStation
 --- !u!1 &87813203
 GameObject:
   m_ObjectHideFlags: 0
@@ -41883,6 +42037,83 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.8400002, y: 0.0943, z: 0.47999954}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1107887245
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1705101658}
+    m_Modifications:
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.185
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.870001
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764312853512047232, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: m_Name
+      value: Fire Extinguisher Station - Fire Point 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+      propertyPath: _fireSpawnPoint
+      value: 
+      objectReference: {fileID: 1521720039556908767}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+--- !u!4 &1107887246 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 1107887245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1107887247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 1107887245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb85bda8a2863464fbd8d94b83a2c972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherStation
 --- !u!1 &1107951437
 GameObject:
   m_ObjectHideFlags: 0
@@ -52211,6 +52442,7 @@ MonoBehaviour:
   _sceneId: 1
   _environmentType: 1
   _defaultEntryState: 0
+  _features: 3
   _playerSpawnPoint: {fileID: 1302521873}
   _environmentRoot: {fileID: 1395916737285745493}
   _emergencyContactController: {fileID: 1064236171}
@@ -52223,6 +52455,10 @@ MonoBehaviour:
   - {fileID: 6419938941248935311}
   - {fileID: 7351656275345314667}
   - {fileID: 1521720039556908767}
+  _fireExtinguisherStations:
+  - {fileID: 70714731}
+  - {fileID: 87747362}
+  - {fileID: 1107887247}
   _exitSpawnPoints:
   - {fileID: 739999999616175113}
   _escapeSmokeEnabled: 1
@@ -57415,7 +57651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1509213423
 Transform:
   m_ObjectHideFlags: 0
@@ -63777,6 +64013,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3810883, y: 0.80298436, z: 0.83312225}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1705101657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1705101658}
+  m_Layer: 0
+  m_Name: Fire Extinguisher Stations (Object Selection)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1705101658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705101657}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 70714730}
+  - {fileID: 87747361}
+  - {fileID: 1107887246}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1707013198
 GameObject:
   m_ObjectHideFlags: 0
@@ -114609,3 +114879,4 @@ SceneRoots:
   - {fileID: 813000000000000001}
   - {fileID: 1709960835}
   - {fileID: 1064236170}
+  - {fileID: 1705101658}

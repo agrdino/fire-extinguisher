@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a4f370cb1d826e5499dc2695c8ce11d4
+guid: 4db3439e940e7e84980c59a81ccd1031
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,18 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Fire Extinguisher
-    second: {fileID: 2100000, guid: 48adb9391c8b9364c855592866bc869a, type: 2}
+      name: FireExtinguisher
+    second: {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glass
-    second: {fileID: 2100000, guid: 1908d5ad2a0c8c14cbf24dd63e65f8dc, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Hose
-    second: {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
+    second: {fileID: 2100000, guid: a9085eb4fcbd22f4180c700720359373, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -45,7 +40,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

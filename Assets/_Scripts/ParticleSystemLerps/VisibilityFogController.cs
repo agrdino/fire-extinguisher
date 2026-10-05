@@ -1,5 +1,5 @@
+using _Scripts.Controller;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace _Scripts.ParticleSystemLerps
 {
@@ -26,19 +26,27 @@ namespace _Scripts.ParticleSystemLerps
         private float _transitionElapsed;
         private bool _isTransitioning;
         private bool _isSmokeActive;
+        private bool _isFogEnabled;
+        private ApplicationManager _applicationManager;
 
         public bool IsSmokeActive => _isSmokeActive;
 
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += HandleSceneLoaded;
-            ApplyTargetImmediately();
+            _applicationManager = ApplicationManager.Instance;
+            if (_applicationManager != null)
+                _applicationManager.OnEnvironmentBound += HandleEnvironmentBound;
+
+            HandleEnvironmentBound(_applicationManager?.CurrentEnvironment);
         }
 
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= HandleSceneLoaded;
+            if (_applicationManager != null)
+                _applicationManager.OnEnvironmentBound -= HandleEnvironmentBound;
+
             _isTransitioning = false;
+            _applicationManager = null;
         }
 
         private void Update()
@@ -76,12 +84,19 @@ namespace _Scripts.ParticleSystemLerps
                 return;
 
             _isSmokeActive = isActive;
+            if (!_isFogEnabled) return;
+
             BeginTransition(transitionDuration);
         }
 
-        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void HandleEnvironmentBound(IEnvironmentSceneContext environment)
         {
-            ApplyTargetImmediately();
+            _isFogEnabled = environment?.Supports(EnvironmentFeature.VisibilityFog) == true;
+            _isTransitioning = false;
+            RenderSettings.fog = _isFogEnabled;
+
+            if (_isFogEnabled)
+                ApplyTargetImmediately();
         }
 
         private void BeginTransition(float transitionDuration)

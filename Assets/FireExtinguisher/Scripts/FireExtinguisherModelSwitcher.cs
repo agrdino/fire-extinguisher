@@ -31,13 +31,19 @@ namespace _Scripts.FireExtinguishers
         private float _particleEmissionAccumulator;
         private bool _particlePrefabEmissionEnabled;
         private bool _hasParticlePrefabEmissionState;
+        private bool _commitTypeAtMidpoint;
         private FireExtinguisherType _visualType;
         private FireExtinguisherType _requestedType;
 
         public bool IsTransitioning { get; private set; }
+        public float PhaseDuration => _phaseDuration;
+        public FireExtinguisherType VisualType => _visualType;
 
         public event Action OnTransitionStarted;
         public event Action OnTransitionCompleted;
+        public event Action<FireExtinguisherType> OnOutgoingDissolveStarted;
+        public event Action<FireExtinguisherType> OnIncomingDissolveStarted;
+        public event Action<FireExtinguisherType> OnVisualTypeChanged;
 
         private void OnEnable()
         {
@@ -68,16 +74,50 @@ namespace _Scripts.FireExtinguishers
 
         private void RequestModel(FireExtinguisherType extinguisherType)
         {
+            if (IsTransitioning && _requestedType == extinguisherType) return;
+
             _requestedType = extinguisherType;
+            _commitTypeAtMidpoint = false;
             if (IsTransitioning || _visualType == _requestedType) return;
 
             if (_dissolveMaterial == null || _phaseDuration <= 0f)
             {
                 SetModelImmediate(_requestedType);
                 _visualType = _requestedType;
+                OnVisualTypeChanged?.Invoke(_visualType);
                 return;
             }
 
+            StartTransition();
+        }
+
+        public bool TryTransitionTo(FireExtinguisherType extinguisherType)
+        {
+            if (_fireExtinguisher == null || IsTransitioning || _visualType == extinguisherType) return false;
+
+            _requestedType = extinguisherType;
+            _commitTypeAtMidpoint = true;
+
+            if (_dissolveMaterial == null || _phaseDuration <= 0f)
+            {
+                OnTransitionStarted?.Invoke();
+                OnOutgoingDissolveStarted?.Invoke(_visualType);
+                _fireExtinguisher.SetType(_requestedType);
+                OnIncomingDissolveStarted?.Invoke(_requestedType);
+                SetModelImmediate(_requestedType);
+                _visualType = _requestedType;
+                _commitTypeAtMidpoint = false;
+                OnVisualTypeChanged?.Invoke(_visualType);
+                OnTransitionCompleted?.Invoke();
+                return true;
+            }
+
+            StartTransition();
+            return true;
+        }
+
+        private void StartTransition()
+        {
             IsTransitioning = true;
             OnTransitionStarted?.Invoke();
             _transitionRoutine = StartCoroutine(TransitionToRequestedModel());
@@ -88,6 +128,7 @@ namespace _Scripts.FireExtinguishers
             while (_visualType != _requestedType)
             {
                 Transform outgoingModel = GetModel(_visualType);
+                OnOutgoingDissolveStarted?.Invoke(_visualType);
                 if (outgoingModel != null)
                 {
                     SetActive(outgoingModel, true);
@@ -101,8 +142,15 @@ namespace _Scripts.FireExtinguishers
                 // Use the latest request at the midpoint so rapid input never reveals
                 // a stale model before transitioning again.
                 FireExtinguisherType incomingType = _requestedType;
+                bool commitType = _commitTypeAtMidpoint;
+                _commitTypeAtMidpoint = false;
+                if (commitType && _fireExtinguisher.ExtinguisherType != incomingType)
+                    _fireExtinguisher.SetType(incomingType);
+
+                OnIncomingDissolveStarted?.Invoke(incomingType);
                 Transform incomingModel = GetModel(incomingType);
                 _visualType = incomingType;
+                OnVisualTypeChanged?.Invoke(_visualType);
 
                 if (incomingModel == null) continue;
 
@@ -115,6 +163,7 @@ namespace _Scripts.FireExtinguishers
 
             _transitionRoutine = null;
             IsTransitioning = false;
+            _commitTypeAtMidpoint = false;
             StopDissolveParticles(false);
             OnTransitionCompleted?.Invoke();
         }
@@ -344,6 +393,7 @@ namespace _Scripts.FireExtinguishers
             _transitionMaterials?.Restore();
             StopDissolveParticles(true);
             IsTransitioning = false;
+            _commitTypeAtMidpoint = false;
             if (wasTransitioning) OnTransitionCompleted?.Invoke();
         }
 

@@ -10,6 +10,7 @@ namespace _Scripts.UI
     public sealed class RayInteractorStateController : MonoBehaviour
     {
         [SerializeField] private GameObject _rayInteractor;
+        [SerializeField] private LeftHandObjectInteractor _objectInteractor;
         [SerializeField, Min(0.1f)] private float _factoryInteractionLineLength = 2f;
 
         private ApplicationManager _applicationManager;
@@ -38,6 +39,7 @@ namespace _Scripts.UI
 
             if (_applicationManager != null)
                 _applicationManager.OnStateChanged -= HandleApplicationStateChanged;
+            if (_lineVisual != null) _lineVisual.enabled = false;
             _applicationManager = null;
         }
 
@@ -56,6 +58,8 @@ namespace _Scripts.UI
 
             _xrRayInteractor = _rayInteractor.GetComponent<XRRayInteractor>();
             _lineVisual = _rayInteractor.GetComponent<XRInteractorLineVisual>();
+            if (_objectInteractor == null)
+                _objectInteractor = GetComponentInChildren<LeftHandObjectInteractor>(true);
             if (_xrRayInteractor == null || _lineVisual == null)
             {
                 return;
@@ -63,6 +67,7 @@ namespace _Scripts.UI
 
             _maxLineLength = _lineVisual.lineLength;
             _lineVisual.autoAdjustLineLength = false;
+            _lineVisual.enabled = false;
         }
 
         [BeforeRenderOrder(XRInteractionUpdateOrder.k_BeforeRenderLineVisual - 1)]
@@ -73,22 +78,33 @@ namespace _Scripts.UI
                 || !_xrRayInteractor.isActiveAndEnabled)
                 return;
 
+            bool hasUiHit = _xrRayInteractor.TryGetCurrentUIRaycastResult(out var uiHit)
+                            && uiHit.gameObject != null;
+            bool hasObjectHit = _objectInteractor != null
+                                && _objectInteractor.HasHoveredInteractable;
+            bool shouldShowLine = hasUiHit || hasObjectHit;
+            if (_lineVisual.enabled != shouldShowLine)
+                _lineVisual.enabled = shouldShowLine;
+            if (!shouldShowLine) return;
+
             float lineLength = _maxLineLength;
             if (_applicationManager != null && (_applicationManager.IsFactoryResponding || _applicationManager.IsEmergencyContacting))
                 lineLength = Mathf.Min(lineLength, _factoryInteractionLineLength);
-            if (_xrRayInteractor.TryGetCurrentUIRaycastResult(out var uiHit)
-                && uiHit.gameObject != null)
-            {
-                lineLength = Mathf.Clamp(uiHit.distance, 0f, _maxLineLength);
-            }
+            if (hasObjectHit)
+                lineLength = Mathf.Min(lineLength, _objectInteractor.HoveredDistance);
+            if (hasUiHit)
+                lineLength = Mathf.Min(
+                    lineLength,
+                    Mathf.Clamp(uiHit.distance, 0f, _maxLineLength));
 
             _lineVisual.lineLength = lineLength;
         }
 
         private static bool ShouldEnableRayInteractor(ApplicationState state)
         {
-            return state != ApplicationState.Fighting
-                && state != ApplicationState.Escape;
+            // The left-hand ray remains available while fighting so the player can
+            // select or swap the physical extinguisher at any time.
+            return state != ApplicationState.Escape;
         }
     }
 }

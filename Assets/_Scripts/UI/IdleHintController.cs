@@ -346,6 +346,9 @@ namespace _Scripts.UI
             if (_applicationManager.State != ApplicationState.Fighting || _fireExtinguisher == null)
                 return HintStep.None;
 
+            if (_applicationManager.SelectedExtinguisherType == FireExtinguisherType.Unselect)
+                return HintStep.SelectExtinguisher;
+
             FireExtinguisherState state = _fireExtinguisher.CurrentState;
             if (state.SafetyPin == SafetyPinState.Inserted) return HintStep.RemoveSafetyPin;
             if (state.Lever == LeverState.Released) return HintStep.AimAndSqueeze;
@@ -424,6 +427,8 @@ namespace _Scripts.UI
                         component => component.HintTarget);
 
                 case HintStep.SelectExtinguisher:
+                    return _applicationManager?.ActiveExtinguisherStation?.GetHintTarget();
+
                 case HintStep.ConfirmExtinguisher:
                 {
                     SelectExtinguisherScene selectScene = UIController.Instance?.CurrentScene as SelectExtinguisherScene;
