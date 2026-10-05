@@ -43,7 +43,7 @@ PrefabInstance:
     - target: {fileID: 2636325300729656182, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: c0563724aef786e4dbbd27c5592b1e39, type: 2}
+      objectReference: {fileID: 11400000, guid: 16e660be6f3d19d4f8ae324e20b01732, type: 2}
     - target: {fileID: 2636325300729656182, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -59,7 +59,7 @@ PrefabInstance:
     - target: {fileID: 2636325300729656182, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -2604712656688833770, guid: c0563724aef786e4dbbd27c5592b1e39, type: 2}
+      objectReference: {fileID: 2796877826858194140, guid: 16e660be6f3d19d4f8ae324e20b01732, type: 2}
     - target: {fileID: 2726226267807481917, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 8832627563217175522, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
+      objectReference: {fileID: 11400000, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
     - target: {fileID: 8832627563217175522, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -295,7 +295,7 @@ PrefabInstance:
     - target: {fileID: 8832627563217175522, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -4842602029216170885, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
+      objectReference: {fileID: 2796877826858194140, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
     - target: {fileID: 8832627563217175522, guid: 552d3e67870045747a4ea845df207d96, type: 3}
       propertyPath: m_TextWrappingMode
       value: 1

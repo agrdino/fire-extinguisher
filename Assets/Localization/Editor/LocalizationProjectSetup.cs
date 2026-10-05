@@ -29,8 +29,14 @@ namespace Spaxtek.EditorTools
         private const string LocalesFolder = RootFolder + "/Locales";
         private const string TablesFolder = RootFolder + "/Tables";
         private const string PrefabsFolder = RootFolder + "/Prefabs";
-        private const string FontSourcePath = RootFolder + "/Fonts/NotoSansJP-Variable.ttf";
-        private const string FontAssetPath = RootFolder + "/Fonts/NotoSansJP Dynamic SDF.asset";
+        private const string FontSourcePath = RootFolder + "/Fonts/NotoSans-Regular.ttf";
+        private const string FontAssetPath = RootFolder + "/Fonts/NotoSans Dynamic SDF.asset";
+        private const string SemiBoldFontSourcePath = RootFolder + "/Fonts/NotoSans-SemiBold.ttf";
+        private const string SemiBoldFontAssetPath = RootFolder + "/Fonts/NotoSans-SemiBold Dynamic SDF.asset";
+        private const string BoldFontSourcePath = RootFolder + "/Fonts/NotoSans-Bold.ttf";
+        private const string BoldFontAssetPath = RootFolder + "/Fonts/NotoSans-Bold Dynamic SDF.asset";
+        private const string JapaneseFontSourcePath = RootFolder + "/Fonts/NotoSansJP-Variable.ttf";
+        private const string JapaneseFontAssetPath = RootFolder + "/Fonts/NotoSansJP Dynamic SDF.asset";
         private const string SettingsPath = SettingsFolder + "/Localization Settings.asset";
         private const string CatalogPath = RootFolder + "/Editor/LocalizationTranslations.json";
         private const string LanguagePrefabPath = PrefabsFolder + "/Select Language Scene.prefab";
@@ -52,6 +58,13 @@ namespace Spaxtek.EditorTools
             public string ja = string.Empty;
         }
 
+        private sealed class LocalizedFontAssets
+        {
+            public TMP_FontAsset Regular;
+            public TMP_FontAsset SemiBold;
+            public TMP_FontAsset Bold;
+        }
+
         private static Dictionary<string, string> _staticKeyByText;
 
         [MenuItem("Tools/Localization/Rebuild Unity Localization")]
@@ -67,12 +80,12 @@ namespace Spaxtek.EditorTools
                 EnsureFolders();
                 Translation[] translations = LoadTranslations();
                 _staticKeyByText = BuildStaticLookup(translations);
-                TMP_FontAsset fontAsset = EnsureFontAsset();
+                LocalizedFontAssets fontAssets = EnsureFontAssets();
                 LocalizationSettings settings = EnsureSettingsAndLocales(out List<Locale> locales);
                 StringTableCollection collection = EnsureStringTables(locales, translations);
                 GameObject languagePrefab = EnsureLanguagePrefab();
-                LocalizePrefabAssets(fontAsset);
-                LocalizeScenes(fontAsset, languagePrefab);
+                LocalizePrefabAssets(fontAssets);
+                LocalizeScenes(fontAssets, languagePrefab);
                 EditorUtility.SetDirty(settings);
                 EditorUtility.SetDirty(collection);
                 AssetDatabase.SaveAssets();
@@ -116,21 +129,58 @@ namespace Spaxtek.EditorTools
             AssetDatabase.CreateFolder(parent, name);
         }
 
-        private static TMP_FontAsset EnsureFontAsset()
+        private static LocalizedFontAssets EnsureFontAssets()
         {
-            TMP_FontAsset existing = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(FontAssetPath);
+            TMP_FontAsset regularFont = EnsureDynamicFontAsset(
+                FontSourcePath, FontAssetPath, "NotoSans Dynamic SDF");
+            TMP_FontAsset semiBoldFont = EnsureDynamicFontAsset(
+                SemiBoldFontSourcePath, SemiBoldFontAssetPath, "NotoSans-SemiBold Dynamic SDF");
+            TMP_FontAsset boldFont = EnsureDynamicFontAsset(
+                BoldFontSourcePath, BoldFontAssetPath, "NotoSans-Bold Dynamic SDF");
+            TMP_FontAsset japaneseFont = EnsureDynamicFontAsset(
+                JapaneseFontSourcePath, JapaneseFontAssetPath, "NotoSansJP Dynamic SDF");
+
+            EnsureFallbackFont(regularFont, japaneseFont);
+            EnsureFallbackFont(semiBoldFont, japaneseFont);
+            EnsureFallbackFont(boldFont, japaneseFont);
+
+            return new LocalizedFontAssets
+            {
+                Regular = regularFont,
+                SemiBold = semiBoldFont,
+                Bold = boldFont
+            };
+        }
+
+        private static void EnsureFallbackFont(TMP_FontAsset fontAsset, TMP_FontAsset fallbackFont)
+        {
+            List<TMP_FontAsset> fallbackFonts = fontAsset.fallbackFontAssetTable
+                ?? new List<TMP_FontAsset>();
+            if (fallbackFont != null && !fallbackFonts.Contains(fallbackFont))
+            {
+                fallbackFonts.Add(fallbackFont);
+                fontAsset.fallbackFontAssetTable = fallbackFonts;
+                EditorUtility.SetDirty(fontAsset);
+                AssetDatabase.SaveAssets();
+            }
+        }
+
+        private static TMP_FontAsset EnsureDynamicFontAsset(
+            string sourcePath, string assetPath, string assetName)
+        {
+            TMP_FontAsset existing = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(assetPath);
             if (existing != null)
                 return existing;
 
-            AssetDatabase.ImportAsset(FontSourcePath, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
-            Font sourceFont = AssetDatabase.LoadAssetAtPath<Font>(FontSourcePath);
+            AssetDatabase.ImportAsset(sourcePath, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+            Font sourceFont = AssetDatabase.LoadAssetAtPath<Font>(sourcePath);
             if (sourceFont == null)
-                throw new InvalidOperationException($"Unable to import font at {FontSourcePath}.");
+                throw new InvalidOperationException($"Unable to import font at {sourcePath}.");
 
             TMP_FontAsset fontAsset = TMP_FontAsset.CreateFontAsset(
                 sourceFont, 90, 9, GlyphRenderMode.SDFAA, 2048, 2048, AtlasPopulationMode.Dynamic, true);
-            fontAsset.name = "NotoSansJP Dynamic SDF";
-            AssetDatabase.CreateAsset(fontAsset, FontAssetPath);
+            fontAsset.name = assetName;
+            AssetDatabase.CreateAsset(fontAsset, assetPath);
 
             if (fontAsset.atlasTextures != null)
             {
@@ -329,7 +379,7 @@ namespace Spaxtek.EditorTools
             }
         }
 
-        private static void LocalizePrefabAssets(TMP_FontAsset fontAsset)
+        private static void LocalizePrefabAssets(LocalizedFontAssets fontAssets)
         {
             List<string> paths = AssetDatabase.FindAssets("t:Prefab", new[]
                 {
@@ -349,7 +399,7 @@ namespace Spaxtek.EditorTools
                 GameObject root = PrefabUtility.LoadPrefabContents(path);
                 try
                 {
-                    bool changed = LocalizeTexts(root.GetComponentsInChildren<TMP_Text>(true), fontAsset);
+                    bool changed = LocalizeTexts(root.GetComponentsInChildren<TMP_Text>(true), fontAssets);
                     if (changed)
                         PrefabUtility.SaveAsPrefabAsset(root, path);
                 }
@@ -360,7 +410,7 @@ namespace Spaxtek.EditorTools
             }
         }
 
-        private static void LocalizeScenes(TMP_FontAsset fontAsset, GameObject languagePrefab)
+        private static void LocalizeScenes(LocalizedFontAssets fontAssets, GameObject languagePrefab)
         {
             string[] scenePaths = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes" })
                 .Select(AssetDatabase.GUIDToAssetPath)
@@ -381,7 +431,7 @@ namespace Spaxtek.EditorTools
                         TMP_Text[] texts = root.GetComponentsInChildren<TMP_Text>(true)
                             .Where(text => !PrefabUtility.IsPartOfPrefabInstance(text.gameObject))
                             .ToArray();
-                        LocalizeTexts(texts, fontAsset);
+                        LocalizeTexts(texts, fontAssets);
                     }
 
                     if (scenePath.EndsWith("/SampleScene.unity", StringComparison.OrdinalIgnoreCase))
@@ -429,7 +479,7 @@ namespace Spaxtek.EditorTools
             EditorUtility.SetDirty(controller);
         }
 
-        private static bool LocalizeTexts(IEnumerable<TMP_Text> texts, TMP_FontAsset fontAsset)
+        private static bool LocalizeTexts(IEnumerable<TMP_Text> texts, LocalizedFontAssets fontAssets)
         {
             bool changed = false;
             foreach (TMP_Text text in texts)
@@ -437,11 +487,10 @@ namespace Spaxtek.EditorTools
                 if (text == null)
                     continue;
 
-                // Preserve typography assigned by the Apple Vision theme. The localization
-                // rebuild only supplies a safe default for newly-created labels.
-                if (fontAsset != null && text.font == null)
+                TMP_FontAsset desiredFont = GetLocalizedUiFont(text.font, fontAssets);
+                if (desiredFont != null && text.font != desiredFont)
                 {
-                    text.font = fontAsset;
+                    text.font = desiredFont;
                     EditorUtility.SetDirty(text);
                     changed = true;
                 }
@@ -489,6 +538,24 @@ namespace Spaxtek.EditorTools
             }
 
             return changed;
+        }
+
+        private static TMP_FontAsset GetLocalizedUiFont(
+            TMP_FontAsset currentFont, LocalizedFontAssets fontAssets)
+        {
+            if (currentFont == null)
+                return fontAssets.Regular;
+
+            string fontName = currentFont.name;
+            if (!fontName.StartsWith("Rajdhani-", StringComparison.OrdinalIgnoreCase)
+                && !fontName.StartsWith("NotoSans", StringComparison.OrdinalIgnoreCase))
+                return null;
+
+            if (fontName.IndexOf("SemiBold", StringComparison.OrdinalIgnoreCase) >= 0)
+                return fontAssets.SemiBold;
+            if (fontName.IndexOf("Bold", StringComparison.OrdinalIgnoreCase) >= 0)
+                return fontAssets.Bold;
+            return fontAssets.Regular;
         }
 
         private static TMP_Text FindText(GameObject root, string name)

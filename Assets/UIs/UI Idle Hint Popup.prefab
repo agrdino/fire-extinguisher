@@ -278,6 +278,33 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  _switchOffPowerHintLocalized:
+    m_TableReference:
+      m_TableCollectionName: UI
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: factory.switch_off_power
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _activateFireAlarmHintLocalized:
+    m_TableReference:
+      m_TableCollectionName: UI
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: factory.activate_fire_alarm
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _contactEmergencyTeamHintLocalized:
+    m_TableReference:
+      m_TableCollectionName: UI
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: hint.contact_emergency_team
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   references:
     version: 2
     RefIds: []
@@ -425,8 +452,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select 1 of 2 extinguishers.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 53113ad64e19ba649bc6e6fbb3bd95b0, type: 2}
-  m_sharedMaterial: {fileID: 2011374565877433116, guid: 53113ad64e19ba649bc6e6fbb3bd95b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af3edec62f5f2184bac7e835c85ae669, type: 2}
+  m_sharedMaterial: {fileID: 2796877826858194140, guid: af3edec62f5f2184bac7e835c85ae669, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

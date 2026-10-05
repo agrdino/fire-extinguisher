@@ -57,13 +57,16 @@ MonoBehaviour:
   - m_Id: 1337040902
     m_Localized: '1. Choose the extinguisher that matches the fire.
 
+
       2. Remove
       the safety pin.
 
+
       3. Aim at the base of the fire.
 
-      4. Squeeze the
-      lever and sweep side to side.'
+
+      4. Squeeze
+      the lever and sweep side to side.'
     m_Metadata:
       m_Items: []
   - m_Id: 1337040903
@@ -109,16 +112,21 @@ MonoBehaviour:
   - m_Id: 1337040913
     m_Localized: '1. Explore the area and locate the emergency exit.
 
+
       2. Choose
       an extinguisher that matches the fire.
 
+
       3. Remove the safety pin.
+
 
       4.
       Aim at the base of the fire.
 
+
       5. Squeeze the lever and sweep side to
       side.
+
 
       6. After extinguishing the fire, follow the exit marker.'
     m_Metadata:
@@ -192,8 +200,10 @@ MonoBehaviour:
   - m_Id: 1337040923
     m_Localized: 'For electrical fires.
 
+
       Does not conduct electricity or corrode
       equipment.
+
 
       Not for gasoline fires in this training.'
     m_Metadata:
@@ -205,8 +215,10 @@ MonoBehaviour:
   - m_Id: 1337040925
     m_Localized: 'For gasoline fires.
 
+
       Creates an isolating layer that keeps
       air away from the fuel.
+
 
       Not for electrical fires in this training.'
     m_Metadata:

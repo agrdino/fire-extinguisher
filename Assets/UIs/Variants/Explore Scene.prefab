@@ -118,8 +118,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'START '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
-  m_sharedMaterial: {fileID: -4842602029216170885, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
+  m_sharedMaterial: {fileID: 2796877826858194140, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -557,8 +557,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
-  m_sharedMaterial: {fileID: -4842602029216170885, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
+  m_sharedMaterial: {fileID: 2796877826858194140, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1208,8 +1208,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: EXPLORE THE AREA
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
-  m_sharedMaterial: {fileID: -4842602029216170885, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
+  m_sharedMaterial: {fileID: 2796877826858194140, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1737,8 +1737,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 50
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 53113ad64e19ba649bc6e6fbb3bd95b0, type: 2}
-  m_sharedMaterial: {fileID: 2011374565877433116, guid: 53113ad64e19ba649bc6e6fbb3bd95b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af3edec62f5f2184bac7e835c85ae669, type: 2}
+  m_sharedMaterial: {fileID: 2796877826858194140, guid: af3edec62f5f2184bac7e835c85ae669, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2164,8 +2164,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 50
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 53113ad64e19ba649bc6e6fbb3bd95b0, type: 2}
-  m_sharedMaterial: {fileID: 2011374565877433116, guid: 53113ad64e19ba649bc6e6fbb3bd95b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af3edec62f5f2184bac7e835c85ae669, type: 2}
+  m_sharedMaterial: {fileID: 2796877826858194140, guid: af3edec62f5f2184bac7e835c85ae669, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2778,8 +2778,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Fire drill starts in 30s
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
-  m_sharedMaterial: {fileID: -4842602029216170885, guid: 31b0561b4d1fddd4187bf777b57f5efc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
+  m_sharedMaterial: {fileID: 2796877826858194140, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

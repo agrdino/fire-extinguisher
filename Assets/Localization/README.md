@@ -21,7 +21,7 @@ The selected locale is persisted by Unity through the PlayerPrefs key `fire-exti
 - `Tables/` - the `UI` String Table Collection and its three locale tables
 - `Prefabs/` - language selection panel
 - `Runtime/` - application UI integration only
-- `Fonts/` - Noto Sans JP source, TMP font asset, and license
+- `Fonts/` - Noto Sans Regular/SemiBold/Bold for English and Vietnamese, Noto Sans JP fallback, TMP font assets, and OFL license
 - `Editor/` - translation catalog and optional rebuild tool
 
 `Assets/AddressableAssetsData` remains at Unity Addressables' required default configuration path. All localization-owned content is kept in this folder.
