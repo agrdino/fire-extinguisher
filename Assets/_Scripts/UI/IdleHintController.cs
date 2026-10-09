@@ -427,7 +427,12 @@ namespace _Scripts.UI
                         component => component.HintTarget);
 
                 case HintStep.SelectExtinguisher:
-                    return _applicationManager?.ActiveExtinguisherStation?.GetHintTarget();
+                {
+                    FireExtinguisherStation station = _applicationManager != null
+                        ? _applicationManager.ActiveExtinguisherStation
+                        : null;
+                    return station != null ? station.GetHintTarget() : null;
+                }
 
                 case HintStep.ConfirmExtinguisher:
                 {

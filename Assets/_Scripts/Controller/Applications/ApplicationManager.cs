@@ -41,7 +41,6 @@ namespace _Scripts.Controller
 
         [Header("Runtime References")]
         [SerializeField] private EmergencyExit _emergencyExit;
-        [SerializeField] private EmergencyPathGuide _emergencyPathGuide;
         [SerializeField] private Transform _playerRoot;
         [SerializeField] private Transform _playerView;
         [SerializeField] private GameObject _movementProviderObject;
@@ -79,7 +78,10 @@ namespace _Scripts.Controller
         public EmergencyExit EmergencyExit => _emergencyExit;
         public Transform PlayerView => GetPlayerView();
         public IEnvironmentSceneContext CurrentEnvironment => _environmentContext;
-        public FireExtinguisherStation ActiveExtinguisherStation => _activeExtinguisherStation;
+        // Do not expose Unity's destroyed-object wrapper. Null-conditional callers use
+        // CLR null semantics and would otherwise still invoke methods on the destroyed station.
+        public FireExtinguisherStation ActiveExtinguisherStation =>
+            _activeExtinguisherStation != null ? _activeExtinguisherStation : null;
 
         public event Action<ApplicationState> OnStateChanged;
         public event Action<float> OnRemainingTimeChanged;
@@ -99,8 +101,6 @@ namespace _Scripts.Controller
             _modelSwitcher = _fireExtinguisherController?.FireExtinguisher != null
                 ? _fireExtinguisherController.FireExtinguisher.GetComponent<FireExtinguisherModelSwitcher>()
                 : null;
-
-            _emergencyPathGuide?.Initialize(GetPlayerView(), _playerRoot);
         }
 
         private void OnEnable()
@@ -150,7 +150,6 @@ namespace _Scripts.Controller
                 _modelSwitcher.OnVisualTypeChanged -= HandleVisualTypeChanged;
                 _modelSwitcher.OnTransitionCompleted -= HandleExtinguisherTransitionCompleted;
             }
-            SetEmergencyPathTarget(null);
             SetMovementEnabled(false);
         }
 
@@ -208,7 +207,6 @@ namespace _Scripts.Controller
         {
             _fireController.ClearFires();
             _fireExtinguisherController.SetInputEnabled(false);
-            SetEmergencyPathTarget(null);
             SetEmergencyExitActive(false);
             SetMovementEnabled(false);
         }
@@ -329,7 +327,6 @@ namespace _Scripts.Controller
                     break;
             }
 
-            UpdateEmergencyPathTarget();
             RefreshExtinguisherStationInteractions();
             OnStateChanged?.Invoke(_state);
         }
@@ -441,24 +438,6 @@ namespace _Scripts.Controller
 
             _emergencyExit.Disarm();
             _emergencyExit.gameObject.SetActive(false);
-        }
-
-        private void UpdateEmergencyPathTarget()
-        {
-            Transform target = _state switch
-            {
-                ApplicationState.ContactEmergencyTeam => _environmentContext?.EmergencyContactController?.transform,
-                ApplicationState.Escape => _emergencyExit != null ? _emergencyExit.transform : null,
-                _ => null
-            };
-            SetEmergencyPathTarget(target);
-        }
-
-        private void SetEmergencyPathTarget(Transform target)
-        {
-            if (_emergencyPathGuide == null) return;
-            _emergencyPathGuide.SetTarget(target);
-            _emergencyPathGuide.SetVisible(target != null);
         }
 
         private void ResetPlayerPose()

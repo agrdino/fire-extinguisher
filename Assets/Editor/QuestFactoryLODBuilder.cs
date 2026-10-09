@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityMeshSimplifier;
 
@@ -36,10 +35,6 @@ public static class QuestFactoryLODBuilder
                 throw new InvalidOperationException("Could not find Factory model root: " + ModelRootName);
             RestorePreviousOutput(root);
 
-            var navMesh = NavMesh.CalculateTriangulation();
-            if (navMesh.vertices == null || navMesh.vertices.Length == 0 || navMesh.indices == null || navMesh.indices.Length < 3)
-                throw new InvalidOperationException("No NavMesh polygons were found in the loaded Factory Scene. Refusing to generate broad-scope LODs.");
-
             EnsureFolder(OutputPath);
             EnsureFolder(MeshOutputPath);
             chunkMeshCache.Clear();
@@ -51,8 +46,6 @@ public static class QuestFactoryLODBuilder
             {
                 var renderer = renderers[i];
                 if (renderer == null || renderer.GetComponent<MeshFilter>() == null)
-                    continue;
-                if (!BoundsIntersectsNavMeshXZ(renderer.bounds, navMesh))
                     continue;
                 var filter = renderer.GetComponent<MeshFilter>();
                 if (filter.sharedMesh == null || !renderer.enabled)
@@ -95,13 +88,10 @@ public static class QuestFactoryLODBuilder
                             for (int c = 0; c < chunks.Count; c++)
                             {
                                 var item = chunks[c];
-                                if (BoundsIntersectsNavMeshXZ(item.renderer.bounds, navMesh))
-                                {
-                                    if (GenerateOneLOD(item.gameObject, item.renderer, item.mesh, options))
-                                        generated++;
-                                    else
-                                        skipped++;
-                                }
+                                if (GenerateOneLOD(item.gameObject, item.renderer, item.mesh, options))
+                                    generated++;
+                                else
+                                    skipped++;
                             }
                             sourceRenderer.enabled = false;
                             splitObjects += chunks.Count;
@@ -473,44 +463,6 @@ private static void ShareLODMeshes(LODGroup group, Mesh sourceMesh)
         }
         return path;
     }
-
-    private static bool BoundsIntersectsNavMeshXZ(Bounds bounds, NavMeshTriangulation navMesh)
-    {
-        var center = new Vector2(bounds.center.x, bounds.center.z);
-        var half = new Vector2(bounds.extents.x, bounds.extents.z);
-        for (int i = 0; i + 2 < navMesh.indices.Length; i += 3)
-        {
-            var va = navMesh.vertices[navMesh.indices[i]];
-            var vb = navMesh.vertices[navMesh.indices[i + 1]];
-            var vc = navMesh.vertices[navMesh.indices[i + 2]];
-            var a = new Vector2(va.x, va.z) - center;
-            var b = new Vector2(vb.x, vb.z) - center;
-            var c = new Vector2(vc.x, vc.z) - center;
-            if (AxisOverlaps(a, b, c, half, Vector2.right) &&
-                AxisOverlaps(a, b, c, half, Vector2.up) &&
-                AxisOverlaps(a, b, c, half, new Vector2(-(b.y - a.y), b.x - a.x)) &&
-                AxisOverlaps(a, b, c, half, new Vector2(-(c.y - b.y), c.x - b.x)) &&
-                AxisOverlaps(a, b, c, half, new Vector2(-(a.y - c.y), a.x - c.x)))
-                return true;
-        }
-        return false;
-    }
-
-    private static bool AxisOverlaps(Vector2 a, Vector2 b, Vector2 c, Vector2 half, Vector2 axis)
-    {
-        float length = axis.magnitude;
-        if (length < 0.000001f)
-            return true;
-        axis /= length;
-        float pa = Vector2.Dot(a, axis);
-        float pb = Vector2.Dot(b, axis);
-        float pc = Vector2.Dot(c, axis);
-        float min = Mathf.Min(pa, Mathf.Min(pb, pc));
-        float max = Mathf.Max(pa, Mathf.Max(pb, pc));
-        float radius = half.x * Mathf.Abs(axis.x) + half.y * Mathf.Abs(axis.y);
-        return min <= radius && max >= -radius;
-    }
-
 
 private static void RestorePreviousOutput(GameObject root)
     {
