@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Scripts.Controller;
+using _Scripts.Environments.EmergencyContact;
 using _Scripts.FireExtinguishers;
 using _Scripts.FireExtinguishers.Visualizes;
 using TMPro;
@@ -459,7 +460,7 @@ namespace _Scripts.UI
                     return FindFirstObjectByType<FactoryEmergencyResponseController>()?.CurrentHintTarget;
 
                 case HintStep.ContactEmergencyTeam:
-                    return _applicationManager?.CurrentEnvironment?.EmergencyContactController?.CurrentHintTarget;
+                    return HandheldEmergencyPhoneController.Instance?.HintTarget;
 
                 default:
                     return null;

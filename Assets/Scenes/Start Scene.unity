@@ -447,7 +447,6 @@ MonoBehaviour:
   _features: 0
   _playerSpawnPoint: {fileID: 384461262}
   _environmentRoot: {fileID: 2093457025}
-  _emergencyContactController: {fileID: 0}
   _uiAnchors:
   - _state: 8
     _anchor: {fileID: 5600149445161288996}

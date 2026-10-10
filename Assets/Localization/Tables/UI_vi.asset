@@ -358,15 +358,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674048
-    m_Localized: "\u0110i \u0111\u1EBFn \u0111i\u1EC7n tho\u1EA1i kh\u1EA9n c\u1EA5p
-      g\u1EA7n l\u1ED1i tho\xE1t v\xE0 t\u01B0\u01A1ng t\xE1c \u0111\u1EC3 li\xEAn
-      l\u1EA1c GA (2121) ho\u1EB7c B\u1EA3o v\u1EC7 (2480)."
+    m_Localized: "Nh\u1EA5n X tr\xEAn controller tr\xE1i \u0111\u1EC3 m\u1EDF \u0111i\u1EC7n
+      tho\u1EA1i. D\xF9ng Y \u0111\u1EC3 \u0111\u1ED5i gi\u1EEFa GA (2120) v\xE0 B\u1EA3o
+      v\u1EC7 (2480), r\u1ED3i nh\u1EA5n X \u0111\u1EC3 g\u1ECDi."
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674049
-    m_Localized: "D\xF9ng \u0111i\u1EC7n tho\u1EA1i kh\u1EA9n c\u1EA5p g\u1EA7n l\u1ED1i
-      tho\xE1t \u0111\u1EC3 li\xEAn l\u1EA1c GA (2121) ho\u1EB7c B\u1EA3o v\u1EC7
-      (2480)."
+    m_Localized: "Nh\u1EA5n X \u0111\u1EC3 m\u1EDF \u0111i\u1EC7n tho\u1EA1i, Y \u0111\u1EC3
+      \u0111\u1ED5i s\u1ED1 v\xE0 X \u0111\u1EC3 g\u1ECDi."
     m_Metadata:
       m_Items: []
   references:

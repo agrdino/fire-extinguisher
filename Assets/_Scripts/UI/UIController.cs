@@ -21,7 +21,6 @@ namespace _Scripts.UI
         [SerializeField] private GuideScene _guideScene;
         [SerializeField] private ExploreScene _exploreScene;
         [SerializeField] private FactoryResponseScene _factoryResponseScene;
-        [SerializeField] private ContactEmergencyScene _contactEmergencyScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectExtinguisherScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _fightingScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapeScene;
@@ -96,6 +95,14 @@ namespace _Scripts.UI
                 HideSceneObject(_currentScene);
             }
 
+            // ContactEmergencyTeam now uses the controller-attached phone exclusively.
+            // Do not show the legacy world-space instruction panel.
+            if (state == ApplicationState.ContactEmergencyTeam)
+            {
+                _currentScene = null;
+                return;
+            }
+
             _currentScene = state switch
             {
                 ApplicationState.Ready => _readyView,
@@ -106,7 +113,6 @@ namespace _Scripts.UI
                 ApplicationState.FactoryResponse => _factoryResponseScene,
                 ApplicationState.SelectExtinguisher => _selectExtinguisherScene.Value,
                 ApplicationState.Fighting => _fightingScene.Value,
-                ApplicationState.ContactEmergencyTeam => _contactEmergencyScene,
                 ApplicationState.Escape => _escapeScene.Value,
                 ApplicationState.Completed => _completedScene.Value,
                 ApplicationState.Escaped => _escapedScene.Value,
@@ -148,7 +154,6 @@ namespace _Scripts.UI
                 ApplicationState.FactoryResponse => selectedFireSpawnPoint?.CircuitBreakerUIPoint,
                 ApplicationState.SelectExtinguisher => selectedFireSpawnPoint?.SelectExtinguisherUIPoint,
                 ApplicationState.Fighting => selectedFireSpawnPoint?.FightingUIPoint,
-                ApplicationState.ContactEmergencyTeam => _environmentContext.EmergencyContactController?.UIAnchor,
                 ApplicationState.Escape => selectedFireSpawnPoint?.EscapeUIPoint,
                 _ => null
             };

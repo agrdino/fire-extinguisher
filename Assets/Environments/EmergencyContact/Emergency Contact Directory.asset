@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Emergency Contact Directory
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.EmergencyContact.EmergencyContactDirectory
   _entries:
-  - _phoneNumber: 2121
-    _displayName: GENERAL AFFAIRS
+  - _phoneNumber: 2120
+    _displayName: GA
   - _phoneNumber: 2480
     _displayName: SECURITY
