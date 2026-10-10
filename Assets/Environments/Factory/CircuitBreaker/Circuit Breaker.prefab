@@ -159,17 +159,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryEmergencyInteractable
   _kind: 0
-  _fireSpawnPoint: {fileID: 0}
   _isPrimaryHintTarget: 0
   _hintTarget: {fileID: 0}
   _hoverHighlight: {fileID: 811000000000000006}
   _pressedColor: {r: 0.65, g: 1, b: 1, a: 1}
   _pressedEmission: {r: 0.5, g: 4, b: 5, a: 1}
   _pressedDuration: 0.18
-  _breakerHinge: {fileID: 2445202398880030477}
-  _breakerClosedEulerAngles: {x: 0, y: 0, z: 0}
-  _breakerOpenEulerAngles: {x: 0, y: -120, z: 0}
-  _breakerOpenDuration: 1
   _responseController: {fileID: 0}
   _renderers:
   - {fileID: 1294625818507452466}

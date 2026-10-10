@@ -150,8 +150,7 @@ namespace _Scripts.UI
             FactoryEmergencyResponseController factoryResponseController = FindFirstObjectByType<FactoryEmergencyResponseController>();
             Transform fireUIAnchor = state switch
             {
-                ApplicationState.FactoryResponse when factoryResponseController?.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm => selectedFireSpawnPoint?.FireAlarmUIPoint,
-                ApplicationState.FactoryResponse => selectedFireSpawnPoint?.CircuitBreakerUIPoint,
+                ApplicationState.FactoryResponse => factoryResponseController?.CurrentUIAnchor,
                 ApplicationState.SelectExtinguisher => selectedFireSpawnPoint?.SelectExtinguisherUIPoint,
                 ApplicationState.Fighting => selectedFireSpawnPoint?.FightingUIPoint,
                 ApplicationState.Escape => selectedFireSpawnPoint?.EscapeUIPoint,

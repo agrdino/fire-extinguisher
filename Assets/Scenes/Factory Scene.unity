@@ -14906,37 +14906,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145414778}
   m_Mesh: {fileID: 4300000, guid: 3bfef41159a9e6f45be61fdccd71d048, type: 2}
---- !u!1 &145426192
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 145426193}
-  m_Layer: 0
-  m_Name: UI Point - Circuit Breaker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &145426193
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145426192}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04400015, y: 0.3, z: 9.105001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5843923689568196207}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &146079484
 GameObject:
   m_ObjectHideFlags: 0
@@ -16618,37 +16587,6 @@ Transform:
   - {fileID: 227614310}
   m_Father: {fileID: 886589165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &157646767
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 157646768}
-  m_Layer: 0
-  m_Name: UI Point - Circuit Breaker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &157646768
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157646767}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.731, y: 1.4, z: 2.6000013}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6234302537784246876}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &157917239
 GameObject:
   m_ObjectHideFlags: 0
@@ -88128,37 +88066,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865363209}
   m_Mesh: {fileID: -3401335536868599340, guid: 947787feeacf33848b5057d451219040, type: 3}
---- !u!1 &865581865
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 865581866}
-  m_Layer: 0
-  m_Name: UI Point - Circuit Breaker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &865581866
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865581865}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.3, y: 1.4, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2459236865231068299}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &866061522
 GameObject:
   m_ObjectHideFlags: 0
@@ -131933,6 +131840,8 @@ Transform:
   m_Children:
   - {fileID: 719999998509140998}
   - {fileID: 719999998509141016}
+  - {fileID: 813000000000000021}
+  - {fileID: 814000000000000001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1304623616
@@ -255044,12 +254953,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryEmergencyResponseController
   _interactables:
-  - {fileID: 813000000000000012}
   - {fileID: 813000000000000022}
-  - {fileID: 813000000000000032}
   - {fileID: 813000000000000042}
   - {fileID: 813000000000000052}
   - {fileID: 813000000000000062}
+  _circuitBreakerUIAnchor: {fileID: 814000000000000001}
 --- !u!114 &813000000000000003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255068,45 +254976,29 @@ MonoBehaviour:
   _circuitBreakerLocalEulerAngles: {x: 0, y: 0, z: 0}
   _fireAlarmLocalPosition: {x: 0, y: 0, z: 0.05}
   _fireAlarmLocalEulerAngles: {x: 0, y: 0, z: 0}
---- !u!4 &813000000000000011 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-  m_PrefabInstance: {fileID: 7144599669237923723}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &813000000000000012 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3843139119076094911, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-  m_PrefabInstance: {fileID: 7144599669237923723}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9029f15705c54da1bfafd29b8d87097c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryEmergencyInteractable
 --- !u!1001 &813000000000000020
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5843923689568196207}
+    m_TransformParent: {fileID: 1302521873}
     m_Modifications:
     - target: {fileID: 811000000000000000, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
       propertyPath: m_Name
-      value: Circuit Breaker - Fire Point 2
+      value: Shared Circuit Breaker
       objectReference: {fileID: 0}
     - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.39
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.754999
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
       propertyPath: m_LocalRotation.w
@@ -255129,10 +255021,6 @@ PrefabInstance:
       value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 811000000000000005, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: _fireSpawnPoint
-      value: 
-      objectReference: {fileID: 7351656275345314667}
-    - target: {fileID: 811000000000000005, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
       propertyPath: _responseController
       value: 
       objectReference: {fileID: 813000000000000002}
@@ -255150,79 +255038,6 @@ Transform:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 811000000000000005, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
   m_PrefabInstance: {fileID: 813000000000000020}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9029f15705c54da1bfafd29b8d87097c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryEmergencyInteractable
---- !u!1001 &813000000000000030
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6234302537784246876}
-    m_Modifications:
-    - target: {fileID: 811000000000000000, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_Name
-      value: Circuit Breaker - Fire Point 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.727
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.716
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000005, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: _fireSpawnPoint
-      value: 
-      objectReference: {fileID: 1521720039556908767}
-    - target: {fileID: 811000000000000005, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: _responseController
-      value: 
-      objectReference: {fileID: 813000000000000002}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
---- !u!4 &813000000000000031 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 811000000000000001, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-  m_PrefabInstance: {fileID: 813000000000000030}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &813000000000000032 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 811000000000000005, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-  m_PrefabInstance: {fileID: 813000000000000030}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -255472,7 +255287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 0
-  _circuitBreakerUIPoint: {fileID: 157646768}
   _fireAlarmUIPoint: {fileID: 1136457112}
   _selectExtinguisherUIPoint: {fileID: 1308377587}
   _fightingUIPoint: {fileID: 102033696}
@@ -255554,12 +255368,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 865581866}
   - {fileID: 452602661}
   - {fileID: 1253652197}
   - {fileID: 1776024690}
   - {fileID: 1782083478}
-  - {fileID: 813000000000000011}
   - {fileID: 813000000000000041}
   m_Father: {fileID: 151891300152869471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -255624,12 +255436,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 145426193}
   - {fileID: 91543225}
   - {fileID: 869664462}
   - {fileID: 1756448793}
   - {fileID: 2014227334}
-  - {fileID: 813000000000000021}
   - {fileID: 813000000000000051}
   m_Father: {fileID: 151891300152869471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -255646,12 +255456,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 157646768}
   - {fileID: 1136457112}
   - {fileID: 1308377587}
   - {fileID: 102033696}
   - {fileID: 93970783}
-  - {fileID: 813000000000000031}
   - {fileID: 813000000000000061}
   m_Father: {fileID: 151891300152869471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -255685,76 +255493,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 0
-  _circuitBreakerUIPoint: {fileID: 865581866}
   _fireAlarmUIPoint: {fileID: 452602661}
   _selectExtinguisherUIPoint: {fileID: 1253652197}
   _fightingUIPoint: {fileID: 1776024690}
   _escapeUIPoint: {fileID: 1782083478}
---- !u!1001 &7144599669237923723
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2459236865231068299}
-    m_Modifications:
-    - target: {fileID: 3843139119076094906, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_Name
-      value: Circuit Breaker - Fire Point 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094907, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843139119076094911, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: _fireSpawnPoint
-      value: 
-      objectReference: {fileID: 6419938941248935311}
-    - target: {fileID: 3843139119076094911, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
-      propertyPath: _responseController
-      value: 
-      objectReference: {fileID: 813000000000000002}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 62f41bc815d2dde4dbbaddcabe33e22c, type: 3}
 --- !u!114 &7351656275345314667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255768,7 +255510,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Fires.FireSpawnPoint
   _fireType: 0
-  _circuitBreakerUIPoint: {fileID: 145426193}
   _fireAlarmUIPoint: {fileID: 91543225}
   _selectExtinguisherUIPoint: {fileID: 869664462}
   _fightingUIPoint: {fileID: 1756448793}
@@ -255933,6 +255674,37 @@ Transform:
   m_Children:
   - {fileID: 2028162188}
   m_Father: {fileID: 1395916737285745493}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &814000000000000000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 814000000000000001}
+  m_Layer: 0
+  m_Name: UI Point - Shared Circuit Breaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &814000000000000001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814000000000000000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1302521873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

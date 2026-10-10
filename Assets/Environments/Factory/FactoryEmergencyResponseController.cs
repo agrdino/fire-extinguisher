@@ -19,10 +19,12 @@ namespace _Scripts.Environments.Factory
     {
         private ApplicationManager _applicationManager;
         [SerializeField] private FactoryEmergencyInteractable[] _interactables = Array.Empty<FactoryEmergencyInteractable>();
+        [SerializeField] private Transform _circuitBreakerUIAnchor;
         private FactoryEmergencyInteractable _activeCircuitBreaker;
 
         public FactoryEmergencyResponseStep CurrentStep { get; private set; }
         public Transform CurrentHintTarget { get; private set; }
+        public Transform CurrentUIAnchor { get; private set; }
 
         public event Action<FactoryEmergencyResponseStep> OnStepChanged;
         public event Action<FactoryEmergencyInteractable> OnInteractionCompleted;
@@ -83,14 +85,14 @@ namespace _Scripts.Environments.Factory
 
         private void BeginCircuitBreakerStep()
         {
-            FireSpawnPoint selectedSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
             _activeCircuitBreaker = null;
             for (int index = 0; index < _interactables.Length; index++)
             {
                 FactoryEmergencyInteractable interactable = _interactables[index];
-                bool isSelectedCircuitBreaker = interactable.Kind == FactoryEmergencyInteractableKind.CircuitBreaker && interactable.FireSpawnPoint == selectedSpawnPoint;
-                interactable.SetInteractionEnabled(isSelectedCircuitBreaker);
-                if (isSelectedCircuitBreaker) _activeCircuitBreaker = interactable;
+                bool isCircuitBreaker = interactable.Kind == FactoryEmergencyInteractableKind.CircuitBreaker;
+                bool isSharedCircuitBreaker = isCircuitBreaker && _activeCircuitBreaker == null;
+                interactable.SetInteractionEnabled(isSharedCircuitBreaker);
+                if (isSharedCircuitBreaker) _activeCircuitBreaker = interactable;
             }
 
             if (_activeCircuitBreaker == null)
@@ -98,7 +100,10 @@ namespace _Scripts.Environments.Factory
                 return;
             }
 
-            SetStep(FactoryEmergencyResponseStep.SwitchOffPower, _activeCircuitBreaker.HintTarget);
+            SetStep(
+                FactoryEmergencyResponseStep.SwitchOffPower,
+                _activeCircuitBreaker.HintTarget,
+                _circuitBreakerUIAnchor);
         }
 
         private void BeginFireAlarmStep()
@@ -109,8 +114,7 @@ namespace _Scripts.Environments.Factory
             {
                 FactoryEmergencyInteractable interactable = _interactables[index];
                 bool isAlarm = interactable.Kind == FactoryEmergencyInteractableKind.FireAlarm;
-                bool isOptionalCircuitCloser = interactable == _activeCircuitBreaker;
-                interactable.SetInteractionEnabled(isAlarm || isOptionalCircuitCloser);
+                interactable.SetInteractionEnabled(isAlarm);
                 if (!isAlarm) continue;
                 fallbackAlarm ??= interactable;
                 if (interactable.IsPrimaryHintTarget) primaryAlarm = interactable;
@@ -122,14 +126,18 @@ namespace _Scripts.Environments.Factory
                 return;
             }
 
-            SetStep(FactoryEmergencyResponseStep.ActivateFireAlarm, hintAlarm.HintTarget);
+            Transform fireAlarmUIAnchor = FireController.Instance?.SelectedSpawnPoint?.FireAlarmUIPoint;
+            SetStep(
+                FactoryEmergencyResponseStep.ActivateFireAlarm,
+                hintAlarm.HintTarget,
+                fireAlarmUIAnchor);
         }
 
         private void CompleteResponse()
         {
             for (int index = 0; index < _interactables.Length; index++)
                 _interactables[index].SetInteractionEnabled(false);
-            SetStep(FactoryEmergencyResponseStep.Completed, null);
+            SetStep(FactoryEmergencyResponseStep.Completed, null, null);
             _applicationManager.CompleteFactoryResponse();
         }
 
@@ -156,13 +164,17 @@ namespace _Scripts.Environments.Factory
             }
 
             _activeCircuitBreaker = null;
-            SetStep(FactoryEmergencyResponseStep.None, null);
+            SetStep(FactoryEmergencyResponseStep.None, null, null);
         }
 
-        private void SetStep(FactoryEmergencyResponseStep step, Transform hintTarget)
+        private void SetStep(
+            FactoryEmergencyResponseStep step,
+            Transform hintTarget,
+            Transform uiAnchor)
         {
             CurrentStep = step;
             CurrentHintTarget = hintTarget;
+            CurrentUIAnchor = uiAnchor;
             OnStepChanged?.Invoke(step);
             IdleHintController.Instance?.NotifyActivity();
         }

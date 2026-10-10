@@ -6,14 +6,12 @@ namespace _Scripts.Fires
     public sealed class FireSpawnPoint : MonoBehaviour
     {
         [SerializeField] private FireType _fireType = FireType.Electrical;
-        [SerializeField] private Transform _circuitBreakerUIPoint;
         [SerializeField] private Transform _fireAlarmUIPoint;
         [SerializeField] private Transform _selectExtinguisherUIPoint;
         [SerializeField] private Transform _fightingUIPoint;
         [SerializeField] private Transform _escapeUIPoint;
 
         public FireType FireType => _fireType;
-        public Transform CircuitBreakerUIPoint => _circuitBreakerUIPoint;
         public Transform FireAlarmUIPoint => _fireAlarmUIPoint;
         public Transform SelectExtinguisherUIPoint => _selectExtinguisherUIPoint;
         public Transform FightingUIPoint => _fightingUIPoint;
@@ -28,7 +26,6 @@ namespace _Scripts.Fires
             Gizmos.DrawWireSphere(transform.position, 0.2f);
             Gizmos.DrawLine(transform.position, transform.position + transform.forward * 0.4f);
 
-            DrawUIPointGizmo(_circuitBreakerUIPoint, new Color(0f, 1f, 1f, 0.9f));
             DrawUIPointGizmo(_fireAlarmUIPoint, new Color(0.2f, 0.9f, 1f, 0.9f));
             DrawUIPointGizmo(_selectExtinguisherUIPoint, new Color(0.2f, 0.75f, 1f, 0.9f));
             DrawUIPointGizmo(_fightingUIPoint, new Color(1f, 0.8f, 0.1f, 0.9f));

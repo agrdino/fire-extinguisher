@@ -36,10 +36,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 811000000000000005, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
-      propertyPath: _breakerOpenEulerAngles.y
-      value: 120
-      objectReference: {fileID: 0}
     - target: {fileID: 2445202398880030477, guid: 2bc290b3797a4645b47b1812c36782ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.8714541

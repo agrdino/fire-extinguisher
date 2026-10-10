@@ -1,6 +1,5 @@
 using System.Collections;
 using _Scripts.Controller;
-using _Scripts.Fires;
 using UnityEngine;
 
 namespace _Scripts.Environments.Factory
@@ -20,7 +19,6 @@ namespace _Scripts.Environments.Factory
         private static readonly int EmissionColorProperty = Shader.PropertyToID("_EmissionColor");
 
         [SerializeField] private FactoryEmergencyInteractableKind _kind;
-        [SerializeField] private FireSpawnPoint _fireSpawnPoint;
         [SerializeField] private bool _isPrimaryHintTarget;
         [SerializeField] private Transform _hintTarget;
         [Header("Feedback")]
@@ -29,25 +27,16 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private Color _pressedEmission = new(0.5f, 4f, 5f, 1f);
         [SerializeField, Min(0f)] private float _pressedDuration = 0.18f;
 
-        [Header("Circuit Breaker")]
-        [SerializeField] private Transform _breakerHinge;
-        [SerializeField] private Vector3 _breakerClosedEulerAngles = Vector3.zero;
-        [SerializeField] private Vector3 _breakerOpenEulerAngles = new(0f, 120f, 0f);
-        [SerializeField, Min(0f)] private float _breakerOpenDuration = 1f;
-
         [SerializeField] private FactoryEmergencyResponseController _responseController;
         [SerializeField] private Renderer[] _renderers = System.Array.Empty<Renderer>();
         private MaterialPropertyBlock _propertyBlock;
         private Color[] _baseColors;
         private Coroutine _pressedRoutine;
-        private Coroutine _breakerHingeRoutine;
         private bool _isHovered;
         private bool _isPressed;
-        private bool _isBreakerOpen;
         private bool _isInteractionEnabled;
 
         public FactoryEmergencyInteractableKind Kind => _kind;
-        public FireSpawnPoint FireSpawnPoint => _fireSpawnPoint;
         public bool IsPrimaryHintTarget => _isPrimaryHintTarget;
         public Transform HintTarget => _hintTarget != null ? _hintTarget : transform;
         public override bool IsInteractionEnabled => _isInteractionEnabled;
@@ -67,19 +56,15 @@ namespace _Scripts.Environments.Factory
                     materials[materialIndex].EnableKeyword("_EMISSION");
             }
 
-            ResetBreakerHinge();
             ApplyVisual();
         }
 
         private void OnDisable()
         {
             if (_pressedRoutine != null) StopCoroutine(_pressedRoutine);
-            if (_breakerHingeRoutine != null) StopCoroutine(_breakerHingeRoutine);
             _pressedRoutine = null;
-            _breakerHingeRoutine = null;
             _isHovered = false;
             _isPressed = false;
-            ResetBreakerHinge();
             ApplyVisual();
         }
 
@@ -102,24 +87,6 @@ namespace _Scripts.Environments.Factory
         {
             if (!IsInteractionEnabled || _responseController == null) return false;
 
-            if (_kind == FactoryEmergencyInteractableKind.CircuitBreaker)
-            {
-                if (_breakerHingeRoutine != null) return false;
-                if (!_isBreakerOpen)
-                {
-                    PlayPressedFeedbackFromStart();
-                    OpenBreakerHinge();
-                    return true;
-                }
-
-                if (_responseController.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm)
-                {
-                    PlayPressedFeedbackFromStart();
-                    CloseBreakerHinge();
-                    return true;
-                }
-            }
-
             PlayPressedFeedbackFromStart();
             _responseController.HandleInteraction(this);
             return true;
@@ -128,12 +95,9 @@ namespace _Scripts.Environments.Factory
         public void ResetInteractionState()
         {
             if (_pressedRoutine != null) StopCoroutine(_pressedRoutine);
-            if (_breakerHingeRoutine != null) StopCoroutine(_breakerHingeRoutine);
             _pressedRoutine = null;
-            _breakerHingeRoutine = null;
             _isHovered = false;
             _isPressed = false;
-            ResetBreakerHinge();
             ApplyVisual();
         }
 
@@ -141,66 +105,6 @@ namespace _Scripts.Environments.Factory
         {
             if (_pressedRoutine != null) StopCoroutine(_pressedRoutine);
             _pressedRoutine = StartCoroutine(PlayPressedFeedback());
-        }
-
-        private void OpenBreakerHinge()
-        {
-            SetBreakerHingeState(true, false);
-        }
-
-        private void CloseBreakerHinge()
-        {
-            SetBreakerHingeState(false, true);
-        }
-
-        private void SetBreakerHingeState(bool isOpen, bool disableInteractionWhenComplete)
-        {
-            _isBreakerOpen = isOpen;
-            Quaternion targetRotation = Quaternion.Euler(
-                isOpen ? _breakerOpenEulerAngles : _breakerClosedEulerAngles);
-
-            if (_breakerHinge == null)
-            {
-                if (disableInteractionWhenComplete) SetInteractionEnabled(false);
-                return;
-            }
-
-            if (_breakerOpenDuration <= 0f)
-            {
-                _breakerHinge.localRotation = targetRotation;
-                if (disableInteractionWhenComplete) SetInteractionEnabled(false);
-                return;
-            }
-
-            _breakerHingeRoutine = StartCoroutine(
-                AnimateBreakerHinge(targetRotation, disableInteractionWhenComplete));
-        }
-
-        private IEnumerator AnimateBreakerHinge(
-            Quaternion targetRotation,
-            bool disableInteractionWhenComplete)
-        {
-            Quaternion startRotation = _breakerHinge.localRotation;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < _breakerOpenDuration)
-            {
-                elapsedTime += Time.unscaledDeltaTime;
-                float progress = Mathf.Clamp01(elapsedTime / _breakerOpenDuration);
-                _breakerHinge.localRotation = Quaternion.Slerp(startRotation, targetRotation, progress);
-                yield return null;
-            }
-
-            _breakerHinge.localRotation = targetRotation;
-            _breakerHingeRoutine = null;
-            if (disableInteractionWhenComplete) SetInteractionEnabled(false);
-        }
-
-        private void ResetBreakerHinge()
-        {
-            _isBreakerOpen = false;
-            if (_kind == FactoryEmergencyInteractableKind.CircuitBreaker && _breakerHinge != null)
-                _breakerHinge.localRotation = Quaternion.Euler(_breakerClosedEulerAngles);
         }
 
         private IEnumerator PlayPressedFeedback()
