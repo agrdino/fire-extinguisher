@@ -81,6 +81,7 @@ namespace _Scripts.FireExtinguishers.Visualizes
         public float CurrentCurveLength => _currentCurveLength;
         public int BoneCount => _bones != null ? _bones.Length : 0;
         public bool IsStretching => _initialized && Vector3.Distance(_curveStart, _curveEnd) > _effectiveRestLength;
+        public Transform EndAnchor => _endAnchor;
         public Renderer Renderer => _hoseRenderer;
 
         public void SetStartAnchor(Transform startAnchor)
@@ -90,6 +91,32 @@ namespace _Scripts.FireExtinguishers.Visualizes
             _startAnchor = startAnchor;
             if (!_initialized || _startAnchor == null) return;
 
+            InitializeSmoothedShape();
+            UpdateCurve(0f);
+            PoseBones();
+        }
+
+        public void SetEndAnchor(Transform endAnchor)
+        {
+            if (endAnchor == null || _endAnchor == endAnchor) return;
+
+            _endAnchor = endAnchor;
+            if (!_initialized) return;
+
+            InitializeSmoothedShape();
+            UpdateCurve(0f);
+            PoseBones();
+        }
+
+        public void SetRestLength(float restLength)
+        {
+            float clampedLength = Mathf.Max(0f, restLength);
+            if (Mathf.Approximately(_restLength, clampedLength)) return;
+
+            _restLength = clampedLength;
+            if (!_initialized) return;
+
+            _effectiveRestLength = Mathf.Max(_restLength > 0f ? _restLength : _bindLength, 0.001f);
             InitializeSmoothedShape();
             UpdateCurve(0f);
             PoseBones();

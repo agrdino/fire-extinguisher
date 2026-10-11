@@ -99,6 +99,10 @@ MonoBehaviour:
   _unselectAnchor: {fileID: 3963374121640054314}
   _co2Anchor: {fileID: 8455378561982933536}
   _powderAnchor: {fileID: 2101259036231781262}
+  _nozzleRoot: {fileID: 0}
+  _unselectRestLength: 0.3
+  _co2RestLength: 0.3
+  _powderRestLength: 0.225
   _selectedMaterial: {fileID: 2100000, guid: 1b5c02d5d6469ec4986afcbf6b972d3a, type: 2}
   _unselectMaterial: {fileID: 2100000, guid: afa27ed436299b74ab5e92a4f7043757, type: 2}
   _dissolveMaterial: {fileID: 2100000, guid: 80353978b24262643ac84f20373da11f, type: 2}

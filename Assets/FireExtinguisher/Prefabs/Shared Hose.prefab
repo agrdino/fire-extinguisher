@@ -120,7 +120,7 @@ MonoBehaviour:
   _startAnchor: {fileID: 0}
   _endAnchor: {fileID: 0}
   _hoseRenderer: {fileID: 3183851992529237698}
-  _endAnchorLocalOffset: {x: 0.0015, y: 0, z: 0}
+  _endAnchorLocalOffset: {x: 0, y: 0, z: 0}
   _startTangentAxis: {x: 1, y: 0, z: 0}
   _endTangentAxis: {x: 1, y: 0, z: 0}
   _startUpAxis: {x: 0, y: 1, z: 0}

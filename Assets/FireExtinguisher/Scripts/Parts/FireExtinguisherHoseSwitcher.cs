@@ -17,6 +17,15 @@ namespace _Scripts.FireExtinguishers.Visualizes
         [SerializeField] private Transform _co2Anchor;
         [SerializeField] private Transform _powderAnchor;
 
+        [Header("Nozzle End Anchors")]
+        [Tooltip("Nozzle root containing Unselect, CO2 and Powder model roots. Defaults to the hose's initial end anchor.")]
+        [SerializeField] private Transform _nozzleRoot;
+
+        [Header("Hose Lengths")]
+        [SerializeField, Min(0f)] private float _unselectRestLength = 0.3f;
+        [SerializeField, Min(0f)] private float _co2RestLength = 0.3f;
+        [SerializeField, Min(0f)] private float _powderRestLength = 0.225f;
+
         [Header("Materials")]
         [SerializeField] private Material _selectedMaterial;
         [SerializeField] private Material _unselectMaterial;
@@ -29,6 +38,7 @@ namespace _Scripts.FireExtinguishers.Visualizes
         private Coroutine _transitionRoutine;
         private FireExtinguisherType _visualType;
         private FireExtinguisherType _requestedType;
+        private FireExtinguisherNozzleHoseAnchors _nozzleAnchors;
         private bool _isTransitioning;
 
         private void OnEnable()
@@ -115,9 +125,26 @@ namespace _Scripts.FireExtinguishers.Visualizes
         private void ApplyHoseType(FireExtinguisherType extinguisherType)
         {
             _hose.SetStartAnchor(GetAnchor(extinguisherType));
+            _hose.SetEndAnchor(GetNozzleAnchor(extinguisherType));
+
+            _hose.SetRestLength(GetRestLength(extinguisherType));
             _hose.SetMaterial(extinguisherType == FireExtinguisherType.Unselect
                 ? _unselectMaterial
                 : _selectedMaterial);
+        }
+
+        private Transform GetNozzleAnchor(FireExtinguisherType extinguisherType)
+        {
+            if (_nozzleRoot == null) _nozzleRoot = _hose.EndAnchor;
+            if (_nozzleRoot == null) return null;
+
+            if (_nozzleAnchors == null)
+                _nozzleAnchors = _nozzleRoot.GetComponent<FireExtinguisherNozzleHoseAnchors>();
+
+            Transform anchor = _nozzleAnchors != null
+                ? _nozzleAnchors.GetAnchor(extinguisherType)
+                : null;
+            return anchor != null ? anchor : _nozzleRoot;
         }
 
         private void CancelTransition()
@@ -140,6 +167,23 @@ namespace _Scripts.FireExtinguishers.Visualizes
                 FireExtinguisherType.Powder => _powderAnchor,
                 _ => _unselectAnchor
             };
+        }
+
+        private float GetRestLength(FireExtinguisherType extinguisherType)
+        {
+            return extinguisherType switch
+            {
+                FireExtinguisherType.CO2 => _co2RestLength,
+                FireExtinguisherType.Powder => _powderRestLength,
+                _ => _unselectRestLength
+            };
+        }
+
+        private void OnValidate()
+        {
+            _unselectRestLength = Mathf.Max(0f, _unselectRestLength);
+            _co2RestLength = Mathf.Max(0f, _co2RestLength);
+            _powderRestLength = Mathf.Max(0f, _powderRestLength);
         }
     }
 }
