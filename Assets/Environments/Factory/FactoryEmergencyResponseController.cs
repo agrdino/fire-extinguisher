@@ -20,6 +20,7 @@ namespace _Scripts.Environments.Factory
         private ApplicationManager _applicationManager;
         [SerializeField] private FactoryEmergencyInteractable[] _interactables = Array.Empty<FactoryEmergencyInteractable>();
         [SerializeField] private Transform _circuitBreakerUIAnchor;
+        [SerializeField] private FactoryPowerLightingController _powerLightingController;
         private FactoryEmergencyInteractable _activeCircuitBreaker;
 
         public FactoryEmergencyResponseStep CurrentStep { get; private set; }
@@ -53,6 +54,7 @@ namespace _Scripts.Environments.Factory
             if (CurrentStep == FactoryEmergencyResponseStep.SwitchOffPower && interactable == _activeCircuitBreaker)
             {
                 FireController.Instance?.StopElectricalSparks();
+                _powerLightingController?.SetPowerOff(true);
                 OnInteractionCompleted?.Invoke(interactable);
                 BeginFireAlarmStep();
                 return;
@@ -85,6 +87,7 @@ namespace _Scripts.Environments.Factory
 
         private void BeginCircuitBreakerStep()
         {
+            _powerLightingController?.SetPowerOff(false);
             _activeCircuitBreaker = null;
             for (int index = 0; index < _interactables.Length; index++)
             {
@@ -143,6 +146,7 @@ namespace _Scripts.Environments.Factory
 
         private void DisableInteractions()
         {
+            _powerLightingController?.SetPowerOff(false);
             if (_interactables != null)
             {
                 for (int index = 0; index < _interactables.Length; index++)
@@ -154,6 +158,7 @@ namespace _Scripts.Environments.Factory
 
         private void ResetResponse()
         {
+            _powerLightingController?.SetPowerOff(false);
             if (_interactables != null)
             {
                 for (int index = 0; index < _interactables.Length; index++)
