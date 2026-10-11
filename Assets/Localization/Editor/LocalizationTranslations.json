@@ -14,8 +14,8 @@
     {"key":"environment.title","en":"SELECT ENVIRONMENT","vi":"CHỌN MÔI TRƯỜNG","ja":"環境を選択"},
     {"key":"environment.factory","en":"FACTORY","vi":"NHÀ MÁY","ja":"工場"},
     {"key":"environment.factory_description","en":"Industrial fire safety training","vi":"Huấn luyện an toàn cháy nổ trong nhà máy","ja":"工場での火災安全訓練"},
-    {"key":"environment.park","en":"PARK","vi":"CÔNG VIÊN","ja":"公園"},
-    {"key":"environment.park_description","en":"Outdoor fire safety training","vi":"Huấn luyện an toàn cháy nổ ngoài trời","ja":"屋外での火災安全訓練"},
+    {"key":"environment.parking_area","en":"PARKING AREA","vi":"BÃI ĐỖ XE","ja":"駐車場"},
+    {"key":"environment.parking_area_description","en":"Outdoor fire safety training","vi":"Huấn luyện an toàn cháy nổ ngoài trời","ja":"屋外での火災安全訓練"},
 
     {"key":"language.title","en":"SELECT LANGUAGE","vi":"CHỌN NGÔN NGỮ","ja":"言語を選択"},
     {"key":"language.instruction","en":"Choose your preferred language.","vi":"Chọn ngôn ngữ anh muốn sử dụng.","ja":"使用する言語を選んでください。"},

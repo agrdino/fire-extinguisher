@@ -4,6 +4,6 @@ namespace _Scripts.Controller
     {
         Start = 0,
         Factory = 1,
-        Park = 2
+        ParkingArea = 2
     }
 }

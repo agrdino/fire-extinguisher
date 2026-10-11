@@ -64,11 +64,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040905
-    m_Key: environment.park
+    m_Key: environment.parking_area
     m_Metadata:
       m_Items: []
   - m_Id: 1337040906
-    m_Key: environment.park_description
+    m_Key: environment.parking_area_description
     m_Metadata:
       m_Items: []
   - m_Id: 1337040907

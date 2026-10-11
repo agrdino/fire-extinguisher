@@ -24,4 +24,4 @@ MonoBehaviour:
   - _id: 2
     _scene:
       _sceneAsset: {fileID: 102900000, guid: a44c28b69a22d694f89c7b317b4f9b34, type: 3}
-      _path: Assets/Scenes/Park Scene.unity
+      _path: Assets/Scenes/Parking Area Scene.unity

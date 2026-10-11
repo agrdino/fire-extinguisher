@@ -295,6 +295,7 @@ namespace _Scripts.Controller
                     ConfigureExtinguisherStations();
                     EnsureRoundTimerStarted();
                     _fireExtinguisherController.SetInputEnabled(false);
+                    EnsureEmergencyExitPositioned();
                     SetEmergencyExitActive(true);
                     break;
 
@@ -303,6 +304,7 @@ namespace _Scripts.Controller
                     _fireExtinguisherController.SetInputEnabled(false);
                     if (_isEscapeTimeLimited) _remainingTime = _escapeDuration;
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
+                    EnsureEmergencyExitPositioned();
                     SetEmergencyExitActive(true);
                     break;
 
@@ -374,7 +376,7 @@ namespace _Scripts.Controller
         {
             if (!IsFighting
                 || station == null
-                || station != _activeExtinguisherStation
+                || !station.IsActiveStation
                 || extinguisherType == FireExtinguisherType.Unselect
                 || extinguisherType == _selectedExtinguisherType
                 || _hasPendingExtinguisherSelection
@@ -382,6 +384,7 @@ namespace _Scripts.Controller
                 || _modelSwitcher.IsTransitioning)
                 return false;
 
+            _activeExtinguisherStation = station;
             SaveSelectedExtinguisherAmount();
             _hasPendingExtinguisherSelection = true;
             _pendingExtinguisherType = extinguisherType;
@@ -438,6 +441,15 @@ namespace _Scripts.Controller
 
             _emergencyExit.Disarm();
             _emergencyExit.gameObject.SetActive(false);
+        }
+
+        private void EnsureEmergencyExitPositioned()
+        {
+            if (_exitPlacementController == null
+                || _exitPlacementController.SelectedSpawnPoint != null)
+                return;
+
+            _exitPlacementController.TryPosition(GetPlayerView());
         }
 
         private void ResetPlayerPose()
@@ -566,8 +578,9 @@ namespace _Scripts.Controller
                 FireExtinguisherStation station = stations[index];
                 if (station == null) continue;
 
-                bool isActive = _activeExtinguisherStation == null && station.Matches(selectedSpawnPoint);
-                if (isActive) _activeExtinguisherStation = station;
+                bool isActive = station.Matches(selectedSpawnPoint);
+                if (isActive && _activeExtinguisherStation == null)
+                    _activeExtinguisherStation = station;
                 station.Configure(isActive, _selectedExtinguisherType);
             }
         }

@@ -7,9 +7,9 @@ using UnityMeshSimplifier;
 
 public static class QuestParkingMeshOptimizer
 {
-    private const string ScenePath = "Assets/Scenes/Park Scene.unity";
+    private const string ScenePath = "Assets/Scenes/Parking Area Scene.unity";
     private const string TargetPath = "Parking Area Environment/Geometry/Assembly-2/SimLab_skp/Assembly-10899";
-    private const string OutputPath = "Assets/Environments/Park/OptimizedParkingMeshes";
+    private const string OutputPath = "Assets/Environments/Parking Area/OptimizedParkingMeshes";
 
     [MenuItem("Tools/Quest Mobile/Optimize Parking Area Meshes")]
     public static void OptimizeParkingArea()

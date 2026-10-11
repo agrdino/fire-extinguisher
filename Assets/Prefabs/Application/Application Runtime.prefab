@@ -1833,7 +1833,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ce140e4a0244a0692a6637420ddd501, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.EmergencyContact.HandheldEmergencyPhoneController
   _directory: {fileID: 11400000, guid: eb0987adf7daf7048ae03b3528c20237, type: 2}
   _viewPrefab: {fileID: 100004, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}

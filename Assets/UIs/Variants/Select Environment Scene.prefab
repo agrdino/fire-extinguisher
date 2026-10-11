@@ -2240,7 +2240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.SelectEnvironmentScene
   _btnFactory: {fileID: 1382791029939443870}
-  _btnPark: {fileID: 541486805864854961}
+  _btnParkingArea: {fileID: 541486805864854961}
   _btnConfirm: {fileID: 1837295644452028342}
   _btnBack: {fileID: 7420900146231392792}
 --- !u!114 &5306148092089455584
@@ -2413,15 +2413,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 439809752819581889, guid: a4a3e25430175c14585edc7dbc60d608, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_Key
-      value: environment.park_description
+      value: environment.parking_area_description
       objectReference: {fileID: 0}
     - target: {fileID: 1735539006080124211, guid: a4a3e25430175c14585edc7dbc60d608, type: 3}
       propertyPath: m_text
-      value: Outdoor
+      value: Parking Area
       objectReference: {fileID: 0}
     - target: {fileID: 5048552344090998183, guid: a4a3e25430175c14585edc7dbc60d608, type: 3}
       propertyPath: m_text
-      value: PARK
+      value: PARKING AREA
       objectReference: {fileID: 0}
     - target: {fileID: 5465951296301529592, guid: a4a3e25430175c14585edc7dbc60d608, type: 3}
       propertyPath: m_Transition
@@ -2509,7 +2509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8399200150559680161, guid: a4a3e25430175c14585edc7dbc60d608, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_Key
-      value: environment.park
+      value: environment.parking_area
       objectReference: {fileID: 0}
     - target: {fileID: 8399200150559680161, guid: a4a3e25430175c14585edc7dbc60d608, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName

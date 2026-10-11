@@ -8,7 +8,7 @@ namespace _Scripts.UI
     public sealed class SelectEnvironmentScene : MonoBehaviour, IScene
     {
         [SerializeField] private Button _btnFactory;
-        [SerializeField] private Button _btnPark;
+        [SerializeField] private Button _btnParkingArea;
         [SerializeField] private Button _btnConfirm;
         [SerializeField] private Button _btnBack;
 
@@ -24,7 +24,7 @@ namespace _Scripts.UI
         {
             ResolveButtons();
             if (_btnFactory != null) _btnFactory.onClick.AddListener(SelectFactory);
-            if (_btnPark != null) _btnPark.onClick.AddListener(SelectPark);
+            if (_btnParkingArea != null) _btnParkingArea.onClick.AddListener(SelectParkingArea);
             if (_btnConfirm != null) _btnConfirm.onClick.AddListener(ConfirmSelection);
             if (_btnBack != null) _btnBack.onClick.AddListener(GoBack);
         }
@@ -32,7 +32,7 @@ namespace _Scripts.UI
         private void OnDestroy()
         {
             if (_btnFactory != null) _btnFactory.onClick.RemoveListener(SelectFactory);
-            if (_btnPark != null) _btnPark.onClick.RemoveListener(SelectPark);
+            if (_btnParkingArea != null) _btnParkingArea.onClick.RemoveListener(SelectParkingArea);
             if (_btnConfirm != null) _btnConfirm.onClick.RemoveListener(ConfirmSelection);
             if (_btnBack != null) _btnBack.onClick.RemoveListener(GoBack);
         }
@@ -46,7 +46,7 @@ namespace _Scripts.UI
         public void Hide() { }
 
         private void SelectFactory() => SelectEnvironment(SceneId.Factory);
-        private void SelectPark() => SelectEnvironment(SceneId.Park);
+        private void SelectParkingArea() => SelectEnvironment(SceneId.ParkingArea);
 
         private void ConfirmSelection()
         {
@@ -80,13 +80,13 @@ namespace _Scripts.UI
 
             Button[] optionButtons = UIComponentLookup.FindButtonsUnder(this, "Environments");
             if (_btnFactory == null && optionButtons.Length > 0) _btnFactory = optionButtons[0];
-            if (_btnPark == null && optionButtons.Length > 1) _btnPark = optionButtons[1];
+            if (_btnParkingArea == null && optionButtons.Length > 1) _btnParkingArea = optionButtons[1];
         }
 
         private void UpdateSelectionVisuals()
         {
             SetButtonVisual(_btnFactory, _selectedEnvironmentScene == SceneId.Factory);
-            SetButtonVisual(_btnPark, _selectedEnvironmentScene == SceneId.Park);
+            SetButtonVisual(_btnParkingArea, _selectedEnvironmentScene == SceneId.ParkingArea);
             if (_btnConfirm != null)
                 _btnConfirm.interactable = _selectedEnvironmentScene.HasValue
                     && _navigator != null
