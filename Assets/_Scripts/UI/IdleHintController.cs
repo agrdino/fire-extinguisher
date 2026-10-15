@@ -100,6 +100,7 @@ namespace _Scripts.UI
         private float _remainingTemporaryMessageTime;
         private LocalizedString _temporaryMessage;
         private Transform _temporaryMessageTarget;
+        private LazyFollow _lazyFollow;
 
         private void Awake()
         {
@@ -110,6 +111,7 @@ namespace _Scripts.UI
             }
 
             _instance = this;
+            _lazyFollow = GetComponent<LazyFollow>();
             _applicationManager = ApplicationManager.Instance;
             _fireExtinguisherController = FireExtinguisherController.Instance;
             _fireExtinguisher = _fireExtinguisherController?.FireExtinguisher;
@@ -268,7 +270,21 @@ namespace _Scripts.UI
 
         private void OnApplicationStateChanged(ApplicationState state)
         {
+            if (state == ApplicationState.Ready)
+                SnapFollowToView();
+
             RefreshRequirement(true);
+        }
+
+        private void SnapFollowToView()
+        {
+            if (_lazyFollow == null || !_lazyFollow.isActiveAndEnabled) return;
+
+            // LazyFollow performs an immediate snap from OnEnable when snapOnEnable is set.
+            // Restart keeps this popup alive, so explicitly restart the component after the
+            // player rig has been returned to its spawn pose.
+            _lazyFollow.enabled = false;
+            _lazyFollow.enabled = true;
         }
 
         private void OnExtinguisherSelected(FireExtinguisherType extinguisherType)

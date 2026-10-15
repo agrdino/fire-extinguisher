@@ -48,13 +48,13 @@ namespace _Scripts.Fires
 
         private void OnDisable()
         {
-            IdleHintController.Instance?.HidePersistentMessage(this);
+            FireWarningHintController.Instance?.HideWarning(this);
             _playerCollidersInside.Clear();
         }
 
         public void Arm(Transform playerRoot)
         {
-            IdleHintController.Instance?.HidePersistentMessage(this);
+            FireWarningHintController.Instance?.HideWarning(this);
             _playerRoot = playerRoot;
             _playerCollidersInside.Clear();
         }
@@ -64,13 +64,13 @@ namespace _Scripts.Fires
             if (!BelongsToPlayer(other) || !_playerCollidersInside.Add(other)) return;
             if (_playerCollidersInside.Count > 1) return;
 
-            IdleHintController hintController = IdleHintController.Instance;
-            if (hintController != null)
+            FireWarningHintController warningHint = FireWarningHintController.Instance;
+            if (warningHint != null)
             {
                 // The circular anchor is only geometry for the curve endpoint. Center it on
                 // the fire itself, not on the elevated proximity-warning trigger.
                 Transform warningTarget = _fire != null ? _fire.transform : transform;
-                hintController.ShowPersistentMessage(this, _localizedWarningMessage, warningTarget);
+                warningHint.ShowWarning(this, _localizedWarningMessage, warningTarget);
                 return;
             }
 
@@ -81,7 +81,7 @@ namespace _Scripts.Fires
         {
             if (other != null) _playerCollidersInside.Remove(other);
             if (_playerCollidersInside.Count == 0)
-                IdleHintController.Instance?.HidePersistentMessage(this);
+                FireWarningHintController.Instance?.HideWarning(this);
         }
 
         private bool BelongsToPlayer(Collider other)

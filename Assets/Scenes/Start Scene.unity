@@ -648,6 +648,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Application Runtime
       objectReference: {fileID: 0}
+    - target: {fileID: 8962677695553302094, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: _roundDuration
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962677695553302094, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
+      propertyPath: _escapeDuration
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -188,7 +188,7 @@ MonoBehaviour:
   m_TargetOffset: {x: 0.3, y: 0.15, z: 1.35}
   m_FollowInLocalSpace: 0
   m_ApplyTargetInLocalSpace: 0
-  m_MovementSpeed: 5
+  m_MovementSpeed: 10
   m_MovementSpeedVariancePercentage: 0.25
   m_SnapOnEnable: 1
   m_PositionFollowMode: 1
