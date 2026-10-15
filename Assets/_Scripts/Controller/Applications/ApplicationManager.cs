@@ -59,6 +59,7 @@ namespace _Scripts.Controller
         private FireExtinguisherType _pendingExtinguisherType = FireExtinguisherType.Unselect;
         private FireExtinguisherModelSwitcher _modelSwitcher;
         private FireExtinguisherStation _activeExtinguisherStation;
+        private FireExtinguisherStation _mainExtinguisherStation;
         private IEnvironmentSceneContext _environmentContext;
 
         public ApplicationState State => _state;
@@ -82,6 +83,8 @@ namespace _Scripts.Controller
         // CLR null semantics and would otherwise still invoke methods on the destroyed station.
         public FireExtinguisherStation ActiveExtinguisherStation =>
             _activeExtinguisherStation != null ? _activeExtinguisherStation : null;
+        public FireExtinguisherStation MainExtinguisherStation =>
+            _mainExtinguisherStation != null ? _mainExtinguisherStation : null;
 
         public event Action<ApplicationState> OnStateChanged;
         public event Action<float> OnRemainingTimeChanged;
@@ -569,20 +572,24 @@ namespace _Scripts.Controller
         private void ConfigureExtinguisherStations()
         {
             _activeExtinguisherStation = null;
+            _mainExtinguisherStation = null;
             IReadOnlyList<FireExtinguisherStation> stations = _environmentContext?.FireExtinguisherStations;
             if (stations == null) return;
 
             FireSpawnPoint selectedSpawnPoint = _fireController.SelectedSpawnPoint;
+            bool allowPickupAtAnyStation = _environmentContext.EnvironmentType == EnvironmentType.Factory;
             for (int index = 0; index < stations.Count; index++)
             {
                 FireExtinguisherStation station = stations[index];
                 if (station == null) continue;
 
-                bool isActive = station.Matches(selectedSpawnPoint);
-                if (isActive && _activeExtinguisherStation == null)
-                    _activeExtinguisherStation = station;
-                station.Configure(isActive, _selectedExtinguisherType);
+                bool matchesSelectedFire = station.Matches(selectedSpawnPoint);
+                if (matchesSelectedFire && _mainExtinguisherStation == null)
+                    _mainExtinguisherStation = station;
+                station.Configure(allowPickupAtAnyStation || matchesSelectedFire, _selectedExtinguisherType);
             }
+
+            _activeExtinguisherStation = _mainExtinguisherStation;
         }
 
         private void RefreshExtinguisherStationInteractions()

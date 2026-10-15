@@ -72,6 +72,7 @@ namespace _Scripts.UI
         [Header("Timing")]
         [SerializeField, Min(0f)] private float _idleDelay = 8f;
         [SerializeField, Min(0f)] private float _fadeDuration = 0.2f;
+        [SerializeField, Min(0f)] private float _mainTargetDistanceTolerance = 5f;
 
         [Header("Copy")]
         [SerializeField] private LocalizedString _resetSafetyPinHintLocalized = new("UI", "start.reset_safety_pin");
@@ -174,6 +175,13 @@ namespace _Scripts.UI
 
             float fadeSpeed = _fadeDuration > 0f ? Time.unscaledDeltaTime / _fadeDuration : 1f;
             _canvasGroup.alpha = Mathf.MoveTowards(_canvasGroup.alpha, _targetAlpha, fadeSpeed);
+
+            if (_targetAlpha > 0f
+                && !_isShowingTemporaryMessage
+                && _persistentMessages.Count == 0
+                && (_currentStep == HintStep.SelectExtinguisher
+                    || _currentStep == HintStep.ActivateFireAlarm))
+                _calloutCurve?.SetTarget(ResolveHintTarget(_currentStep));
         }
 
         private void OnDestroy()
@@ -444,12 +452,7 @@ namespace _Scripts.UI
                         component => component.HintTarget);
 
                 case HintStep.SelectExtinguisher:
-                {
-                    FireExtinguisherStation station = _applicationManager != null
-                        ? _applicationManager.ActiveExtinguisherStation
-                        : null;
-                    return station != null ? station.GetHintTarget() : null;
-                }
+                    return ResolveExtinguisherStationHintTarget();
 
                 case HintStep.ConfirmExtinguisher:
                 {
@@ -472,8 +475,19 @@ namespace _Scripts.UI
                     return _applicationManager?.EmergencyExit?.HintTarget;
 
                 case HintStep.SwitchOffPower:
-                case HintStep.ActivateFireAlarm:
                     return FindFirstObjectByType<FactoryEmergencyResponseController>()?.CurrentHintTarget;
+
+                case HintStep.ActivateFireAlarm:
+                {
+                    FactoryEmergencyResponseController responseController =
+                        FindFirstObjectByType<FactoryEmergencyResponseController>();
+                    Transform player = _applicationManager?.PlayerView;
+                    return responseController != null && player != null
+                        ? responseController.GetPreferredFireAlarmHintTarget(
+                            player.position,
+                            _mainTargetDistanceTolerance)
+                        : responseController?.CurrentHintTarget;
+                }
 
                 case HintStep.ContactEmergencyTeam:
                     return HandheldEmergencyPhoneController.Instance?.HintTarget;
@@ -481,6 +495,47 @@ namespace _Scripts.UI
                 default:
                     return null;
             }
+        }
+
+        private Transform ResolveExtinguisherStationHintTarget()
+        {
+            if (_applicationManager == null) return null;
+
+            IReadOnlyList<FireExtinguisherStation> stations =
+                _applicationManager.CurrentEnvironment?.FireExtinguisherStations;
+            Transform player = _applicationManager.PlayerView;
+            FireExtinguisherStation mainStation = _applicationManager.MainExtinguisherStation;
+            if (stations == null || player == null)
+                return mainStation != null ? mainStation.GetHintTarget() : null;
+
+            FireExtinguisherStation nearestStation = null;
+            float nearestDistance = float.PositiveInfinity;
+            for (int index = 0; index < stations.Count; index++)
+            {
+                FireExtinguisherStation station = stations[index];
+                if (station == null || !station.IsActiveStation || !station.gameObject.activeInHierarchy)
+                    continue;
+
+                float distance = HorizontalDistance(player.position, station.transform.position);
+                if (distance >= nearestDistance) continue;
+                nearestDistance = distance;
+                nearestStation = station;
+            }
+
+            if (mainStation == null)
+                return nearestStation != null ? nearestStation.GetHintTarget() : null;
+            if (nearestStation == null) return mainStation.GetHintTarget();
+
+            float mainDistance = HorizontalDistance(player.position, mainStation.transform.position);
+            return mainDistance <= nearestDistance + _mainTargetDistanceTolerance
+                ? mainStation.GetHintTarget()
+                : nearestStation.GetHintTarget();
+        }
+
+        private static float HorizontalDistance(Vector3 from, Vector3 to)
+        {
+            Vector2 offset = new(to.x - from.x, to.z - from.z);
+            return offset.magnitude;
         }
 
         private Transform FindActivePartTarget<T>(System.Func<T, Transform> getTarget)

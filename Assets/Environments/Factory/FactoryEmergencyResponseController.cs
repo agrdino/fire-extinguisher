@@ -22,6 +22,7 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private Transform _circuitBreakerUIAnchor;
         [SerializeField] private FactoryPowerLightingController _powerLightingController;
         private FactoryEmergencyInteractable _activeCircuitBreaker;
+        private FactoryEmergencyInteractable _mainFireAlarm;
 
         public FactoryEmergencyResponseStep CurrentStep { get; private set; }
         public Transform CurrentHintTarget { get; private set; }
@@ -29,6 +30,36 @@ namespace _Scripts.Environments.Factory
 
         public event Action<FactoryEmergencyResponseStep> OnStepChanged;
         public event Action<FactoryEmergencyInteractable> OnInteractionCompleted;
+
+        public Transform GetPreferredFireAlarmHintTarget(
+            Vector3 playerPosition,
+            float mainTargetDistanceTolerance)
+        {
+            FactoryEmergencyInteractable nearestAlarm = null;
+            float nearestDistance = float.PositiveInfinity;
+            for (int index = 0; index < _interactables.Length; index++)
+            {
+                FactoryEmergencyInteractable interactable = _interactables[index];
+                if (interactable == null
+                    || interactable.Kind != FactoryEmergencyInteractableKind.FireAlarm
+                    || !interactable.IsInteractionEnabled
+                    || !interactable.gameObject.activeInHierarchy)
+                    continue;
+
+                float distance = HorizontalDistance(playerPosition, interactable.HintTarget.position);
+                if (distance >= nearestDistance) continue;
+                nearestDistance = distance;
+                nearestAlarm = interactable;
+            }
+
+            if (_mainFireAlarm == null) return nearestAlarm != null ? nearestAlarm.HintTarget : null;
+            if (nearestAlarm == null) return _mainFireAlarm.HintTarget;
+
+            float mainDistance = HorizontalDistance(playerPosition, _mainFireAlarm.HintTarget.position);
+            return mainDistance <= nearestDistance + Mathf.Max(0f, mainTargetDistanceTolerance)
+                ? _mainFireAlarm.HintTarget
+                : nearestAlarm.HintTarget;
+        }
 
         private void Start()
         {
@@ -111,8 +142,9 @@ namespace _Scripts.Environments.Factory
 
         private void BeginFireAlarmStep()
         {
-            FactoryEmergencyInteractable primaryAlarm = null;
+            _mainFireAlarm = null;
             FactoryEmergencyInteractable fallbackAlarm = null;
+            FireSpawnPoint selectedSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
             for (int index = 0; index < _interactables.Length; index++)
             {
                 FactoryEmergencyInteractable interactable = _interactables[index];
@@ -120,10 +152,11 @@ namespace _Scripts.Environments.Factory
                 interactable.SetInteractionEnabled(isAlarm);
                 if (!isAlarm) continue;
                 fallbackAlarm ??= interactable;
-                if (interactable.IsPrimaryHintTarget) primaryAlarm = interactable;
+                if (_mainFireAlarm == null && interactable.Matches(selectedSpawnPoint))
+                    _mainFireAlarm = interactable;
             }
 
-            FactoryEmergencyInteractable hintAlarm = primaryAlarm != null ? primaryAlarm : fallbackAlarm;
+            FactoryEmergencyInteractable hintAlarm = _mainFireAlarm != null ? _mainFireAlarm : fallbackAlarm;
             if (hintAlarm == null)
             {
                 return;
@@ -154,6 +187,7 @@ namespace _Scripts.Environments.Factory
             }
 
             _activeCircuitBreaker = null;
+            _mainFireAlarm = null;
         }
 
         private void ResetResponse()
@@ -169,7 +203,14 @@ namespace _Scripts.Environments.Factory
             }
 
             _activeCircuitBreaker = null;
+            _mainFireAlarm = null;
             SetStep(FactoryEmergencyResponseStep.None, null, null);
+        }
+
+        private static float HorizontalDistance(Vector3 from, Vector3 to)
+        {
+            Vector2 offset = new(to.x - from.x, to.z - from.z);
+            return offset.magnitude;
         }
 
         private void SetStep(

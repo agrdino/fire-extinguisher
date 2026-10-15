@@ -224,6 +224,7 @@ MonoBehaviour:
   _targetAnchorVerticalOffset: 0.4
   _idleDelay: 8
   _fadeDuration: 0.2
+  _mainTargetDistanceTolerance: 5
   _resetSafetyPinHintLocalized:
     m_TableReference:
       m_TableCollectionName: UI

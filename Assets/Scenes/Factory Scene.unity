@@ -117918,9 +117918,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 813000000000000002}
     - target: {fileID: 812000000000000005, guid: 86747d3fd6534a0eb0124524db4a1a87, type: 3}
-      propertyPath: _isPrimaryHintTarget
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: _fireSpawnPoint
+      value:
+      objectReference: {fileID: 6419938941248935311}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -117990,6 +117990,10 @@ PrefabInstance:
       propertyPath: _responseController
       value: 
       objectReference: {fileID: 813000000000000002}
+    - target: {fileID: 812000000000000005, guid: 86747d3fd6534a0eb0124524db4a1a87, type: 3}
+      propertyPath: _fireSpawnPoint
+      value:
+      objectReference: {fileID: 7351656275345314667}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -118059,6 +118063,10 @@ PrefabInstance:
       propertyPath: _responseController
       value: 
       objectReference: {fileID: 813000000000000002}
+    - target: {fileID: 812000000000000005, guid: 86747d3fd6534a0eb0124524db4a1a87, type: 3}
+      propertyPath: _fireSpawnPoint
+      value:
+      objectReference: {fileID: 1521720039556908767}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
