@@ -22,7 +22,6 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private Transform _circuitBreakerUIAnchor;
         [SerializeField] private FactoryPowerLightingController _powerLightingController;
         private FactoryEmergencyInteractable _activeCircuitBreaker;
-        private FactoryEmergencyInteractable _mainFireAlarm;
 
         public FactoryEmergencyResponseStep CurrentStep { get; private set; }
         public Transform CurrentHintTarget { get; private set; }
@@ -30,36 +29,6 @@ namespace _Scripts.Environments.Factory
 
         public event Action<FactoryEmergencyResponseStep> OnStepChanged;
         public event Action<FactoryEmergencyInteractable> OnInteractionCompleted;
-
-        public Transform GetPreferredFireAlarmHintTarget(
-            Vector3 playerPosition,
-            float mainTargetDistanceTolerance)
-        {
-            FactoryEmergencyInteractable nearestAlarm = null;
-            float nearestDistance = float.PositiveInfinity;
-            for (int index = 0; index < _interactables.Length; index++)
-            {
-                FactoryEmergencyInteractable interactable = _interactables[index];
-                if (interactable == null
-                    || interactable.Kind != FactoryEmergencyInteractableKind.FireAlarm
-                    || !interactable.IsInteractionEnabled
-                    || !interactable.gameObject.activeInHierarchy)
-                    continue;
-
-                float distance = HorizontalDistance(playerPosition, interactable.HintTarget.position);
-                if (distance >= nearestDistance) continue;
-                nearestDistance = distance;
-                nearestAlarm = interactable;
-            }
-
-            if (_mainFireAlarm == null) return nearestAlarm != null ? nearestAlarm.HintTarget : null;
-            if (nearestAlarm == null) return _mainFireAlarm.HintTarget;
-
-            float mainDistance = HorizontalDistance(playerPosition, _mainFireAlarm.HintTarget.position);
-            return mainDistance <= nearestDistance + Mathf.Max(0f, mainTargetDistanceTolerance)
-                ? _mainFireAlarm.HintTarget
-                : nearestAlarm.HintTarget;
-        }
 
         private void Start()
         {
@@ -123,6 +92,7 @@ namespace _Scripts.Environments.Factory
             for (int index = 0; index < _interactables.Length; index++)
             {
                 FactoryEmergencyInteractable interactable = _interactables[index];
+                if (interactable == null) continue;
                 bool isCircuitBreaker = interactable.Kind == FactoryEmergencyInteractableKind.CircuitBreaker;
                 bool isSharedCircuitBreaker = isCircuitBreaker && _activeCircuitBreaker == null;
                 interactable.SetInteractionEnabled(isSharedCircuitBreaker);
@@ -142,22 +112,34 @@ namespace _Scripts.Environments.Factory
 
         private void BeginFireAlarmStep()
         {
-            _mainFireAlarm = null;
-            FactoryEmergencyInteractable fallbackAlarm = null;
             FireSpawnPoint selectedSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
+            Transform playerView = _applicationManager?.PlayerView;
+            FactoryEmergencyInteractable nearestAlarm = null;
+            float nearestDistance = float.PositiveInfinity;
+
             for (int index = 0; index < _interactables.Length; index++)
             {
                 FactoryEmergencyInteractable interactable = _interactables[index];
+                if (interactable == null || !interactable.gameObject.activeInHierarchy) continue;
+
                 bool isAlarm = interactable.Kind == FactoryEmergencyInteractableKind.FireAlarm;
                 interactable.SetInteractionEnabled(isAlarm);
                 if (!isAlarm) continue;
-                fallbackAlarm ??= interactable;
-                if (_mainFireAlarm == null && interactable.Matches(selectedSpawnPoint))
-                    _mainFireAlarm = interactable;
+
+                if (nearestAlarm == null)
+                    nearestAlarm = interactable;
+
+                float distance = CombinedHorizontalDistance(
+                    interactable.HintTarget.position,
+                    selectedSpawnPoint != null ? selectedSpawnPoint.transform : null,
+                    playerView);
+                if (distance >= nearestDistance) continue;
+
+                nearestDistance = distance;
+                nearestAlarm = interactable;
             }
 
-            FactoryEmergencyInteractable hintAlarm = _mainFireAlarm != null ? _mainFireAlarm : fallbackAlarm;
-            if (hintAlarm == null)
+            if (nearestAlarm == null)
             {
                 return;
             }
@@ -165,14 +147,14 @@ namespace _Scripts.Environments.Factory
             Transform fireAlarmUIAnchor = FireController.Instance?.SelectedSpawnPoint?.FireAlarmUIPoint;
             SetStep(
                 FactoryEmergencyResponseStep.ActivateFireAlarm,
-                hintAlarm.HintTarget,
+                nearestAlarm.HintTarget,
                 fireAlarmUIAnchor);
         }
 
         private void CompleteResponse()
         {
             for (int index = 0; index < _interactables.Length; index++)
-                _interactables[index].SetInteractionEnabled(false);
+                _interactables[index]?.SetInteractionEnabled(false);
             SetStep(FactoryEmergencyResponseStep.Completed, null, null);
             _applicationManager.CompleteFactoryResponse();
         }
@@ -183,11 +165,10 @@ namespace _Scripts.Environments.Factory
             if (_interactables != null)
             {
                 for (int index = 0; index < _interactables.Length; index++)
-                    _interactables[index].SetInteractionEnabled(false);
+                    _interactables[index]?.SetInteractionEnabled(false);
             }
 
             _activeCircuitBreaker = null;
-            _mainFireAlarm = null;
         }
 
         private void ResetResponse()
@@ -197,20 +178,45 @@ namespace _Scripts.Environments.Factory
             {
                 for (int index = 0; index < _interactables.Length; index++)
                 {
-                    _interactables[index].ResetInteractionState();
-                    _interactables[index].SetInteractionEnabled(false);
+                    FactoryEmergencyInteractable interactable = _interactables[index];
+                    if (interactable == null) continue;
+                    interactable.ResetInteractionState();
+                    interactable.SetInteractionEnabled(false);
                 }
             }
 
             _activeCircuitBreaker = null;
-            _mainFireAlarm = null;
             SetStep(FactoryEmergencyResponseStep.None, null, null);
+        }
+
+        private static float CombinedHorizontalDistance(
+            Vector3 candidatePosition,
+            Transform firstReference,
+            Transform secondReference)
+        {
+            float distance = 0f;
+            int referenceCount = 0;
+
+            if (firstReference != null)
+            {
+                distance += HorizontalDistance(candidatePosition, firstReference.position);
+                referenceCount++;
+            }
+
+            if (secondReference != null)
+            {
+                distance += HorizontalDistance(candidatePosition, secondReference.position);
+                referenceCount++;
+            }
+
+            return referenceCount > 0 ? distance : float.PositiveInfinity;
         }
 
         private static float HorizontalDistance(Vector3 from, Vector3 to)
         {
-            Vector2 offset = new(to.x - from.x, to.z - from.z);
-            return offset.magnitude;
+            float x = from.x - to.x;
+            float z = from.z - to.z;
+            return Mathf.Sqrt(x * x + z * z);
         }
 
         private void SetStep(

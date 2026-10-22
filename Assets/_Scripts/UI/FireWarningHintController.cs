@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace _Scripts.UI
 {
@@ -14,20 +13,17 @@ namespace _Scripts.UI
     /// </summary>
     [DefaultExecutionOrder(100)]
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(LazyFollow))]
     public sealed class FireWarningHintController : MonoBehaviour
     {
         private readonly struct WarningMessage
         {
-            public WarningMessage(LocalizedString message, Transform target, ulong sequence)
+            public WarningMessage(LocalizedString message, ulong sequence)
             {
                 Message = message;
-                Target = target;
                 Sequence = sequence;
             }
 
             public LocalizedString Message { get; }
-            public Transform Target { get; }
             public ulong Sequence { get; }
         }
 
@@ -40,15 +36,8 @@ namespace _Scripts.UI
         [SerializeField] private TMP_Text _messageText;
         [SerializeField] private UIPopupTween _popupAnimation;
 
-        [Header("Callout")]
-        [SerializeField] private Material _curveMaterial;
-        [SerializeField] private Color _curveColor = new(1f, 0.29f, 0.24f, 1f);
-        [SerializeField, Min(0.0001f)] private float _curveWidth = 0.01f;
-        [SerializeField, Min(0f)] private float _targetGap = 0.08f;
-        [SerializeField, Min(0f)] private float _popupGap = 0.015f;
-        [SerializeField, Min(0f)] private float _curveStrength = 0.18f;
-        [SerializeField, Min(0.001f)] private float _targetAnchorRadius = 0.48f;
-        [SerializeField] private float _targetAnchorVerticalOffset = 0.4f;
+        [Header("Fixed Follow")]
+        [SerializeField] private Vector3 _viewOffset = new(0f, -0.2f, 1f);
 
         [Header("Timing")]
         [SerializeField, Min(0f)] private float _fadeDuration = 0.2f;
@@ -57,7 +46,6 @@ namespace _Scripts.UI
         private Object _activeSource;
         private ulong _sequence;
         private float _targetAlpha;
-        private HintCalloutCurve _calloutCurve;
         private Camera _baseCamera;
         private Camera _overlayCamera;
 
@@ -79,7 +67,7 @@ namespace _Scripts.UI
                 _popupAnimation = GetComponentInChildren<UIPopupTween>(true);
 
             EnsureOverlayCamera();
-            EnsureCalloutCurve(gameObject.layer);
+            UpdateFixedPose();
             LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
         }
 
@@ -91,17 +79,22 @@ namespace _Scripts.UI
             _canvasGroup.alpha = Mathf.MoveTowards(_canvasGroup.alpha, _targetAlpha, fadeSpeed);
         }
 
+        private void LateUpdate()
+        {
+            UpdateFixedPose();
+        }
+
         private void OnDestroy()
         {
             LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
             if (_instance == this) _instance = null;
         }
 
-        public void ShowWarning(Object source, LocalizedString message, Transform target)
+        public void ShowWarning(Object source, LocalizedString message)
         {
             if (source == null || message == null || message.IsEmpty || _messageText == null) return;
 
-            WarningMessage warning = new(message, target, ++_sequence);
+            WarningMessage warning = new(message, ++_sequence);
             _warnings[source] = warning;
             _activeSource = source;
             ApplyWarning(warning);
@@ -126,12 +119,6 @@ namespace _Scripts.UI
         private void ApplyWarning(WarningMessage warning)
         {
             _messageText.SetText(warning.Message.GetLocalizedString());
-            if (_calloutCurve != null)
-            {
-                _calloutCurve.SetTarget(warning.Target, true);
-                _calloutCurve.SetVisible(warning.Target != null);
-            }
-
             if (_targetAlpha <= 0f && _popupAnimation != null) _popupAnimation.PlayIn();
             _targetAlpha = 1f;
         }
@@ -140,7 +127,6 @@ namespace _Scripts.UI
         {
             if (_targetAlpha > 0f && _popupAnimation != null) _popupAnimation.PlayOut();
             _targetAlpha = 0f;
-            if (_calloutCurve != null) _calloutCurve.SetVisible(false);
         }
 
         private bool TryGetLatestWarning(out Object latestSource, out WarningMessage latestWarning)
@@ -183,26 +169,12 @@ namespace _Scripts.UI
                 baseData.cameraStack.Add(_overlayCamera);
         }
 
-        private void EnsureCalloutCurve(int layer)
+        private void UpdateFixedPose()
         {
-            RectTransform popupRect = _canvasGroup != null ? _canvasGroup.transform as RectTransform : null;
-            if (popupRect == null) return;
+            if (_baseCamera == null) return;
 
-            _calloutCurve = GetComponent<HintCalloutCurve>();
-            if (_calloutCurve == null) _calloutCurve = gameObject.AddComponent<HintCalloutCurve>();
-            _calloutCurve.gameObject.layer = layer;
-            _calloutCurve.Initialize(
-                popupRect,
-                _canvasGroup,
-                _baseCamera,
-                _curveMaterial,
-                _curveColor,
-                _curveWidth,
-                _targetGap,
-                _popupGap,
-                _curveStrength,
-                _targetAnchorRadius,
-                _targetAnchorVerticalOffset);
+            Transform view = _baseCamera.transform;
+            transform.SetPositionAndRotation(view.TransformPoint(_viewOffset), view.rotation);
         }
     }
 }

@@ -22,6 +22,10 @@ namespace _Scripts.Controller
         public bool IsTransitioning => _sceneFlowController != null
             && _sceneFlowController.IsTransitioning;
 
+        public SceneId CurrentEnvironmentScene => _currentEnvironment != null
+            ? _currentEnvironment.SceneId
+            : SceneId.Start;
+
         private void Awake()
         {
             if (!ValidateRuntimeReferences()) return;

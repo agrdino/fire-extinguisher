@@ -67,10 +67,7 @@ namespace _Scripts.Fires
             FireWarningHintController warningHint = FireWarningHintController.Instance;
             if (warningHint != null)
             {
-                // The circular anchor is only geometry for the curve endpoint. Center it on
-                // the fire itself, not on the elevated proximity-warning trigger.
-                Transform warningTarget = _fire != null ? _fire.transform : transform;
-                warningHint.ShowWarning(this, _localizedWarningMessage, warningTarget);
+                warningHint.ShowWarning(this, _localizedWarningMessage);
                 return;
             }
 

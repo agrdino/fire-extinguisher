@@ -13,12 +13,14 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnRestart;
         [SerializeField] private TMP_Text _txtMessage;
         [SerializeField] private LocalizedString _escapedMessage = new("UI", "escaped.message");
+        [SerializeField] private EndStateNavigationControls _navigationControls = new();
 
         private IApplicationNavigator _navigator;
 
         public void Initialize(IApplicationNavigator navigator)
         {
             _navigator = navigator;
+            _navigationControls.Initialize(_navigator, _btnRestart);
         }
 
         private void Awake()
@@ -27,7 +29,6 @@ namespace _Scripts.UI
             if (_txtMessage == null) _txtMessage = UIComponentLookup.FindText(this, "txtGuide");
             DisableStaticMessageLocalizer();
             ConfigureMessageText();
-            if (_btnRestart != null) _btnRestart.onClick.AddListener(OnRestartClicked);
         }
 
         private void OnEnable()
@@ -42,31 +43,17 @@ namespace _Scripts.UI
 
         private void OnDestroy()
         {
-            if (_btnRestart != null) _btnRestart.onClick.RemoveListener(OnRestartClicked);
+            _navigationControls.Unbind();
         }
 
         public void Show()
         {
             RefreshMessage();
-            RefreshButton();
+            _navigationControls.Refresh(false);
         }
 
         public void Hide()
         {
-        }
-
-        private void OnRestartClicked()
-        {
-            if (_navigator == null) return;
-
-            _navigator.TryRestartCurrentEnvironment();
-            RefreshButton();
-        }
-
-        private void RefreshButton()
-        {
-            if (_btnRestart != null)
-                _btnRestart.interactable = _navigator != null && !_navigator.IsTransitioning;
         }
 
         private void RefreshMessage()
@@ -89,6 +76,10 @@ namespace _Scripts.UI
             _txtMessage.fontSizeMax = 42f;
         }
 
-        private void OnSelectedLocaleChanged(Locale locale) => RefreshMessage();
+        private void OnSelectedLocaleChanged(Locale locale)
+        {
+            RefreshMessage();
+            _navigationControls.Refresh(false);
+        }
     }
 }

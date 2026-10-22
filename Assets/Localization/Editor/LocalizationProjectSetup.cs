@@ -40,7 +40,7 @@ namespace Spaxtek.EditorTools
         private const string SettingsPath = SettingsFolder + "/Localization Settings.asset";
         private const string CatalogPath = RootFolder + "/Editor/LocalizationTranslations.json";
         private const string LanguagePrefabPath = PrefabsFolder + "/Select Language Scene.prefab";
-        private const string SourcePanelPath = "Assets/UIs/Variants/Ready View.prefab";
+        private const string SourcePanelPath = "Assets/UIs/Variants/Start Scene.prefab";
         private const string TableName = "UI";
 
         [Serializable]
@@ -295,10 +295,10 @@ namespace Spaxtek.EditorTools
             try
             {
                 root.name = "Select Language Scene";
-                ReadyView readyView = root.GetComponentInChildren<ReadyView>(true);
-                GameObject host = readyView != null ? readyView.gameObject : root;
-                if (readyView != null)
-                    Object.DestroyImmediate(readyView, true);
+                StartScene startScene = root.GetComponentInChildren<StartScene>(true);
+                GameObject host = startScene != null ? startScene.gameObject : root;
+                if (startScene != null)
+                    Object.DestroyImmediate(startScene, true);
 
                 SelectLanguageScene languageScene = host.GetComponent<SelectLanguageScene>();
                 if (languageScene == null)
@@ -307,17 +307,37 @@ namespace Spaxtek.EditorTools
                 TMP_Text title = FindText(root, "txtTitle");
                 TMP_Text instruction = FindText(root, "txtGuide");
                 if (title != null) title.SetText("SELECT LANGUAGE");
-                if (instruction != null) instruction.SetText("Choose your preferred language.");
+                if (instruction != null)
+                {
+                    instruction.SetText("Choose your preferred language.");
+                    instruction.horizontalAlignment = HorizontalAlignmentOptions.Center;
+                }
 
                 Button continueButton = FindButton(root, "btnContinue") ?? FindButton(root, "btnStart");
                 if (continueButton == null)
                     throw new InvalidOperationException("Language panel source is missing btnStart.");
                 continueButton.name = "btnContinue";
-                ConfigureButton(continueButton, "CONTINUE", new Vector2(260f, -390f), new Vector2(500f, 100f));
+                ConfigureButton(continueButton, "CONTINUE", new Vector2(0f, -390f), new Vector2(500f, 100f));
 
-                Button vietnameseButton = EnsureButtonClone(continueButton, "btnVietnamese", "Tiếng Việt", new Vector2(-430f, -120f), new Vector2(360f, 110f));
-                Button englishButton = EnsureButtonClone(continueButton, "btnEnglish", "English", new Vector2(0f, -120f), new Vector2(360f, 110f));
-                Button japaneseButton = EnsureButtonClone(continueButton, "btnJapanese", "日本語", new Vector2(430f, -120f), new Vector2(360f, 110f));
+                Button vietnameseButton = FindButton(root, "UI Vietnamese");
+                Button englishButton = FindButton(root, "UI English");
+                Button japaneseButton = FindButton(root, "UI Japanese");
+
+                if (vietnameseButton != null && englishButton != null && japaneseButton != null)
+                {
+                    ConfigureLanguageButton(vietnameseButton, "Tiếng Việt");
+                    ConfigureLanguageButton(englishButton, "English");
+                    ConfigureLanguageButton(japaneseButton, "日本語");
+                    RemoveButton(root, "btnVietnamese");
+                    RemoveButton(root, "btnEnglish");
+                    RemoveButton(root, "btnJapanese");
+                }
+                else
+                {
+                    vietnameseButton = EnsureButtonClone(continueButton, "btnVietnamese", "Tiếng Việt", new Vector2(-430f, -120f), new Vector2(360f, 110f));
+                    englishButton = EnsureButtonClone(continueButton, "btnEnglish", "English", new Vector2(0f, -120f), new Vector2(360f, 110f));
+                    japaneseButton = EnsureButtonClone(continueButton, "btnJapanese", "日本語", new Vector2(430f, -120f), new Vector2(360f, 110f));
+                }
                 Button backButton = FindButton(root, "btnBack");
                 if (backButton != null)
                     Object.DestroyImmediate(backButton.gameObject);
@@ -354,6 +374,32 @@ namespace Spaxtek.EditorTools
             Button button = clone.GetComponent<Button>();
             ConfigureButton(button, label, position, size);
             return button;
+        }
+
+        private static void ConfigureLanguageButton(Button button, string label)
+        {
+            LayoutElement layout = button.GetComponent<LayoutElement>();
+            if (layout != null)
+            {
+                layout.preferredWidth = 360f;
+                layout.preferredHeight = 110f;
+            }
+
+            TMP_Text text = button.GetComponentInChildren<TMP_Text>(true);
+            if (text != null)
+            {
+                text.SetText(label);
+                text.enableAutoSizing = true;
+                text.fontSizeMin = 28f;
+                text.fontSizeMax = 48f;
+            }
+        }
+
+        private static void RemoveButton(GameObject root, string name)
+        {
+            Button button = FindButton(root, name);
+            if (button != null)
+                Object.DestroyImmediate(button.gameObject, true);
         }
 
         private static void ConfigureButton(Button button, string label, Vector2 position, Vector2 size)

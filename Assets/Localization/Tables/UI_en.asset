@@ -406,6 +406,34 @@ MonoBehaviour:
     m_Localized: Press X to open the phone, Y to switch contacts, and X to call.
     m_Metadata:
       m_Items: []
+  - m_Id: 19252806459432960
+    m_Localized: Use the trigger to interact with UI.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19252806484598784
+    m_Localized: Use the thumbstick to move.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19252806484598785
+    m_Localized: Use X / Y to call GA or Security.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19252806484598786
+    m_Localized: Please wait...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19252806484598787
+    m_Localized: Press the trigger to continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19252806484598788
+    m_Localized: Controller guide complete. Select CONTINUE to proceed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886272
+    m_Localized: SELECT AREA
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

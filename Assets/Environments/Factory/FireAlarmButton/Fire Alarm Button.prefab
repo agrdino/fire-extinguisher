@@ -69,7 +69,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryEmergencyInteractable
   _kind: 1
-  _fireSpawnPoint: {fileID: 0}
   _hintTarget: {fileID: 0}
   _hoverHighlight: {fileID: 812000000000000006}
   _pressedColor: {r: 0.65, g: 1, b: 1, a: 1}

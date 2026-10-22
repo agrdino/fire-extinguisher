@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
@@ -147,7 +147,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8020917336435217465}
-  - component: {fileID: 9024568058141123736}
   - component: {fileID: 1815999700813457772}
   m_Layer: 8
   m_Name: UI Fire Warning Hint Popup
@@ -172,33 +171,6 @@ Transform:
   - {fileID: 7153113473673068415}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9024568058141123736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1052189521138179535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a2d7d89889b4d94fa1f8d6fe49788e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.LazyFollow
-  m_Target: {fileID: 0}
-  m_TargetOffset: {x: -0.3, y: 0.15, z: 1.35}
-  m_FollowInLocalSpace: 0
-  m_ApplyTargetInLocalSpace: 0
-  m_MovementSpeed: 10
-  m_MovementSpeedVariancePercentage: 0.25
-  m_SnapOnEnable: 1
-  m_PositionFollowMode: 1
-  m_MinDistanceAllowed: 0.03
-  m_MaxDistanceAllowed: 0.12
-  m_TimeUntilThresholdReachesMaxDistance: 0.5
-  m_RotationFollowMode: 1
-  m_MinAngleAllowed: 0.1
-  m_MaxAngleAllowed: 1
-  m_TimeUntilThresholdReachesMaxAngle: 0.75
 --- !u!114 &1815999700813457772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,19 +181,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc910fc688e912946a8ff23e82648f13, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.FireWarningHintController
   _canvasGroup: {fileID: 7194382488455511436}
   _messageText: {fileID: 1357819944927657492}
   _popupAnimation: {fileID: 4319441939531739683}
-  _curveMaterial: {fileID: 2100000, guid: b0e96864bafcfb54894bb238ad56cf3b, type: 2}
-  _curveColor: {r: 1, g: 0.29, b: 0.24, a: 1}
-  _curveWidth: 0.01
-  _targetGap: 0.08
-  _popupGap: 0.015
-  _curveStrength: 0.18
-  _targetAnchorRadius: 0.48
-  _targetAnchorVerticalOffset: 0.4
+  _viewOffset: {x: 0, y: -0.2, z: 1}
   _fadeDuration: 0.2
 --- !u!1 &2760347005031988487
 GameObject:
@@ -278,7 +243,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.29, b: 0.24, a: 1}
@@ -355,7 +320,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -459,7 +424,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4cb57c2dea0f0c469f020c2ff5dc602, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.UIPopupTween
   _playOnEnable: 0
   _duration: 0.16666667

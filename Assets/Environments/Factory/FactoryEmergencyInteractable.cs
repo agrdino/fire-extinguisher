@@ -1,6 +1,5 @@
 using System.Collections;
 using _Scripts.Controller;
-using _Scripts.Fires;
 using UnityEngine;
 
 namespace _Scripts.Environments.Factory
@@ -20,7 +19,6 @@ namespace _Scripts.Environments.Factory
         private static readonly int EmissionColorProperty = Shader.PropertyToID("_EmissionColor");
 
         [SerializeField] private FactoryEmergencyInteractableKind _kind;
-        [SerializeField] private FireSpawnPoint _fireSpawnPoint;
         [SerializeField] private Transform _hintTarget;
         [Header("Feedback")]
         [SerializeField] private HoverMaterialHighlight _hoverHighlight;
@@ -38,14 +36,8 @@ namespace _Scripts.Environments.Factory
         private bool _isInteractionEnabled;
 
         public FactoryEmergencyInteractableKind Kind => _kind;
-        public FireSpawnPoint FireSpawnPoint => _fireSpawnPoint;
         public Transform HintTarget => _hintTarget != null ? _hintTarget : transform;
         public override bool IsInteractionEnabled => _isInteractionEnabled;
-
-        public bool Matches(FireSpawnPoint selectedSpawnPoint)
-        {
-            return _fireSpawnPoint != null && _fireSpawnPoint == selectedSpawnPoint;
-        }
 
         private void Awake()
         {

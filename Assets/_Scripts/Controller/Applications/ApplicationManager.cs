@@ -577,19 +577,68 @@ namespace _Scripts.Controller
             if (stations == null) return;
 
             FireSpawnPoint selectedSpawnPoint = _fireController.SelectedSpawnPoint;
+            Transform playerView = GetPlayerView();
             bool allowPickupAtAnyStation = _environmentContext.EnvironmentType == EnvironmentType.Factory;
+
+            float nearestDistance = float.PositiveInfinity;
+            for (int index = 0; index < stations.Count; index++)
+            {
+                FireExtinguisherStation station = stations[index];
+                if (station == null || !station.gameObject.activeInHierarchy) continue;
+
+                if (_mainExtinguisherStation == null)
+                    _mainExtinguisherStation = station;
+
+                float distance = CombinedHorizontalDistance(
+                    station.transform.position,
+                    selectedSpawnPoint != null ? selectedSpawnPoint.transform : null,
+                    playerView);
+                if (distance >= nearestDistance) continue;
+
+                nearestDistance = distance;
+                _mainExtinguisherStation = station;
+            }
+
             for (int index = 0; index < stations.Count; index++)
             {
                 FireExtinguisherStation station = stations[index];
                 if (station == null) continue;
-
-                bool matchesSelectedFire = station.Matches(selectedSpawnPoint);
-                if (matchesSelectedFire && _mainExtinguisherStation == null)
-                    _mainExtinguisherStation = station;
-                station.Configure(allowPickupAtAnyStation || matchesSelectedFire, _selectedExtinguisherType);
+                station.Configure(
+                    allowPickupAtAnyStation || station == _mainExtinguisherStation,
+                    _selectedExtinguisherType);
             }
 
             _activeExtinguisherStation = _mainExtinguisherStation;
+        }
+
+        private static float CombinedHorizontalDistance(
+            Vector3 candidatePosition,
+            Transform firstReference,
+            Transform secondReference)
+        {
+            float distance = 0f;
+            int referenceCount = 0;
+
+            if (firstReference != null)
+            {
+                distance += HorizontalDistance(candidatePosition, firstReference.position);
+                referenceCount++;
+            }
+
+            if (secondReference != null)
+            {
+                distance += HorizontalDistance(candidatePosition, secondReference.position);
+                referenceCount++;
+            }
+
+            return referenceCount > 0 ? distance : float.PositiveInfinity;
+        }
+
+        private static float HorizontalDistance(Vector3 from, Vector3 to)
+        {
+            float x = from.x - to.x;
+            float z = from.z - to.z;
+            return Mathf.Sqrt(x * x + z * z);
         }
 
         private void RefreshExtinguisherStationInteractions()

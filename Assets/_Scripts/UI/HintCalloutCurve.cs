@@ -155,14 +155,14 @@ namespace _Scripts.UI
         private Vector3 GetTargetCenter()
         {
             Collider directCollider = _target.GetComponent<Collider>();
-            if (directCollider != null && directCollider.gameObject.activeInHierarchy)
+            if (IsUsableCollider(directCollider))
                 return directCollider.bounds.center;
 
             if (_targetColliders != null)
             {
                 foreach (Collider targetCollider in _targetColliders)
                 {
-                    if (targetCollider == null || !targetCollider.gameObject.activeInHierarchy) continue;
+                    if (!IsUsableCollider(targetCollider)) continue;
                     return targetCollider.bounds.center;
                 }
             }
@@ -176,12 +176,17 @@ namespace _Scripts.UI
                 return GetClosestRectPoint(rectTransform, popupPosition);
 
             Vector3 bestPoint = _target.position;
-            float bestDistance = (bestPoint - popupPosition).sqrMagnitude;
+            float bestDistance = float.PositiveInfinity;
             if (_targetRenderers == null) return bestPoint;
 
             foreach (Renderer targetRenderer in _targetRenderers)
             {
-                if (targetRenderer == null || !targetRenderer.gameObject.activeInHierarchy) continue;
+                if (targetRenderer == null
+                    || !targetRenderer.enabled
+                    || !targetRenderer.gameObject.activeInHierarchy
+                    || targetRenderer is ParticleSystemRenderer
+                    || targetRenderer.bounds.extents.sqrMagnitude < 0.000001f)
+                    continue;
 
                 Vector3 candidate = targetRenderer.bounds.ClosestPoint(popupPosition);
                 float distance = (candidate - popupPosition).sqrMagnitude;
@@ -192,6 +197,14 @@ namespace _Scripts.UI
             }
 
             return bestPoint;
+        }
+
+        private static bool IsUsableCollider(Collider targetCollider)
+        {
+            return targetCollider != null
+                && targetCollider.enabled
+                && targetCollider.gameObject.activeInHierarchy
+                && targetCollider.bounds.extents.sqrMagnitude >= 0.000001f;
         }
 
         private static Vector3 GetClosestRectPoint(RectTransform rectTransform, Vector3 worldPoint)

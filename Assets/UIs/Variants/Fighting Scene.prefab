@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 2100000, guid: 11ffc314f470f83409f864ca989290db, type: 2}
   m_Color: {r: 0.09803922, g: 0.13725491, b: 0.1764706, a: 0.92}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -140,10 +140,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16e660be6f3d19d4f8ae324e20b01732, type: 2}
-  m_sharedMaterial: {fileID: 2796877826858194140, guid: 16e660be6f3d19d4f8ae324e20b01732, type: 2}
+  m_sharedMaterial: {fileID: -6276663919784615216, guid: 16e660be6f3d19d4f8ae324e20b01732, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.025, g: 0.08, b: 0.12, a: 0.92}
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0.78431374, b: 1, a: 1}
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
     m_Mode: 0
@@ -508,7 +508,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -518,10 +518,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16e660be6f3d19d4f8ae324e20b01732, type: 2}
-  m_sharedMaterial: {fileID: 2796877826858194140, guid: 16e660be6f3d19d4f8ae324e20b01732, type: 2}
+  m_sharedMaterial: {fileID: -6276663919784615216, guid: 16e660be6f3d19d4f8ae324e20b01732, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: babab8b2b03d472c87cfb5607bb2e35c, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.FightingScene
   _sldFireExtinguisher: {fileID: 4549515197777896035}
   _txtGuide: {fileID: 2974853320542401301}
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b246e3dfd402d84b96818c7ee9e64da, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.UIPanelTween
   _panel: {fileID: 3494225306515655565}
   _content: {fileID: 7423816777079835479}
@@ -1035,6 +1035,10 @@ PrefabInstance:
       propertyPath: m_text
       value: EXTINGUISH ALL FIRES
       objectReference: {fileID: 0}
+    - target: {fileID: 4753628180596766500, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_sharedMaterial
+      value:
+      objectReference: {fileID: -7875133561243526030, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
     - target: {fileID: 6524490427946553663, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_text
       value: Remove the safety pin, aim at the base of the fire, squeeze the lever,
@@ -1044,6 +1048,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 55.1
       objectReference: {fileID: 0}
+    - target: {fileID: 6524490427946553663, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_sharedMaterial
+      value:
+      objectReference: {fileID: -7875133561243526030, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
     - target: {fileID: 7412088410918292824, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_Key
       value: fighting.title
@@ -1082,7 +1090,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &7218602854543932602 stripped
 RectTransform:
