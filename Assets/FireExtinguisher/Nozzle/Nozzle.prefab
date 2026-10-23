@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7245039298336376286}
   - component: {fileID: 6502931810309498630}
   m_Layer: 0
-  m_Name: Nozzle
+  m_Name: Nozzle Fire Extinguisher Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 383192627447201181}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.02, y: 0, z: 0}
-  m_LocalScale: {x: 1.5000001, y: 1.5, z: 1.5000001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6000001, y: 1.6000001, z: 1.6000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3798566193800061278}
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383192627447201181}
-  m_Mesh: {fileID: 7145417245639539162, guid: a2c8ead874cd6c74bbcc6cd3f3ca9e62, type: 3}
+  m_Mesh: {fileID: -4440437551663639075, guid: 0fcee6548e5f3b14eae660a1954373b4, type: 3}
 --- !u!23 &6502931810309498630
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0ec0cb5ad4ee9a34d996d01c5bf2d851, type: 2}
+  - {fileID: 2100000, guid: 36087061a0f751e4eb3472e0e139996b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2322588963061859962}
   - component: {fileID: 7410156943357857974}
   m_Layer: 0
-  m_Name: Nozzle (1)
+  m_Name: Nozzle Fire Extinguisher CO2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,8 +117,8 @@ Transform:
   m_GameObject: {fileID: 651503665289738876}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6000001, y: 1.6000001, z: 1.6000001}
+  m_LocalPosition: {x: -0.02, y: 0, z: 0}
+  m_LocalScale: {x: 1.5000001, y: 1.5, z: 1.5000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3675607409340761657}
@@ -130,7 +130,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651503665289738876}
-  m_Mesh: {fileID: -4440437551663639075, guid: 0fcee6548e5f3b14eae660a1954373b4, type: 3}
+  m_Mesh: {fileID: 7145417245639539162, guid: a2c8ead874cd6c74bbcc6cd3f3ca9e62, type: 3}
 --- !u!23 &7410156943357857974
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -301,7 +301,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6120288633054607570}
   - {fileID: 4914157230480499023}
   - {fileID: 7866676858809660593}
   - {fileID: 7346502198765432005}
@@ -368,6 +367,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9027499951005649227}
+  - {fileID: 6120288633054607570}
   - {fileID: 7332084514240547856}
   - {fileID: 7346502198765432007}
   m_Father: {fileID: 9161795741285879404}
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 7048791695104571501}
   - component: {fileID: 8338562315721339570}
   m_Layer: 0
-  m_Name: Nozzle
+  m_Name: Nozzle Fire Extinguisher Power (Secondary)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,7 +403,7 @@ Transform:
   m_LocalScale: {x: 1.6000001, y: 1.6000001, z: 1.6000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 3675607409340761657}
+  m_Father: {fileID: 3798566193800061278}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &7048791695104571501
 MeshFilter:

@@ -368,34 +368,6 @@ MonoBehaviour:
       \u0111\u1ED5i s\u1ED1 v\xE0 X \u0111\u1EC3 g\u1ECDi."
     m_Metadata:
       m_Items: []
-  - m_Id: 19252806459432960
-    m_Localized: "D\xF9ng c\xF2 tr\u1ECF \u0111\u1EC3 t\u01B0\u01A1ng t\xE1c v\u1EDBi
-      UI."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598784
-    m_Localized: "D\xF9ng c\u1EA7n \u0111i\u1EC1u khi\u1EC3n \u0111\u1EC3 di chuy\u1EC3n."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598785
-    m_Localized: "D\xF9ng n\xFAt X / Y \u0111\u1EC3 g\u1ECDi GA ho\u1EB7c B\u1EA3o
-      v\u1EC7."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598786
-    m_Localized: "Vui l\xF2ng ch\u1EDD..."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598787
-    m_Localized: "Nh\u1EA5n c\xF2 tr\u1ECF \u0111\u1EC3 xem h\u01B0\u1EDBng d\u1EABn
-      ti\u1EBFp theo"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598788
-    m_Localized: "\u0110\xE3 ho\xE0n t\u1EA5t h\u01B0\u1EDBng d\u1EABn. Ch\u1ECDn
-      TI\u1EBEP T\u1EE4C \u0111\u1EC3 sang b\u01B0\u1EDBc k\u1EBF ti\u1EBFp."
-    m_Metadata:
-      m_Items: []
   - m_Id: 19611946792886272
     m_Localized: "CH\u1ECCN KHU V\u1EF0C"
     m_Metadata:

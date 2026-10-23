@@ -22,14 +22,6 @@ namespace _Scripts.Environments.EmergencyContact
     {
         private const int RequiredPhoneNumberLength = 4;
 
-        private static readonly Color DialerBackgroundColor = Color.white;
-        private static readonly Color CallingBackgroundColor = new(0.035f, 0.36f, 0.82f, 1f);
-        private static readonly Color PrimaryTextColor = new(0.055f, 0.075f, 0.11f, 1f);
-        private static readonly Color SecondaryTextColor = new(0.35f, 0.39f, 0.45f, 1f);
-        private static readonly Color CallButtonColor = new(0.1f, 0.72f, 0.35f, 1f);
-        private static readonly Color HangUpButtonColor = new(0.9f, 0.08f, 0.08f, 1f);
-        private static readonly Color DisabledButtonColor = new(0.72f, 0.75f, 0.79f, 1f);
-
         public static HandheldEmergencyPhoneController Instance { get; private set; }
 
         [Header("Contacts")]
@@ -39,7 +31,7 @@ namespace _Scripts.Environments.EmergencyContact
         [SerializeField] private HandheldEmergencyPhoneView _viewPrefab;
 
         [Header("Hand Attachment")]
-        [SerializeField] private Vector3 _localPosition = new(0.065f, 0.115f, 0.095f);
+        [SerializeField] private Vector3 _localPosition = new(0f, 0.115f, 0.095f);
         [SerializeField] private Vector3 _localEulerAngles = new(58f, 0f, 0f);
         [SerializeField, Min(0.00001f)] private float _canvasScale = 0.00035f;
         [SerializeField, Range(0, 31)] private int _interfaceLayer = 8;
@@ -47,12 +39,14 @@ namespace _Scripts.Environments.EmergencyContact
         [Header("Call")]
         [SerializeField, Min(1)] private int _minimumCallDuration = 4;
         [SerializeField, Min(1)] private int _maximumCallDuration = 6;
+        [SerializeField, Min(0f)] private float _autoHideDelay = 5f;
 
         private readonly List<EmergencyContactEntry> _contacts = new();
         private InputAction _primaryButtonAction;
         private InputAction _secondaryButtonAction;
         private ApplicationManager _applicationManager;
         private Coroutine _callRoutine;
+        private Coroutine _autoHideRoutine;
         private int _selectedContactIndex;
         private int _callDuration;
 
@@ -60,12 +54,14 @@ namespace _Scripts.Environments.EmergencyContact
         private GameObject _phoneRoot;
         private GameObject _dialerScreen;
         private GameObject _callScreen;
+        private GameObject _endedScreen;
         private Image _background;
-        private Image _hangUpButton;
         private TMP_Text _dialerNumberText;
         private TMP_Text _departmentText;
         private TMP_Text _callNumberText;
         private TMP_Text _timerText;
+        private TMP_Text _endedDepartmentText;
+        private TMP_Text _endedCallNumberText;
 
         public HandheldEmergencyPhoneState State { get; private set; } = HandheldEmergencyPhoneState.Hidden;
         public Transform HintTarget => _phoneRoot != null ? _phoneRoot.transform : transform;
@@ -150,8 +146,8 @@ namespace _Scripts.Environments.EmergencyContact
                 return;
             }
 
-            // The completed-call screen may stay in the player's hand during Escape.
-            // Hiding it is deliberately left to the next X press.
+            // Keep the completed-call screen visible during Escape until its timeout
+            // expires or the player dismisses it with the third X press.
             if (applicationState == ApplicationState.Escape && State == HandheldEmergencyPhoneState.Ended)
                 return;
 
@@ -160,7 +156,7 @@ namespace _Scripts.Environments.EmergencyContact
 
         private void BeginSession()
         {
-            StopCallRoutine();
+            StopPhoneRoutines();
             _contacts.Clear();
             _directory?.GetValidEntries(RequiredPhoneNumberLength, _contacts);
 
@@ -179,9 +175,8 @@ namespace _Scripts.Environments.EmergencyContact
 
         private void ResetSession()
         {
-            StopCallRoutine();
-            State = HandheldEmergencyPhoneState.Hidden;
-            if (_phoneRoot != null) _phoneRoot.SetActive(false);
+            StopPhoneRoutines();
+            HidePhone();
         }
 
         private void HandlePrimaryButton()
@@ -202,8 +197,8 @@ namespace _Scripts.Environments.EmergencyContact
                     break;
 
                 case HandheldEmergencyPhoneState.Ended:
-                    State = HandheldEmergencyPhoneState.Hidden;
-                    _phoneRoot.SetActive(false);
+                    StopAutoHideRoutine();
+                    HidePhone();
                     IdleHintController.Instance?.NotifyActivity();
                     break;
             }
@@ -251,7 +246,7 @@ namespace _Scripts.Environments.EmergencyContact
                 if (nextDisplayedSecond != displayedSecond)
                 {
                     displayedSecond = nextDisplayedSecond;
-                    SetTimer(displayedSecond, Color.white);
+                    SetTimer(displayedSecond);
                 }
 
                 yield return null;
@@ -263,6 +258,17 @@ namespace _Scripts.Environments.EmergencyContact
             RenderEnded();
             IdleHintController.Instance?.NotifyActivity();
             _applicationManager?.CompleteEmergencyContact();
+            _autoHideRoutine = StartCoroutine(HideAfterDelay());
+        }
+
+        private IEnumerator HideAfterDelay()
+        {
+            if (_autoHideDelay > 0f)
+                yield return new WaitForSecondsRealtime(_autoHideDelay);
+
+            _autoHideRoutine = null;
+            if (State == HandheldEmergencyPhoneState.Ended)
+                HidePhone();
         }
 
         private void StopCallRoutine()
@@ -272,15 +278,31 @@ namespace _Scripts.Environments.EmergencyContact
             _callRoutine = null;
         }
 
+        private void StopAutoHideRoutine()
+        {
+            if (_autoHideRoutine == null) return;
+            StopCoroutine(_autoHideRoutine);
+            _autoHideRoutine = null;
+        }
+
+        private void StopPhoneRoutines()
+        {
+            StopCallRoutine();
+            StopAutoHideRoutine();
+        }
+
+        private void HidePhone()
+        {
+            State = HandheldEmergencyPhoneState.Hidden;
+            if (_phoneRoot != null) _phoneRoot.SetActive(false);
+        }
+
         private void RenderDialer()
         {
             EmergencyContactEntry contact = SelectedContact;
             if (contact == null) return;
 
-            _background.color = DialerBackgroundColor;
-            _dialerScreen.SetActive(true);
-            _callScreen.SetActive(false);
-            _dialerNumberText.color = PrimaryTextColor;
+            ShowScreen(_dialerScreen, _view.DialerBackgroundColor);
             _dialerNumberText.SetText(contact.PhoneNumber);
         }
 
@@ -289,15 +311,10 @@ namespace _Scripts.Environments.EmergencyContact
             EmergencyContactEntry contact = SelectedContact;
             if (contact == null) return;
 
-            _background.color = CallingBackgroundColor;
-            _dialerScreen.SetActive(false);
-            _callScreen.SetActive(true);
-            _departmentText.color = Color.white;
-            _callNumberText.color = Color.white;
+            ShowScreen(_callScreen, _view.CallingBackgroundColor);
             _departmentText.SetText(contact.DisplayName);
             _callNumberText.SetText(contact.PhoneNumber);
-            _hangUpButton.color = HangUpButtonColor;
-            SetTimer(elapsedSeconds, Color.white);
+            SetTimer(elapsedSeconds);
         }
 
         private void RenderEnded()
@@ -305,22 +322,23 @@ namespace _Scripts.Environments.EmergencyContact
             EmergencyContactEntry contact = SelectedContact;
             if (contact == null) return;
 
-            _background.color = DialerBackgroundColor;
-            _dialerScreen.SetActive(false);
-            _callScreen.SetActive(true);
-            _departmentText.color = PrimaryTextColor;
-            _callNumberText.color = SecondaryTextColor;
-            _departmentText.SetText(contact.DisplayName);
-            _callNumberText.SetText(contact.PhoneNumber);
-            _hangUpButton.color = DisabledButtonColor;
-            SetTimer(_callDuration, HangUpButtonColor);
+            ShowScreen(_endedScreen, _view.EndedBackgroundColor);
+            _endedDepartmentText.SetText(contact.DisplayName);
+            _endedCallNumberText.SetText(contact.PhoneNumber);
         }
 
-        private void SetTimer(int totalSeconds, Color color)
+        private void ShowScreen(GameObject activeScreen, Color backgroundColor)
+        {
+            _background.color = backgroundColor;
+            _dialerScreen.SetActive(activeScreen == _dialerScreen);
+            _callScreen.SetActive(activeScreen == _callScreen);
+            _endedScreen.SetActive(activeScreen == _endedScreen);
+        }
+
+        private void SetTimer(int totalSeconds)
         {
             int minutes = Mathf.Max(0, totalSeconds) / 60;
             int seconds = Mathf.Max(0, totalSeconds) % 60;
-            _timerText.color = color;
             _timerText.SetText($"{minutes:00}:{seconds:00}");
         }
 
@@ -343,11 +361,13 @@ namespace _Scripts.Environments.EmergencyContact
             _background = _view.Background;
             _dialerScreen = _view.DialerScreen;
             _callScreen = _view.CallScreen;
+            _endedScreen = _view.EndedScreen;
             _dialerNumberText = _view.DialerNumberText;
             _departmentText = _view.DepartmentText;
             _callNumberText = _view.CallNumberText;
             _timerText = _view.TimerText;
-            _hangUpButton = _view.HangUpButton;
+            _endedDepartmentText = _view.EndedDepartmentText;
+            _endedCallNumberText = _view.EndedCallNumberText;
 
             SetLayerRecursively(_phoneRoot, _interfaceLayer);
             _phoneRoot.SetActive(false);

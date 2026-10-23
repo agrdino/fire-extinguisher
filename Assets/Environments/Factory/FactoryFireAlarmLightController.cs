@@ -49,7 +49,9 @@ namespace _Scripts.Environments.Factory
             if (interactable == null || interactable.Kind != FactoryEmergencyInteractableKind.FireAlarm)
                 return;
 
-            SetAlarmLightsActive(true);
+            // The fire alarm visual has been intentionally retired. Keep the
+            // particle systems and their Light components off when the alarm is used.
+            SetAlarmLightsActive(false);
         }
 
         private void HandleStepChanged(FactoryEmergencyResponseStep step)

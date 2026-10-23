@@ -1838,12 +1838,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.EmergencyContact.HandheldEmergencyPhoneController
   _directory: {fileID: 11400000, guid: eb0987adf7daf7048ae03b3528c20237, type: 2}
   _viewPrefab: {fileID: 100004, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
-  _localPosition: {x: 0.065, y: 0.115, z: 0.095}
+  _localPosition: {x: 0, y: 0.115, z: 0.095}
   _localEulerAngles: {x: 58, y: 0, z: 0}
   _canvasScale: 0.00035
   _interfaceLayer: 8
   _minimumCallDuration: 4
   _maximumCallDuration: 6
+  _autoHideDelay: 5
 --- !u!1 &6689828537375574554
 GameObject:
   m_ObjectHideFlags: 0

@@ -295,30 +295,6 @@ MonoBehaviour:
     m_Key: hint.contact_emergency_team
     m_Metadata:
       m_Items: []
-  - m_Id: 19252806459432960
-    m_Key: guide.controller.interact
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598784
-    m_Key: guide.controller.move
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598785
-    m_Key: guide.controller.call
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598786
-    m_Key: guide.controller.wait
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598787
-    m_Key: guide.controller.advance
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19252806484598788
-    m_Key: guide.controller.complete
-    m_Metadata:
-      m_Items: []
   - m_Id: 19611946792886272
     m_Key: common.environment_selection
     m_Metadata:
