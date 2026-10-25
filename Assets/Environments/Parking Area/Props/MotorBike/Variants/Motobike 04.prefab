@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1529343715563216725
 Transform:
@@ -104,9 +104,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3375155543063466042, guid: 68e7f7e9a7849ae4ab323331bc57bdeb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205635549158982268, guid: 68e7f7e9a7849ae4ab323331bc57bdeb, type: 3}
       propertyPath: m_Name
       value: Motobike 04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205635549158982268, guid: 68e7f7e9a7849ae4ab323331bc57bdeb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -129,9 +137,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1529343715563216725}
     m_Modifications:
+    - target: {fileID: 424258400355384216, guid: 0ea151be42e59cb4c83099b9833025db, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1249185106077047753, guid: 0ea151be42e59cb4c83099b9833025db, type: 3}
       propertyPath: m_Name
       value: honda-super-cub-c125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249185106077047753, guid: 0ea151be42e59cb4c83099b9833025db, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1881993993313452403, guid: 0ea151be42e59cb4c83099b9833025db, type: 3}
       propertyPath: m_LocalPosition.x
@@ -172,6 +188,14 @@ PrefabInstance:
     - target: {fileID: 1881993993313452403, guid: 0ea151be42e59cb4c83099b9833025db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 8.853
+      objectReference: {fileID: 0}
+    - target: {fileID: 5996318166710384220, guid: 0ea151be42e59cb4c83099b9833025db, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895231973152593297, guid: 0ea151be42e59cb4c83099b9833025db, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

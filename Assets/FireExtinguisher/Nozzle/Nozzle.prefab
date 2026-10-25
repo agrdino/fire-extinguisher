@@ -234,9 +234,9 @@ MonoBehaviour:
   _rayOrigin: {fileID: 2987053083054346954}
   _range: 3
   _intensityReductionPerSecond: 20
-  _fireLayers:
+  _collisionLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4294967295
 --- !u!114 &8712345678901234507
 MonoBehaviour:
   m_ObjectHideFlags: 0

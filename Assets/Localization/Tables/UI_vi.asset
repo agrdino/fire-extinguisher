@@ -358,14 +358,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674048
-    m_Localized: "Nh\u1EA5n X tr\xEAn controller tr\xE1i \u0111\u1EC3 m\u1EDF \u0111i\u1EC7n
-      tho\u1EA1i. D\xF9ng Y \u0111\u1EC3 \u0111\u1ED5i gi\u1EEFa GA (2120) v\xE0
-      B\u1EA3o v\u1EC7 (2480), r\u1ED3i nh\u1EA5n X \u0111\u1EC3 g\u1ECDi."
+    m_Localized: "\u0110i\u1EC7n tho\u1EA1i hi\u1EC7n s\u1EB5n. Nh\u1EA5n thumbstick tr\xE1i \u0111\u1EC3 \u0111\u1ED5i gi\u1EEFa GA (2120) v\xE0 B\u1EA3o v\u1EC7 (2480), r\u1ED3i nh\u1EA5n trigger tr\xE1i \u0111\u1EC3 g\u1ECDi."
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674049
-    m_Localized: "Nh\u1EA5n X \u0111\u1EC3 m\u1EDF \u0111i\u1EC7n tho\u1EA1i, Y \u0111\u1EC3
-      \u0111\u1ED5i s\u1ED1 v\xE0 X \u0111\u1EC3 g\u1ECDi."
+    m_Localized: "Nh\u1EA5n thumbstick tr\xE1i \u0111\u1EC3 \u0111\u1ED5i s\u1ED1, r\u1ED3i nh\u1EA5n trigger tr\xE1i \u0111\u1EC3 g\u1ECDi."
     m_Metadata:
       m_Items: []
   - m_Id: 19611946792886272

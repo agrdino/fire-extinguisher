@@ -18,11 +18,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5449774790168554459, guid: edcd5f3b93819b440bce7f3b554e890b, type: 3}
       propertyPath: _recoveryDelay
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5449774790168554459, guid: edcd5f3b93819b440bce7f3b554e890b, type: 3}
       propertyPath: _currentIntensity
       value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449774790168554459, guid: edcd5f3b93819b440bce7f3b554e890b, type: 3}
+      propertyPath: _dangerIntensityRatio
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5920212611039059228, guid: edcd5f3b93819b440bce7f3b554e890b, type: 3}
       propertyPath: m_LocalPosition.x

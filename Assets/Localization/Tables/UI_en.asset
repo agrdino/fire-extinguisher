@@ -398,12 +398,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674048
-    m_Localized: Press X on the left controller to open the phone. Use Y to switch
-      between GA (2120) and Security (2480), then press X to call.
+    m_Localized: The phone appears automatically. Press the left thumbstick to switch
+      between GA (2120) and Security (2480), then press the left trigger to call.
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674049
-    m_Localized: Press X to open the phone, Y to switch contacts, and X to call.
+    m_Localized: Press the left thumbstick to switch contacts, then press the left trigger to call.
     m_Metadata:
       m_Items: []
   - m_Id: 19611946792886272

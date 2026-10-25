@@ -42,8 +42,8 @@ namespace _Scripts.Environments.EmergencyContact
         [SerializeField, Min(0f)] private float _autoHideDelay = 5f;
 
         private readonly List<EmergencyContactEntry> _contacts = new();
-        private InputAction _primaryButtonAction;
-        private InputAction _secondaryButtonAction;
+        private InputAction _triggerAction;
+        private InputAction _thumbButtonAction;
         private ApplicationManager _applicationManager;
         private Coroutine _callRoutine;
         private Coroutine _autoHideRoutine;
@@ -83,20 +83,20 @@ namespace _Scripts.Environments.EmergencyContact
             Instance = this;
             CreateView();
 
-            _primaryButtonAction = new InputAction(
-                "Emergency Phone X",
+            _triggerAction = new InputAction(
+                "Emergency Phone Trigger",
                 InputActionType.Button,
-                "<XRController>{LeftHand}/primaryButton");
-            _secondaryButtonAction = new InputAction(
-                "Emergency Phone Y",
+                "<XRController>{LeftHand}/trigger");
+            _thumbButtonAction = new InputAction(
+                "Emergency Phone Thumbstick Click",
                 InputActionType.Button,
-                "<XRController>{LeftHand}/secondaryButton");
+                "<XRController>{LeftHand}/thumbstickClicked");
         }
 
         private void OnEnable()
         {
-            _primaryButtonAction?.Enable();
-            _secondaryButtonAction?.Enable();
+            _triggerAction?.Enable();
+            _thumbButtonAction?.Enable();
         }
 
         private void Start()
@@ -115,17 +115,17 @@ namespace _Scripts.Environments.EmergencyContact
 
         private void Update()
         {
-            if (_primaryButtonAction?.WasPressedThisFrame() == true)
-                HandlePrimaryButton();
+            if (_triggerAction?.WasPressedThisFrame() == true)
+                HandleTriggerButton();
 
-            if (_secondaryButtonAction?.WasPressedThisFrame() == true)
-                HandleSecondaryButton();
+            if (_thumbButtonAction?.WasPressedThisFrame() == true)
+                HandleThumbButton();
         }
 
         private void OnDisable()
         {
-            _primaryButtonAction?.Disable();
-            _secondaryButtonAction?.Disable();
+            _triggerAction?.Disable();
+            _thumbButtonAction?.Disable();
         }
 
         private void OnDestroy()
@@ -133,8 +133,8 @@ namespace _Scripts.Environments.EmergencyContact
             if (_applicationManager != null)
                 _applicationManager.OnStateChanged -= HandleApplicationStateChanged;
 
-            _primaryButtonAction?.Dispose();
-            _secondaryButtonAction?.Dispose();
+            _triggerAction?.Dispose();
+            _thumbButtonAction?.Dispose();
             if (Instance == this) Instance = null;
         }
 
@@ -147,7 +147,7 @@ namespace _Scripts.Environments.EmergencyContact
             }
 
             // Keep the completed-call screen visible during Escape until its timeout
-            // expires or the player dismisses it with the third X press.
+            // expires or the player dismisses it with the trigger.
             if (applicationState == ApplicationState.Escape && State == HandheldEmergencyPhoneState.Ended)
                 return;
 
@@ -168,9 +168,10 @@ namespace _Scripts.Environments.EmergencyContact
             }
 
             _selectedContactIndex = Random.Range(0, _contacts.Count);
-            State = HandheldEmergencyPhoneState.Hidden;
-            _phoneRoot.SetActive(false);
+            State = HandheldEmergencyPhoneState.Dialer;
+            _phoneRoot.SetActive(true);
             RenderDialer();
+            IdleHintController.Instance?.NotifyActivity();
         }
 
         private void ResetSession()
@@ -179,13 +180,11 @@ namespace _Scripts.Environments.EmergencyContact
             HidePhone();
         }
 
-        private void HandlePrimaryButton()
+        private void HandleTriggerButton()
         {
             switch (State)
             {
                 case HandheldEmergencyPhoneState.Hidden:
-                    if (_applicationManager?.State == ApplicationState.ContactEmergencyTeam)
-                        ShowDialer();
                     break;
 
                 case HandheldEmergencyPhoneState.Dialer:
@@ -204,19 +203,11 @@ namespace _Scripts.Environments.EmergencyContact
             }
         }
 
-        private void HandleSecondaryButton()
+        private void HandleThumbButton()
         {
             if (State != HandheldEmergencyPhoneState.Dialer || _contacts.Count < 2) return;
 
             _selectedContactIndex = (_selectedContactIndex + 1) % _contacts.Count;
-            RenderDialer();
-            IdleHintController.Instance?.NotifyActivity();
-        }
-
-        private void ShowDialer()
-        {
-            State = HandheldEmergencyPhoneState.Dialer;
-            _phoneRoot.SetActive(true);
             RenderDialer();
             IdleHintController.Instance?.NotifyActivity();
         }
