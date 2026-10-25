@@ -538,7 +538,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    textureScale: {x: 1.5, y: 0.5}
+    textureScale: {x: 1.5, y: 0.7}
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 0
@@ -629,7 +629,7 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7186830432823608306}
-  - screenRelativeHeight: 0.09127839
+  - screenRelativeHeight: 0.0823357
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5988561826661179371}
