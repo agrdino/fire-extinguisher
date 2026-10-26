@@ -28,13 +28,7 @@ namespace _Scripts.Environments.EmergencyContact
         [SerializeField] private EmergencyContactDirectory _directory;
 
         [Header("View")]
-        [SerializeField] private HandheldEmergencyPhoneView _viewPrefab;
-
-        [Header("Hand Attachment")]
-        [SerializeField] private Vector3 _localPosition = new(0f, 0.115f, 0.095f);
-        [SerializeField] private Vector3 _localEulerAngles = new(58f, 0f, 0f);
-        [SerializeField, Min(0.00001f)] private float _canvasScale = 0.00035f;
-        [SerializeField, Range(0, 31)] private int _interfaceLayer = 8;
+        [SerializeField] private HandheldEmergencyPhoneView _view;
 
         [Header("Call")]
         [SerializeField, Min(1)] private int _minimumCallDuration = 4;
@@ -50,7 +44,6 @@ namespace _Scripts.Environments.EmergencyContact
         private int _selectedContactIndex;
         private int _callDuration;
 
-        private HandheldEmergencyPhoneView _view;
         private GameObject _phoneRoot;
         private GameObject _dialerScreen;
         private GameObject _callScreen;
@@ -81,7 +74,7 @@ namespace _Scripts.Environments.EmergencyContact
             }
 
             Instance = this;
-            CreateView();
+            CacheView();
 
             _triggerAction = new InputAction(
                 "Emergency Phone Trigger",
@@ -333,22 +326,16 @@ namespace _Scripts.Environments.EmergencyContact
             _timerText.SetText($"{minutes:00}:{seconds:00}");
         }
 
-        private void CreateView()
+        private void CacheView()
         {
-            if (_viewPrefab == null)
+            if (_view == null)
             {
-                Debug.LogError("The handheld emergency phone requires a view prefab.", this);
+                Debug.LogError("The handheld emergency phone requires a view in the Application Runtime prefab.", this);
                 enabled = false;
                 return;
             }
 
-            _view = Instantiate(_viewPrefab, transform);
-            _view.name = _viewPrefab.name;
             _phoneRoot = _view.gameObject;
-            _phoneRoot.transform.localPosition = _localPosition;
-            _phoneRoot.transform.localRotation = Quaternion.Euler(_localEulerAngles);
-            _phoneRoot.transform.localScale = Vector3.one * _canvasScale;
-
             _background = _view.Background;
             _dialerScreen = _view.DialerScreen;
             _callScreen = _view.CallScreen;
@@ -360,15 +347,7 @@ namespace _Scripts.Environments.EmergencyContact
             _endedDepartmentText = _view.EndedDepartmentText;
             _endedCallNumberText = _view.EndedCallNumberText;
 
-            SetLayerRecursively(_phoneRoot, _interfaceLayer);
             _phoneRoot.SetActive(false);
-        }
-
-        private static void SetLayerRecursively(GameObject root, int layer)
-        {
-            root.layer = layer;
-            foreach (Transform child in root.transform)
-                SetLayerRecursively(child.gameObject, layer);
         }
     }
 }

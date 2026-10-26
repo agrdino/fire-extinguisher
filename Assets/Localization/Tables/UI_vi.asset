@@ -144,16 +144,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040920
-    m_Localized: "CO\u2082 d\xF9ng cho ch\xE1y \u0111i\u1EC7n. B\u1ED9t kh\xF4 d\xF9ng
-      cho ch\xE1y x\u0103ng. Ch\u1ECDn m\u1ED9t b\xECnh r\u1ED3i x\xE1c nh\u1EADn."
+    m_Localized: "CO<sub>2</sub> d\xF9ng cho ch\xE1y \u0111i\u1EC7n. B\u1ED9t kh\xF4
+      d\xF9ng cho ch\xE1y x\u0103ng. Ch\u1ECDn m\u1ED9t b\xECnh r\u1ED3i x\xE1c nh\u1EADn."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040921
-    m_Localized: "CO\u2082"
+    m_Localized: CO<sub>2</sub>
     m_Metadata:
       m_Items: []
   - m_Id: 1337040922
-    m_Localized: "B\xCCNH CH\u1EEEA CH\xC1Y CO\u2082"
+    m_Localized: "B\xCCNH CH\u1EEEA CH\xC1Y CO<sub>2</sub>"
     m_Metadata:
       m_Items: []
   - m_Id: 1337040923
@@ -233,8 +233,9 @@ MonoBehaviour:
       t\xE1c ch\u1EEFa ch\xE1y c\u01A1 s\u1EDF. Ch\xFAc m\u1EEBng b\u1EA1n \u0111\xE3
       ho\xE0n th\xE0nh tr\u1EA3i nghi\u1EC7m. Xin c\u1EA3m \u01A1n!\n\nB\u1EA1n \u0111\xE3
       ch\u1ECDn \u0111\xFAng lo\u1EA1i b\xECnh ch\u1EEFa ch\xE1y ph\xF9 h\u1EE3p
-      v\xEC khi s\u1EED d\u1EE5ng b\xECnh CO\u2082, b\xECnh n\xE0y s\u1EBD kh\xF4ng
-      d\u1EABn \u0111i\u1EC7n v\xE0 kh\xF4ng g\xE2y \u0103n m\xF2n thi\u1EBFt b\u1ECB."
+      v\xEC khi s\u1EED d\u1EE5ng b\xECnh CO<sub>2</sub>, b\xECnh n\xE0y s\u1EBD
+      kh\xF4ng d\u1EABn \u0111i\u1EC7n v\xE0 kh\xF4ng g\xE2y \u0103n m\xF2n thi\u1EBFt
+      b\u1ECB."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040947
@@ -280,7 +281,7 @@ MonoBehaviour:
       g\xE2y h\u01B0 h\u1ECFng thi\u1EBFt b\u1ECB, t\u1EA1o m\xE0n b\u1EE5i d\xE0y
       \u0111\u1EB7c, c\u1EA3n tr\u1EDF t\u1EA7m nh\xECn v\xE0 g\xE2y kh\xF3 th\u1EDF.
       \u0110\u1ED1i v\u1EDBi \u0111\xE1m ch\xE1y \u0111i\u1EC7n, c\u1EA7n s\u1EED
-      d\u1EE5ng b\xECnh ch\u1EEFa ch\xE1y CO\u2082 nh\xE9."
+      d\u1EE5ng b\xECnh ch\u1EEFa ch\xE1y CO<sub>2</sub> nh\xE9."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040953
@@ -288,8 +289,8 @@ MonoBehaviour:
       ch\xE1y ph\xF9 h\u1EE3p. \u0110\u1ED1i v\u1EDBi \u0111\xE1m ch\xE1y x\u0103ng,
       c\u1EA7n s\u1EED d\u1EE5ng b\xECnh ch\u1EEFa ch\xE1y b\u1ED9t nh\xE9 v\xEC
       \u1EDF khu v\u1EF1c b\xEAn ngo\xE0i tr\u1ED1ng tr\u1EA3i ho\u1EB7c c\xF3 gi\xF3
-      m\u1EA1nh, CO\u2082 d\u1EC5 b\u1ECB ph\xE2n t\xE1n, l\xE0m gi\u1EA3m hi\u1EC7u
-      qu\u1EA3 ch\u1EEFa ch\xE1y."
+      m\u1EA1nh, CO<sub>2</sub> d\u1EC5 b\u1ECB ph\xE2n t\xE1n, l\xE0m gi\u1EA3m
+      hi\u1EC7u qu\u1EA3 ch\u1EEFa ch\xE1y."
     m_Metadata:
       m_Items: []
   - m_Id: 1337040938
@@ -358,11 +359,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674048
-    m_Localized: "\u0110i\u1EC7n tho\u1EA1i hi\u1EC7n s\u1EB5n. Nh\u1EA5n thumbstick tr\xE1i \u0111\u1EC3 \u0111\u1ED5i gi\u1EEFa GA (2120) v\xE0 B\u1EA3o v\u1EC7 (2480), r\u1ED3i nh\u1EA5n trigger tr\xE1i \u0111\u1EC3 g\u1ECDi."
+    m_Localized: "\u0110i\u1EC7n tho\u1EA1i hi\u1EC7n s\u1EB5n. Nh\u1EA5n thumbstick
+      tr\xE1i \u0111\u1EC3 \u0111\u1ED5i gi\u1EEFa GA (2120) v\xE0 B\u1EA3o v\u1EC7
+      (2480), r\u1ED3i nh\u1EA5n trigger tr\xE1i \u0111\u1EC3 g\u1ECDi."
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674049
-    m_Localized: "Nh\u1EA5n thumbstick tr\xE1i \u0111\u1EC3 \u0111\u1ED5i s\u1ED1, r\u1ED3i nh\u1EA5n trigger tr\xE1i \u0111\u1EC3 g\u1ECDi."
+    m_Localized: "Nh\u1EA5n thumbstick tr\xE1i \u0111\u1EC3 \u0111\u1ED5i s\u1ED1,
+      r\u1ED3i nh\u1EA5n trigger tr\xE1i \u0111\u1EC3 g\u1ECDi."
     m_Metadata:
       m_Items: []
   - m_Id: 19611946792886272

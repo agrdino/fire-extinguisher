@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15281422b06d6c84cb7c556ab22b6424, type: 3}
+  m_Name: FireExtinguisherVoiceLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Audio.VoiceClipLibrary
+  _entries:
+  - _id: welcome.introduction
+    _category: experience_intro
+    _priority: P0
+    _vietnamese: {fileID: 8300000, guid: 44e592cd8ac54e5cbd4ff78d38b5133f, type: 3}
+    _english: {fileID: 0}
+    _japanese: {fileID: 0}
+  - _id: completed.electrical.result
+    _category: success_result
+    _priority: P0
+    _vietnamese: {fileID: 8300000, guid: 23cf11c5082c43cc98daa848254f57b2, type: 3}
+    _english: {fileID: 0}
+    _japanese: {fileID: 0}
+  - _id: completed.liquid.result
+    _category: success_result
+    _priority: P0
+    _vietnamese: {fileID: 8300000, guid: ce9a39c1acfd45b585774bdc7defe58b, type: 3}
+    _english: {fileID: 0}
+    _japanese: {fileID: 0}
+  - _id: failure.extinguisherDepleted.result
+    _category: failure_result
+    _priority: P1
+    _vietnamese: {fileID: 8300000, guid: 2da5e57b5e8244ecb60be7fa10dab478, type: 3}
+    _english: {fileID: 0}
+    _japanese: {fileID: 0}
+  - _id: failure.wrongExtinguisher.electrical.tip
+    _category: failure_feedback
+    _priority: P1
+    _vietnamese: {fileID: 8300000, guid: 22d35331a0074c7c9c93e547731b2aa3, type: 3}
+    _english: {fileID: 0}
+    _japanese: {fileID: 0}
+  - _id: failure.wrongExtinguisher.liquid.tip
+    _category: failure_feedback
+    _priority: P1
+    _vietnamese: {fileID: 8300000, guid: fb481e79aa9b47e8aafaa675b16398c3, type: 3}
+    _english: {fileID: 0}
+    _japanese: {fileID: 0}
+  - _id: failure.unknown.result
+    _category: failure_result
+    _priority: P1
+    _vietnamese: {fileID: 8300000, guid: a1a1dfbb6daa432cb3cebdad84f1bf92, type: 3}
+    _english: {fileID: 0}
+    _japanese: {fileID: 0}

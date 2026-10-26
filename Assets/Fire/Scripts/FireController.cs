@@ -68,6 +68,13 @@ namespace _Scripts.Fires
 
         public bool AreAllFiresExtinguished() => _activeFires.Count > 0 && _activeFires.TrueForAll(fire => fire.IsExtinguished);
 
+        public void ResetActiveFires()
+        {
+            _hasRaisedAllFiresExtinguished = false;
+            for (int i = 0; i < _activeFires.Count; i++)
+                _activeFires[i]?.ResetFire();
+        }
+
         public void SpawnFires(Transform playerRoot, bool keepElectricalSparksUntilPowerOff = false)
         {
             ClearFires();

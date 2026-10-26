@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Controller.GameManager
   _roundDuration: 90
   _escapeDuration: 40
+  _wrongExtinguisherFailureDelay: 4
   _isExploreTimeLimited: 0
   _exploreDuration: 30
   _fireController: {fileID: 152316646840582338}
@@ -362,6 +363,9 @@ GameObject:
   - component: {fileID: 5670028465276207191}
   - component: {fileID: 8034227045019496165}
   - component: {fileID: 1361165334517163097}
+  - component: {fileID: 3997428241945550316}
+  - component: {fileID: 1715660961842200326}
+  - component: {fileID: 8297598900370171273}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -396,6 +400,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99cbaea2bca94278bc68e867de95889b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Audio.AudioManager
+  _voice:
+    _library: {fileID: 11400000, guid: 099167ef6247ff8448db06d259813eb5, type: 2}
+    _defaultLocaleCode: en
+    _output: {fileID: 0}
+    _volume: 1
+    _logMissingCues: 1
 --- !u!82 &8241853663682226992
 AudioSource:
   m_ObjectHideFlags: 0
@@ -721,6 +731,61 @@ MonoBehaviour:
   _audioSource: {fileID: 8034227045019496165}
   _hoverClip: {fileID: 8300000, guid: f0cb06f9461ea8b4bba64f3f7064a702, type: 3}
   _clickClip: {fileID: 8300000, guid: 4656469a7b79f5c4a84f2ecd79f129d1, type: 3}
+--- !u!114 &3997428241945550316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2815170109715069579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d452f91290bd74cb8e2a899ecd4837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Audio.VoiceLocaleSync
+--- !u!114 &1715660961842200326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2815170109715069579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa3da65c9d1c704ab4adf3dfea7de67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Audio.ApplicationStateVoicePresenter
+  _applicationManager: {fileID: 8962677695553302094}
+  _bindings:
+  - _state: 0
+    _cue:
+      _id: welcome.introduction
+  _playCurrentStateOnStart: 1
+--- !u!114 &8297598900370171273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2815170109715069579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a62693eddb12ed4dba71a29622a71d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Audio.TrainingResultVoicePresenter
+  _applicationManager: {fileID: 8962677695553302094}
+  _completedElectrical:
+    _id: completed.electrical.result
+  _completedLiquid:
+    _id: completed.liquid.result
+  _extinguisherDepleted:
+    _id: failure.extinguisherDepleted.result
+  _wrongExtinguisherElectrical:
+    _id: failure.wrongExtinguisher.electrical.tip
+  _wrongExtinguisherLiquid:
+    _id: failure.wrongExtinguisher.liquid.tip
+  _unknownFailure:
+    _id: failure.unknown.result
 --- !u!1 &2914815740470489799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,6 +1700,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1817053404723927133}
   - {fileID: 7040445056584746088}
   - {fileID: 2261650049357785150}
   m_Father: {fileID: 4712338367803150261}
@@ -1836,11 +1902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.EmergencyContact.HandheldEmergencyPhoneController
   _directory: {fileID: 11400000, guid: eb0987adf7daf7048ae03b3528c20237, type: 2}
-  _viewPrefab: {fileID: 100004, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
-  _localPosition: {x: 0, y: 0.115, z: 0.095}
-  _localEulerAngles: {x: 58, y: 0, z: 0}
-  _canvasScale: 0.00035
-  _interfaceLayer: 8
+  _view: {fileID: 1817053404723927128}
   _minimumCallDuration: 4
   _maximumCallDuration: 6
   _autoHideDelay: 5
@@ -2879,6 +2941,143 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8020917336435217465, guid: 911b37b4b30b0c64e8908ac51bd5ecac, type: 3}
   m_PrefabInstance: {fileID: 1612452449670963854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1817053404723830524
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6359299723703630821}
+    m_Modifications:
+    - target: {fileID: 100000, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_Name
+      value: Handheld Emergency Phone UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.00035
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.00035
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.00035
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.095
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8746197
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.4848096
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.115
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100003, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+--- !u!114 &1817053404723927128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+  m_PrefabInstance: {fileID: 1817053404723830524}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593979e152e545c9bbeb38e095d11d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.EmergencyContact.HandheldEmergencyPhoneView
+--- !u!224 &1817053404723927133 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: a2e1c23d4b5f46c7a8d9e0f112233445, type: 3}
+  m_PrefabInstance: {fileID: 1817053404723830524}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2202704237315197444
 PrefabInstance:

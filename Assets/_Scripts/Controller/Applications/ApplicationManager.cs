@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using _Scripts.FireExtinguishers;
 using _Scripts.Fires;
@@ -31,6 +32,7 @@ namespace _Scripts.Controller
         [Header("Timing")]
         [SerializeField, Min(0f)] private float _roundDuration = 90f;
         [SerializeField, Min(0f)] private float _escapeDuration = 40f;
+        [SerializeField, Min(0f)] private float _wrongExtinguisherFailureDelay = 3f;
         [SerializeField] private bool _isExploreTimeLimited = true;
         [SerializeField, Min(0f)] private float _exploreDuration = 30f;
 
@@ -61,6 +63,11 @@ namespace _Scripts.Controller
         private FireExtinguisherStation _activeExtinguisherStation;
         private FireExtinguisherStation _mainExtinguisherStation;
         private IEnvironmentSceneContext _environmentContext;
+        private Coroutine _wrongExtinguisherFailureRoutine;
+        private bool _isRetryingWrongExtinguisherFailure;
+        private bool _hasExtinguisherPickupPose;
+        private Vector3 _extinguisherPickupPosition;
+        private Quaternion _extinguisherPickupRotation;
 
         public ApplicationState State => _state;
         public float RoundDuration => _roundDuration;
@@ -76,6 +83,10 @@ namespace _Scripts.Controller
         public bool IsEscapeTimeLimited => IsEscaping && _isEscapeTimeLimited;
         public FireExtinguisherType SelectedExtinguisherType => _selectedExtinguisherType;
         public TrainingFailureReason FailureReasons => _failureReasons;
+        public bool CanRetryWrongExtinguisherFailure =>
+            _state == ApplicationState.Failed
+            && _hasExtinguisherPickupPose
+            && (_failureReasons & TrainingFailureReason.IncompatibleExtinguisherSelected) != 0;
         public EmergencyExit EmergencyExit => _emergencyExit;
         public Transform PlayerView => GetPlayerView();
         public IEnvironmentSceneContext CurrentEnvironment => _environmentContext;
@@ -133,6 +144,8 @@ namespace _Scripts.Controller
 
         private void OnDisable()
         {
+            CancelWrongExtinguisherFailure();
+
             if (_fireController != null)
             {
                 _fireController.OnAllFiresExtinguished -= HandleAllFiresExtinguished;
@@ -237,6 +250,8 @@ namespace _Scripts.Controller
 
             ApplicationState previousState = _state;
             _state = state;
+            if (previousState == ApplicationState.Fighting && state != ApplicationState.Fighting)
+                CancelWrongExtinguisherFailure();
             SetMovementEnabled(CanMoveInState(_state));
             switch (_state)
             {
@@ -249,6 +264,7 @@ namespace _Scripts.Controller
                     _fireController.ClearFires();
                     _isEscapeTimeLimited = false;
                     _isRoundTimerRunning = false;
+                    ClearExtinguisherPickupPose();
                     SetEmergencyExitActive(false);
                     ResetPlayerPose();
                     break;
@@ -263,6 +279,7 @@ namespace _Scripts.Controller
                     _fireController.ClearFires();
                     _isEscapeTimeLimited = false;
                     _isRoundTimerRunning = false;
+                    ClearExtinguisherPickupPose();
                     SetEmergencyExitActive(false);
                     ResetPlayerPose();
                     _remainingTime = _exploreDuration;
@@ -271,6 +288,7 @@ namespace _Scripts.Controller
 
                 case ApplicationState.FactoryResponse:
                     ResetTrainingResult();
+                    ClearExtinguisherPickupPose();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     EnsureRoundTimerStarted();
@@ -281,6 +299,7 @@ namespace _Scripts.Controller
 
                 case ApplicationState.SelectExtinguisher:
                     ResetTrainingResult();
+                    ClearExtinguisherPickupPose();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     EnsureRoundTimerStarted();
@@ -290,13 +309,33 @@ namespace _Scripts.Controller
                     break;
 
                 case ApplicationState.Fighting:
+                    bool isWrongExtinguisherRetry = _isRetryingWrongExtinguisherFailure;
+                    _isRetryingWrongExtinguisherFailure = false;
                     _isEscapeTimeLimited = false;
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
-                    if (previousState != ApplicationState.FactoryResponse || _fireController.SelectedSpawnPoint == null)
-                        _fireController.SpawnFires(_playerRoot);
+                    if (isWrongExtinguisherRetry)
+                    {
+                        ResetTrainingResult();
+                        _fireController.ResetActiveFires();
+                        RestoreExtinguisherPickupPose();
+                    }
+                    else
+                    {
+                        ClearExtinguisherPickupPose();
+                        if (previousState != ApplicationState.FactoryResponse || _fireController.SelectedSpawnPoint == null)
+                            _fireController.SpawnFires(_playerRoot);
+                    }
                     ConfigureExtinguisherStations();
-                    EnsureRoundTimerStarted();
+                    if (isWrongExtinguisherRetry)
+                    {
+                        _isRoundTimerRunning = true;
+                        OnRemainingTimeChanged?.Invoke(_remainingTime);
+                    }
+                    else
+                    {
+                        EnsureRoundTimerStarted();
+                    }
                     _fireExtinguisherController.SetInputEnabled(false);
                     EnsureEmergencyExitPositioned();
                     SetEmergencyExitActive(true);
@@ -345,6 +384,7 @@ namespace _Scripts.Controller
             SelectExtinguisher(FireExtinguisherType.Unselect);
             _isEscapeTimeLimited = false;
             _isRoundTimerRunning = false;
+            ClearExtinguisherPickupPose();
             SetEmergencyExitActive(false);
             ResetPlayerPose();
             _remainingTime = _roundDuration;
@@ -403,6 +443,7 @@ namespace _Scripts.Controller
 
             if (_modelSwitcher.TryTransitionTo(extinguisherType))
             {
+                SaveExtinguisherPickupPose();
                 // Confirm the accepted object interaction immediately; the logical
                 // type still commits at the dissolve midpoint as before.
                 station.PlaySelectionFeedback(extinguisherType);
@@ -466,12 +507,40 @@ namespace _Scripts.Controller
         {
             if (_playerRoot == null || _environmentContext?.PlayerSpawnPoint == null) return;
 
+            SetPlayerPose(
+                _environmentContext.PlayerSpawnPoint.position,
+                _environmentContext.PlayerSpawnPoint.rotation);
+        }
+
+        private void SaveExtinguisherPickupPose()
+        {
+            if (_playerRoot == null) return;
+
+            _extinguisherPickupPosition = _playerRoot.position;
+            _extinguisherPickupRotation = _playerRoot.rotation;
+            _hasExtinguisherPickupPose = true;
+        }
+
+        private void RestoreExtinguisherPickupPose()
+        {
+            if (!_hasExtinguisherPickupPose) return;
+            SetPlayerPose(_extinguisherPickupPosition, _extinguisherPickupRotation);
+        }
+
+        private void ClearExtinguisherPickupPose()
+        {
+            _hasExtinguisherPickupPose = false;
+        }
+
+        private void SetPlayerPose(Vector3 position, Quaternion rotation)
+        {
+            if (_playerRoot == null) return;
+
             CharacterController characterController = _playerRoot.GetComponent<CharacterController>();
             bool wasEnabled = characterController != null && characterController.enabled;
             if (characterController != null) characterController.enabled = false;
 
-            Transform spawnPoint = _environmentContext.PlayerSpawnPoint;
-            _playerRoot.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            _playerRoot.SetPositionAndRotation(position, rotation);
 
             if (characterController != null) characterController.enabled = wasEnabled;
         }
@@ -487,6 +556,7 @@ namespace _Scripts.Controller
         private void HandleAllFiresExtinguished()
         {
             if (!IsFighting) return;
+            if (_wrongExtinguisherFailureRoutine != null) return;
 
             UnselectExtinguisher();
 
@@ -506,6 +576,7 @@ namespace _Scripts.Controller
         private void HandleEmergencyExitReached()
         {
             if (!IsFighting && !IsEscaping) return;
+            if (_wrongExtinguisherFailureRoutine != null) return;
 
             if (_fireController.AreAllFiresExtinguished())
             {
@@ -519,7 +590,38 @@ namespace _Scripts.Controller
 
         private void HandleIncompatibleFireTargeted(FireExtinguisherType extinguisherType, FireType fireType)
         {
-            if (IsFighting) AddFailureReason(TrainingFailureReason.IncompatibleExtinguisherSelected);
+            if (!IsFighting || _wrongExtinguisherFailureRoutine != null) return;
+
+            AddFailureReason(TrainingFailureReason.IncompatibleExtinguisherSelected);
+            _wrongExtinguisherFailureRoutine = StartCoroutine(ShowWrongExtinguisherFailureAfterDelay());
+        }
+
+        private IEnumerator ShowWrongExtinguisherFailureAfterDelay()
+        {
+            if (_wrongExtinguisherFailureDelay > 0f)
+                yield return new WaitForSeconds(_wrongExtinguisherFailureDelay);
+
+            _wrongExtinguisherFailureRoutine = null;
+            if (IsFighting
+                && (_failureReasons & TrainingFailureReason.IncompatibleExtinguisherSelected) != 0)
+                SetState(ApplicationState.Failed);
+        }
+
+        private void CancelWrongExtinguisherFailure()
+        {
+            if (_wrongExtinguisherFailureRoutine == null) return;
+
+            StopCoroutine(_wrongExtinguisherFailureRoutine);
+            _wrongExtinguisherFailureRoutine = null;
+        }
+
+        public bool TryRetryWrongExtinguisherFailure()
+        {
+            if (!CanRetryWrongExtinguisherFailure) return false;
+
+            _isRetryingWrongExtinguisherFailure = true;
+            SetState(ApplicationState.Fighting);
+            return true;
         }
 
         private void HandleOutgoingDissolveStarted(FireExtinguisherType outgoingType)

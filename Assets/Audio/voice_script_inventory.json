@@ -10,7 +10,7 @@
     },
     {
       "id": "completed.electrical.result",
-      "vi": "Bạn đã thực hiện rất tốt công tác chữa cháy tại chỗ. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn! Bạn đã chọn đúng bình chữa cháy CO₂. Bình CO₂ không dẫn điện và không gây ăn mòn thiết bị, phù hợp với đám cháy điện.",
+      "vi": "Bạn đã thực hiện rất tốt công tác chữa cháy tại chỗ. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn!  Bạn đã chọn đúng bình chữa cháy CO₂. Bình CO₂ không dẫn điện và không gây ăn mòn thiết bị, phù hợp với đám cháy điện.",
       "en": "You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you! You chose the correct extinguisher. A CO2 extinguisher does not conduct electricity or corrode equipment, making it suitable for electrical fires.",
       "jp": "初期消火活動をとても適切に行いました。体験の完了、おめでとうございます。ありがとうございました！適切な消火器を選択できました。CO₂消火器は電気を通さず、機器を腐食させないため、電気火災に適しています。",
       "category": "success_result",
@@ -25,42 +25,10 @@
       "priority": "P0"
     },
     {
-      "id": "escaped.fireNotExtinguished.result",
-      "vi": "Bạn đã thoát ra an toàn, nhưng đám cháy vẫn chưa được dập tắt.",
-      "en": "You reached safety, but the fire was not extinguished.",
-      "jp": "安全な場所へ避難しましたが、火はまだ消し止められていません。",
-      "category": "escaped_result",
-      "priority": "P0"
-    },
-    {
-      "id": "failure.escapeTimedOut.result",
-      "vi": "Bạn chưa đến nơi an toàn trong thời gian quy định. Hãy đi theo chỉ dẫn và tới lối thoát hiểm kịp thời.",
-      "en": "You did not reach safety within the required time. Follow the guidance and reach the emergency exit promptly.",
-      "jp": "制限時間内に安全な場所へ避難できませんでした。案内表示に従い、速やかに非常口へ向かってください。",
-      "category": "failure_result",
-      "priority": "P0"
-    },
-    {
-      "id": "failure.firefightingTimedOut.result",
-      "vi": "Bạn chưa dập tắt đám cháy trong thời gian quy định. Hãy thao tác nhanh chóng, hướng vòi vào gốc lửa và lia vòi qua lại.",
-      "en": "You did not extinguish the fire within the required time. Act quickly, aim at the base of the fire, and sweep the nozzle from side to side.",
-      "jp": "制限時間内に消火できませんでした。素早く操作し、ノズルを火元に向けて左右に噴射してください。",
-      "category": "failure_result",
-      "priority": "P1"
-    },
-    {
       "id": "failure.extinguisherDepleted.result",
       "vi": "Bình chữa cháy đã hết trước khi bạn dập tắt được đám cháy. Hãy hướng vòi chính xác vào gốc lửa và sử dụng chất chữa cháy hiệu quả hơn.",
       "en": "The extinguisher ran out before the fire was extinguished. Aim accurately at the base of the fire and use the extinguishing agent more efficiently.",
       "jp": "消火する前に消火器の薬剤がなくなりました。ノズルを火元に正確に向け、消火剤を効率よく使用してください。",
-      "category": "failure_result",
-      "priority": "P1"
-    },
-    {
-      "id": "failure.fireNotExtinguished.result",
-      "vi": "Bạn đã đến lối thoát hiểm khi đám cháy chưa được dập tắt. Trong bài huấn luyện này, bạn cần dập tắt hoàn toàn đám cháy trước khi thoát hiểm.",
-      "en": "You reached the emergency exit before the fire was extinguished. You must extinguish the fire completely before evacuating in this training.",
-      "jp": "消火する前に非常口へ到達しました。この訓練では、避難する前に火を完全に消してください。",
       "category": "failure_result",
       "priority": "P1"
     },

@@ -82,6 +82,12 @@ namespace _Scripts.Controller
                 && _applicationManager.State != ApplicationState.Failed)
                 return false;
 
+            if (_applicationManager.CanRetryWrongExtinguisherFailure)
+            {
+                return _sceneFlowController.TryRunTransition(
+                    () => _applicationManager.TryRetryWrongExtinguisherFailure());
+            }
+
             return _sceneFlowController.TryRunTransition(
                 () => _applicationManager.SetState(ApplicationState.Ready));
         }

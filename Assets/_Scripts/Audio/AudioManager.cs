@@ -21,6 +21,9 @@ namespace _Scripts.Audio
 
         private static AudioManager _instance;
 
+        [Header("Localized Voice")]
+        [SerializeField] private VoicePlaybackSystem _voice = new VoicePlaybackSystem();
+
         private readonly Dictionary<AudioSource, AlternatingLoopState> _alternatingLoops =
             new Dictionary<AudioSource, AlternatingLoopState>();
 
@@ -41,6 +44,8 @@ namespace _Scripts.Audio
             }
 
             _instance = this;
+            if (_voice == null) _voice = new VoicePlaybackSystem();
+            _voice.Initialize(this);
         }
 
         private void OnDestroy()
@@ -48,7 +53,33 @@ namespace _Scripts.Audio
             if (_instance != this) return;
 
             StopAllAlternatingLoops();
+            _voice?.Stop();
             _instance = null;
+        }
+
+        public VoicePlaybackHandle PlayVoice(VoiceCueReference cue)
+        {
+            return _voice != null ? _voice.Play(cue) : default;
+        }
+
+        public void SetVoiceLocale(string localeCode)
+        {
+            _voice?.SetLocale(localeCode);
+        }
+
+        public void StopVoice()
+        {
+            _voice?.Stop();
+        }
+
+        internal bool IsVoicePlaying(uint generation)
+        {
+            return _voice != null && _voice.IsPlaying(generation);
+        }
+
+        internal void StopVoice(uint generation)
+        {
+            _voice?.Stop(generation);
         }
 
         public void PlayAlternatingLoop(

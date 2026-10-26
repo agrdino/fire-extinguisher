@@ -37,11 +37,6 @@ namespace _Scripts.Environments.Factory
             RestoreInitialState();
         }
 
-        private void OnDestroy()
-        {
-            RestoreInitialState();
-        }
-
         public void SetPowerOff(bool isPowerOff)
         {
             CaptureInitialState();

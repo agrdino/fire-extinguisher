@@ -69,9 +69,9 @@ namespace _Scripts.UI
 
             ApplicationManager applicationManager = ApplicationManager.Instance;
             TrainingFailureReason reasons = applicationManager != null ? applicationManager.FailureReasons : TrainingFailureReason.FireNotExtinguished;
-            string message = GetPrimaryReason(reasons).GetLocalizedString();
-            if ((reasons & TrainingFailureReason.IncompatibleExtinguisherSelected) != 0)
-                message = $"{message}\n\n{GetWrongExtinguisherTip().GetLocalizedString()}";
+            string message = (reasons & TrainingFailureReason.IncompatibleExtinguisherSelected) != 0
+                ? GetWrongExtinguisherTip().GetLocalizedString()
+                : GetPrimaryReason(reasons).GetLocalizedString();
             _txtMessage.SetText(message);
         }
 

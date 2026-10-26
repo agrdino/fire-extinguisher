@@ -58,11 +58,22 @@ namespace _Scripts.Fires
 
         private void OnEnable()
         {
+            ResetRuntimeState(false);
+        }
+
+        public void ResetFire()
+        {
+            ResetRuntimeState(true);
+        }
+
+        private void ResetRuntimeState(bool notifyIntensityChanged)
+        {
             _currentIntensity = _maxIntensity;
             _remainingDeactivationDelay = _deactivationDelay;
             _remainingRecoveryDelay = _recoveryDelay;
             _hasIncompatibleExposure = false;
             _hasReachedDangerThreshold = false;
+            if (notifyIntensityChanged) OnIntensityChanged?.Invoke(_currentIntensity);
         }
 
         private void Update()
