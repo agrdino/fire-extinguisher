@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _Scripts.UI
 {
     public sealed class EscapedScene : MonoBehaviour, IScene
     {
-        [SerializeField] private Button _btnRestart;
+        [FormerlySerializedAs("_btnRestart")]
+        [SerializeField] private Button _btnRetry;
         [SerializeField] private TMP_Text _txtMessage;
         [SerializeField] private LocalizedString _escapedMessage = new("UI", "escaped.message");
         [SerializeField] private EndStateNavigationControls _navigationControls = new();
@@ -20,12 +22,14 @@ namespace _Scripts.UI
         public void Initialize(IApplicationNavigator navigator)
         {
             _navigator = navigator;
-            _navigationControls.Initialize(_navigator, _btnRestart);
+            _navigationControls.Initialize(_navigator, _btnRetry);
         }
 
         private void Awake()
         {
-            if (_btnRestart == null) _btnRestart = UIComponentLookup.FindButton(this, "btnRestart");
+            if (_btnRetry == null)
+                _btnRetry = UIComponentLookup.FindButton(this, "btnRetry")
+                    ?? UIComponentLookup.FindButton(this, "btnRestart");
             if (_txtMessage == null) _txtMessage = UIComponentLookup.FindText(this, "txtGuide");
             DisableStaticMessageLocalizer();
             ConfigureMessageText();

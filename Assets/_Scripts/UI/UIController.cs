@@ -15,7 +15,6 @@ namespace _Scripts.UI
         public static UIController Instance => _instance;
         
         [SerializeField] private SelectLanguageScene _selectLanguageScene;
-        [SerializeField] private SelectEnvironmentScene _selectEnvironmentScene;
         [FormerlySerializedAs("_readyView")]
         [SerializeField] private StartScene _startScene;
         [SerializeField] private GuideScene _guideScene;
@@ -61,7 +60,7 @@ namespace _Scripts.UI
 
         public void InitializeNavigation(IApplicationNavigator navigator)
         {
-            _selectEnvironmentScene.Initialize(navigator);
+            _selectLanguageScene.Initialize(navigator);
             _startScene.Initialize(navigator);
             if (_completedScene.Value is CompletedScene completedScene)
                 completedScene.Initialize(navigator);
@@ -107,7 +106,7 @@ namespace _Scripts.UI
             {
                 ApplicationState.Ready => _startScene,
                 ApplicationState.Language => _selectLanguageScene,
-                ApplicationState.SelectEnvironment => _selectEnvironmentScene,
+                ApplicationState.SelectEnvironment => _selectLanguageScene,
                 ApplicationState.Guide => _guideScene,
                 ApplicationState.Explore => _exploreScene,
                 ApplicationState.FactoryResponse => _factoryResponseScene,

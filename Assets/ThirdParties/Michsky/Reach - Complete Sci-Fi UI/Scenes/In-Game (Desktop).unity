@@ -183,9 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Title Area
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e62ece968382eaf44897316c9daaf99e, type: 2}
-  m_sharedMaterial: {fileID: 7526820672995758586, guid: e62ece968382eaf44897316c9daaf99e,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
+  m_sharedMaterial: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -393,14 +392,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 4537598799064072987, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 7526820672995758586, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 5165860432020950734, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_Name
@@ -4072,14 +4069,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 4537598799064072987, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 7526820672995758586, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 5165860432020950734, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_Name
@@ -4322,9 +4317,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PAUSED
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8322a83c36dbf604db8a075474b12c47, type: 2}
-  m_sharedMaterial: {fileID: 3055816025143138274, guid: 8322a83c36dbf604db8a075474b12c47,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
+  m_sharedMaterial: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4476,9 +4470,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Description area.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a97c72100ce9a34eb2d3c2e68bca265, type: 2}
-  m_sharedMaterial: {fileID: -125535016509903392, guid: 2a97c72100ce9a34eb2d3c2e68bca265,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
+  m_sharedMaterial: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7996,14 +7989,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 4537598799064072987, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 7526820672995758586, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 5165860432020950734, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_Name
@@ -15679,9 +15670,8 @@ MonoBehaviour:
     <b>[ESC]</b> Show/Hide Pause
     Menu'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8322a83c36dbf604db8a075474b12c47, type: 2}
-  m_sharedMaterial: {fileID: 3055816025143138274, guid: 8322a83c36dbf604db8a075474b12c47,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
+  m_sharedMaterial: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -19867,14 +19857,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 4537598799064072987, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 7526820672995758586, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 5165860432020950734, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_Name
@@ -23041,14 +23029,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 4537598799064072987, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 7526820672995758586, guid: e62ece968382eaf44897316c9daaf99e,
-        type: 2}
+      objectReference: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 5165860432020950734, guid: 890db13673ca6c440bd2c98811c3dbd3,
         type: 3}
       propertyPath: m_Name

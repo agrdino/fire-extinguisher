@@ -8,7 +8,6 @@ namespace _Scripts.FireExtinguishers
     [DisallowMultipleComponent]
     public sealed class FireExtinguisherSprayRaycaster : MonoBehaviour
     {
-        private const float MinimumIntensityMultiplierAtSphereEdge = 0.5f;
         private const int InitialHitCapacity = 16;
         private const int MaximumHitCapacity = 256;
 
@@ -63,7 +62,7 @@ namespace _Scripts.FireExtinguishers
                     continue;
                 }
 
-                float intensityMultiplier = GetIntensityMultiplier(hit.collider) * obstructionMultiplier;
+                float intensityMultiplier = obstructionMultiplier;
                 if (_hitFireIntensityMultipliers.TryGetValue(fire, out float highestMultiplier) && highestMultiplier >= intensityMultiplier)
                 {
                     if (passThrough == null) break;
@@ -112,9 +111,8 @@ namespace _Scripts.FireExtinguishers
             Transform rayOrigin = RayOrigin;
             while (true)
             {
-                int count = Physics.SphereCastNonAlloc(
+                int count = Physics.RaycastNonAlloc(
                     rayOrigin.position,
-                    _fireExtinguisher.SprayRadius,
                     rayOrigin.forward,
                     _hits,
                     _range,
@@ -158,21 +156,6 @@ namespace _Scripts.FireExtinguishers
             if (_appliedPassThroughs.Add(passThrough)) multiplier *= passThrough.EffectivenessMultiplier;
         }
 
-        private float GetIntensityMultiplier(Collider fireCollider)
-        {
-            float radius = _fireExtinguisher.SprayRadius;
-            if (radius <= 0f) return 1f;
-
-            Transform rayOrigin = RayOrigin;
-            Vector3 toFire = fireCollider.bounds.center - rayOrigin.position;
-            float distanceAlongSpray = Mathf.Clamp(Vector3.Dot(toFire, rayOrigin.forward), 0f, _range);
-            Vector3 sprayPosition = rayOrigin.position + rayOrigin.forward * distanceAlongSpray;
-            Vector3 closestFirePosition = fireCollider.ClosestPoint(sprayPosition);
-            float distanceRatio = Mathf.Clamp01(Vector3.Distance(sprayPosition, closestFirePosition) / radius);
-
-            return Mathf.Lerp(1f, MinimumIntensityMultiplierAtSphereEdge, distanceRatio);
-        }
-
         private void ClearIncompatibleFireTracking()
         {
             _incompatibleFiresLastFrame.Clear();
@@ -184,19 +167,9 @@ namespace _Scripts.FireExtinguishers
             Transform rayOrigin = RayOrigin;
             Vector3 start = rayOrigin.position;
             Vector3 end = start + rayOrigin.forward * _range;
-            float radius = _fireExtinguisher != null ? _fireExtinguisher.SprayRadius : 0f;
 
             Gizmos.color = Color.cyan;
             Gizmos.DrawLine(start, end);
-            Gizmos.DrawWireSphere(start, radius);
-            Gizmos.DrawWireSphere(end, radius);
-
-            Vector3 rightOffset = rayOrigin.right * radius;
-            Vector3 upOffset = rayOrigin.up * radius;
-            Gizmos.DrawLine(start + rightOffset, end + rightOffset);
-            Gizmos.DrawLine(start - rightOffset, end - rightOffset);
-            Gizmos.DrawLine(start + upOffset, end + upOffset);
-            Gizmos.DrawLine(start - upOffset, end - upOffset);
         }
 
     }

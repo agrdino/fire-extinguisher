@@ -5,7 +5,7 @@
     {"key":"common.confirm","en":"CONFIRM","vi":"XÁC NHẬN","ja":"確認"},
     {"key":"common.continue","en":"CONTINUE","vi":"TIẾP TỤC","ja":"続ける"},
     {"key":"common.back","en":"BACK","vi":"QUAY LẠI","ja":"戻る"},
-    {"key":"common.retry","en":"RETRY","vi":"THỬ LẠI","ja":"再試行"},
+    {"key":"common.retry","en":"RETRY","vi":"CHƠI LẠI","ja":"再試行"},
     {"key":"common.restart","en":"RESTART","vi":"CHƠI LẠI","ja":"再スタート"},
     {"key":"common.environment_selection","en":"SELECT AREA","vi":"CHỌN KHU VỰC","ja":"エリアを選択"},
     {"key":"start.title","en":"FIRE EXTINGUISHER TRAINING","vi":"HUẤN LUYỆN CHỮA CHÁY","ja":"消火訓練"},

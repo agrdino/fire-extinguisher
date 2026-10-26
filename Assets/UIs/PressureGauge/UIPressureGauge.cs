@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.UI
 {
+    [DefaultExecutionOrder(100)]
     [DisallowMultipleComponent]
     public sealed class UIPressureGauge : MonoBehaviour
     {
@@ -12,10 +13,10 @@ namespace _Scripts.UI
         [SerializeField] private RectTransform _needle;
 
         [Header("Position Follow")]
+        [Tooltip("Local-space offset from the powder pressure target. Position is snapped every LateUpdate without smoothing.")]
         [SerializeField] private Vector3 _positionOffset = new(0f, 0f, 0.02f);
 
         [Header("Pressure Targets")]
-        [SerializeField] private Transform _co2Pressure;
         [SerializeField] private Transform _powderPressure;
 
         [Header("Gauge Range")]
@@ -68,26 +69,16 @@ namespace _Scripts.UI
             ApplicationState state = _applicationManager.State;
             FireExtinguisherType extinguisherType = _applicationManager.SelectedExtinguisherType;
             bool isSupportedState = state == ApplicationState.SelectExtinguisher || state == ApplicationState.Fighting || state == ApplicationState.Escape;
-            _pressureTarget = GetPressureTarget(extinguisherType);
+            _pressureTarget = extinguisherType == FireExtinguisherType.Powder ? _powderPressure : null;
 
             SnapToPressureTarget();
-            SetVisible(isSupportedState && extinguisherType != FireExtinguisherType.Unselect && _pressureTarget != null);
+            SetVisible(isSupportedState && _pressureTarget != null);
         }
 
         private void SnapToPressureTarget()
         {
             if (_pressureTarget == null) return;
             transform.position = _pressureTarget.TransformPoint(_positionOffset);
-        }
-
-        private Transform GetPressureTarget(FireExtinguisherType extinguisherType)
-        {
-            return extinguisherType switch
-            {
-                FireExtinguisherType.CO2 => _co2Pressure,
-                FireExtinguisherType.Powder => _powderPressure,
-                _ => null
-            };
         }
 
         private void SetVisible(bool isVisible)

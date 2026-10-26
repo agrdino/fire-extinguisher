@@ -85,7 +85,6 @@ MonoBehaviour:
   _content: {fileID: 7878586559222081342}
   _needle: {fileID: 3558427306676269891}
   _positionOffset: {x: 0, y: 0, z: 0.02}
-  _co2Pressure: {fileID: 0}
   _powderPressure: {fileID: 0}
   _minimumRotation: 128
   _maximumRotation: -20

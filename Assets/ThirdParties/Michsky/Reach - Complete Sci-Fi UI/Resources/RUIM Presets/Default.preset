@@ -188,23 +188,23 @@ Preset:
   - target: {fileID: 0}
     propertyPath: fontLight
     value: 
-    objectReference: {fileID: 11400000, guid: a4412f15afcccfd4591f5f064f5004b4, type: 2}
+    objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   - target: {fileID: 0}
     propertyPath: fontRegular
     value: 
-    objectReference: {fileID: 11400000, guid: 2a97c72100ce9a34eb2d3c2e68bca265, type: 2}
+    objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   - target: {fileID: 0}
     propertyPath: fontMedium
     value: 
-    objectReference: {fileID: 11400000, guid: 8322a83c36dbf604db8a075474b12c47, type: 2}
+    objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   - target: {fileID: 0}
     propertyPath: fontSemiBold
     value: 
-    objectReference: {fileID: 11400000, guid: e62ece968382eaf44897316c9daaf99e, type: 2}
+    objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   - target: {fileID: 0}
     propertyPath: fontBold
     value: 
-    objectReference: {fileID: 11400000, guid: f89ce2922ef89ae46adc711adf2e04ef, type: 2}
+    objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   - target: {fileID: 0}
     propertyPath: customFont
     value: 

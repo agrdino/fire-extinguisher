@@ -68980,7 +68980,7 @@ MonoBehaviour:
   _defaultEntryState: 0
   _features: -1
   _playerSpawnPoint: {fileID: 72301436}
-  _environmentRoot: {fileID: 0}
+  _environmentRoot: {fileID: 1812128186}
   _uiAnchors:
   - _state: 6
     _anchor: {fileID: 4007031578850583328}

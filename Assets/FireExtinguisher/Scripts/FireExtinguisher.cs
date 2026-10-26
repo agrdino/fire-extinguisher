@@ -17,9 +17,6 @@ namespace _Scripts.FireExtinguishers
         [SerializeField, Min(0f)] private float _consumptionPerSecond = 1f;
         [SerializeField, Min(0f)] private float _remainingAmount = 10f;
 
-        [Header("Spray")]
-        [SerializeField, Min(0f)] private float _sprayRadius = 0.25f;
-
         public event Action<FireExtinguisherState> OnStateChanged;
         public event Action<float> OnCapacityChanged;
         public event Action<float, float> OnRemainingAmountChanged;
@@ -35,7 +32,6 @@ namespace _Scripts.FireExtinguishers
         public float ConsumptionPerSecond => _consumptionPerSecond;
         public float RemainingAmount => _remainingAmount;
         public float RemainingRatio => _capacity > 0f ? _remainingAmount / _capacity : 0f;
-        public float SprayRadius => _sprayRadius;
         public bool HasRemainingAmount => _remainingAmount > 0f;
         public bool IsDepleted => !HasRemainingAmount;
         public bool CanSpray => _state.CanSpray && HasRemainingAmount;

@@ -69,6 +69,13 @@ namespace _Scripts.Environments.Factory
 
         private void HandleApplicationStateChanged(ApplicationState state)
         {
+            if (state == ApplicationState.Ready)
+            {
+                ResetResponse();
+                _powerLightingController?.SetPowerOff(false);
+                return;
+            }
+
             if (state == ApplicationState.FactoryResponse)
             {
                 ResetResponse();
@@ -87,7 +94,6 @@ namespace _Scripts.Environments.Factory
 
         private void BeginCircuitBreakerStep()
         {
-            _powerLightingController?.SetPowerOff(false);
             _activeCircuitBreaker = null;
             for (int index = 0; index < _interactables.Length; index++)
             {
@@ -161,7 +167,6 @@ namespace _Scripts.Environments.Factory
 
         private void DisableInteractions()
         {
-            _powerLightingController?.SetPowerOff(false);
             if (_interactables != null)
             {
                 for (int index = 0; index < _interactables.Length; index++)
@@ -173,7 +178,6 @@ namespace _Scripts.Environments.Factory
 
         private void ResetResponse()
         {
-            _powerLightingController?.SetPowerOff(false);
             if (_interactables != null)
             {
                 for (int index = 0; index < _interactables.Length; index++)

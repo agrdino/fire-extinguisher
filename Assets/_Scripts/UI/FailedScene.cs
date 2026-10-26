@@ -20,12 +20,14 @@ namespace _Scripts.UI
         [SerializeField] private LocalizedString _fireNotExtinguishedMessage = new("UI", "failed.reason.fire_not_extinguished");
         [SerializeField] private LocalizedString _electricalWrongExtinguisherTip = new("UI", "failed.tip.wrong_extinguisher.electrical");
         [SerializeField] private LocalizedString _liquidWrongExtinguisherTip = new("UI", "failed.tip.wrong_extinguisher.liquid");
+        [SerializeField] private EndStateNavigationControls _navigationControls = new();
 
         private IApplicationNavigator _navigator;
 
         public void Initialize(IApplicationNavigator navigator)
         {
             _navigator = navigator;
+            _navigationControls.Initialize(_navigator, _btnRetry);
         }
 
         private void Awake()
@@ -34,7 +36,6 @@ namespace _Scripts.UI
             if (_txtMessage == null) _txtMessage = UIComponentLookup.FindText(this, "txtGuide");
             DisableStaticMessageLocalizer();
             ConfigureMessageText();
-            if (_btnRetry != null) _btnRetry.onClick.AddListener(OnRetryClicked);
         }
 
         private void OnEnable()
@@ -49,34 +50,17 @@ namespace _Scripts.UI
 
         private void OnDestroy()
         {
-            if (_btnRetry != null) _btnRetry.onClick.RemoveListener(OnRetryClicked);
+            _navigationControls.Unbind();
         }
 
         public void Show()
         {
             RefreshMessage();
-            RefreshButton();
+            _navigationControls.Refresh(false);
         }
 
         public void Hide()
         {
-        }
-
-        private void OnRetryClicked()
-        {
-            if (_navigator == null)
-            {
-                return;
-            }
-
-            _navigator.TryRestartCurrentEnvironment();
-            RefreshButton();
-        }
-
-        private void RefreshButton()
-        {
-            if (_btnRetry != null)
-                _btnRetry.interactable = _navigator != null && !_navigator.IsTransitioning;
         }
 
         private void RefreshMessage()
@@ -122,6 +106,10 @@ namespace _Scripts.UI
             _txtMessage.fontSizeMax = 42f;
         }
 
-        private void OnSelectedLocaleChanged(Locale locale) => RefreshMessage();
+        private void OnSelectedLocaleChanged(Locale locale)
+        {
+            RefreshMessage();
+            _navigationControls.Refresh(false);
+        }
     }
 }

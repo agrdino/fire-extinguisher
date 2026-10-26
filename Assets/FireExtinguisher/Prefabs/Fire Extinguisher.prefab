@@ -61,7 +61,6 @@ MonoBehaviour:
   _capacity: 30
   _consumptionPerSecond: 2
   _remainingAmount: 30
-  _sprayRadius: 0.25
 --- !u!114 &7066903038430929421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +333,10 @@ PrefabInstance:
       propertyPath: _fireExtinguisher
       value: 
       objectReference: {fileID: 7066903038430929420}
+    - target: {fileID: 2680303633520945374, guid: ec8536f7bbc493048b34b5c6d8183574, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4882035209530354784, guid: ec8536f7bbc493048b34b5c6d8183574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -482,10 +485,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unselect
       objectReference: {fileID: 0}
+    - target: {fileID: 1259850072376362492, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1654103150550823505, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
       propertyPath: _fireExtinguisher
       value: 
       objectReference: {fileID: 7066903038430929420}
+    - target: {fileID: 4153721050557299956, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4754249683321269672, guid: 981cf444a1bbdf9418c7949fca19e2f4, type: 3}
       propertyPath: _fireExtinguisher
       value: 

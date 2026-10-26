@@ -305,6 +305,7 @@ namespace _Scripts.Controller
                 case ApplicationState.Escape:
                     _isRoundTimerRunning = false;
                     _fireExtinguisherController.SetInputEnabled(false);
+                    UnselectExtinguisher();
                     if (_isEscapeTimeLimited) _remainingTime = _escapeDuration;
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
                     EnsureEmergencyExitPositioned();
@@ -371,6 +372,12 @@ namespace _Scripts.Controller
             _selectedExtinguisherType = extinguisherType;
             _fireExtinguisherController.FireExtinguisher.SetType(extinguisherType);
             OnExtinguisherSelected?.Invoke(extinguisherType);
+        }
+
+        private void UnselectExtinguisher()
+        {
+            if (_selectedExtinguisherType == FireExtinguisherType.Unselect) return;
+            SelectExtinguisher(FireExtinguisherType.Unselect);
         }
 
         public bool TrySelectExtinguisher(
@@ -480,6 +487,8 @@ namespace _Scripts.Controller
         private void HandleAllFiresExtinguished()
         {
             if (!IsFighting) return;
+
+            UnselectExtinguisher();
 
             if (_environmentContext?.Supports(EnvironmentFeature.EmergencyContact) == true)
                 SetState(ApplicationState.ContactEmergencyTeam);

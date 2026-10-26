@@ -1,4 +1,4 @@
-using _Scripts.Controller;
+using _Scripts.SceneManagement;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -17,6 +17,13 @@ namespace _Scripts.UI
         [SerializeField] private Button _btnEnglish;
         [SerializeField] private Button _btnJapanese;
         [SerializeField] private Button _btnContinue;
+
+        private IApplicationNavigator _navigator;
+
+        public void Initialize(IApplicationNavigator navigator)
+        {
+            _navigator = navigator;
+        }
 
         private void Awake()
         {
@@ -53,9 +60,9 @@ namespace _Scripts.UI
         private void SelectEnglish() => SelectLocale(EnglishCode);
         private void SelectJapanese() => SelectLocale(JapaneseCode);
 
-        private static void Continue()
+        private void Continue()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.SelectEnvironment);
+            _navigator?.TryEnterEnvironment(SceneId.Factory);
         }
 
         private void SelectLocale(string code)

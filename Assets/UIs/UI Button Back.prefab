@@ -122,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_fontSize
-      value: 29.35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_fontStyle
@@ -130,15 +130,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_fontSizeMax
-      value: 32
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_fontSizeBase
-      value: 24
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_RaycastTarget
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
+      propertyPath: m_characterSpacing
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_enableAutoSizing
@@ -147,6 +155,10 @@ PrefabInstance:
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
+      propertyPath: m_ActiveFontFeatures.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -165,7 +177,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &4584464611709089154 stripped
 GameObject:
@@ -182,7 +194,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Components.LocalizeStringEvent
   m_StringReference:
     m_TableReference:
@@ -203,10 +215,10 @@ MonoBehaviour:
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName:
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   references:

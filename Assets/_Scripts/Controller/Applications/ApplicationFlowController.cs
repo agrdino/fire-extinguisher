@@ -67,11 +67,11 @@ namespace _Scripts.Controller
         {
             if (_currentEnvironment != null && _currentEnvironment.SceneId == SceneId.Start)
             {
-                _applicationManager.SetState(ApplicationState.SelectEnvironment);
+                _applicationManager.SetState(ApplicationState.Language);
                 return true;
             }
 
-            return TryNavigate(SceneId.Start, ApplicationState.SelectEnvironment);
+            return TryNavigate(SceneId.Start, ApplicationState.Language);
         }
 
         public bool TryRestartCurrentEnvironment()

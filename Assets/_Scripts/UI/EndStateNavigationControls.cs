@@ -17,40 +17,28 @@ namespace _Scripts.UI
         [SerializeField] private TMP_Text _txtReturnToStart;
         [SerializeField] private TMP_Text _txtSwitchEnvironment;
 
-        [Header("Standard Layout")]
-        [SerializeField] private Vector2 _startLeftPosition = new(-430f, -200f);
-        [SerializeField] private Vector2 _restartCenterPosition = new(0f, -200f);
-        [SerializeField] private Vector2 _switchRightPosition = new(430f, -200f);
-
-        [Header("Factory Completed Layout")]
-        [SerializeField] private Vector2 _factoryCompletedStartPosition = new(-430f, -200f);
-        [SerializeField] private Vector2 _factoryCompletedRestartPosition = new(430f, -200f);
-        [SerializeField] private Vector2 _factoryCompletedSwitchPosition = new(0f, -200f);
-
-        [Header("Parking Completed Layout")]
-        [SerializeField] private Vector2 _parkingCompletedRestartPosition = new(-430f, -200f);
-        [SerializeField] private Vector2 _parkingCompletedStartPosition = new(0f, -200f);
-        [SerializeField] private Vector2 _parkingCompletedSwitchPosition = new(430f, -200f);
-
-        [Header("Button Sizes")]
-        [SerializeField] private Vector2 _secondarySize = new(260f, 60f);
-        [SerializeField] private Vector2 _primarySize = new(360f, 76f);
+        [Header("Layout")]
+        [SerializeField] private Vector2 _backPosition = new(25f, 25f);
+        [SerializeField] private Vector2 _backSize = new(200f, 50f);
+        [SerializeField] private Vector2 _singleActionPosition = new(0f, -200f);
+        [SerializeField] private Vector2 _twoActionLeftPosition = new(-210f, -200f);
+        [SerializeField] private Vector2 _twoActionRightPosition = new(210f, -200f);
+        [SerializeField] private Vector2 _actionSize = new(320f, 76f);
 
         [Header("Labels")]
-        [SerializeField] private LocalizedString _returnToStartLabel = new("UI", "common.environment_selection");
-        [SerializeField] private LocalizedString _factoryLabel = new("UI", "environment.factory");
+        [SerializeField] private LocalizedString _returnToStartLabel = new("UI", "common.back");
         [SerializeField] private LocalizedString _parkingAreaLabel = new("UI", "environment.parking_area");
 
         private IApplicationNavigator _navigator;
-        private Button _btnRestart;
+        private Button _btnRetry;
 
-        public void Initialize(IApplicationNavigator navigator, Button btnRestart)
+        public void Initialize(IApplicationNavigator navigator, Button btnRetry)
         {
             Unbind();
             _navigator = navigator;
-            _btnRestart = btnRestart;
+            _btnRetry = btnRetry;
 
-            if (_btnRestart != null) _btnRestart.onClick.AddListener(Restart);
+            if (_btnRetry != null) _btnRetry.onClick.AddListener(Retry);
             if (_btnReturnToStart != null) _btnReturnToStart.onClick.AddListener(ReturnToStart);
             if (_btnSwitchEnvironment != null) _btnSwitchEnvironment.onClick.AddListener(SwitchEnvironment);
 
@@ -60,7 +48,7 @@ namespace _Scripts.UI
 
         public void Unbind()
         {
-            if (_btnRestart != null) _btnRestart.onClick.RemoveListener(Restart);
+            if (_btnRetry != null) _btnRetry.onClick.RemoveListener(Retry);
             if (_btnReturnToStart != null) _btnReturnToStart.onClick.RemoveListener(ReturnToStart);
             if (_btnSwitchEnvironment != null) _btnSwitchEnvironment.onClick.RemoveListener(SwitchEnvironment);
         }
@@ -68,23 +56,18 @@ namespace _Scripts.UI
         public void Refresh(bool isCompleted)
         {
             SceneId currentScene = _navigator?.CurrentEnvironmentScene ?? SceneId.Start;
-            SceneId targetScene = GetOtherEnvironment(currentScene);
+            bool showParkingButton = isCompleted && currentScene == SceneId.Factory;
 
             if (_txtReturnToStart != null)
                 _txtReturnToStart.SetText(_returnToStartLabel.GetLocalizedString());
-            if (_txtSwitchEnvironment != null)
-            {
-                LocalizedString targetLabel = targetScene == SceneId.Factory
-                    ? _factoryLabel
-                    : _parkingAreaLabel;
-                _txtSwitchEnvironment.SetText(targetLabel.GetLocalizedString());
-            }
+            if (_txtSwitchEnvironment != null && showParkingButton)
+                _txtSwitchEnvironment.SetText(_parkingAreaLabel.GetLocalizedString());
 
-            ApplyLayout(currentScene, isCompleted);
+            ApplyLayout(showParkingButton);
             RefreshInteractableState();
         }
 
-        private void Restart()
+        private void Retry()
         {
             if (_navigator == null) return;
             _navigator.TryRestartCurrentEnvironment();
@@ -101,48 +84,44 @@ namespace _Scripts.UI
         private void SwitchEnvironment()
         {
             if (_navigator == null) return;
-            _navigator.TryEnterEnvironment(GetOtherEnvironment(_navigator.CurrentEnvironmentScene));
+            _navigator.TryEnterEnvironment(SceneId.ParkingArea);
             RefreshInteractableState();
         }
 
         private void RefreshInteractableState()
         {
             bool interactable = _navigator != null && !_navigator.IsTransitioning;
-            if (_btnRestart != null) _btnRestart.interactable = interactable;
+            if (_btnRetry != null) _btnRetry.interactable = interactable;
             if (_btnReturnToStart != null) _btnReturnToStart.interactable = interactable;
             if (_btnSwitchEnvironment != null) _btnSwitchEnvironment.interactable = interactable;
         }
 
-        private void ApplyLayout(SceneId currentScene, bool isCompleted)
+        private void ApplyLayout(bool showParkingButton)
         {
-            RectTransform restart = _btnRestart != null ? _btnRestart.transform as RectTransform : null;
+            RectTransform retry = _btnRetry != null ? _btnRetry.transform as RectTransform : null;
             RectTransform start = _btnReturnToStart != null ? _btnReturnToStart.transform as RectTransform : null;
             RectTransform switchEnvironment = _btnSwitchEnvironment != null
                 ? _btnSwitchEnvironment.transform as RectTransform
                 : null;
 
-            if (isCompleted && currentScene == SceneId.Factory)
+            if (_btnRetry != null) _btnRetry.gameObject.SetActive(true);
+            if (_btnReturnToStart != null) _btnReturnToStart.gameObject.SetActive(true);
+            if (_btnSwitchEnvironment != null)
+                _btnSwitchEnvironment.gameObject.SetActive(showParkingButton);
+
+            SetBottomLeftLayout(start, _backPosition, _backSize);
+
+            if (showParkingButton)
             {
-                SetLayout(start, _factoryCompletedStartPosition, _secondarySize);
-                SetLayout(restart, _factoryCompletedRestartPosition, _secondarySize);
-                SetLayout(switchEnvironment, _factoryCompletedSwitchPosition, _primarySize);
+                SetCenteredLayout(retry, _twoActionLeftPosition, _actionSize);
+                SetCenteredLayout(switchEnvironment, _twoActionRightPosition, _actionSize);
                 return;
             }
 
-            if (isCompleted && currentScene == SceneId.ParkingArea)
-            {
-                SetLayout(restart, _parkingCompletedRestartPosition, _secondarySize);
-                SetLayout(start, _parkingCompletedStartPosition, _primarySize);
-                SetLayout(switchEnvironment, _parkingCompletedSwitchPosition, _secondarySize);
-                return;
-            }
-
-            SetLayout(start, _startLeftPosition, _secondarySize);
-            SetLayout(restart, _restartCenterPosition, _primarySize);
-            SetLayout(switchEnvironment, _switchRightPosition, _secondarySize);
+            SetCenteredLayout(retry, _singleActionPosition, _actionSize);
         }
 
-        private static void SetLayout(RectTransform rectTransform, Vector2 position, Vector2 size)
+        private static void SetCenteredLayout(RectTransform rectTransform, Vector2 position, Vector2 size)
         {
             if (rectTransform == null) return;
             rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
@@ -152,9 +131,14 @@ namespace _Scripts.UI
             rectTransform.sizeDelta = size;
         }
 
-        private static SceneId GetOtherEnvironment(SceneId currentScene)
+        private static void SetBottomLeftLayout(RectTransform rectTransform, Vector2 position, Vector2 size)
         {
-            return currentScene == SceneId.Factory ? SceneId.ParkingArea : SceneId.Factory;
+            if (rectTransform == null) return;
+            rectTransform.anchorMin = Vector2.zero;
+            rectTransform.anchorMax = Vector2.zero;
+            rectTransform.pivot = Vector2.zero;
+            rectTransform.anchoredPosition = position;
+            rectTransform.sizeDelta = size;
         }
 
         private static void DisableStaticLocalizer(TMP_Text label)

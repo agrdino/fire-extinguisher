@@ -99,11 +99,11 @@ PrefabInstance:
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
+      objectReference: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     - target: {fileID: 6445926246996353904, guid: b77f4ab0823bbb04cb6a4efaed7b4f5d, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -7875133561243526030, guid: 3507453adaf9d4b4cae9f6a86adcec32, type: 2}
+      objectReference: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
