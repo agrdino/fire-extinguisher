@@ -76,7 +76,7 @@ namespace _Scripts.Controller
         public float RemainingTime => _remainingTime;
         public bool IsExploring => _state == ApplicationState.Explore;
         public bool IsExploreTimeLimited => IsExploring && _isExploreTimeLimited;
-        public bool IsFactoryResponding => _state == ApplicationState.FactoryResponse;
+        public bool IsEmergencyResponding => _state == ApplicationState.EmergencyResponse;
         public bool IsFighting => _state == ApplicationState.Fighting;
         public bool IsEmergencyContacting => _state == ApplicationState.ContactEmergencyTeam;
         public bool IsEscaping => _state == ApplicationState.Escape;
@@ -286,13 +286,15 @@ namespace _Scripts.Controller
                     OnRemainingTimeChanged?.Invoke(_remainingTime);
                     break;
 
-                case ApplicationState.FactoryResponse:
+                case ApplicationState.EmergencyResponse:
                     ResetTrainingResult();
                     ClearExtinguisherPickupPose();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     EnsureRoundTimerStarted();
-                    _fireController.SpawnFires(_playerRoot, true);
+                    _fireController.SpawnFires(
+                        _playerRoot,
+                        _environmentContext?.EnvironmentType == EnvironmentType.Factory);
                     ConfigureExtinguisherStations();
                     _exitPlacementController.TryPosition(GetPlayerView());
                     break;
@@ -303,7 +305,7 @@ namespace _Scripts.Controller
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
                     EnsureRoundTimerStarted();
-                    if (previousState != ApplicationState.FactoryResponse || _fireController.SelectedSpawnPoint == null)
+                    if (previousState != ApplicationState.EmergencyResponse || _fireController.SelectedSpawnPoint == null)
                         _fireController.SpawnFires(_playerRoot);
                     _exitPlacementController.TryPosition(GetPlayerView());
                     break;
@@ -323,7 +325,7 @@ namespace _Scripts.Controller
                     else
                     {
                         ClearExtinguisherPickupPose();
-                        if (previousState != ApplicationState.FactoryResponse || _fireController.SelectedSpawnPoint == null)
+                        if (previousState != ApplicationState.EmergencyResponse || _fireController.SelectedSpawnPoint == null)
                             _fireController.SpawnFires(_playerRoot);
                     }
                     ConfigureExtinguisherStations();
@@ -462,14 +464,12 @@ namespace _Scripts.Controller
         public void CompleteExplore()
         {
             if (!IsExploring) return;
-            SetState(_environmentContext?.EnvironmentType == EnvironmentType.Factory
-                ? ApplicationState.FactoryResponse
-                : ApplicationState.Fighting);
+            SetState(ApplicationState.EmergencyResponse);
         }
 
-        public void CompleteFactoryResponse()
+        public void CompleteEmergencyResponse()
         {
-            if (!IsFactoryResponding) return;
+            if (!IsEmergencyResponding) return;
             SetState(ApplicationState.Fighting);
         }
 
@@ -780,13 +780,13 @@ namespace _Scripts.Controller
 
         private bool IsRoundInProgress()
         {
-            return IsFactoryResponding || _state == ApplicationState.SelectExtinguisher || IsFighting;
+            return IsEmergencyResponding || _state == ApplicationState.SelectExtinguisher || IsFighting;
         }
 
         private static bool CanMoveInState(ApplicationState state)
         {
             return state == ApplicationState.Explore
-                || state == ApplicationState.FactoryResponse
+                || state == ApplicationState.EmergencyResponse
                 || state == ApplicationState.SelectExtinguisher
                 || state == ApplicationState.Fighting
                 || state == ApplicationState.ContactEmergencyTeam

@@ -292,7 +292,7 @@ MonoBehaviour:
       m_TableCollectionName: UI
     m_TableEntryReference:
       m_KeyId: 0
-      m_Key: factory.activate_fire_alarm
+      m_Key: emergency.activate_fire_alarm
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []

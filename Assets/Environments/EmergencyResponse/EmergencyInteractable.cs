@@ -2,9 +2,9 @@ using System.Collections;
 using _Scripts.Controller;
 using UnityEngine;
 
-namespace _Scripts.Environments.Factory
+namespace _Scripts.Environments.EmergencyResponse
 {
-    public enum FactoryEmergencyInteractableKind
+    public enum EmergencyInteractableKind
     {
         CircuitBreaker,
         FireAlarm
@@ -12,21 +12,22 @@ namespace _Scripts.Environments.Factory
 
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Collider))]
-    public sealed class FactoryEmergencyInteractable : HandRayInteractable
+    public sealed class EmergencyInteractable : HandRayInteractable
     {
         private static readonly int BaseColorProperty = Shader.PropertyToID("_BaseColor");
         private static readonly int ColorProperty = Shader.PropertyToID("_Color");
         private static readonly int EmissionColorProperty = Shader.PropertyToID("_EmissionColor");
 
-        [SerializeField] private FactoryEmergencyInteractableKind _kind;
+        [SerializeField] private EmergencyInteractableKind _kind;
         [SerializeField] private Transform _hintTarget;
+        [SerializeField] private Transform _uiAnchor;
         [Header("Feedback")]
         [SerializeField] private HoverMaterialHighlight _hoverHighlight;
         [SerializeField] private Color _pressedColor = new(0.65f, 1f, 1f, 1f);
         [SerializeField] private Color _pressedEmission = new(0.5f, 4f, 5f, 1f);
         [SerializeField, Min(0f)] private float _pressedDuration = 0.18f;
 
-        [SerializeField] private FactoryEmergencyResponseController _responseController;
+        [SerializeField] private EmergencyResponseController _responseController;
         [SerializeField] private Renderer[] _renderers = System.Array.Empty<Renderer>();
         private MaterialPropertyBlock _propertyBlock;
         private Color[] _baseColors;
@@ -35,8 +36,9 @@ namespace _Scripts.Environments.Factory
         private bool _isPressed;
         private bool _isInteractionEnabled;
 
-        public FactoryEmergencyInteractableKind Kind => _kind;
+        public EmergencyInteractableKind Kind => _kind;
         public Transform HintTarget => _hintTarget != null ? _hintTarget : transform;
+        public Transform UIAnchor => _uiAnchor != null ? _uiAnchor : HintTarget;
         public override bool IsInteractionEnabled => _isInteractionEnabled;
 
         private void Awake()
@@ -47,6 +49,7 @@ namespace _Scripts.Environments.Factory
             for (int index = 0; index < _renderers.Length; index++)
             {
                 Renderer targetRenderer = _renderers[index];
+                if (targetRenderer == null) continue;
                 Material sharedMaterial = targetRenderer.sharedMaterial;
                 _baseColors[index] = GetMaterialColor(sharedMaterial);
                 Material[] materials = targetRenderer.materials;

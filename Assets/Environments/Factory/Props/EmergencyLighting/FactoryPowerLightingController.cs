@@ -1,10 +1,11 @@
 using System;
+using _Scripts.Environments.EmergencyResponse;
 using UnityEngine;
 
 namespace _Scripts.Environments.Factory
 {
     [DisallowMultipleComponent]
-    public sealed class FactoryPowerLightingController : MonoBehaviour
+    public sealed class FactoryPowerLightingController : MonoBehaviour, IEmergencyPowerController
     {
         [SerializeField, Range(0f, 1f)] private float _powerOffBrightness = 0.1f;
         [SerializeField, Range(0f, 1f)] private float _powerOffAmbientBrightness = 0.02f;

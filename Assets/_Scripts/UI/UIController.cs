@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using _Scripts.Controller;
 using _Scripts.Fires;
-using _Scripts.Environments.Factory;
+using _Scripts.Environments.EmergencyResponse;
 using _Scripts.SceneManagement;
 
 namespace _Scripts.UI
@@ -19,7 +19,8 @@ namespace _Scripts.UI
         [SerializeField] private StartScene _startScene;
         [SerializeField] private GuideScene _guideScene;
         [SerializeField] private ExploreScene _exploreScene;
-        [SerializeField] private FactoryResponseScene _factoryResponseScene;
+        [FormerlySerializedAs("_factoryResponseScene")]
+        [SerializeField] private EmergencyResponseScene _emergencyResponseScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _selectExtinguisherScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _fightingScene;
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _escapeScene;
@@ -109,7 +110,7 @@ namespace _Scripts.UI
                 ApplicationState.SelectEnvironment => _selectLanguageScene,
                 ApplicationState.Guide => _guideScene,
                 ApplicationState.Explore => _exploreScene,
-                ApplicationState.FactoryResponse => _factoryResponseScene,
+                ApplicationState.EmergencyResponse => _emergencyResponseScene,
                 ApplicationState.SelectExtinguisher => _selectExtinguisherScene.Value,
                 ApplicationState.Fighting => _fightingScene.Value,
                 ApplicationState.Escape => _escapeScene.Value,
@@ -146,10 +147,10 @@ namespace _Scripts.UI
             if (state == ApplicationState.Failed) return PlaceFailedScene(scene);
 
             FireSpawnPoint selectedFireSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
-            FactoryEmergencyResponseController factoryResponseController = FindFirstObjectByType<FactoryEmergencyResponseController>();
+            EmergencyResponseController emergencyResponseController = FindFirstObjectByType<EmergencyResponseController>();
             Transform fireUIAnchor = state switch
             {
-                ApplicationState.FactoryResponse => factoryResponseController?.CurrentUIAnchor,
+                ApplicationState.EmergencyResponse => emergencyResponseController?.CurrentUIAnchor,
                 ApplicationState.SelectExtinguisher => selectedFireSpawnPoint?.SelectExtinguisherUIPoint,
                 ApplicationState.Fighting => selectedFireSpawnPoint?.FightingUIPoint,
                 ApplicationState.Escape => selectedFireSpawnPoint?.EscapeUIPoint,

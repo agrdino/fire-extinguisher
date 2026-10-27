@@ -3,10 +3,16 @@ using _Scripts.Controller;
 using _Scripts.Fires;
 using _Scripts.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace _Scripts.Environments.Factory
+namespace _Scripts.Environments.EmergencyResponse
 {
-    public enum FactoryEmergencyResponseStep
+    public interface IEmergencyPowerController
+    {
+        void SetPowerOff(bool isPowerOff);
+    }
+
+    public enum EmergencyResponseStep
     {
         None,
         SwitchOffPower,
@@ -15,20 +21,23 @@ namespace _Scripts.Environments.Factory
     }
 
     [DisallowMultipleComponent]
-    public sealed class FactoryEmergencyResponseController : MonoBehaviour
+    public sealed class EmergencyResponseController : MonoBehaviour
     {
         private ApplicationManager _applicationManager;
-        [SerializeField] private FactoryEmergencyInteractable[] _interactables = Array.Empty<FactoryEmergencyInteractable>();
+        [SerializeField] private EmergencyInteractable[] _interactables = Array.Empty<EmergencyInteractable>();
         [SerializeField] private Transform _circuitBreakerUIAnchor;
-        [SerializeField] private FactoryPowerLightingController _powerLightingController;
-        private FactoryEmergencyInteractable _activeCircuitBreaker;
+        [FormerlySerializedAs("_powerLightingController")]
+        [SerializeField] private MonoBehaviour _powerController;
+        private EmergencyInteractable _activeCircuitBreaker;
 
-        public FactoryEmergencyResponseStep CurrentStep { get; private set; }
+        public EmergencyResponseStep CurrentStep { get; private set; }
         public Transform CurrentHintTarget { get; private set; }
         public Transform CurrentUIAnchor { get; private set; }
 
-        public event Action<FactoryEmergencyResponseStep> OnStepChanged;
-        public event Action<FactoryEmergencyInteractable> OnInteractionCompleted;
+        public event Action<EmergencyResponseStep> OnStepChanged;
+        public event Action<EmergencyInteractable> OnInteractionCompleted;
+
+        private IEmergencyPowerController PowerController => _powerController as IEmergencyPowerController;
 
         private void Start()
         {
@@ -47,20 +56,20 @@ namespace _Scripts.Environments.Factory
             if (_applicationManager != null) _applicationManager.OnStateChanged -= HandleApplicationStateChanged;
         }
 
-        public void HandleInteraction(FactoryEmergencyInteractable interactable)
+        public void HandleInteraction(EmergencyInteractable interactable)
         {
             if (interactable == null || !interactable.IsInteractionEnabled) return;
 
-            if (CurrentStep == FactoryEmergencyResponseStep.SwitchOffPower && interactable == _activeCircuitBreaker)
+            if (CurrentStep == EmergencyResponseStep.SwitchOffPower && interactable == _activeCircuitBreaker)
             {
                 FireController.Instance?.StopElectricalSparks();
-                _powerLightingController?.SetPowerOff(true);
+                PowerController?.SetPowerOff(true);
                 OnInteractionCompleted?.Invoke(interactable);
                 BeginFireAlarmStep();
                 return;
             }
 
-            if (CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm && interactable.Kind == FactoryEmergencyInteractableKind.FireAlarm)
+            if (CurrentStep == EmergencyResponseStep.ActivateFireAlarm && interactable.Kind == EmergencyInteractableKind.FireAlarm)
             {
                 OnInteractionCompleted?.Invoke(interactable);
                 CompleteResponse();
@@ -72,14 +81,14 @@ namespace _Scripts.Environments.Factory
             if (state == ApplicationState.Ready)
             {
                 ResetResponse();
-                _powerLightingController?.SetPowerOff(false);
+                PowerController?.SetPowerOff(false);
                 return;
             }
 
-            if (state == ApplicationState.FactoryResponse)
+            if (state == ApplicationState.EmergencyResponse)
             {
                 ResetResponse();
-                BeginCircuitBreakerStep();
+                if (!BeginCircuitBreakerStep()) BeginFireAlarmStep();
                 return;
             }
 
@@ -92,14 +101,14 @@ namespace _Scripts.Environments.Factory
             DisableInteractions();
         }
 
-        private void BeginCircuitBreakerStep()
+        private bool BeginCircuitBreakerStep()
         {
             _activeCircuitBreaker = null;
             for (int index = 0; index < _interactables.Length; index++)
             {
-                FactoryEmergencyInteractable interactable = _interactables[index];
+                EmergencyInteractable interactable = _interactables[index];
                 if (interactable == null) continue;
-                bool isCircuitBreaker = interactable.Kind == FactoryEmergencyInteractableKind.CircuitBreaker;
+                bool isCircuitBreaker = interactable.Kind == EmergencyInteractableKind.CircuitBreaker;
                 bool isSharedCircuitBreaker = isCircuitBreaker && _activeCircuitBreaker == null;
                 interactable.SetInteractionEnabled(isSharedCircuitBreaker);
                 if (isSharedCircuitBreaker) _activeCircuitBreaker = interactable;
@@ -107,28 +116,31 @@ namespace _Scripts.Environments.Factory
 
             if (_activeCircuitBreaker == null)
             {
-                return;
+                return false;
             }
 
             SetStep(
-                FactoryEmergencyResponseStep.SwitchOffPower,
+                EmergencyResponseStep.SwitchOffPower,
                 _activeCircuitBreaker.HintTarget,
-                _circuitBreakerUIAnchor);
+                _circuitBreakerUIAnchor != null
+                    ? _circuitBreakerUIAnchor
+                    : _activeCircuitBreaker.UIAnchor);
+            return true;
         }
 
         private void BeginFireAlarmStep()
         {
             FireSpawnPoint selectedSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
             Transform playerView = _applicationManager?.PlayerView;
-            FactoryEmergencyInteractable nearestAlarm = null;
+            EmergencyInteractable nearestAlarm = null;
             float nearestDistance = float.PositiveInfinity;
 
             for (int index = 0; index < _interactables.Length; index++)
             {
-                FactoryEmergencyInteractable interactable = _interactables[index];
+                EmergencyInteractable interactable = _interactables[index];
                 if (interactable == null || !interactable.gameObject.activeInHierarchy) continue;
 
-                bool isAlarm = interactable.Kind == FactoryEmergencyInteractableKind.FireAlarm;
+                bool isAlarm = interactable.Kind == EmergencyInteractableKind.FireAlarm;
                 interactable.SetInteractionEnabled(isAlarm);
                 if (!isAlarm) continue;
 
@@ -152,17 +164,17 @@ namespace _Scripts.Environments.Factory
 
             Transform fireAlarmUIAnchor = FireController.Instance?.SelectedSpawnPoint?.FireAlarmUIPoint;
             SetStep(
-                FactoryEmergencyResponseStep.ActivateFireAlarm,
+                EmergencyResponseStep.ActivateFireAlarm,
                 nearestAlarm.HintTarget,
-                fireAlarmUIAnchor);
+                fireAlarmUIAnchor != null ? fireAlarmUIAnchor : nearestAlarm.UIAnchor);
         }
 
         private void CompleteResponse()
         {
             for (int index = 0; index < _interactables.Length; index++)
                 _interactables[index]?.SetInteractionEnabled(false);
-            SetStep(FactoryEmergencyResponseStep.Completed, null, null);
-            _applicationManager.CompleteFactoryResponse();
+            SetStep(EmergencyResponseStep.Completed, null, null);
+            _applicationManager.CompleteEmergencyResponse();
         }
 
         private void DisableInteractions()
@@ -182,7 +194,7 @@ namespace _Scripts.Environments.Factory
             {
                 for (int index = 0; index < _interactables.Length; index++)
                 {
-                    FactoryEmergencyInteractable interactable = _interactables[index];
+                    EmergencyInteractable interactable = _interactables[index];
                     if (interactable == null) continue;
                     interactable.ResetInteractionState();
                     interactable.SetInteractionEnabled(false);
@@ -190,7 +202,7 @@ namespace _Scripts.Environments.Factory
             }
 
             _activeCircuitBreaker = null;
-            SetStep(FactoryEmergencyResponseStep.None, null, null);
+            SetStep(EmergencyResponseStep.None, null, null);
         }
 
         private static float CombinedHorizontalDistance(
@@ -224,7 +236,7 @@ namespace _Scripts.Environments.Factory
         }
 
         private void SetStep(
-            FactoryEmergencyResponseStep step,
+            EmergencyResponseStep step,
             Transform hintTarget,
             Transform uiAnchor)
         {

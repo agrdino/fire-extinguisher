@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Scripts.Environments.Factory
+namespace _Scripts.Environments.EmergencyResponse
 {
     [AddComponentMenu("XR/Visual/Hover Material Highlight")]
     [DisallowMultipleComponent]
@@ -13,7 +13,7 @@ namespace _Scripts.Environments.Factory
         private Material[][] _originalMaterials;
         private bool _isHovered;
 
-        // The factory hand raycast supplies hover state instead of XRI hover events.
+        // The hand raycast supplies hover state instead of XRI hover events.
         // Append a shared overlay material, keeping each renderer's base materials intact.
         public void SetHovered(bool isHovered)
         {

@@ -1,4 +1,4 @@
-using _Scripts.Environments.Factory;
+using _Scripts.Environments.EmergencyResponse;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -7,15 +7,15 @@ using UnityEngine.Localization.Components;
 
 namespace _Scripts.UI
 {
-    public sealed class FactoryResponseScene : MonoBehaviour, IScene
+    public sealed class EmergencyResponseScene : MonoBehaviour, IScene
     {
         [SerializeField] private TMP_Text _txtTitle;
         [SerializeField] private TMP_Text _txtGuide;
         [SerializeField] private LocalizedString _title = new("UI", "hint.title");
         [SerializeField] private LocalizedString _switchOffPowerMessage = new("UI", "factory.switch_off_power");
-        [SerializeField] private LocalizedString _activateFireAlarmMessage = new("UI", "factory.activate_fire_alarm");
+        [SerializeField] private LocalizedString _activateFireAlarmMessage = new("UI", "emergency.activate_fire_alarm");
 
-        private FactoryEmergencyResponseController _responseController;
+        private EmergencyResponseController _responseController;
 
         private void Awake()
         {
@@ -43,7 +43,7 @@ namespace _Scripts.UI
         private void BindResponseController()
         {
             UnbindResponseController();
-            _responseController = FindFirstObjectByType<FactoryEmergencyResponseController>();
+            _responseController = FindFirstObjectByType<EmergencyResponseController>();
             if (_responseController != null) _responseController.OnStepChanged += HandleStepChanged;
         }
 
@@ -53,7 +53,7 @@ namespace _Scripts.UI
             _responseController = null;
         }
 
-        private void HandleStepChanged(FactoryEmergencyResponseStep step)
+        private void HandleStepChanged(EmergencyResponseStep step)
         {
             RefreshContent();
             UIController.Instance?.RefreshCurrentScenePlacement();
@@ -70,7 +70,7 @@ namespace _Scripts.UI
             if (_txtTitle != null) _txtTitle.SetText(_title.GetLocalizedString());
             if (_txtGuide == null) return;
 
-            LocalizedString message = _responseController?.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm
+            LocalizedString message = _responseController?.CurrentStep == EmergencyResponseStep.ActivateFireAlarm
                 ? _activateFireAlarmMessage
                 : _switchOffPowerMessage;
             _txtGuide.SetText(message.GetLocalizedString());

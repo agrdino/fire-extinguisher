@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Environments.EmergencyResponse;
 using UnityEngine;
 
 namespace _Scripts.Environments.Factory
@@ -6,7 +7,7 @@ namespace _Scripts.Environments.Factory
     [DisallowMultipleComponent]
     public sealed class FactoryFireAlarmLightController : MonoBehaviour
     {
-        [SerializeField] private FactoryEmergencyResponseController _responseController;
+        [SerializeField] private EmergencyResponseController _responseController;
         [SerializeField] private ParticleSystem[] _alarmLights = Array.Empty<ParticleSystem>();
 
         [Header("Ceiling Flash")]
@@ -44,9 +45,9 @@ namespace _Scripts.Environments.Factory
             SetCeilingLightIntensity(brightness * _ceilingLightPeakIntensity);
         }
 
-        private void HandleInteractionCompleted(FactoryEmergencyInteractable interactable)
+        private void HandleInteractionCompleted(EmergencyInteractable interactable)
         {
-            if (interactable == null || interactable.Kind != FactoryEmergencyInteractableKind.FireAlarm)
+            if (interactable == null || interactable.Kind != EmergencyInteractableKind.FireAlarm)
                 return;
 
             // The fire alarm visual has been intentionally retired. Keep the
@@ -54,9 +55,9 @@ namespace _Scripts.Environments.Factory
             SetAlarmLightsActive(false);
         }
 
-        private void HandleStepChanged(FactoryEmergencyResponseStep step)
+        private void HandleStepChanged(EmergencyResponseStep step)
         {
-            if (step == FactoryEmergencyResponseStep.None || step == FactoryEmergencyResponseStep.SwitchOffPower)
+            if (step == EmergencyResponseStep.None || step == EmergencyResponseStep.SwitchOffPower)
                 SetAlarmLightsActive(false);
         }
 

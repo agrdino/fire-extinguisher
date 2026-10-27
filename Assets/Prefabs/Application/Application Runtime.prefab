@@ -1169,7 +1169,7 @@ MonoBehaviour:
   _startScene: {fileID: 3441429159544759982}
   _guideScene: {fileID: 4203264153229684036}
   _exploreScene: {fileID: 2684154617169046517}
-  _factoryResponseScene: {fileID: 8847345871223827991}
+  _emergencyResponseScene: {fileID: 8847345871223827991}
   _selectExtinguisherScene:
     _underlyingValue: {fileID: 917346808306020792}
   _fightingScene:
@@ -2335,7 +2335,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6041777625918835803, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
       propertyPath: m_Name
-      value: Factory Response Scene
+      value: Emergency Response Scene
       objectReference: {fileID: 0}
     - target: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac1895c91d454bcc8d72ed870b945f5f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.FactoryResponseScene
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.EmergencyResponseScene
 --- !u!4 &9017077243467211216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8225830217555182044, guid: cb278b85169c11a4bbd52e048ffcaa7c, type: 3}

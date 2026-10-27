@@ -9,7 +9,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit.UI;
-using _Scripts.Environments.Factory;
+using _Scripts.Environments.EmergencyResponse;
 
 namespace _Scripts.UI
 {
@@ -81,7 +81,7 @@ namespace _Scripts.UI
         [SerializeField] private LocalizedString _aimAndSqueezeHintLocalized = new("UI", "hint.aim_and_squeeze");
         [SerializeField] private LocalizedString _goToEmergencyExitHintLocalized = new("UI", "hint.go_to_exit");
         [SerializeField] private LocalizedString _switchOffPowerHintLocalized = new("UI", "factory.switch_off_power");
-        [SerializeField] private LocalizedString _activateFireAlarmHintLocalized = new("UI", "factory.activate_fire_alarm");
+        [SerializeField] private LocalizedString _activateFireAlarmHintLocalized = new("UI", "emergency.activate_fire_alarm");
         [SerializeField] private LocalizedString _contactEmergencyTeamHintLocalized = new("UI", "hint.contact_emergency_team");
 
         private ApplicationManager _applicationManager;
@@ -347,10 +347,10 @@ namespace _Scripts.UI
                     : HintStep.ConfirmExtinguisher;
             }
 
-            if (_applicationManager.State == ApplicationState.FactoryResponse)
+            if (_applicationManager.State == ApplicationState.EmergencyResponse)
             {
-                FactoryEmergencyResponseController responseController = FindFirstObjectByType<FactoryEmergencyResponseController>();
-                return responseController?.CurrentStep == FactoryEmergencyResponseStep.ActivateFireAlarm
+                EmergencyResponseController responseController = FindFirstObjectByType<EmergencyResponseController>();
+                return responseController?.CurrentStep == EmergencyResponseStep.ActivateFireAlarm
                     ? HintStep.ActivateFireAlarm
                     : HintStep.SwitchOffPower;
             }
@@ -474,7 +474,7 @@ namespace _Scripts.UI
 
                 case HintStep.SwitchOffPower:
                 case HintStep.ActivateFireAlarm:
-                    return FindFirstObjectByType<FactoryEmergencyResponseController>()?.CurrentHintTarget;
+                    return FindFirstObjectByType<EmergencyResponseController>()?.CurrentHintTarget;
 
                 case HintStep.ContactEmergencyTeam:
                     return HandheldEmergencyPhoneController.Instance?.HintTarget;

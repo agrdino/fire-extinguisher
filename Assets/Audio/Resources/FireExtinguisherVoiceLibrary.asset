@@ -17,41 +17,41 @@ MonoBehaviour:
     _category: experience_intro
     _priority: P0
     _vietnamese: {fileID: 8300000, guid: 44e592cd8ac54e5cbd4ff78d38b5133f, type: 3}
-    _english: {fileID: 0}
+    _english: {fileID: 8300000, guid: 956cfb674723d7b4b852313a041dbd71, type: 3}
     _japanese: {fileID: 0}
   - _id: completed.electrical.result
     _category: success_result
     _priority: P0
     _vietnamese: {fileID: 8300000, guid: 23cf11c5082c43cc98daa848254f57b2, type: 3}
-    _english: {fileID: 0}
+    _english: {fileID: 8300000, guid: 3c9c43096f7a2ed46b540e06a1ca916d, type: 3}
     _japanese: {fileID: 0}
   - _id: completed.liquid.result
     _category: success_result
     _priority: P0
     _vietnamese: {fileID: 8300000, guid: ce9a39c1acfd45b585774bdc7defe58b, type: 3}
-    _english: {fileID: 0}
+    _english: {fileID: 8300000, guid: e268626e39c8344448b47b74aff86a94, type: 3}
     _japanese: {fileID: 0}
   - _id: failure.extinguisherDepleted.result
     _category: failure_result
     _priority: P1
     _vietnamese: {fileID: 8300000, guid: 2da5e57b5e8244ecb60be7fa10dab478, type: 3}
-    _english: {fileID: 0}
+    _english: {fileID: 8300000, guid: e3d1f838c5cf7fa4a959e7a4da1174a5, type: 3}
     _japanese: {fileID: 0}
   - _id: failure.wrongExtinguisher.electrical.tip
     _category: failure_feedback
     _priority: P1
     _vietnamese: {fileID: 8300000, guid: 22d35331a0074c7c9c93e547731b2aa3, type: 3}
-    _english: {fileID: 0}
+    _english: {fileID: 8300000, guid: 6e60f6af4b3710b499a8fb1fa74ffe25, type: 3}
     _japanese: {fileID: 0}
   - _id: failure.wrongExtinguisher.liquid.tip
     _category: failure_feedback
     _priority: P1
     _vietnamese: {fileID: 8300000, guid: fb481e79aa9b47e8aafaa675b16398c3, type: 3}
-    _english: {fileID: 0}
+    _english: {fileID: 8300000, guid: 905d82ca8aa079843ac5dd627ea26aab, type: 3}
     _japanese: {fileID: 0}
   - _id: failure.unknown.result
     _category: failure_result
     _priority: P1
     _vietnamese: {fileID: 8300000, guid: a1a1dfbb6daa432cb3cebdad84f1bf92, type: 3}
-    _english: {fileID: 0}
+    _english: {fileID: 8300000, guid: 8763553c0f388f341aca857b93787533, type: 3}
     _japanese: {fileID: 0}

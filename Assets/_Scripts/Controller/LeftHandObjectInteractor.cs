@@ -39,7 +39,7 @@ namespace _Scripts.Controller
         {
             ApplicationManager applicationManager = ApplicationManager.Instance;
             if (applicationManager == null
-                || (!applicationManager.IsFactoryResponding
+                || (!applicationManager.IsEmergencyResponding
                     && !applicationManager.IsEmergencyContacting
                     && !applicationManager.IsFighting))
             {

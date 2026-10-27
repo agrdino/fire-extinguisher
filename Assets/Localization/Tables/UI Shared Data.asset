@@ -272,7 +272,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1448646678781955
-    m_Key: factory.activate_fire_alarm
+    m_Key: emergency.activate_fire_alarm
     m_Metadata:
       m_Items: []
   - m_Id: 10302763491102720

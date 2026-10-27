@@ -11,16 +11,16 @@
     {
       "id": "completed.electrical.result",
       "vi": "Bạn đã thực hiện rất tốt công tác chữa cháy tại chỗ. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn!  Bạn đã chọn đúng bình chữa cháy CO₂. Bình CO₂ không dẫn điện và không gây ăn mòn thiết bị, phù hợp với đám cháy điện.",
-      "en": "You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you! You chose the correct extinguisher. A CO2 extinguisher does not conduct electricity or corrode equipment, making it suitable for electrical fires.",
-      "jp": "初期消火活動をとても適切に行いました。体験の完了、おめでとうございます。ありがとうございました！適切な消火器を選択できました。CO₂消火器は電気を通さず、機器を腐食させないため、電気火災に適しています。",
+      "en": "You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you! You chose the correct CO2 extinguisher. A CO2 extinguisher does not conduct electricity or corrode equipment, making it suitable for electrical fires.",
+      "jp": "初期消火活動をとても適切に行いました。体験の完了、おめでとうございます。ありがとうございました！適切なCO₂消火器を選択できました。CO₂消火器は電気を通さず、機器を腐食させないため、電気火災に適しています。",
       "category": "success_result",
       "priority": "P0"
     },
     {
       "id": "completed.liquid.result",
-      "vi": "Bạn đã thực hiện rất tốt công tác chữa cháy tại chỗ. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn! Bạn đã chọn đúng bình chữa cháy bột khô. Khi tiếp xúc với đám cháy xăng, bột khô tạo ra lớp cách ly, ngăn không khí tiếp xúc với nhiên liệu và dập tắt lửa hiệu quả.",
-      "en": "You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you! You chose the correct dry powder extinguisher. When dry powder contacts a gasoline fire, it creates an isolating layer that prevents air from reaching the fuel and extinguishes the flames effectively.",
-      "jp": "初期消火活動をとても適切に行いました。体験の完了、おめでとうございます。ありがとうございました！適切な粉末消火器を選択できました。粉末消火剤はガソリン火災に触れると遮断層を作り、燃料と空気の接触を防いで効果的に消火します。",
+      "vi": "Bạn đã chọn đúng bình chữa cháy bột khô. Khi tiếp xúc với đám cháy xăng, bột khô tạo ra lớp cách ly, ngăn không khí tiếp xúc với nhiên liệu và dập tắt lửa hiệu quả. Bạn đã thực hiện rất tốt công tác chữa cháy tại chỗ. Chúc mừng bạn đã hoàn thành trải nghiệm. Xin cảm ơn!",
+      "en": "You chose the correct dry powder extinguisher. When dry powder comes into contact with a gasoline fire, it creates an isolating layer that prevents air from reaching the fuel and extinguishes the flames effectively. You performed the on-site firefighting procedure very well. Congratulations on completing the experience. Thank you!",
+      "jp": "適切な粉末消火器を選択できました。粉末消火剤はガソリン火災に触れると遮断層を作り、燃料と空気の接触を防いで効果的に消火します。初期消火活動をとても適切に行いました。体験の完了、おめでとうございます。ありがとうございました！",
       "category": "success_result",
       "priority": "P0"
     },

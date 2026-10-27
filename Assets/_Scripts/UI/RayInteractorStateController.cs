@@ -88,7 +88,7 @@ namespace _Scripts.UI
             if (!shouldShowLine) return;
 
             float lineLength = _maxLineLength;
-            if (_applicationManager != null && (_applicationManager.IsFactoryResponding || _applicationManager.IsEmergencyContacting))
+            if (_applicationManager != null && (_applicationManager.IsEmergencyResponding || _applicationManager.IsEmergencyContacting))
                 lineLength = Mathf.Min(lineLength, _factoryInteractionLineLength);
             if (hasObjectHit)
                 lineLength = Mathf.Min(lineLength, _objectInteractor.HoveredDistance);

@@ -185,12 +185,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040920
-    m_Localized: CO2 is for electrical fires. Dry powder is for gasoline fires. Select
-      one, then confirm.
+    m_Localized: CO<sub>2</sub> is for electrical fires. Dry powder is for gasoline
+      fires. Select one, then confirm.
     m_Metadata:
       m_Items: []
   - m_Id: 1337040921
-    m_Localized: CO2
+    m_Localized: CO<sub>2</sub>
     m_Metadata:
       m_Items: []
   - m_Id: 1337040922
@@ -224,7 +224,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1337040926
-    m_Localized: Bla bla
+    m_Localized: Descriptions
     m_Metadata:
       m_Items: []
   - m_Id: 1337040927
@@ -403,7 +403,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674049
-    m_Localized: Press the left thumbstick to switch contacts, then press the left trigger to call.
+    m_Localized: Press the left thumbstick to switch contacts, then press the left
+      trigger to call.
     m_Metadata:
       m_Items: []
   - m_Id: 19611946792886272

@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Environments.Factory
+namespace _Scripts.Environments.EmergencyResponse
 {
     [DisallowMultipleComponent]
-    public sealed class FactoryEmergencyCompletionVfx : MonoBehaviour
+    public sealed class EmergencyResponseCompletionVfx : MonoBehaviour
     {
-        [SerializeField] private FactoryEmergencyResponseController _responseController;
+        [SerializeField] private EmergencyResponseController _responseController;
         [SerializeField] private GameObject _checkVfxPrefab;
 
         [Header("Circuit Breaker Placement")]
@@ -17,7 +17,7 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private Vector3 _fireAlarmLocalPosition = new(0f, 0.8f, 0.75f);
         [SerializeField] private Vector3 _fireAlarmLocalEulerAngles = Vector3.zero;
 
-        private readonly Dictionary<FactoryEmergencyInteractable, GameObject> _instances = new();
+        private readonly Dictionary<EmergencyInteractable, GameObject> _instances = new();
 
         private void OnEnable()
         {
@@ -46,13 +46,13 @@ namespace _Scripts.Environments.Factory
             HideAll();
         }
 
-        private void HandleInteractionCompleted(FactoryEmergencyInteractable interactable)
+        private void HandleInteractionCompleted(EmergencyInteractable interactable)
         {
             if (interactable == null || _checkVfxPrefab == null) return;
 
             Vector3 localPosition;
             Vector3 localEulerAngles;
-            if (interactable.Kind == FactoryEmergencyInteractableKind.CircuitBreaker)
+            if (interactable.Kind == EmergencyInteractableKind.CircuitBreaker)
             {
                 localPosition = _circuitBreakerLocalPosition;
                 localEulerAngles = _circuitBreakerLocalEulerAngles;
@@ -83,10 +83,10 @@ namespace _Scripts.Environments.Factory
             RestartParticles(instance);
         }
 
-        private void HandleStepChanged(FactoryEmergencyResponseStep step)
+        private void HandleStepChanged(EmergencyResponseStep step)
         {
-            if (step == FactoryEmergencyResponseStep.None
-                || step == FactoryEmergencyResponseStep.SwitchOffPower)
+            if (step == EmergencyResponseStep.None
+                || step == EmergencyResponseStep.SwitchOffPower)
             {
                 HideAll();
             }

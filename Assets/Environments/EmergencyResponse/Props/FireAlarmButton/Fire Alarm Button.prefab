@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6856920587416440693}
+  - {fileID: 2196033006545480293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &812000000000000004
@@ -67,9 +68,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9029f15705c54da1bfafd29b8d87097c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.FactoryEmergencyInteractable
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.EmergencyResponse.EmergencyInteractable
   _kind: 1
   _hintTarget: {fileID: 0}
+  _uiAnchor: {fileID: 2196033006545480293}
   _hoverHighlight: {fileID: 812000000000000006}
   _pressedColor: {r: 0.65, g: 1, b: 1, a: 1}
   _pressedEmission: {r: 0.5, g: 4, b: 5, a: 1}
@@ -89,11 +91,42 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778425f300dd40e49c2997b094416585, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.Factory.HoverMaterialHighlight
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Environments.EmergencyResponse.HoverMaterialHighlight
   _renderers:
   - {fileID: 7394786420544939119}
   - {fileID: 3995298821276312599}
   _highlightMaterial: {fileID: 2100000, guid: ceab109f9f2346e4a5f652871aa1f274, type: 2}
+--- !u!1 &3347883012151385148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2196033006545480293}
+  m_Layer: 0
+  m_Name: UI Point - Fire Alarm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2196033006545480293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3347883012151385148}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 812000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5212942496527523678
 GameObject:
   m_ObjectHideFlags: 0
