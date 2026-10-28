@@ -24,7 +24,8 @@ namespace _Scripts.Environments.Factory
             for (int index = 0; index < _lights.Length; index++)
             {
                 if (_lights[index] != null)
-                    _lights[index].enabled = isActive;
+                    _lights[index].enabled = isActive &&
+                                             _lights[index].lightmapBakeType != LightmapBakeType.Baked;
             }
         }
 

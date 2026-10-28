@@ -13,15 +13,14 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private FactoryEmergencyLightFixture[] _emergencyFixtures =
             Array.Empty<FactoryEmergencyLightFixture>();
 
-        [Header("Ceiling Lamp Meshes")]
-        [Tooltip("The emissive lamp meshes shown while factory power is available.")]
-        [SerializeField] private GameObject[] _poweredLampMeshes = Array.Empty<GameObject>();
-        [Tooltip("Cloned lamp meshes using the non-emissive power-off material.")]
-        [SerializeField] private GameObject _powerOffLampMeshesRoot;
+        [Header("Ceiling Lights")]
+        [SerializeField] private CeilLight[] _ceilingLights = Array.Empty<CeilLight>();
+
+        [Header("Baked Lighting Scenarios")]
+        [SerializeField] private FactoryBakedLightingSwitcher _bakedLighting;
 
         private float[] _initialLightIntensities = Array.Empty<float>();
-        private bool[] _initialPoweredLampActiveStates = Array.Empty<bool>();
-        private bool _initialPowerOffLampMeshesRootActive;
+        private bool[] _initialCeilingLightPowerStates = Array.Empty<bool>();
         private float _initialAmbientIntensity;
         private bool _hasCapturedInitialState;
 
@@ -55,14 +54,12 @@ namespace _Scripts.Environments.Factory
                     _initialLightIntensities[index] = _environmentLights[index].intensity;
             }
 
-            _initialPoweredLampActiveStates = new bool[_poweredLampMeshes.Length];
-            for (int index = 0; index < _poweredLampMeshes.Length; index++)
+            _initialCeilingLightPowerStates = new bool[_ceilingLights.Length];
+            for (int index = 0; index < _ceilingLights.Length; index++)
             {
-                if (_poweredLampMeshes[index] != null)
-                    _initialPoweredLampActiveStates[index] = _poweredLampMeshes[index].activeSelf;
+                if (_ceilingLights[index] != null)
+                    _initialCeilingLightPowerStates[index] = _ceilingLights[index].IsPowered;
             }
-            if (_powerOffLampMeshesRoot != null)
-                _initialPowerOffLampMeshesRootActive = _powerOffLampMeshesRoot.activeSelf;
 
             _initialAmbientIntensity = RenderSettings.ambientIntensity;
             _hasCapturedInitialState = true;
@@ -79,9 +76,12 @@ namespace _Scripts.Environments.Factory
                     _environmentLights[index].intensity = _initialLightIntensities[index] * brightnessMultiplier;
             }
 
-            RenderSettings.ambientIntensity = _initialAmbientIntensity
-                * (isPowerOff ? _powerOffAmbientBrightness : 1f);
-            ApplyLampMeshState(isPowerOff);
+            if (_bakedLighting != null)
+                _bakedLighting.SetBlackout(isPowerOff);
+            else
+                RenderSettings.ambientIntensity = _initialAmbientIntensity
+                    * (isPowerOff ? _powerOffAmbientBrightness : 1f);
+            ApplyCeilingLightState(isPowerOff);
 
             for (int index = 0; index < _emergencyFixtures.Length; index++)
             {
@@ -100,8 +100,11 @@ namespace _Scripts.Environments.Factory
                     _environmentLights[index].intensity = _initialLightIntensities[index];
             }
 
-            RenderSettings.ambientIntensity = _initialAmbientIntensity;
-            RestoreLampMeshState();
+            if (_bakedLighting != null)
+                _bakedLighting.SetBlackout(false);
+            else
+                RenderSettings.ambientIntensity = _initialAmbientIntensity;
+            RestoreCeilingLightState();
 
             for (int index = 0; index < _emergencyFixtures.Length; index++)
             {
@@ -112,30 +115,24 @@ namespace _Scripts.Environments.Factory
             IsPowerOff = false;
         }
 
-        private void ApplyLampMeshState(bool isPowerOff)
+        private void ApplyCeilingLightState(bool isPowerOff)
         {
-            for (int index = 0; index < _poweredLampMeshes.Length; index++)
+            for (int index = 0; index < _ceilingLights.Length; index++)
             {
-                GameObject poweredLampMesh = _poweredLampMeshes[index];
-                if (poweredLampMesh != null)
-                    poweredLampMesh.SetActive(!isPowerOff && _initialPoweredLampActiveStates[index]);
+                CeilLight ceilingLight = _ceilingLights[index];
+                if (ceilingLight != null)
+                    ceilingLight.SetPowered(!isPowerOff);
             }
-
-            if (_powerOffLampMeshesRoot != null)
-                _powerOffLampMeshesRoot.SetActive(isPowerOff);
         }
 
-        private void RestoreLampMeshState()
+        private void RestoreCeilingLightState()
         {
-            for (int index = 0; index < _poweredLampMeshes.Length; index++)
+            for (int index = 0; index < _ceilingLights.Length; index++)
             {
-                GameObject poweredLampMesh = _poweredLampMeshes[index];
-                if (poweredLampMesh != null)
-                    poweredLampMesh.SetActive(_initialPoweredLampActiveStates[index]);
+                CeilLight ceilingLight = _ceilingLights[index];
+                if (ceilingLight != null)
+                    ceilingLight.SetPowered(_initialCeilingLightPowerStates[index]);
             }
-
-            if (_powerOffLampMeshesRoot != null)
-                _powerOffLampMeshesRoot.SetActive(_initialPowerOffLampMeshesRootActive);
         }
     }
 }
