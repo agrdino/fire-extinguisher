@@ -78,9 +78,8 @@ namespace _Scripts.Environments.Factory
 
             if (_bakedLighting != null)
                 _bakedLighting.SetBlackout(isPowerOff);
-            else
-                RenderSettings.ambientIntensity = _initialAmbientIntensity
-                    * (isPowerOff ? _powerOffAmbientBrightness : 1f);
+            RenderSettings.ambientIntensity = _initialAmbientIntensity
+                * (isPowerOff ? _powerOffAmbientBrightness : 1f);
             ApplyCeilingLightState(isPowerOff);
 
             for (int index = 0; index < _emergencyFixtures.Length; index++)
@@ -102,8 +101,7 @@ namespace _Scripts.Environments.Factory
 
             if (_bakedLighting != null)
                 _bakedLighting.SetBlackout(false);
-            else
-                RenderSettings.ambientIntensity = _initialAmbientIntensity;
+            RenderSettings.ambientIntensity = _initialAmbientIntensity;
             RestoreCeilingLightState();
 
             for (int index = 0; index < _emergencyFixtures.Length; index++)
