@@ -24,9 +24,19 @@ namespace _Scripts.Environments.Factory
             for (int index = 0; index < _lights.Length; index++)
             {
                 if (_lights[index] != null)
-                    _lights[index].enabled = isActive &&
-                                             _lights[index].lightmapBakeType != LightmapBakeType.Baked;
+                    _lights[index].enabled = isActive && CanEnableAtRuntime(_lights[index]);
             }
+        }
+
+        private static bool CanEnableAtRuntime(Light light)
+        {
+#if UNITY_EDITOR
+            return light.lightmapBakeType != LightmapBakeType.Baked;
+#else
+            // Factory emergency lights are baked into the dark lightmaps. Player builds
+            // must keep their Light components disabled; lightmapBakeType is Editor-only.
+            return false;
+#endif
         }
 
         private void CacheLightsIfNeeded()
