@@ -55,7 +55,7 @@ namespace _Scripts.UI
                 || !_fireExtinguisherController.IsReadyToStart)
                 return;
 
-            ApplicationManager.Instance.SetState(ApplicationState.Guide);
+            ApplicationManager.Instance.SetState(ApplicationState.Explore);
         }
 
         private void OnClickBackButton()

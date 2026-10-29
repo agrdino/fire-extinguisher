@@ -39,7 +39,7 @@ namespace _Scripts.Editors.FireExtinguishers
             EditorGUILayout.PropertyField(_heartbeatInterval);
 
             EditorGUILayout.HelpBox(
-                "On Play, the simulator sends the configured default key immediately. When heartbeat simulation is enabled, it repeats the Controller's last received keyboard key.",
+                "On Play, the simulator sends the configured default key immediately. Heartbeats keep the keyboard connection alive, but do not overwrite an active XR Trigger/Thumb state.",
                 MessageType.Info);
 
             EditorGUILayout.Space();

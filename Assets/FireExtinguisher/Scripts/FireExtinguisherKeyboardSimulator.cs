@@ -53,7 +53,7 @@ namespace _Scripts.FireExtinguishers
 
         private bool SendKey(Key key)
         {
-            if (!_controller.TryReceiveKey(key)) return false;
+            if (!_controller.TryReceiveKeyHeartbeat(key)) return false;
 
             _lastSimulatedKey = key;
             _nextHeartbeatTime = Time.unscaledTime + Mathf.Max(0.01f, _heartbeatInterval);

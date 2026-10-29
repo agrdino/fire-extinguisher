@@ -2,6 +2,7 @@ using _Scripts.Controller;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _Scripts.UI
@@ -9,7 +10,8 @@ namespace _Scripts.UI
     public sealed class ExploreScene : MonoBehaviour, IScene
     {
         [SerializeField] private Button _btnStart;
-        [SerializeField] private Button _btnBackGuide;
+        [FormerlySerializedAs("_btnBackGuide")]
+        [SerializeField] private Button _btnBack;
         [SerializeField] private TextMeshProUGUI _txtCountdown;
         [SerializeField] private Slider _timerBar;
         [SerializeField] private LocalizedString _countdownString = new("UI", "explore.countdown");
@@ -19,15 +21,15 @@ namespace _Scripts.UI
         private void Awake()
         {
             if (_btnStart == null) _btnStart = UIComponentLookup.FindButton(this, "btnStart");
-            if (_btnBackGuide == null) _btnBackGuide = UIComponentLookup.FindButton(this, "btnBack");
+            if (_btnBack == null) _btnBack = UIComponentLookup.FindButton(this, "btnBack");
             if (_btnStart != null) _btnStart.onClick.AddListener(StartButton_OnClick);
-            if (_btnBackGuide != null) _btnBackGuide.onClick.AddListener(BackGuideButton_OnClick);
+            if (_btnBack != null) _btnBack.onClick.AddListener(BackButton_OnClick);
         }
 
         private void OnDestroy()
         {
             if (_btnStart != null) _btnStart.onClick.RemoveListener(StartButton_OnClick);
-            if (_btnBackGuide != null) _btnBackGuide.onClick.RemoveListener(BackGuideButton_OnClick);
+            if (_btnBack != null) _btnBack.onClick.RemoveListener(BackButton_OnClick);
             UnsubscribeFromTimer();
         }
 
@@ -70,9 +72,9 @@ namespace _Scripts.UI
             ApplicationManager.Instance.CompleteExplore();
         }
 
-        private void BackGuideButton_OnClick()
+        private void BackButton_OnClick()
         {
-            ApplicationManager.Instance.SetState(ApplicationState.Guide);
+            ApplicationManager.Instance.SetState(ApplicationState.Ready);
         }
 
     }

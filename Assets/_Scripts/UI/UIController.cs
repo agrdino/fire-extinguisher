@@ -17,7 +17,6 @@ namespace _Scripts.UI
         [SerializeField] private SelectLanguageScene _selectLanguageScene;
         [FormerlySerializedAs("_readyView")]
         [SerializeField] private StartScene _startScene;
-        [SerializeField] private GuideScene _guideScene;
         [SerializeField] private ExploreScene _exploreScene;
         [FormerlySerializedAs("_factoryResponseScene")]
         [SerializeField] private EmergencyResponseScene _emergencyResponseScene;
@@ -108,7 +107,6 @@ namespace _Scripts.UI
                 ApplicationState.Ready => _startScene,
                 ApplicationState.Language => _selectLanguageScene,
                 ApplicationState.SelectEnvironment => _selectLanguageScene,
-                ApplicationState.Guide => _guideScene,
                 ApplicationState.Explore => _exploreScene,
                 ApplicationState.EmergencyResponse => _emergencyResponseScene,
                 ApplicationState.SelectExtinguisher => _selectExtinguisherScene.Value,
@@ -176,7 +174,7 @@ namespace _Scripts.UI
             }
 
             ApplicationState placementState = state == ApplicationState.Ready
-                ? ApplicationState.Guide
+                ? ApplicationState.Explore
                 : state;
 
             if (!_environmentContext.TryGetUIAnchor(placementState, out Transform point))

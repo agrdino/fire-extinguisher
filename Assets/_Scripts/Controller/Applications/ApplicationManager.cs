@@ -257,7 +257,6 @@ namespace _Scripts.Controller
             {
                 case ApplicationState.Ready:
                 case ApplicationState.Language:
-                case ApplicationState.Guide:
                     ResetTrainingResult();
                     ResetExtinguisher();
                     SelectExtinguisher(FireExtinguisherType.Unselect);
@@ -689,8 +688,6 @@ namespace _Scripts.Controller
 
             FireSpawnPoint selectedSpawnPoint = _fireController.SelectedSpawnPoint;
             Transform playerView = GetPlayerView();
-            bool allowPickupAtAnyStation = _environmentContext.EnvironmentType == EnvironmentType.Factory;
-
             float nearestDistance = float.PositiveInfinity;
             for (int index = 0; index < stations.Count; index++)
             {
@@ -715,7 +712,7 @@ namespace _Scripts.Controller
                 FireExtinguisherStation station = stations[index];
                 if (station == null) continue;
                 station.Configure(
-                    allowPickupAtAnyStation || station == _mainExtinguisherStation,
+                    station.gameObject.activeInHierarchy,
                     _selectedExtinguisherType);
             }
 

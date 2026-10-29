@@ -12,6 +12,21 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Road Marking Exit Sign Material
+    second: {fileID: 2100000, guid: f4244b84848e2824caaad570357baf0d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road Marking Orange Material
+    second: {fileID: 2100000, guid: 2c68bcd2dfe6afb41ac3509fa1cbd386, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road Marking White Material
+    second: {fileID: 2100000, guid: 10fd3d54347e6a14c96a6a094f0fa2ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Rolling Shutter Door Material
     second: {fileID: 2100000, guid: 7f166811b02861e46a688fec100ccf80, type: 2}
   - first:
@@ -24,6 +39,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: White Wall Material
     second: {fileID: 2100000, guid: 3df8cd5347d3e7a498290cfbde0b3278, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White Wall Material.001
+    second: {fileID: 2100000, guid: 303aeb1bf83e44d4db0c7bbe70b1832d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

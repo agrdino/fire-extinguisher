@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.ExploreScene
   _btnStart: {fileID: 1311588199108149093}
-  _btnBackGuide: {fileID: 4209155007197610787}
+  _btnBack: {fileID: 4209155007197610787}
   _txtCountdown: {fileID: 620000000000000012}
   _timerBar: {fileID: 2688807179666274610}
   _countdownString:

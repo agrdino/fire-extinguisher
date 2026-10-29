@@ -9,6 +9,14 @@ namespace _Scripts.FireExtinguishers
     [DisallowMultipleComponent]
     public sealed class FireExtinguisherController : MonoBehaviour
     {
+        public enum InputSource
+        {
+            None,
+            Keyboard,
+            XRController,
+            DirectState
+        }
+
         private static FireExtinguisherController _instance;
 
         public static FireExtinguisherController Instance
@@ -29,6 +37,7 @@ namespace _Scripts.FireExtinguishers
         [SerializeField] private bool _isConnected;
         [SerializeField] private Key _lastReceivedKey = Key.None;
         [SerializeField] private bool _hasReceivedKey;
+        [SerializeField] private InputSource _activeInputSource;
 
         private float _lastReceiveTime = float.NegativeInfinity;
 
@@ -41,6 +50,7 @@ namespace _Scripts.FireExtinguishers
         public Key LastReceivedKey => _lastReceivedKey;
         public bool HasReceivedKey => _hasReceivedKey;
         public bool IsInputEnabled => _isInputEnabled;
+        public InputSource ActiveInputSource => _activeInputSource;
         public bool IsReadyToStart =>
             _isConnected && _hasReceivedKey && _lastReceivedKey == Key.A;
         
@@ -78,17 +88,27 @@ namespace _Scripts.FireExtinguishers
             if (Instance == this) Instance = null;
         }
 
-        public bool TryReceiveKey(Key key)
-        {
-            if (!_inputSettings.TryGetState(key, out FireExtinguisherState state)) return false;
+        public bool TryReceiveKey(Key key) => TryReceiveKey(key, false);
 
-            _lastReceiveTime = Time.unscaledTime;
-            _isConnected = true;
+        public bool TryReceiveKeyHeartbeat(Key key) => TryReceiveKey(key, true);
+
+        private bool TryReceiveKey(Key key, bool isHeartbeat)
+        {
+            if (_inputSettings == null ||
+                !_inputSettings.TryGetState(key, out FireExtinguisherState state))
+                return false;
+
+            RegisterInputActivity();
             _lastReceivedKey = key;
             _hasReceivedKey = true;
-            if (!_isInputEnabled) return true;
 
-            ReceiveState(state);
+            if (!isHeartbeat || _activeInputSource == InputSource.None)
+                _activeInputSource = InputSource.Keyboard;
+
+            if (!_isInputEnabled) return true;
+            if (isHeartbeat && _activeInputSource != InputSource.Keyboard) return true;
+
+            ApplyState(state);
             return true;
         }
 
@@ -97,12 +117,37 @@ namespace _Scripts.FireExtinguishers
         {
             if (!_isInputEnabled) return;
 
-            _lastReceiveTime = Time.unscaledTime;
-            _isConnected = true;
-            _currentState = state;
-            _fireExtinguisher.SetState(state);
-            
-            if (_logReceivedStates) LogReceivedState(state);
+            RegisterInputActivity();
+            _activeInputSource = InputSource.DirectState;
+            ApplyState(state);
+        }
+
+        public void ReceiveXRControls(bool isTriggerPressed, bool toggleSafetyPin)
+        {
+            if (!_isInputEnabled) return;
+
+            RegisterInputActivity();
+            _activeInputSource = InputSource.XRController;
+
+            FireExtinguisherState state = _currentState;
+            if (toggleSafetyPin)
+            {
+                SafetyPinState nextSafetyPin = state.SafetyPin == SafetyPinState.Inserted
+                    ? SafetyPinState.Removed
+                    : SafetyPinState.Inserted;
+                state = state.WithSafetyPin(nextSafetyPin);
+            }
+
+            LeverState lever = isTriggerPressed
+                ? LeverState.Pressed
+                : LeverState.Released;
+            ApplyState(state.WithLever(lever));
+        }
+
+        public void RefreshXRInputConnection()
+        {
+            if (!_isInputEnabled || _activeInputSource != InputSource.XRController) return;
+            RegisterInputActivity();
         }
 
         public void Refill()
@@ -122,6 +167,7 @@ namespace _Scripts.FireExtinguishers
         public void ResetInputState()
         {
             _isInputEnabled = false;
+            _activeInputSource = InputSource.None;
             _currentState = FireExtinguisherState.DefaultState;
 
             _fireExtinguisher.SetState(_currentState);
@@ -139,6 +185,22 @@ namespace _Scripts.FireExtinguishers
 
             _fireExtinguisher.SetState(_currentState);
             if (_logReceivedStates) Debug.LogWarning("Fire extinguisher connection timed out. Lever was released; safety pin state was preserved.", this);
+        }
+
+        private void RegisterInputActivity()
+        {
+            _lastReceiveTime = Time.unscaledTime;
+            _isConnected = true;
+        }
+
+        private void ApplyState(FireExtinguisherState state)
+        {
+            if (_currentState == state) return;
+
+            _currentState = state;
+            _fireExtinguisher.SetState(state);
+
+            if (_logReceivedStates) LogReceivedState(state);
         }
 
         private void LogReceivedState(FireExtinguisherState state)

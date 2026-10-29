@@ -8,7 +8,6 @@ namespace _Scripts.Controller
         Escape = 3,
         Completed = 4,
         Failed = 5,
-        Guide = 6,
         Explore = 7,
         Language = 8,
         SelectEnvironment = 9,

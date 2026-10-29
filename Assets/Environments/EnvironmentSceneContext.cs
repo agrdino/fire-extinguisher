@@ -156,18 +156,15 @@ namespace _Scripts.Controller
             foreach (SceneUIAnchor entry in _uiAnchors)
             {
                 if (entry == null || entry.Anchor == null) continue;
-                if (entry.State != ApplicationState.Guide && entry.State != ApplicationState.Explore) continue;
+                if (entry.State != ApplicationState.Explore) continue;
 
                 Transform anchor = entry.Anchor;
-                bool isGuide = entry.State == ApplicationState.Guide;
-                Gizmos.color = isGuide
-                    ? new Color(0.2f, 0.75f, 1f, 0.9f)
-                    : new Color(0.35f, 1f, 0.4f, 0.9f);
+                Gizmos.color = new Color(0.35f, 1f, 0.4f, 0.9f);
                 Gizmos.matrix = Matrix4x4.TRS(anchor.position, anchor.rotation, Vector3.one);
-                Gizmos.DrawWireSphere(Vector3.zero, isGuide ? 0.15f : 0.2f);
+                Gizmos.DrawWireSphere(Vector3.zero, 0.2f);
                 Gizmos.DrawWireCube(Vector3.zero, new Vector3(0.8f, 0.45f, 0.02f));
                 DrawForwardArrow();
-                UnityEditor.Handles.Label(anchor.position + Vector3.up * (isGuide ? 0.4f : 0.65f), $"UI Point - {entry.State}");
+                UnityEditor.Handles.Label(anchor.position + Vector3.up * 0.65f, $"UI Point - {entry.State}");
             }
 
             Gizmos.matrix = previousMatrix;

@@ -32,6 +32,11 @@ namespace _Scripts.FireExtinguishers
             return new FireExtinguisherState(_safetyPin, lever);
         }
 
+        public FireExtinguisherState WithSafetyPin(SafetyPinState safetyPin)
+        {
+            return new FireExtinguisherState(safetyPin, _lever);
+        }
+
         public bool Equals(FireExtinguisherState other)
         {
             return _safetyPin == other._safetyPin && _lever == other._lever;

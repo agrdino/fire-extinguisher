@@ -52,7 +52,6 @@ namespace FireExtinguisher.EditorTools
             "Assets/UIs/Variants/Escaped Scene.prefab",
             "Assets/UIs/Variants/Explore Scene.prefab",
             "Assets/UIs/Variants/Failed Scene.prefab",
-            "Assets/UIs/Variants/Guide Scene.prefab",
             "Assets/UIs/Variants/Select Environment Scene.prefab",
             "Assets/UIs/Variants/Select Extinguisher Scene.prefab",
             "Assets/UIs/Variants/Start Scene.prefab",
