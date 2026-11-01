@@ -122,7 +122,10 @@ namespace _Scripts.FireExtinguishers
             ApplyState(state);
         }
 
-        public void ReceiveXRControls(bool isTriggerPressed, bool toggleSafetyPin)
+        public void ReceiveXRControls(
+            bool isTriggerPressed,
+            bool removeSafetyPin,
+            bool insertSafetyPin)
         {
             if (!_isInputEnabled) return;
 
@@ -130,13 +133,10 @@ namespace _Scripts.FireExtinguishers
             _activeInputSource = InputSource.XRController;
 
             FireExtinguisherState state = _currentState;
-            if (toggleSafetyPin)
-            {
-                SafetyPinState nextSafetyPin = state.SafetyPin == SafetyPinState.Inserted
-                    ? SafetyPinState.Removed
-                    : SafetyPinState.Inserted;
-                state = state.WithSafetyPin(nextSafetyPin);
-            }
+            if (removeSafetyPin && !insertSafetyPin)
+                state = state.WithSafetyPin(SafetyPinState.Removed);
+            else if (insertSafetyPin && !removeSafetyPin)
+                state = state.WithSafetyPin(SafetyPinState.Inserted);
 
             LeverState lever = isTriggerPressed
                 ? LeverState.Pressed

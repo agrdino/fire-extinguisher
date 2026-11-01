@@ -39,7 +39,7 @@ namespace _Scripts.Editors.FireExtinguishers
             EditorGUILayout.PropertyField(_heartbeatInterval);
 
             EditorGUILayout.HelpBox(
-                "On Play, the simulator sends the configured default key immediately. Heartbeats keep the keyboard connection alive, but do not overwrite an active XR Trigger/Thumb state.",
+                "On Play, the simulator sends the configured default keyboard key immediately. Right-controller A removes the safety pin, B inserts it, and Trigger controls spraying. Keyboard A/B/C/D remain unchanged. No keyboard binding is added for XR Trigger/A/B.",
                 MessageType.Info);
 
             EditorGUILayout.Space();

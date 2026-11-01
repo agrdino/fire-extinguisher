@@ -7,15 +7,17 @@ namespace _Scripts.FireExtinguishers
     public sealed class FireExtinguisherXRInput : MonoBehaviour
     {
         private const string RightTriggerBinding =
-            "<XRController>{RightHand}/{Trigger}";
-        private const string RightThumbBinding =
-            "<XRController>{RightHand}/{Primary2DAxisClick}";
+            "<XRController>{RightHand}/{TriggerButton}";
+        private const string RightAButtonBinding =
+            "<XRController>{RightHand}/{PrimaryButton}";
+        private const string RightBButtonBinding =
+            "<XRController>{RightHand}/{SecondaryButton}";
 
         [SerializeField] private FireExtinguisherController _controller;
-        [SerializeField, Range(0.01f, 1f)] private float _triggerPressThreshold = 0.5f;
 
         private InputAction _triggerAction;
-        private InputAction _thumbAction;
+        private InputAction _aButtonAction;
+        private InputAction _bButtonAction;
         private bool _wasTriggerPressed;
         private bool _hasReceivedXRInput;
 
@@ -34,7 +36,8 @@ namespace _Scripts.FireExtinguishers
         {
             CreateInputActions();
             _triggerAction.Enable();
-            _thumbAction.Enable();
+            _aButtonAction.Enable();
+            _bButtonAction.Enable();
         }
 
         private void Start()
@@ -49,14 +52,17 @@ namespace _Scripts.FireExtinguishers
         {
             if (_controller == null) return;
 
-            bool isTriggerPressed =
-                _triggerAction.ReadValue<float>() >= _triggerPressThreshold;
+            bool isTriggerPressed = _triggerAction.IsPressed();
             bool didTriggerChange = isTriggerPressed != _wasTriggerPressed;
-            bool didPressThumb = _thumbAction.WasPressedThisFrame();
+            bool didPressA = _aButtonAction.WasPressedThisFrame();
+            bool didPressB = _bButtonAction.WasPressedThisFrame();
 
-            if (didTriggerChange || didPressThumb)
+            if (didTriggerChange || didPressA || didPressB)
             {
-                _controller.ReceiveXRControls(isTriggerPressed, didPressThumb);
+                _controller.ReceiveXRControls(
+                    isTriggerPressed,
+                    didPressA,
+                    didPressB);
                 _hasReceivedXRInput = true;
                 _wasTriggerPressed = isTriggerPressed;
                 return;
@@ -69,18 +75,20 @@ namespace _Scripts.FireExtinguishers
         private void OnDisable()
         {
             if (_wasTriggerPressed && _controller != null)
-                _controller.ReceiveXRControls(false, false);
+                _controller.ReceiveXRControls(false, false, false);
 
             _wasTriggerPressed = false;
             _hasReceivedXRInput = false;
             _triggerAction?.Disable();
-            _thumbAction?.Disable();
+            _aButtonAction?.Disable();
+            _bButtonAction?.Disable();
         }
 
         private void OnDestroy()
         {
             _triggerAction?.Dispose();
-            _thumbAction?.Dispose();
+            _aButtonAction?.Dispose();
+            _bButtonAction?.Dispose();
         }
 
         private void ResolveController()
@@ -99,17 +107,26 @@ namespace _Scripts.FireExtinguishers
             {
                 _triggerAction = new InputAction(
                     "Fire Extinguisher Trigger",
-                    InputActionType.Value,
+                    InputActionType.Button,
                     RightTriggerBinding,
-                    expectedControlType: "Axis");
+                    expectedControlType: "Button");
             }
 
-            if (_thumbAction == null)
+            if (_aButtonAction == null)
             {
-                _thumbAction = new InputAction(
-                    "Fire Extinguisher Thumb",
+                _aButtonAction = new InputAction(
+                    "Fire Extinguisher Remove Safety Pin (A)",
                     InputActionType.Button,
-                    RightThumbBinding,
+                    RightAButtonBinding,
+                    expectedControlType: "Button");
+            }
+
+            if (_bButtonAction == null)
+            {
+                _bButtonAction = new InputAction(
+                    "Fire Extinguisher Insert Safety Pin (B)",
+                    InputActionType.Button,
+                    RightBButtonBinding,
                     expectedControlType: "Button");
             }
         }
