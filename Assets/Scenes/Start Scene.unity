@@ -774,7 +774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8962677695553302094, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: _escapeDuration
-      value: 300
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 9071832935567102687, guid: 4cc05abb802d80a4abd926daa28f6c53, type: 3}
       propertyPath: m_fontColor32.rgba
