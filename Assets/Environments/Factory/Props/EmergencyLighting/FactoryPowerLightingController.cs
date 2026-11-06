@@ -13,14 +13,10 @@ namespace _Scripts.Environments.Factory
         [SerializeField] private FactoryEmergencyLightFixture[] _emergencyFixtures =
             Array.Empty<FactoryEmergencyLightFixture>();
 
-        [Header("Ceiling Lights")]
-        [SerializeField] private CeilLight[] _ceilingLights = Array.Empty<CeilLight>();
-
         [Header("Baked Lighting Scenarios")]
         [SerializeField] private FactoryBakedLightingSwitcher _bakedLighting;
 
         private float[] _initialLightIntensities = Array.Empty<float>();
-        private bool[] _initialCeilingLightPowerStates = Array.Empty<bool>();
         private float _initialAmbientIntensity;
         private bool _hasCapturedInitialState;
 
@@ -54,13 +50,6 @@ namespace _Scripts.Environments.Factory
                     _initialLightIntensities[index] = _environmentLights[index].intensity;
             }
 
-            _initialCeilingLightPowerStates = new bool[_ceilingLights.Length];
-            for (int index = 0; index < _ceilingLights.Length; index++)
-            {
-                if (_ceilingLights[index] != null)
-                    _initialCeilingLightPowerStates[index] = _ceilingLights[index].IsPowered;
-            }
-
             _initialAmbientIntensity = RenderSettings.ambientIntensity;
             _hasCapturedInitialState = true;
         }
@@ -80,7 +69,6 @@ namespace _Scripts.Environments.Factory
                 _bakedLighting.SetBlackout(isPowerOff);
             RenderSettings.ambientIntensity = _initialAmbientIntensity
                 * (isPowerOff ? _powerOffAmbientBrightness : 1f);
-            ApplyCeilingLightState(isPowerOff);
 
             for (int index = 0; index < _emergencyFixtures.Length; index++)
             {
@@ -102,7 +90,6 @@ namespace _Scripts.Environments.Factory
             if (_bakedLighting != null)
                 _bakedLighting.SetBlackout(false);
             RenderSettings.ambientIntensity = _initialAmbientIntensity;
-            RestoreCeilingLightState();
 
             for (int index = 0; index < _emergencyFixtures.Length; index++)
             {
@@ -111,26 +98,6 @@ namespace _Scripts.Environments.Factory
             }
 
             IsPowerOff = false;
-        }
-
-        private void ApplyCeilingLightState(bool isPowerOff)
-        {
-            for (int index = 0; index < _ceilingLights.Length; index++)
-            {
-                CeilLight ceilingLight = _ceilingLights[index];
-                if (ceilingLight != null)
-                    ceilingLight.SetPowered(!isPowerOff);
-            }
-        }
-
-        private void RestoreCeilingLightState()
-        {
-            for (int index = 0; index < _ceilingLights.Length; index++)
-            {
-                CeilLight ceilingLight = _ceilingLights[index];
-                if (ceilingLight != null)
-                    ceilingLight.SetPowered(_initialCeilingLightPowerStates[index]);
-            }
         }
     }
 }
