@@ -10415,7 +10415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344802783197265600, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8404329908667696825, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_Name
@@ -10423,7 +10423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8921862048641195488, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167690571141717786, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_Range
@@ -17624,7 +17624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344802783197265600, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8404329908667696825, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_Name
@@ -17632,7 +17632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8921862048641195488, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167690571141717786, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_Range
@@ -48914,9 +48914,9 @@ MonoBehaviour:
   _normalScenario: {fileID: 0}
   _blackoutScenario: {fileID: 0}
   _lightLightmaps:
-  - {fileID: 2800000, guid: 5606f57660b8c9c4f832cd7373c17f8b, type: 3}
+  - {fileID: 2800000, guid: d466549d37d888849a13925c71b0ab9a, type: 3}
   _darkLightmaps:
-  - {fileID: 2800000, guid: aefcc6703f1b7fb44805f5b5574d3036, type: 3}
+  - {fileID: 2800000, guid: 14aba3f0dfaa37947929d2a082c7cc33, type: 3}
   _previewBlackoutInEditor: 0
 --- !u!1 &1310791850
 GameObject:
@@ -52926,7 +52926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344802783197265600, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8404329908667696825, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_Name
@@ -52934,7 +52934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8921862048641195488, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167690571141717786, guid: 192f8930e5a7d964d87dbdcc2a1a68a9, type: 3}
       propertyPath: m_Range
@@ -74641,7 +74641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2022125826
 Transform:
   m_ObjectHideFlags: 0
@@ -586111,7 +586111,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7510748521582275653}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -717733,7 +717733,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5956718111027047053}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
