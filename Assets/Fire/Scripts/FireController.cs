@@ -72,7 +72,13 @@ namespace _Scripts.Fires
         {
             _hasRaisedAllFiresExtinguished = false;
             for (int i = 0; i < _activeFires.Count; i++)
-                _activeFires[i]?.ResetFire();
+            {
+                Fire fire = _activeFires[i];
+                if (fire == null) continue;
+
+                fire.ResetFire();
+                fire.GetComponentInChildren<FireProximityWarning>(true)?.ResetWarningState();
+            }
         }
 
         public void SpawnFires(Transform playerRoot, bool keepElectricalSparksUntilPowerOff = false)

@@ -48,18 +48,32 @@ namespace _Scripts.Fires
 
         private void OnDisable()
         {
-            FireWarningHintController.Instance?.HideWarning(this);
-            _playerCollidersInside.Clear();
+            ResetWarningState();
         }
 
         public void Arm(Transform playerRoot)
         {
-            FireWarningHintController.Instance?.HideWarning(this);
             _playerRoot = playerRoot;
+            ResetWarningState();
+        }
+
+        public void ResetWarningState()
+        {
+            FireWarningHintController.Instance?.HideWarning(this);
             _playerCollidersInside.Clear();
         }
 
         private void OnTriggerEnter(Collider other)
+        {
+            TrackPlayerCollider(other);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            TrackPlayerCollider(other);
+        }
+
+        private void TrackPlayerCollider(Collider other)
         {
             if (!BelongsToPlayer(other) || !_playerCollidersInside.Add(other)) return;
             if (_playerCollidersInside.Count > 1) return;
