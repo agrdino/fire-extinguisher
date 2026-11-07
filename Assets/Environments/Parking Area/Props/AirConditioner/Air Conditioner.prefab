@@ -225,6 +225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Air Conditioner
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b407153c13ed635479865a0c11fa48f8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -311,6 +315,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b407153c13ed635479865a0c11fa48f8, type: 3}
       propertyPath: m_Name
       value: Air Conditioner
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b407153c13ed635479865a0c11fa48f8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
