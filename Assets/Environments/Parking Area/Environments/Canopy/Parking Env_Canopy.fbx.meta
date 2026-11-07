@@ -7,8 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Canopy Main Material
+    second: {fileID: 2100000, guid: 02674e8e25635f6469d5ac7833617e0a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Canopy Material
+    second: {fileID: 2100000, guid: 4d61eec910209c5459220aa12ff6cae8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Metal_Rough
     second: {fileID: 2100000, guid: e74da5a345038954bb3cbbc81fbe8b3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar Material
+    second: {fileID: 2100000, guid: 4168d5199cb82734c8d1f9d8b9f3e410, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
