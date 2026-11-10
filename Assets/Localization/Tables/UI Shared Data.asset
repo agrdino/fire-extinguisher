@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: common.restart
     m_Metadata:
       m_Items: []
+  - m_Id: 1337040899
+    m_Key: common.finish
+    m_Metadata:
+      m_Items: []
   - m_Id: 1337040900
     m_Key: start.title
     m_Metadata:

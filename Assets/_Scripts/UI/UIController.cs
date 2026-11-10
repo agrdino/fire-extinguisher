@@ -28,8 +28,8 @@ namespace _Scripts.UI
         [SerializeField] private InterfaceReference<IScene, MonoBehaviour> _failedScene;
 
         [Header("Failed UI Placement")]
-        [SerializeField, Min(0f)] private float _failedSceneDistance = 2.5f;
-        [SerializeField] private float _failedSceneHeight = 1.4f;
+        [FormerlySerializedAs("_failedSceneDistance"), SerializeField, Min(0f)] private float _fallbackSceneDistance = 2.5f;
+        [FormerlySerializedAs("_failedSceneHeight"), SerializeField] private float _fallbackSceneHeight = 1.4f;
 
         private IScene _currentScene;
         private ApplicationManager _applicationManager;
@@ -120,10 +120,15 @@ namespace _Scripts.UI
 
             if (!PlaceScene(_currentScene, state)) return;
 
-            _currentScene.gameObject.SetActive(true);
-            if (_currentScene.gameObject.TryGetComponent(out UIPanelTween transition))
+            ShowSceneObject(_currentScene);
+        }
+
+        private static void ShowSceneObject(IScene scene)
+        {
+            scene.gameObject.SetActive(true);
+            if (scene.gameObject.TryGetComponent(out UIPanelTween transition))
                 transition.PlayIn();
-            _currentScene.Show();
+            scene.Show();
         }
 
         private static void HideSceneObject(IScene scene)
@@ -142,7 +147,7 @@ namespace _Scripts.UI
                 return false;
             }
 
-            if (state == ApplicationState.Failed) return PlaceFailedScene(scene);
+            if (state == ApplicationState.Failed) return PlaceFallbackScene(scene);
 
             FireSpawnPoint selectedFireSpawnPoint = FireController.Instance?.SelectedSpawnPoint;
             EmergencyResponseController emergencyResponseController = FindFirstObjectByType<EmergencyResponseController>();
@@ -177,22 +182,25 @@ namespace _Scripts.UI
                 ? ApplicationState.Explore
                 : state;
 
-            if (!_environmentContext.TryGetUIAnchor(placementState, out Transform point))
+            if (_environmentContext.TryGetUIAnchor(placementState, out Transform point))
             {
-                scene.gameObject.SetActive(false);
-                return false;
+                scene.gameObject.transform.SetPositionAndRotation(point.position, point.rotation);
+                return true;
             }
 
-            scene.gameObject.transform.SetPositionAndRotation(point.position, point.rotation);
-            return true;
+            // Some phase anchors are assigned by their controller after the state
+            // change event. Keep the panel visible until that anchor is available.
+            return PlaceFallbackScene(scene);
         }
 
         public void RefreshCurrentScenePlacement()
         {
-            if (_currentScene != null) PlaceScene(_currentScene, _applicationManager.State);
+            if (_currentScene == null || !PlaceScene(_currentScene, _applicationManager.State)) return;
+            if (!_currentScene.gameObject.activeInHierarchy)
+                ShowSceneObject(_currentScene);
         }
 
-        private bool PlaceFailedScene(IScene scene)
+        private bool PlaceFallbackScene(IScene scene)
         {
             Transform playerView = _applicationManager.PlayerView;
             if (playerView == null)
@@ -201,8 +209,8 @@ namespace _Scripts.UI
             }
 
             Quaternion yawRotation = Quaternion.Euler(0f, playerView.eulerAngles.y, 0f);
-            Vector3 position = playerView.position + yawRotation * Vector3.forward * _failedSceneDistance;
-            position.y = _failedSceneHeight;
+            Vector3 position = playerView.position + yawRotation * Vector3.forward * _fallbackSceneDistance;
+            position.y = _fallbackSceneHeight;
             scene.gameObject.transform.SetPositionAndRotation(position, yawRotation);
             return true;
         }

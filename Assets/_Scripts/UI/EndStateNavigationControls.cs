@@ -17,16 +17,8 @@ namespace _Scripts.UI
         [SerializeField] private TMP_Text _txtReturnToStart;
         [SerializeField] private TMP_Text _txtSwitchEnvironment;
 
-        [Header("Layout")]
-        [SerializeField] private Vector2 _backPosition = new(25f, 25f);
-        [SerializeField] private Vector2 _backSize = new(200f, 50f);
-        [SerializeField] private Vector2 _singleActionPosition = new(0f, -200f);
-        [SerializeField] private Vector2 _twoActionLeftPosition = new(-210f, -200f);
-        [SerializeField] private Vector2 _twoActionRightPosition = new(210f, -200f);
-        [SerializeField] private Vector2 _actionSize = new(320f, 76f);
-
         [Header("Labels")]
-        [SerializeField] private LocalizedString _returnToStartLabel = new("UI", "common.back");
+        [SerializeField] private LocalizedString _returnToStartLabel = new("UI", "common.finish");
         [SerializeField] private LocalizedString _parkingAreaLabel = new("UI", "environment.parking_area");
 
         private IApplicationNavigator _navigator;
@@ -63,7 +55,7 @@ namespace _Scripts.UI
             if (_txtSwitchEnvironment != null && showParkingButton)
                 _txtSwitchEnvironment.SetText(_parkingAreaLabel.GetLocalizedString());
 
-            ApplyLayout(showParkingButton);
+            ApplyButtonVisibility(showParkingButton);
             RefreshInteractableState();
         }
 
@@ -96,49 +88,12 @@ namespace _Scripts.UI
             if (_btnSwitchEnvironment != null) _btnSwitchEnvironment.interactable = interactable;
         }
 
-        private void ApplyLayout(bool showParkingButton)
+        private void ApplyButtonVisibility(bool showParkingButton)
         {
-            RectTransform retry = _btnRetry != null ? _btnRetry.transform as RectTransform : null;
-            RectTransform start = _btnReturnToStart != null ? _btnReturnToStart.transform as RectTransform : null;
-            RectTransform switchEnvironment = _btnSwitchEnvironment != null
-                ? _btnSwitchEnvironment.transform as RectTransform
-                : null;
-
             if (_btnRetry != null) _btnRetry.gameObject.SetActive(true);
             if (_btnReturnToStart != null) _btnReturnToStart.gameObject.SetActive(true);
             if (_btnSwitchEnvironment != null)
                 _btnSwitchEnvironment.gameObject.SetActive(showParkingButton);
-
-            SetBottomLeftLayout(start, _backPosition, _backSize);
-
-            if (showParkingButton)
-            {
-                SetCenteredLayout(retry, _twoActionLeftPosition, _actionSize);
-                SetCenteredLayout(switchEnvironment, _twoActionRightPosition, _actionSize);
-                return;
-            }
-
-            SetCenteredLayout(retry, _singleActionPosition, _actionSize);
-        }
-
-        private static void SetCenteredLayout(RectTransform rectTransform, Vector2 position, Vector2 size)
-        {
-            if (rectTransform == null) return;
-            rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-            rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-            rectTransform.pivot = new Vector2(0.5f, 0.5f);
-            rectTransform.anchoredPosition = position;
-            rectTransform.sizeDelta = size;
-        }
-
-        private static void SetBottomLeftLayout(RectTransform rectTransform, Vector2 position, Vector2 size)
-        {
-            if (rectTransform == null) return;
-            rectTransform.anchorMin = Vector2.zero;
-            rectTransform.anchorMax = Vector2.zero;
-            rectTransform.pivot = Vector2.zero;
-            rectTransform.anchoredPosition = position;
-            rectTransform.sizeDelta = size;
         }
 
         private static void DisableStaticLocalizer(TMP_Text label)

@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5682787560497632375, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6596566190082866221, guid: ce452011c9b0ef840bd67e00fe8dd4dd, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -134,8 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac1895c91d454bcc8d72ed870b945f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.EmergencyResponseScene
-  _txtTitle: {fileID: 0}
-  _txtGuide: {fileID: 0}
+  _txtTitle: {fileID: 3619538987844326670}
+  _txtGuide: {fileID: 2974853320542401301}
   _title:
     m_TableReference:
       m_TableCollectionName: UI
@@ -179,13 +179,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7423816777079835479}
     m_Modifications:
+    - target: {fileID: 603344598393689830, guid: 285b9993f3ee7c84897ca36fcf99a644, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294637554
+      objectReference: {fileID: 0}
     - target: {fileID: 664129226075141006, guid: 285b9993f3ee7c84897ca36fcf99a644, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 664129226075141006, guid: 285b9993f3ee7c84897ca36fcf99a644, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1898405637493656326, guid: 285b9993f3ee7c84897ca36fcf99a644, type: 3}
       propertyPath: m_Pivot.x
@@ -270,6 +274,10 @@ PrefabInstance:
     - target: {fileID: 7234805771834427070, guid: 285b9993f3ee7c84897ca36fcf99a644, type: 3}
       propertyPath: m_Name
       value: Reach Round Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7307196522370513868, guid: 285b9993f3ee7c84897ca36fcf99a644, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280029961
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -373,6 +381,14 @@ PrefabInstance:
       propertyPath: m_text
       value: EXTINGUISH ALL FIRES
       objectReference: {fileID: 0}
+    - target: {fileID: 4753628180596766500, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_fontSize
+      value: 62.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753628180596766500, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294952960
+      objectReference: {fileID: 0}
     - target: {fileID: 6524490427946553663, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_text
       value: Remove the safety pin, aim at the base of the fire, squeeze the lever,
@@ -380,7 +396,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6524490427946553663, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_fontSize
-      value: 55.1
+      value: 43.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524490427946553663, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294952960
       objectReference: {fileID: 0}
     - target: {fileID: 7412088410918292824, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_Key
@@ -411,6 +431,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+--- !u!114 &2974853320542401301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6524490427946553663, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+  m_PrefabInstance: {fileID: 8341625476227457578}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &3619538987844326670 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4753628180596766500, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+  m_PrefabInstance: {fileID: 8341625476227457578}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &7218602854543932602 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1724536848087572112, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}

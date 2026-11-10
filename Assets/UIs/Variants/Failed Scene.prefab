@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7568179380459275393}
+  - component: {fileID: 5821378514340930555}
   m_Layer: 0
   m_Name: Buttons
   m_TagString: Untagged
@@ -32,11 +33,37 @@ RectTransform:
   - {fileID: 633950807243747966}
   m_Father: {fileID: 7810600003340714968}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -200}
+  m_SizeDelta: {x: 0, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5821378514340930555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8406446414487113798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 32
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1001 &1614404971117662371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,18 +245,12 @@ MonoBehaviour:
     _btnSwitchEnvironment: {fileID: 0}
     _txtReturnToStart: {fileID: 2006988023787564017}
     _txtSwitchEnvironment: {fileID: 0}
-    _backPosition: {x: 25, y: 25}
-    _backSize: {x: 200, y: 50}
-    _singleActionPosition: {x: 0, y: -200}
-    _twoActionLeftPosition: {x: -210, y: -200}
-    _twoActionRightPosition: {x: 210, y: -200}
-    _actionSize: {x: 320, y: 76}
     _returnToStartLabel:
       m_TableReference:
         m_TableCollectionName: UI
       m_TableEntryReference:
         m_KeyId: 0
-        m_Key: common.back
+        m_Key: common.finish
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
@@ -282,27 +303,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 320
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_LocalPosition.x
@@ -338,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -432,6 +453,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6098048111312584530, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1798400837671846801}
     - targetCorrespondingSourceObject: {fileID: 4107808685362193092, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       insertIndex: -1
       addedObject: {fileID: 975435387256343636}
@@ -502,12 +526,37 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6212570578302427523, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
   m_PrefabInstance: {fileID: 2860020793549351083}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8291210137364486137}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &8291210137364486137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6098048111312584530, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
+  m_PrefabInstance: {fileID: 2860020793549351083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1798400837671846801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291210137364486137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 320
+  m_MinHeight: 76
+  m_PreferredWidth: 320
+  m_PreferredHeight: 76
+  m_FlexibleWidth: 0
+  m_FlexibleHeight: 0
+  m_LayoutPriority: 1
 --- !u!1001 &2945552616083711822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -518,11 +567,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_AnchorMax.x
@@ -542,11 +591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_LocalPosition.x
@@ -578,11 +627,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318380302121145648, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -631,7 +680,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6098048111312584530, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 640002892755041249}
   m_SourcePrefab: {fileID: 100100000, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
 --- !u!224 &633950807243747966 stripped
 RectTransform:
@@ -649,12 +701,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &8953202295859009564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6098048111312584530, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
+  m_PrefabInstance: {fileID: 2945552616083711822}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &640002892755041249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953202295859009564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 320
+  m_MinHeight: 76
+  m_PreferredWidth: 320
+  m_PreferredHeight: 76
+  m_FlexibleWidth: 0
+  m_FlexibleHeight: 0
+  m_LayoutPriority: 1
 --- !u!114 &9139994394968327885 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6212570578302427523, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
   m_PrefabInstance: {fileID: 2945552616083711822}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8953202295859009564}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -755,6 +832,10 @@ PrefabInstance:
     - target: {fileID: 4753628180596766500, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_text
       value: TRAINING FAILED
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753628180596766500, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
+      propertyPath: m_fontSize
+      value: 62.15
       objectReference: {fileID: 0}
     - target: {fileID: 4753628180596766500, guid: 222277ce975d31c42852f4c0920bf6f2, type: 3}
       propertyPath: m_fontColor.b
