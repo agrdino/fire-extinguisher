@@ -13,8 +13,9 @@ namespace _Scripts.Controller
         private HandController _handController;
         private HandRayInteractable _hoveredInteractable;
         private bool _wasPressed;
-
         public bool HasHoveredInteractable => _hoveredInteractable != null;
+        public HandRayInteractable HoveredInteractable => _hoveredInteractable;
+        public float MaximumInteractionDistance => _maximumDistance;
         public float HoveredDistance { get; private set; }
 
         private void Awake()
