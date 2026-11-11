@@ -402,17 +402,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674048
-    m_Localized: The phone appears automatically. Press the left thumbstick to switch
-      between GA (2120) and Security (2480), then press the left trigger to call.
+    m_Localized: "Press to begin the call."
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674049
-    m_Localized: Press the left thumbstick to switch contacts, then press the left
-      trigger to call.
+    m_Localized: "Press to call {0}."
     m_Metadata:
       m_Items: []
   - m_Id: 19611946792886272
     m_Localized: SELECT AREA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886273
+    m_Localized: "Press to call"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886274
+    m_Localized: "Calling..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886275
+    m_Localized: "Ended"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886276
+    m_Localized: "Press to dismiss"
     m_Metadata:
       m_Items: []
   references:

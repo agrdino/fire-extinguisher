@@ -5,6 +5,8 @@ using _Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace _Scripts.Environments.EmergencyContact
@@ -33,7 +35,14 @@ namespace _Scripts.Environments.EmergencyContact
         [Header("Call")]
         [SerializeField, Min(1)] private int _minimumCallDuration = 4;
         [SerializeField, Min(1)] private int _maximumCallDuration = 6;
+        [SerializeField, Min(0f)] private float _callIntroductionDuration = 1f;
         [SerializeField, Min(0f)] private float _autoHideDelay = 5f;
+
+        [Header("Localization")]
+        [SerializeField] private LocalizedString _callingMessage = new("UI", "phone.calling");
+        [SerializeField] private LocalizedString _callPrompt = new("UI", "phone.call_prompt");
+        [SerializeField] private LocalizedString _endedMessage = new("UI", "phone.ended");
+        [SerializeField] private LocalizedString _dismissPrompt = new("UI", "phone.dismiss_prompt");
 
         private readonly List<EmergencyContactEntry> _contacts = new();
         private InputAction _triggerAction;
@@ -55,9 +64,14 @@ namespace _Scripts.Environments.EmergencyContact
         private TMP_Text _timerText;
         private TMP_Text _endedDepartmentText;
         private TMP_Text _endedCallNumberText;
+        private TMP_Text _callPromptText;
+        private TMP_Text _endedMessageText;
+        private TMP_Text _dismissPromptText;
+        private bool _isShowingCallIntroduction;
 
         public HandheldEmergencyPhoneState State { get; private set; } = HandheldEmergencyPhoneState.Hidden;
         public Transform HintTarget => _phoneRoot != null ? _phoneRoot.transform : transform;
+        public string SelectedDepartmentName => SelectedContact?.DisplayName ?? string.Empty;
 
         private EmergencyContactEntry SelectedContact =>
             _contacts.Count > 0 && _selectedContactIndex >= 0 && _selectedContactIndex < _contacts.Count
@@ -90,6 +104,8 @@ namespace _Scripts.Environments.EmergencyContact
         {
             _triggerAction?.Enable();
             _thumbButtonAction?.Enable();
+            LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
+            RefreshLocalizedText();
         }
 
         private void Start()
@@ -119,6 +135,7 @@ namespace _Scripts.Environments.EmergencyContact
         {
             _triggerAction?.Disable();
             _thumbButtonAction?.Disable();
+            LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
         }
 
         private void OnDestroy()
@@ -163,6 +180,7 @@ namespace _Scripts.Environments.EmergencyContact
             _selectedContactIndex = Random.Range(0, _contacts.Count);
             State = HandheldEmergencyPhoneState.Dialer;
             _phoneRoot.SetActive(true);
+            RefreshLocalizedText();
             RenderDialer();
             IdleHintController.Instance?.NotifyActivity();
         }
@@ -213,14 +231,26 @@ namespace _Scripts.Environments.EmergencyContact
             _callDuration = Random.Range(
                 Mathf.Min(_minimumCallDuration, _maximumCallDuration),
                 Mathf.Max(_minimumCallDuration, _maximumCallDuration) + 1);
-            RenderCalling(0);
             StopCallRoutine();
+            _isShowingCallIntroduction = true;
+            RenderCalling();
             _callRoutine = StartCoroutine(RunCall());
             IdleHintController.Instance?.NotifyActivity();
         }
 
         private IEnumerator RunCall()
         {
+            if (_callIntroductionDuration > 0f)
+                yield return new WaitForSecondsRealtime(_callIntroductionDuration);
+
+            if (State != HandheldEmergencyPhoneState.Calling)
+            {
+                _callRoutine = null;
+                yield break;
+            }
+
+            _isShowingCallIntroduction = false;
+            SetTimer(0);
             float elapsed = 0f;
             int displayedSecond = -1;
 
@@ -238,6 +268,7 @@ namespace _Scripts.Environments.EmergencyContact
             }
 
             _callRoutine = null;
+            _isShowingCallIntroduction = false;
             State = HandheldEmergencyPhoneState.Ended;
             RenderEnded();
             IdleHintController.Instance?.NotifyActivity();
@@ -257,6 +288,7 @@ namespace _Scripts.Environments.EmergencyContact
 
         private void StopCallRoutine()
         {
+            _isShowingCallIntroduction = false;
             if (_callRoutine == null) return;
             StopCoroutine(_callRoutine);
             _callRoutine = null;
@@ -290,7 +322,7 @@ namespace _Scripts.Environments.EmergencyContact
             _dialerNumberText.SetText(contact.PhoneNumber);
         }
 
-        private void RenderCalling(int elapsedSeconds)
+        private void RenderCalling()
         {
             EmergencyContactEntry contact = SelectedContact;
             if (contact == null) return;
@@ -298,7 +330,7 @@ namespace _Scripts.Environments.EmergencyContact
             ShowScreen(_callScreen, _view.CallingBackgroundColor);
             _departmentText.SetText(contact.DisplayName);
             _callNumberText.SetText(contact.PhoneNumber);
-            SetTimer(elapsedSeconds);
+            _timerText.SetText(_callingMessage.GetLocalizedString());
         }
 
         private void RenderEnded()
@@ -309,6 +341,21 @@ namespace _Scripts.Environments.EmergencyContact
             ShowScreen(_endedScreen, _view.EndedBackgroundColor);
             _endedDepartmentText.SetText(contact.DisplayName);
             _endedCallNumberText.SetText(contact.PhoneNumber);
+        }
+
+        private void OnSelectedLocaleChanged(Locale locale)
+        {
+            RefreshLocalizedText();
+        }
+
+        private void RefreshLocalizedText()
+        {
+            if (_callPromptText != null) _callPromptText.SetText(_callPrompt.GetLocalizedString());
+            if (_endedMessageText != null) _endedMessageText.SetText(_endedMessage.GetLocalizedString());
+            if (_dismissPromptText != null) _dismissPromptText.SetText(_dismissPrompt.GetLocalizedString());
+
+            if (_isShowingCallIntroduction && _timerText != null)
+                _timerText.SetText(_callingMessage.GetLocalizedString());
         }
 
         private void ShowScreen(GameObject activeScreen, Color backgroundColor)
@@ -346,6 +393,9 @@ namespace _Scripts.Environments.EmergencyContact
             _timerText = _view.TimerText;
             _endedDepartmentText = _view.EndedDepartmentText;
             _endedCallNumberText = _view.EndedCallNumberText;
+            _callPromptText = _view.CallPromptText;
+            _endedMessageText = _view.EndedMessageText;
+            _dismissPromptText = _view.DismissPromptText;
 
             _phoneRoot.SetActive(false);
         }

@@ -69804,6 +69804,9 @@ MonoBehaviour:
   - {fileID: 1589562917}
   - {fileID: 476534936}
   - {fileID: 248683540}
+  - {fileID: 1321625003}
+  - {fileID: 1274618827}
+  - {fileID: 1809329047}
   _exitSpawnPoints:
   - {fileID: 4022321237784748847}
   _escapeSmokeEnabled: 0
@@ -74886,6 +74889,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
   m_PrefabInstance: {fileID: 1274618825}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1274618827 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 1274618825}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb85bda8a2863464fbd8d94b83a2c972, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherStation
 --- !u!1001 &1275095300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77490,6 +77504,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
   m_PrefabInstance: {fileID: 1321625001}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1321625003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 1321625001}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb85bda8a2863464fbd8d94b83a2c972, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherStation
 --- !u!1 &1323120719
 GameObject:
   m_ObjectHideFlags: 0
@@ -105139,6 +105164,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 520547919110818514, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
   m_PrefabInstance: {fileID: 1809329045}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1809329047 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132142146575768184, guid: 230ed3dbb2c3ace4a8545ac98fe21829, type: 3}
+  m_PrefabInstance: {fileID: 1809329045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb85bda8a2863464fbd8d94b83a2c972, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.FireExtinguishers.FireExtinguisherStation
 --- !u!1001 &1809378002
 PrefabInstance:
   m_ObjectHideFlags: 0

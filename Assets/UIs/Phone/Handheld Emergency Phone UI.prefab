@@ -33,10 +33,10 @@ RectTransform:
   m_Children:
   - {fileID: 110001}
   - {fileID: 7129223328606691788}
+  - {fileID: 3426978110657141627}
   - {fileID: 120001}
   - {fileID: 130001}
   - {fileID: 4271787741727385983}
-  - {fileID: 3426978110657141627}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 10
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &100004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +115,9 @@ MonoBehaviour:
   _timerText: {fileID: 133003}
   _endedDepartmentText: {fileID: 142411308852948889}
   _endedCallNumberText: {fileID: 7766749128671446164}
+  _callPromptText: {fileID: 124003}
+  _endedMessageText: {fileID: 1957613201532192385}
+  _dismissPromptText: {fileID: 4760207007082982990}
 --- !u!1 &110000
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TRIGGER TO CALL
+  m_text: Press to call
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   m_sharedMaterial: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
@@ -939,7 +942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -59}
+  m_AnchoredPosition: {x: 0, y: 10}
   m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &133002
@@ -2023,7 +2026,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TRIGGER TO  DISABLE
+  m_text: Press to dismiss
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
   m_sharedMaterial: {fileID: 1861335653571429718, guid: c32bae5b39062054d86d21a09f8598f0, type: 2}
@@ -2032,7 +2035,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288651167
+    rgba: 4290756543
   m_fontColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

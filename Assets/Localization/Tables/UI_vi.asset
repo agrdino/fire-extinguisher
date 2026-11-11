@@ -363,18 +363,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674048
-    m_Localized: "\u0110i\u1EC7n tho\u1EA1i hi\u1EC7n s\u1EB5n. Nh\u1EA5n thumbstick
-      tr\xE1i \u0111\u1EC3 \u0111\u1ED5i gi\u1EEFa GA (2120) v\xE0 B\u1EA3o v\u1EC7
-      (2480), r\u1ED3i nh\u1EA5n trigger tr\xE1i \u0111\u1EC3 g\u1ECDi."
+    m_Localized: "Nhấn để bắt đầu cuộc gọi."
     m_Metadata:
       m_Items: []
   - m_Id: 10877759292674049
-    m_Localized: "Nh\u1EA5n thumbstick tr\xE1i \u0111\u1EC3 \u0111\u1ED5i s\u1ED1,
-      r\u1ED3i nh\u1EA5n trigger tr\xE1i \u0111\u1EC3 g\u1ECDi."
+    m_Localized: "Nhấn để gọi cho {0}."
     m_Metadata:
       m_Items: []
   - m_Id: 19611946792886272
     m_Localized: "CH\u1ECCN KHU V\u1EF0C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886273
+    m_Localized: "Nhấn để gọi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886274
+    m_Localized: "Đang gọi..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886275
+    m_Localized: "Đã kết thúc"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886276
+    m_Localized: "Nhấn để đóng"
     m_Metadata:
       m_Items: []
   references:

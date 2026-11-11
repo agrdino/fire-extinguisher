@@ -359,7 +359,12 @@ namespace _Scripts.UI
                 return HintStep.GoToEmergencyExit;
 
             if (_applicationManager.State == ApplicationState.ContactEmergencyTeam)
-                return HintStep.ContactEmergencyTeam;
+            {
+                HandheldEmergencyPhoneController phone = HandheldEmergencyPhoneController.Instance;
+                return phone != null && phone.State == HandheldEmergencyPhoneState.Dialer
+                    ? HintStep.ContactEmergencyTeam
+                    : HintStep.None;
+            }
 
             if (_applicationManager.State != ApplicationState.Fighting || _fireExtinguisher == null)
                 return HintStep.None;
@@ -513,7 +518,8 @@ namespace _Scripts.UI
                 HintStep.GoToEmergencyExit => _goToEmergencyExitHintLocalized.GetLocalizedString(),
                 HintStep.SwitchOffPower => _switchOffPowerHintLocalized.GetLocalizedString(),
                 HintStep.ActivateFireAlarm => _activateFireAlarmHintLocalized.GetLocalizedString(),
-                HintStep.ContactEmergencyTeam => _contactEmergencyTeamHintLocalized.GetLocalizedString(),
+                HintStep.ContactEmergencyTeam => _contactEmergencyTeamHintLocalized.GetLocalizedString(
+                    HandheldEmergencyPhoneController.Instance?.SelectedDepartmentName ?? string.Empty),
                 _ => string.Empty
             };
         }

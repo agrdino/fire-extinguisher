@@ -27,6 +27,9 @@ namespace _Scripts.Environments.EmergencyContact
         [Header("Ended")]
         [SerializeField] private TMP_Text _endedDepartmentText;
         [SerializeField] private TMP_Text _endedCallNumberText;
+        [SerializeField] private TMP_Text _callPromptText;
+        [SerializeField] private TMP_Text _endedMessageText;
+        [SerializeField] private TMP_Text _dismissPromptText;
 
         public Image Background => _background;
         public GameObject DialerScreen => _dialerScreen;
@@ -41,5 +44,8 @@ namespace _Scripts.Environments.EmergencyContact
         public TMP_Text TimerText => _timerText;
         public TMP_Text EndedDepartmentText => _endedDepartmentText;
         public TMP_Text EndedCallNumberText => _endedCallNumberText;
+        public TMP_Text CallPromptText => _callPromptText;
+        public TMP_Text EndedMessageText => _endedMessageText;
+        public TMP_Text DismissPromptText => _dismissPromptText;
     }
 }

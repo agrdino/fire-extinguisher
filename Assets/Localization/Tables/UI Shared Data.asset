@@ -303,6 +303,22 @@ MonoBehaviour:
     m_Key: common.environment_selection
     m_Metadata:
       m_Items: []
+  - m_Id: 19611946792886273
+    m_Key: phone.call_prompt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886274
+    m_Key: phone.calling
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886275
+    m_Key: phone.ended
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19611946792886276
+    m_Key: phone.dismiss_prompt
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
