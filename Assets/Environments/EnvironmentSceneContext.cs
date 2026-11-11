@@ -22,6 +22,7 @@ namespace _Scripts.Controller
         ApplicationState DefaultEntryState { get; }
         EnvironmentFeature Features { get; }
         Transform PlayerSpawnPoint { get; }
+        float StartBoundaryRadius { get; }
         IReadOnlyList<FireSpawnPoint> FireSpawnPoints { get; }
         IReadOnlyList<FireExtinguisherStation> FireExtinguisherStations { get; }
         IReadOnlyList<EmergencyExitSpawnPoint> ExitSpawnPoints { get; }
@@ -58,6 +59,10 @@ namespace _Scripts.Controller
         [SerializeField] private Transform _environmentRoot;
         [SerializeField] private List<SceneUIAnchor> _uiAnchors = new();
 
+        [Header("Start Scene Boundary")]
+        [SerializeField, Min(0f), Tooltip("Horizontal room-scale limit used in the Start scene.")]
+        private float _startBoundaryRadius = 1f;
+
         [Header("Cached Environment Points")]
         [SerializeField] private List<FireSpawnPoint> _fireSpawnPoints = new();
         [SerializeField] private List<FireExtinguisherStation> _fireExtinguisherStations = new();
@@ -71,6 +76,7 @@ namespace _Scripts.Controller
         public ApplicationState DefaultEntryState => _defaultEntryState;
         public EnvironmentFeature Features => _features;
         public Transform PlayerSpawnPoint => _playerSpawnPoint;
+        public float StartBoundaryRadius => Mathf.Max(0f, _startBoundaryRadius);
         public IReadOnlyList<FireSpawnPoint> FireSpawnPoints => _fireSpawnPoints;
         public IReadOnlyList<FireExtinguisherStation> FireExtinguisherStations => _fireExtinguisherStations;
         public IReadOnlyList<EmergencyExitSpawnPoint> ExitSpawnPoints => _exitSpawnPoints;
@@ -132,6 +138,7 @@ namespace _Scripts.Controller
 #if UNITY_EDITOR
         private void OnValidate()
         {
+            _startBoundaryRadius = Mathf.Max(0f, _startBoundaryRadius);
             _fireSpawnPoints.RemoveAll(point => point == null);
             _fireExtinguisherStations.RemoveAll(station => station == null);
             _exitSpawnPoints.RemoveAll(point => point == null);
@@ -141,9 +148,26 @@ namespace _Scripts.Controller
         {
             Color previousColor = Gizmos.color;
             Matrix4x4 previousMatrix = Gizmos.matrix;
+#if UNITY_EDITOR
+            Color previousHandlesColor = UnityEditor.Handles.color;
+#endif
 
             if (_playerSpawnPoint != null)
             {
+#if UNITY_EDITOR
+                if (_sceneId == SceneId.Start)
+                {
+                    UnityEditor.Handles.color = new Color(0.2f, 0.85f, 1f, 0.95f);
+                    UnityEditor.Handles.DrawWireDisc(
+                        _playerSpawnPoint.position,
+                        Vector3.up,
+                        StartBoundaryRadius);
+                    UnityEditor.Handles.Label(
+                        _playerSpawnPoint.position + Vector3.up * 0.05f,
+                        $"Start player boundary ({StartBoundaryRadius:0.##} m)");
+                }
+#endif
+
                 Gizmos.color = new Color(1f, 0.75f, 0.15f, 0.9f);
                 Gizmos.matrix = Matrix4x4.TRS(_playerSpawnPoint.position, _playerSpawnPoint.rotation, Vector3.one);
                 Gizmos.DrawWireSphere(Vector3.zero, 0.25f);
@@ -169,6 +193,9 @@ namespace _Scripts.Controller
 
             Gizmos.matrix = previousMatrix;
             Gizmos.color = previousColor;
+#if UNITY_EDITOR
+            UnityEditor.Handles.color = previousHandlesColor;
+#endif
         }
 
         private static void DrawForwardArrow()

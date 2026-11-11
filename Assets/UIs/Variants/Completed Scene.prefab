@@ -57,7 +57,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 32
+  m_Spacing: 44
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -712,6 +712,10 @@ PrefabInstance:
     - target: {fileID: 7548583179774209992, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
       propertyPath: m_Type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548583179774209992, guid: bcbb37de4c0d98e44bddcaa17fee7867, type: 3}
+      propertyPath: m_RaycastPadding.x
+      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
